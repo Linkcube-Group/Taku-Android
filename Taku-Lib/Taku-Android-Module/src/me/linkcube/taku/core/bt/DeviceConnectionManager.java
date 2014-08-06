@@ -6,7 +6,6 @@ import java.util.TimerTask;
 import me.linkcube.taku.TakuApplication;
 import me.linkcube.taku.common.utils.Timber;
 import android.bluetooth.BluetoothDevice;
-import android.os.RemoteException;
 
 public class DeviceConnectionManager {
 
@@ -46,22 +45,14 @@ public class DeviceConnectionManager {
 			public void run() {
 
 				if (!isSexPositionMode) {
-
-					try {
-						if (mIsConnected != TakuApplication.toyServiceCall
-								.checkData()) {
-							mIsConnected = TakuApplication.toyServiceCall
-									.checkData();
-							Timber.d("mIsConnected:" + mIsConnected);
-							if (mIsConnected) {
-								callback.stable();
-							} else {
-								stopTimerTask();
-							}
+					if (mIsConnected != TakuApplication.toyService.checkData()) {
+						mIsConnected = TakuApplication.toyService.checkData();
+						Timber.d("mIsConnected:" + mIsConnected);
+						if (mIsConnected) {
+							callback.stable();
+						} else {
+							stopTimerTask();
 						}
-					} catch (RemoteException e1) {
-						callback.interrupted();
-						e1.printStackTrace();
 					}
 				}
 

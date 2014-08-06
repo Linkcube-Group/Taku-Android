@@ -47,4 +47,9 @@ public class TakuActivity extends UnityPlayerActivity implements ITakuActivity {
 		return BTUtils.isBluetoothEnabled();
 	}
 
+	@Override
+	public boolean isToyConnected() {
+		return false;
+	}
+
 }

@@ -10,4 +10,6 @@ public interface ITakuActivity {
 
 	public boolean isBluetoothEnabled();
 
+	public boolean isToyConnected();
+
 }

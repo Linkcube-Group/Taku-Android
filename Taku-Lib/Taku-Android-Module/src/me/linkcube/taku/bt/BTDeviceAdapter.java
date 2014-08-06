@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import me.linkcube.taku.R;
 import me.linkcube.taku.common.ui.BaseListAdapter;
-import me.linkcube.taku.core.ToyConnectTimeManager;
 import me.linkcube.taku.core.bt.DeviceConnectionManager;
 
 /**
@@ -38,7 +37,6 @@ public class BTDeviceAdapter extends BaseListAdapter<BluetoothDevice> {
 		if (device.equals(DeviceConnectionManager.getInstance()
 				.getDeviceConnected())) {
 			if (DeviceConnectionManager.getInstance().isConnected()) {
-				ToyConnectTimeManager.getInstance().startTimeStatistics();
 				cell.setDeviceState(R.string.connected);
 			} else {
 				if (device.getBondState() == BluetoothDevice.BOND_BONDED) {

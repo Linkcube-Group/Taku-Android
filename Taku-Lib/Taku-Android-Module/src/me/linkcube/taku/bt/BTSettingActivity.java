@@ -7,7 +7,6 @@ import android.bluetooth.BluetoothDevice;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.RemoteException;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -54,8 +53,7 @@ public class BTSettingActivity extends DialogActivity implements
 		super.onResume();
 		bluetoothTb.setChecked(BTUtils.isBluetoothEnabled());
 		bluetoothTb.setOnCheckedChangeListener(switchListener);
-		BTUtils
-				.regiserDeviceReceiver(mActivity, deviceDiscoveryReceiver);
+		BTUtils.regiserDeviceReceiver(mActivity, deviceDiscoveryReceiver);
 		deviceAdapter = new BTDeviceAdapter(mActivity);
 		deviceAdapter.setList(deviceList);
 		deviceLv.setAdapter(deviceAdapter);
@@ -76,8 +74,7 @@ public class BTSettingActivity extends DialogActivity implements
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		BTUtils.unregisterDeviceReceiver(mActivity,
-				deviceDiscoveryReceiver);
+		BTUtils.unregisterDeviceReceiver(mActivity, deviceDiscoveryReceiver);
 		deviceList.clear();
 	}
 
@@ -262,13 +259,8 @@ public class BTSettingActivity extends DialogActivity implements
 		protected Boolean doInBackground(BluetoothDevice... params) {
 			Timber.d("正在连接设备");
 			boolean success = false;
-			try {
-				success = TakuApplication.toyServiceCall.connectToy(
-						mDevice.getName(), mDevice.getAddress());
-			} catch (RemoteException e) {
-				success = false;
-				e.printStackTrace();
-			}
+			success = TakuApplication.toyService.connectToy(mDevice.getName(),
+					mDevice.getAddress());
 			return success;
 		}
 
