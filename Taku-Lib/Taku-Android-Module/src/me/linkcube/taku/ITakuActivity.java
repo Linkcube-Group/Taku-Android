@@ -8,4 +8,6 @@ public interface ITakuActivity {
 
 	public String getHexData();
 
+	public boolean isBluetoothEnabled();
+
 }

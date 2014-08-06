@@ -1,13 +1,14 @@
 package me.linkcube.taku.service;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.UUID;
 
 import me.linkcube.taku.common.utils.Timber;
-import me.linkcube.taku.core.bt.BluetoothUtils;
+import me.linkcube.taku.core.bt.BTUtils;
 import me.linkcube.taku.core.bt.DeviceConnectionManager;
 import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothAdapter;
@@ -16,6 +17,7 @@ import android.bluetooth.BluetoothSocket;
 import android.os.Build;
 import android.os.IBinder;
 import android.os.RemoteException;
+import android.util.Log;
 
 public class ToyServiceCallImpl extends android.os.Binder implements
 		IToyServiceCall {
@@ -25,6 +27,10 @@ public class ToyServiceCallImpl extends android.os.Binder implements
 	private BluetoothSocket curSocket = null;
 
 	private byte[] checkData = { 0x35, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x35 };
+
+	private String dataBuffer = "";
+
+	private Thread mReadThread;
 
 	@Override
 	public IBinder asBinder() {
@@ -81,6 +87,7 @@ public class ToyServiceCallImpl extends android.os.Binder implements
 			return false;
 		}
 		DeviceConnectionManager.getInstance().setmIsConnected(true, curDevice);
+		startReadData();
 		return true;
 	}
 
@@ -91,7 +98,7 @@ public class ToyServiceCallImpl extends android.os.Binder implements
 		Timber.d("connectToy:");
 		curDevice = null;
 
-		if (!BluetoothUtils.isBluetoothEnabled()) {
+		if (!BTUtils.isBluetoothEnabled()) {
 			return false;
 		}
 
@@ -161,6 +168,82 @@ public class ToyServiceCallImpl extends android.os.Binder implements
 		Timber.i("Toy is connected.");
 
 		return true;
+	}
+
+	// 读取数据
+	private class ReadDataThread implements Runnable {
+
+		public void run() {
+
+			byte[] buffer = new byte[1024];
+			int bytes;
+			InputStream mmInStream = null;
+			try {
+				mmInStream = curSocket.getInputStream();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+			while (true) {
+				try {
+					// Read from the InputStream
+					if ((bytes = mmInStream.read(buffer)) > 0) {
+						byte[] buf_data = new byte[bytes];
+						for (int i = 0; i < bytes; i++) {
+							buf_data[i] = buffer[i];
+						}
+						String data = bytesToHexString(buf_data);
+						if (dataBuffer.equals("")) {
+							dataBuffer = data + "_"
+									+ System.currentTimeMillis();
+						} else {
+							dataBuffer = dataBuffer + "|" + data + "_"
+									+ System.currentTimeMillis();
+						}
+						Log.d("data from byte to hex", dataBuffer);
+					}
+				} catch (IOException e) {
+					try {
+						mmInStream.close();
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
+					break;
+				}
+			}
+		}
+	}
+
+	@Override
+	public void startReadData() {
+		mReadThread = new Thread(new ReadDataThread());
+		mReadThread.start();
+	}
+
+	@Override
+	public void clearDataBuffer() {
+		dataBuffer = "";
+	}
+
+	@Override
+	public void stopReadData() {
+		mReadThread.interrupt();
+		mReadThread = null;
+	}
+
+	public static String bytesToHexString(byte[] src) {
+		StringBuilder stringBuilder = new StringBuilder("");
+		if (src == null || src.length <= 0) {
+			return null;
+		}
+		for (int i = 0; i < src.length; i++) {
+			int v = src[i] & 0xFF;
+			String hv = Integer.toHexString(v);
+			if (hv.length() < 2) {
+				stringBuilder.append(0);
+			}
+			stringBuilder.append(hv);
+		}
+		return stringBuilder.toString();
 	}
 
 }

@@ -1,6 +1,7 @@
 package me.linkcube.taku;
 
 import me.linkcube.taku.bt.BTSettingActivity;
+import me.linkcube.taku.core.bt.BTUtils;
 
 import com.unity3d.player.UnityPlayerActivity;
 
@@ -39,6 +40,11 @@ public class TakuActivity extends UnityPlayerActivity implements ITakuActivity {
 	public String getHexData() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public boolean isBluetoothEnabled() {
+		return BTUtils.isBluetoothEnabled();
 	}
 
 }
