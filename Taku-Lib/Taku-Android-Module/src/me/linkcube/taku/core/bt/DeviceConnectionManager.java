@@ -45,8 +45,10 @@ public class DeviceConnectionManager {
 			public void run() {
 
 				if (!isSexPositionMode) {
-					if (mIsConnected != TakuApplication.toyService.checkData()) {
-						mIsConnected = TakuApplication.toyService.checkData();
+					if (mIsConnected != TakuApplication.toyService
+							.checkConnection()) {
+						mIsConnected = TakuApplication.toyService
+								.checkConnection();
 						Timber.d("mIsConnected:" + mIsConnected);
 						if (mIsConnected) {
 							callback.stable();

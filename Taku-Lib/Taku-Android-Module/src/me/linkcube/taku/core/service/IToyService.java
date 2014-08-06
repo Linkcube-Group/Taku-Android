@@ -6,7 +6,7 @@ interface IToyService {
 
 	boolean disconnectToy(String deviceName, String macAddress);
 
-	boolean checkData();
+	boolean checkConnection();
 
 	void startReadData();
 

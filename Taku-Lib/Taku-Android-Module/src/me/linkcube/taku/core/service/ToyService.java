@@ -137,33 +137,6 @@ public class ToyService implements IToyService {
 		return true;
 	}
 
-	@Override
-	public boolean checkData() {
-		if (curDevice == null || curSocket == null) {
-			return false;
-		}
-
-		OutputStream tmpOut = null;
-		try {
-			tmpOut = curSocket.getOutputStream();
-		} catch (IOException e) {
-			Timber.e(e, "sockets not created");
-			return false;
-		}
-
-		try {
-			tmpOut.write(checkData);
-		} catch (IOException e) {
-			e.printStackTrace();
-			Timber.i("Toy is disconnected.");
-			return false;
-		}
-
-		Timber.i("Toy is connected.");
-
-		return true;
-	}
-
 	// 读取数据
 	public class ReadDataThread implements Runnable {
 
@@ -211,6 +184,33 @@ public class ToyService implements IToyService {
 				}
 			}
 		}
+	}
+
+	@Override
+	public boolean checkConnection() {
+		if (curDevice == null || curSocket == null) {
+			return false;
+		}
+
+		OutputStream tmpOut = null;
+		try {
+			tmpOut = curSocket.getOutputStream();
+		} catch (IOException e) {
+			Timber.d("sockets not created", e);
+			return false;
+		}
+
+		try {
+			tmpOut.write(checkData);
+		} catch (IOException e) {
+			e.printStackTrace();
+			Timber.d("Toy is disconnected.");
+			return false;
+		}
+
+		Timber.d("Toy is connected.");
+
+		return true;
 	}
 
 	@Override
