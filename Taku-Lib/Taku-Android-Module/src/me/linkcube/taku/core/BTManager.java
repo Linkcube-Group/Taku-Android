@@ -5,13 +5,14 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import me.linkcube.taku.TakuApplication;
 import me.linkcube.taku.core.service.ToyService;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 
 public class BTManager {
 
-	public static ToyService toyServiceCall;
+	public ToyService toyService;
 
 	private Timer timer;
 
@@ -38,7 +39,11 @@ public class BTManager {
 	}
 
 	private BTManager() {
+		toyService = new ToyService();
+	}
 
+	public ToyService getToyService() {
+		return toyService;
 	}
 
 	/**
@@ -77,7 +82,7 @@ public class BTManager {
 		public void run() {
 			toyState = Const.TOY_STATE.CONNECTING;
 			boolean success;
-			success = BTManager.toyServiceCall.connectToy(device.getName(),
+			success = TakuApplication.toyService.connectToy(device.getName(),
 					device.getAddress());
 			if (success) {
 				toyState = Const.TOY_STATE.CONNECTED;
@@ -97,7 +102,7 @@ public class BTManager {
 		public void run() {
 
 			if (toyState == Const.TOY_STATE.CONNECTED) {
-				if (!BTManager.toyServiceCall.checkConnection()) {
+				if (!TakuApplication.toyService.checkConnection()) {
 					toyState = Const.TOY_STATE.INTERRUPTED;
 					cancelCheckConnectionTask();
 				}
