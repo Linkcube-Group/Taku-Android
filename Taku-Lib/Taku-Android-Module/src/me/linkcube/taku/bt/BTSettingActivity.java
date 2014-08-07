@@ -13,6 +13,7 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -22,6 +23,7 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import me.linkcube.taku.R;
 import me.linkcube.taku.common.ui.DialogActivity;
 import me.linkcube.taku.common.utils.AlertUtils;
+import me.linkcube.taku.common.utils.FormatUtils;
 import me.linkcube.taku.common.utils.PreferenceUtils;
 import me.linkcube.taku.common.utils.Timber;
 import static com.ervinwang.bthelper.Const.Device.*;
@@ -159,8 +161,15 @@ public class BTSettingActivity extends DialogActivity implements
 			BTManager.getInstance().startReceiveData(new IReceiveData() {
 
 				@Override
-				public void receiveData(byte[] data) {
-					Timber.d(data.toString());
+				public void receiveData(int bytes, byte[] buffer) {
+					String data = "#";
+					byte[] buf_data = new byte[bytes];
+					for (int i = 0; i < bytes; i++) {
+						buf_data[i] = buffer[i];
+					}
+					data = FormatUtils.bytesToHexString(buf_data);
+					data += "#";
+					Log.d("Receive Data = ", data);
 				}
 			});
 
