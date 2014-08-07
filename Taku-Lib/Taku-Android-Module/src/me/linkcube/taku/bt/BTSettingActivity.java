@@ -2,6 +2,12 @@ package me.linkcube.taku.bt;
 
 import java.util.List;
 
+import com.ervinwang.btmanager.BTHelper;
+import com.ervinwang.btmanager.BTManager;
+import com.ervinwang.btmanager.core.BTDeviceReceiver;
+import com.ervinwang.btmanager.core.DeviceConnectionManager;
+import com.ervinwang.btmanager.core.OnBTDeviceListener;
+
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.Intent;
@@ -13,17 +19,12 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ToggleButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
-import me.linkcube.taku.TakuApplication;
 import me.linkcube.taku.R;
 import me.linkcube.taku.common.ui.DialogActivity;
 import me.linkcube.taku.common.utils.AlertUtils;
 import me.linkcube.taku.common.utils.PreferenceUtils;
 import me.linkcube.taku.common.utils.Timber;
-import me.linkcube.taku.core.bt.BTDeviceReceiver;
-import me.linkcube.taku.core.bt.BTUtils;
-import me.linkcube.taku.core.bt.DeviceConnectionManager;
-import me.linkcube.taku.core.bt.OnBTDeviceListener;
-import static me.linkcube.taku.core.Const.Device.*;
+import static com.ervinwang.btmanager.Const.Device.*;
 
 public class BTSettingActivity extends DialogActivity implements
 		OnClickListener, OnDeviceItemClickListener, OnBTDeviceListener {
@@ -45,16 +46,16 @@ public class BTSettingActivity extends DialogActivity implements
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.bt_setting_activity);
 		deviceDiscoveryReceiver = new BTDeviceReceiver(this);
-		deviceList = BTUtils.getBondedDevices();
+		deviceList = BTHelper.getBondedDevices();
 		initViews();
 	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
-		bluetoothTb.setChecked(BTUtils.isBluetoothEnabled());
+		bluetoothTb.setChecked(BTHelper.isBluetoothEnabled());
 		bluetoothTb.setOnCheckedChangeListener(switchListener);
-		BTUtils.regiserDeviceReceiver(mActivity, deviceDiscoveryReceiver);
+		BTHelper.regiserDeviceReceiver(mActivity, deviceDiscoveryReceiver);
 		deviceAdapter = new BTDeviceAdapter(mActivity);
 		deviceAdapter.setList(deviceList);
 		deviceLv.setAdapter(deviceAdapter);
@@ -75,7 +76,7 @@ public class BTSettingActivity extends DialogActivity implements
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		BTUtils.unregisterDeviceReceiver(mActivity, deviceDiscoveryReceiver);
+		BTHelper.unregisterDeviceReceiver(mActivity, deviceDiscoveryReceiver);
 		deviceList.clear();
 	}
 
@@ -85,7 +86,7 @@ public class BTSettingActivity extends DialogActivity implements
 		deviceLv.setOnDeviceItemClickListener(this);
 		discoverDevicesBtn = (Button) findViewById(R.id.discover_devices_btn);
 		discoverDevicesBtn.setOnClickListener(this);
-		if (BTUtils.isBluetoothEnabled()) {
+		if (BTHelper.isBluetoothEnabled()) {
 			showBondedDevices();
 		}
 		bluetoothHelpBtn = (Button) findViewById(R.id.bluetooth_help_btn);
@@ -93,7 +94,7 @@ public class BTSettingActivity extends DialogActivity implements
 	}
 
 	private void showBondedDevices() {
-		if (BTUtils.getBondedDevices() != null) {
+		if (BTHelper.getBondedDevices() != null) {
 			deviceLv.showDeviceListView();
 		}
 	}
@@ -116,7 +117,7 @@ public class BTSettingActivity extends DialogActivity implements
 	}
 
 	private void bondDevice(BluetoothDevice device, int position) {
-		if (BTUtils.bondDevice(device)) {
+		if (BTHelper.bondDevice(device)) {
 			showProgressDialog(getResources().getString(
 					R.string.dialog_bonding_bluetooth));
 		} else {
@@ -131,7 +132,7 @@ public class BTSettingActivity extends DialogActivity implements
 		@Override
 		public void onCheckedChanged(CompoundButton buttonView,
 				boolean isChecked) {
-			BTUtils.setBluetoothEnabled(isChecked);
+			BTHelper.setBluetoothEnabled(isChecked);
 			if (!isChecked) {
 				discoverDevicesBtn.setText(R.string.search_toy);
 			} else {
@@ -145,7 +146,7 @@ public class BTSettingActivity extends DialogActivity implements
 
 		switch (v.getId()) {
 		case R.id.discover_devices_btn:
-			if (BTUtils.isBluetoothEnabled()) {
+			if (BTHelper.isBluetoothEnabled()) {
 				startDiscoverBluetoothDevices();
 			} else {
 				AlertUtils.showToast(
@@ -260,8 +261,8 @@ public class BTSettingActivity extends DialogActivity implements
 		protected Boolean doInBackground(BluetoothDevice... params) {
 			Timber.d("正在连接设备");
 			boolean success = false;
-			success = TakuApplication.toyService.connectToy(mDevice.getName(),
-					mDevice.getAddress());
+			success = BTManager.getInstance().getToyService()
+					.connectToy(mDevice.getName(), mDevice.getAddress());
 			return success;
 		}
 

@@ -1,8 +1,8 @@
 package me.linkcube.taku;
 
 import me.linkcube.taku.bt.BTSettingActivity;
-import me.linkcube.taku.core.bt.BTUtils;
 
+import com.ervinwang.btmanager.BTHelper;
 import com.unity3d.player.UnityPlayerActivity;
 
 import android.content.Context;
@@ -44,7 +44,7 @@ public class TakuActivity extends UnityPlayerActivity implements ITakuActivity {
 
 	@Override
 	public boolean isBluetoothEnabled() {
-		return BTUtils.isBluetoothEnabled();
+		return BTHelper.isBluetoothEnabled();
 	}
 
 	@Override
