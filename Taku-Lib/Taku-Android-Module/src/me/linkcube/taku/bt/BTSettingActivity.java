@@ -22,6 +22,7 @@ import me.linkcube.taku.common.utils.Timber;
 import me.linkcube.taku.core.bt.BTDeviceReceiver;
 import me.linkcube.taku.core.bt.BTUtils;
 import me.linkcube.taku.core.bt.DeviceConnectionManager;
+import me.linkcube.taku.core.bt.OnBTDeviceListener;
 import static me.linkcube.taku.core.Const.Device.*;
 
 public class BTSettingActivity extends DialogActivity implements

@@ -1,7 +1,6 @@
 package me.linkcube.taku.core.bt;
 
 import static android.bluetooth.BluetoothAdapter.EXTRA_STATE;
-import me.linkcube.taku.bt.OnBTDeviceListener;
 import me.linkcube.taku.common.utils.Timber;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
