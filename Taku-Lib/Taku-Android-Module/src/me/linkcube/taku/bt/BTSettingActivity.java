@@ -4,9 +4,9 @@ import java.util.List;
 
 import com.ervinwang.bthelper.BTHelper;
 import com.ervinwang.bthelper.BTManager;
-import com.ervinwang.bthelper.core.BTDeviceReceiver;
+import com.ervinwang.bthelper.core.DeviceBroadcastReceiver;
 import com.ervinwang.bthelper.core.DeviceConnectionManager;
-import com.ervinwang.bthelper.core.OnBTDeviceListener;
+import com.ervinwang.bthelper.core.OnDeviceDiscoveryListener;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -27,7 +27,7 @@ import me.linkcube.taku.common.utils.Timber;
 import static com.ervinwang.bthelper.Const.Device.*;
 
 public class BTSettingActivity extends DialogActivity implements
-		OnClickListener, OnDeviceItemClickListener, OnBTDeviceListener {
+		OnClickListener, OnDeviceItemClickListener, OnDeviceDiscoveryListener {
 
 	private ToggleButton bluetoothTb;
 
@@ -39,13 +39,13 @@ public class BTSettingActivity extends DialogActivity implements
 
 	private BTDeviceAdapter deviceAdapter;
 
-	private BTDeviceReceiver deviceDiscoveryReceiver;
+	private DeviceBroadcastReceiver deviceDiscoveryReceiver;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.bt_setting_activity);
-		deviceDiscoveryReceiver = new BTDeviceReceiver(this);
+		deviceDiscoveryReceiver = new DeviceBroadcastReceiver(this);
 		deviceList = BTHelper.getBondedDevices();
 		initViews();
 	}
@@ -166,7 +166,7 @@ public class BTSettingActivity extends DialogActivity implements
 	}
 
 	@Override
-	public void onBluetoothStateTuringOn() {
+	public void onDeviceStateTuringOn() {
 		Timber.i("正在打开蓝牙");
 		bluetoothTb.setClickable(false);
 		deviceLv.setTip(R.string.switching_on_bluetooth);
@@ -176,7 +176,7 @@ public class BTSettingActivity extends DialogActivity implements
 	}
 
 	@Override
-	public void onBluetoothStateTuringOff() {
+	public void onDeviceStateTuringOff() {
 		Timber.i("正在关闭蓝牙");
 		bluetoothTb.setClickable(false);
 		deviceLv.setTip(R.string.switching_off_bluetooth);
@@ -185,7 +185,7 @@ public class BTSettingActivity extends DialogActivity implements
 	}
 
 	@Override
-	public void onBluetoothStateOn() {
+	public void onDeviceStateOn() {
 		Timber.i("蓝牙已打开");
 		bluetoothTb.setClickable(true);
 		AlertUtils.showToast(this,
@@ -195,7 +195,7 @@ public class BTSettingActivity extends DialogActivity implements
 	}
 
 	@Override
-	public void onBluetoothStateOff() {
+	public void onDeviceStateOff() {
 		Timber.i("蓝牙已关闭");
 		bluetoothTb.setClickable(true);
 		AlertUtils.showToast(this,
@@ -204,7 +204,7 @@ public class BTSettingActivity extends DialogActivity implements
 	}
 
 	@Override
-	public void onBluetoothDeviceDiscoveryOne(BluetoothDevice device) {
+	public void onDeviceDiscoveryOne(BluetoothDevice device) {
 		deviceLv.showDeviceListView();
 		Timber.d("发现一个设备:" + device.getName());
 		filterDevices(device);
@@ -218,7 +218,7 @@ public class BTSettingActivity extends DialogActivity implements
 	}
 
 	@Override
-	public void onBluetoothDeviceDiscoveryFinished() {
+	public void onDeviceDiscoveryFinished() {
 		Timber.d("搜索蓝牙设备完毕！");
 		finishDiscoverBluetoothDevices();
 		AlertUtils.showToast(this,
@@ -261,7 +261,7 @@ public class BTSettingActivity extends DialogActivity implements
 		protected Boolean doInBackground(BluetoothDevice... params) {
 			Timber.d("正在连接设备");
 			boolean success = false;
-			success = BTManager.getInstance().getToyService()
+			success = BTManager.getInstance().getDeviceService()
 					.connectToy(mDevice.getName(), mDevice.getAddress());
 			return success;
 		}
@@ -303,7 +303,7 @@ public class BTSettingActivity extends DialogActivity implements
 	}
 
 	@Override
-	public void onBluetoothStateBonded() {
+	public void onDeviceStateBonded() {
 		Timber.d("onReceive:bluetooth bond state changed -> " + "BONDED");
 		Timber.d("玩具配对成功");
 		dismissProgressDialog();
@@ -313,13 +313,13 @@ public class BTSettingActivity extends DialogActivity implements
 	}
 
 	@Override
-	public void onBluetoothStateBondNone() {
+	public void onDeviceStateBondNone() {
 		Timber.d("onReceive:bluetooth bond state changed -> " + "BOND_NONE");
 		deviceAdapter.notifyDataSetChanged();
 	}
 
 	@Override
-	public void onBluetoothStateBonding() {
+	public void onDeviceStateBonding() {
 		Timber.d("onReceive:bluetooth bond state changed -> " + "BONDING");
 		Timber.d("正在绑定玩具");
 	}
