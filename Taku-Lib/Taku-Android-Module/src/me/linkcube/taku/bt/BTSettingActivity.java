@@ -2,11 +2,11 @@ package me.linkcube.taku.bt;
 
 import java.util.List;
 
-import com.ervinwang.btmanager.BTHelper;
-import com.ervinwang.btmanager.BTManager;
-import com.ervinwang.btmanager.core.BTDeviceReceiver;
-import com.ervinwang.btmanager.core.DeviceConnectionManager;
-import com.ervinwang.btmanager.core.OnBTDeviceListener;
+import com.ervinwang.bthelper.BTHelper;
+import com.ervinwang.bthelper.BTManager;
+import com.ervinwang.bthelper.core.BTDeviceReceiver;
+import com.ervinwang.bthelper.core.DeviceConnectionManager;
+import com.ervinwang.bthelper.core.OnBTDeviceListener;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -24,7 +24,7 @@ import me.linkcube.taku.common.ui.DialogActivity;
 import me.linkcube.taku.common.utils.AlertUtils;
 import me.linkcube.taku.common.utils.PreferenceUtils;
 import me.linkcube.taku.common.utils.Timber;
-import static com.ervinwang.btmanager.Const.Device.*;
+import static com.ervinwang.bthelper.Const.Device.*;
 
 public class BTSettingActivity extends DialogActivity implements
 		OnClickListener, OnDeviceItemClickListener, OnBTDeviceListener {

@@ -2,7 +2,7 @@ package me.linkcube.taku;
 
 import me.linkcube.taku.bt.BTSettingActivity;
 
-import com.ervinwang.btmanager.BTHelper;
+import com.ervinwang.bthelper.BTHelper;
 import com.unity3d.player.UnityPlayerActivity;
 
 import android.content.Context;

@@ -1,6 +1,6 @@
 package me.linkcube.taku.bt;
 
-import com.ervinwang.btmanager.core.DeviceConnectionManager;
+import com.ervinwang.bthelper.core.DeviceConnectionManager;
 
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
