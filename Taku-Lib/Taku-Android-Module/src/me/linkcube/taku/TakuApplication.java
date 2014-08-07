@@ -1,6 +1,7 @@
 package me.linkcube.taku;
 
 import me.linkcube.taku.BuildConfig;
+import me.linkcube.taku.common.utils.PreferenceUtils;
 import me.linkcube.taku.common.utils.Timber;
 import android.app.Application;
 
@@ -17,6 +18,7 @@ public class TakuApplication extends Application {
 		} else {
 			Timber.plant(new Timber.HollowTree());
 		}
+		PreferenceUtils.initDataShare(getApplicationContext());
 	}
 
 }

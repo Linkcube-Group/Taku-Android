@@ -10,7 +10,7 @@ import android.content.SharedPreferences.Editor;
  */
 public class PreferenceUtils {
 
-	private final static String PREFS_NAME = "me.linkcube.app";
+	private final static String PREFS_NAME = "me.linkcube.taku";
 
 	private static SharedPreferences sharedPreference;
 

@@ -30,6 +30,11 @@ public final class AlertUtils {
 		showToast(context, msg, Toast.LENGTH_SHORT);
 	}
 
+	public static void showToast(final Context context, int resId) {
+		showToast(context, context.getResources().getString(resId),
+				Toast.LENGTH_SHORT);
+	}
+
 	/**
 	 * 弹出Toast提示
 	 * 
