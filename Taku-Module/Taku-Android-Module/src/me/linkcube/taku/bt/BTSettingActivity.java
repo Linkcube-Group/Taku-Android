@@ -162,14 +162,13 @@ public class BTSettingActivity extends DialogActivity implements
 
 				@Override
 				public void receiveData(int bytes, byte[] buffer) {
-					String data = "#";
+					String data = "";
 					byte[] buf_data = new byte[bytes];
 					for (int i = 0; i < bytes; i++) {
 						buf_data[i] = buffer[i];
 					}
 					data = FormatUtils.bytesToHexString(buf_data);
-					data += "#";
-					Log.d("Receive Data = ", data);
+					Log.d("Receive Data Hex = ", data);
 				}
 			});
 
