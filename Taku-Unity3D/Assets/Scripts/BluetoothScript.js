@@ -9,10 +9,10 @@ private var aniPlayer : Animation;
 private var strBluetoothData : String = "Data";
 private var arrBTDataSplitter : char[] = [(" ")[0]];
 private var arrBTData : String[];
-private var strDeviceNames : String = "";
-private var arrDeviceNameSplitter : char[] = [("|")[0]];
-private var arrDeivceNameMacSplitter : char[] = [(" ")[0]];
-private var arrDevices : String[];
+//private var strDeviceNames : String = "";
+//private var arrDeviceNameSplitter : char[] = [("|")[0]];
+//private var arrDeivceNameMacSplitter : char[] = [(" ")[0]];
+//private var arrDevices : String[];
 private var nSwitchStatusCount : int = 7;
 private var arrSwitchStatus : int[] = [
 	0x01, 
@@ -35,11 +35,11 @@ private var arrPlayerMotion : String[] = [
 private var nSignal : int = 0;
 private var sTestMotion : String = "";
 
-private var nState : int = -2;
-private var bSearchCalled : boolean = false;
-private var bConnectCalled : boolean = false;
-private var bGetDeviceName : boolean = false;
-private var bDeviceSelected : boolean = false;
+//private var nState : int = -2;
+//private var bSearchCalled : boolean = false;
+//private var bConnectCalled : boolean = false;
+//private var bGetDeviceName : boolean = false;
+//private var bDeviceSelected : boolean = false;
 
 private var bStartTiming : boolean = false;
 private var fPrevBTTime : float = 0.0f;
@@ -70,11 +70,11 @@ function Update()
 {
 	fNotRunningTime += Time.deltaTime;
 	
-	nState = activity.Call.<int> ("GetState");	
-	strDeviceNames = activity.Call.<String>("GetDeviceNames");
-	arrDevices = strDeviceNames.Split(arrDeviceNameSplitter);
+//	nState = activity.Call.<int> ("GetState");	
+//	strDeviceNames = activity.Call.<String>("GetDeviceNames");
+//	arrDevices = strDeviceNames.Split(arrDeviceNameSplitter);
 		
-	strBluetoothData = activity.Call.<String> ("GetData");
+	strBluetoothData = activity.Call.<String> ("getData");
 	
 	if(!strBluetoothData.Equals("") && strBluetoothData.Length > 3)
 	{
@@ -153,6 +153,9 @@ function Update()
 			fLastRunTime = fCurrentRunTime;
 		}
 		fPrevBTTime = fCurrBTTime;
+		
+		activity.Call("clearBufferData");
+		
 	}
 	else if(fNotRunningTime > 1.0f)  //如果空闲的时间大于1秒，
 	{
@@ -200,26 +203,26 @@ function Update()
 function OnGUI(){
 	GUI.skin = RunnerGUI;
 	//GUI.Box(Rect(0, 400, 500, 100), strDeviceNames);
-	if(GUI.Button(Rect(50, Screen.height-120, 200, 100), "Search Bluetooth")){
-		activity.Call("Search");
-		bDeviceSelected = false;
-	}
-	if(GUI.Button(Rect(300, Screen.height-120, 200, 100), "Stop Search")){
-		activity.Call("StopSearch"); 
-	}
-	//GUI.Box(Rect(200, Screen.height-360, 400, 100), "State: " + nState);
-	//GUI.Box(Rect(50, Screen.height-480, 600, 100), arrDevices.Length + " Devices: " + strDeviceNames);
-	GUI.Button(Rect(200, Screen.height - 240, 400, 100), strBluetoothData);
-	GUI.Button(Rect(200, Screen.height - 360, 400, 100), sTestMotion + "  " + fDeltaRunTime + "  " + iLeftRight);
-	if(!bDeviceSelected){
-		for(var i : int=0; i<arrDevices.Length; ++i){
-			if(GUI.Button(Rect(100, 200+75*i, 500, 70), arrDevices[i])){
-				activity.Call("SelectDevice", i);
-				activity.Call("Connect");
-				bDeviceSelected = true;
-			}
-		}
-	}	
+//	if(GUI.Button(Rect(50, Screen.height-120, 200, 100), "Search Bluetooth")){
+//		activity.Call("Search");
+//		bDeviceSelected = false;
+//	}
+//	if(GUI.Button(Rect(300, Screen.height-120, 200, 100), "Stop Search")){
+//		activity.Call("StopSearch"); 
+//	}
+//	//GUI.Box(Rect(200, Screen.height-360, 400, 100), "State: " + nState);
+//	//GUI.Box(Rect(50, Screen.height-480, 600, 100), arrDevices.Length + " Devices: " + strDeviceNames);
+//	GUI.Button(Rect(200, Screen.height - 240, 400, 100), strBluetoothData);
+//	GUI.Button(Rect(200, Screen.height - 360, 400, 100), sTestMotion + "  " + fDeltaRunTime + "  " + iLeftRight);
+//	if(!bDeviceSelected){
+//		for(var i : int=0; i<arrDevices.Length; ++i){
+//			if(GUI.Button(Rect(100, 200+75*i, 500, 70), arrDevices[i])){
+//				activity.Call("SelectDevice", i);
+//				activity.Call("Connect");
+//				bDeviceSelected = true;
+//			}
+//		}
+//	}	
 }
 
 public function GetDirection()
