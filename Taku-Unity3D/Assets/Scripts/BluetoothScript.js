@@ -57,6 +57,8 @@ private var eSwipeDirection : SwipeDirection = SwipeDirection.Null;
 
 private var i : int;
 
+private var isConnected : boolean = false;
+
 function Start()
 {
 	var jc : AndroidJavaClass = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
@@ -64,6 +66,12 @@ function Start()
 	hControllerScript = this.GetComponent(ControllerScript) as ControllerScript;
 	aniPlayer = this.transform.Find("PlayerRotation/PlayerMesh/boy").GetComponent(Animation) as Animation;
 	fDeltaRunTime = 5;
+	isConnected = activity.Call.<boolean>("isToyConnected");
+	if(isConnected){
+		activity.Call("startReceiveData");
+	}else{
+		activity.Call("startBTSettingActivity");
+	}
 }
 
 function Update()
@@ -73,8 +81,10 @@ function Update()
 //	nState = activity.Call.<int> ("GetState");	
 //	strDeviceNames = activity.Call.<String>("GetDeviceNames");
 //	arrDevices = strDeviceNames.Split(arrDeviceNameSplitter);
-		
+	
 	strBluetoothData = activity.Call.<String> ("getData");
+	
+	activity.Call("testGetDataFromUnity", strBluetoothData);
 	
 	if(strBluetoothData!=null && !strBluetoothData.Equals("") && strBluetoothData.Length > 3)
 	{

@@ -2,6 +2,7 @@ package me.linkcube.taku;
 
 import me.linkcube.taku.bt.BTSettingActivity;
 import me.linkcube.taku.common.utils.FormatUtils;
+import me.linkcube.taku.common.utils.Timber;
 
 import com.ervinwang.bthelper.BTHelper;
 import com.ervinwang.bthelper.BTManager;
@@ -17,7 +18,7 @@ public class TakuActivity extends UnityPlayerActivity implements ITakuActivity {
 
 	Context mContext = null;
 
-	private String data = "Data";
+	private String data = "";
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -32,7 +33,10 @@ public class TakuActivity extends UnityPlayerActivity implements ITakuActivity {
 
 	@Override
 	public String getData() {
-		return data;
+		Timber.d("getData data= " + data);
+		String temp = data;
+		Timber.d("getData temp= " + temp);
+		return temp;
 	}
 
 	@Override
@@ -42,12 +46,13 @@ public class TakuActivity extends UnityPlayerActivity implements ITakuActivity {
 
 	@Override
 	public boolean isToyConnected() {
-		return false;
+		return BTManager.getInstance().getDeviceService().checkConnection();
 	}
 
 	@Override
 	public void clearBufferData() {
-		data="";
+		Timber.d("clearBufferData = " + data);
+		data = "";
 	}
 
 	@Override
@@ -61,7 +66,8 @@ public class TakuActivity extends UnityPlayerActivity implements ITakuActivity {
 					buf_data[i] = buffer[i];
 				}
 				data = FormatUtils.bytesToHexString(buf_data);
-				Log.d("Receive Data Hex = ", data);
+				Log.d("Receive Data Hex 1 = ", data);
+				Log.d("Receive Data Hex 2 = ", getData());
 			}
 		});
 	}
@@ -69,6 +75,10 @@ public class TakuActivity extends UnityPlayerActivity implements ITakuActivity {
 	@Override
 	public void stopReceiveData() {
 		BTManager.getInstance().stopReceiveData();
+	}
+
+	public void testGetDataFromUnity(String data) {
+		Timber.d("testGetDataFromUnity=" + data);
 	}
 
 }

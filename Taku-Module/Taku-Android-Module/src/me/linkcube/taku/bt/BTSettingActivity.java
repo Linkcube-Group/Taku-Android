@@ -168,7 +168,6 @@ public class BTSettingActivity extends DialogActivity implements
 						buf_data[i] = buffer[i];
 					}
 					data = FormatUtils.bytesToHexString(buf_data);
-					Log.d("Receive Data Hex = ", data);
 				}
 			});
 
