@@ -17,7 +17,7 @@ public class TakuActivity extends UnityPlayerActivity implements ITakuActivity {
 
 	Context mContext = null;
 
-	private String data = null;
+	private String data = "Data";
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {

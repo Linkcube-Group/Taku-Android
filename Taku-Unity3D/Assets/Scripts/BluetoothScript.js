@@ -1,4 +1,4 @@
-﻿#pragma strict
+#pragma strict
 
 var RunnerGUI : GUISkin;
 
@@ -76,77 +76,124 @@ function Update()
 		
 	strBluetoothData = activity.Call.<String> ("getData");
 	
-	if(!strBluetoothData.Equals("") && strBluetoothData.Length > 3)
+	if(strBluetoothData!=null && !strBluetoothData.Equals("") && strBluetoothData.Length > 3)
 	{
-		strBluetoothData = strBluetoothData.Substring(1, strBluetoothData.Length - 2);
-		var arrBTData = strBluetoothData.Split(arrBTDataSplitter);
-		
-		i = 0;		
-		while(i<arrBTData.Length)
+		var signal = "";
+		var control = "";
+		signal = strBluetoothData.Substring(0, 2);
+		if(signal == "25")
 		{
-			if(int.TryParse(arrBTData[i], nSignal))
+			control = strBluetoothData.Substring(2,4);
+			if("02" == control) //run
 			{
-				if(nSignal == 0x25) //0x25开头的信号
+				fNotRunningTime = 0;
+				if(!bBTRunning)
 				{
-					i+=2;
-					if(i>=arrBTData.Length)
-					{
-						break;
+					fLastRunTime = Time.time;
+					bBTRunning = true;
 					}
-					
-					//检测第三个信号
-					if(int.TryParse(arrBTData[i], nSignal))
-					{
-						if(0x02 == nSignal) //run
-						{
-							fNotRunningTime = 0;
-							if(!bBTRunning)
-							{
-								fLastRunTime = Time.time;
-								bBTRunning = true;
-							}
-							else
-							{
-								fCurrentRunTime = Time.time;
-								fDeltaRunTime = (fCurrentRunTime - fLastRunTime) * 1000;					
-							}							
-						}
-						else if(0x01 == nSignal) //left
-						{
-							eSwipeDirection = SwipeDirection.Left;
-						}
-						else if(0x04 == nSignal) //right
-						{
-							eSwipeDirection = SwipeDirection.Right;
-						}
-						else if(0x05 == nSignal) //jump
-						{
-							eSwipeDirection = SwipeDirection.Jump;
-						}
-						
-						//根据信号播放动画
-						for(var j : int = 0; j < nSwitchStatusCount; ++j)
-						{
-							if(nSignal == arrSwitchStatus[j])
-							{
-								aniPlayer.Play(arrPlayerMotion[j]);
-								sTestMotion = arrPlayerMotion[j];
-								break;
-							}
-						}
-						i += 6;
-					}
-				}
-				else //信号非法
+				else
 				{
+					fCurrentRunTime = Time.time;
+					fDeltaRunTime = (fCurrentRunTime - fLastRunTime) * 1000;					
+				}							
+			}
+			else if("01" == control) //left
+			{
+				eSwipeDirection = SwipeDirection.Left;
+			}
+			else if("04" == control) //right
+			{
+				eSwipeDirection = SwipeDirection.Right;
+			}
+			else if("05" == control) //jump
+			{
+				eSwipeDirection = SwipeDirection.Jump;
+			}
+			
+			for(var j : int = 0; j < nSwitchStatusCount; ++j)
+			{
+				if(control == arrSwitchStatus[j])
+				{
+					aniPlayer.Play(arrPlayerMotion[j]);
+					sTestMotion = arrPlayerMotion[j];
 					break;
 				}
 			}
-			else //无信号
-			{
-				break;
-			}
+			
 		}
+		
+//		var arrBTData = strBluetoothData;
+		
+//		i = 0;		
+		
+		
+						
+//		while(i<arrBTData.Length)
+//		{
+//			if(int.TryParse(arrBTData[i], nSignal))
+//			{
+//				if(nSignal == 0x25) //0x25开头的信号
+//				{
+//					i+=2;
+//					if(i>=arrBTData.Length)
+//					{
+//						break;
+//					}
+//					
+//					//检测第三个信号
+//					if(int.TryParse(arrBTData[i], nSignal))
+//					{
+//						if(0x02 == nSignal) //run
+//						{
+//							fNotRunningTime = 0;
+//							if(!bBTRunning)
+//							{
+//								fLastRunTime = Time.time;
+//								bBTRunning = true;
+//							}
+//							else
+//							{
+//								fCurrentRunTime = Time.time;
+//								fDeltaRunTime = (fCurrentRunTime - fLastRunTime) * 1000;					
+//							}							
+//						}
+//						else if(0x01 == nSignal) //left
+//						{
+//							eSwipeDirection = SwipeDirection.Left;
+//						}
+//						else if(0x04 == nSignal) //right
+//						{
+//							eSwipeDirection = SwipeDirection.Right;
+//						}
+//						else if(0x05 == nSignal) //jump
+//						{
+//							eSwipeDirection = SwipeDirection.Jump;
+//						}
+//						
+//						//根据信号播放动画
+//						for(var j : int = 0; j < nSwitchStatusCount; ++j)
+//						{
+//							if(nSignal == arrSwitchStatus[j])
+//							{
+//								aniPlayer.Play(arrPlayerMotion[j]);
+//								sTestMotion = arrPlayerMotion[j];
+//								break;
+//							}
+//						}
+//						i += 6;
+//					}
+//				}
+//				else //信号非法
+//				{
+//					break;
+//				}
+//			}
+//			else //无信号
+//			{
+//				break;
+//			}
+//		}
 		
 		if(bBTRunning) //如果在跑步，更新一下时间
 		{
@@ -212,7 +259,7 @@ function OnGUI(){
 //	}
 //	//GUI.Box(Rect(200, Screen.height-360, 400, 100), "State: " + nState);
 //	//GUI.Box(Rect(50, Screen.height-480, 600, 100), arrDevices.Length + " Devices: " + strDeviceNames);
-//	GUI.Button(Rect(200, Screen.height - 240, 400, 100), strBluetoothData);
+	GUI.Button(Rect(200, Screen.height - 240, 400, 100), strBluetoothData+"a");
 //	GUI.Button(Rect(200, Screen.height - 360, 400, 100), sTestMotion + "  " + fDeltaRunTime + "  " + iLeftRight);
 //	if(!bDeviceSelected){
 //		for(var i : int=0; i<arrDevices.Length; ++i){
