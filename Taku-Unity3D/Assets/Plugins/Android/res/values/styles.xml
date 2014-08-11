@@ -1,109 +1,20 @@
-<resources xmlns:android="http://schemas.android.com/apk/res/android">
+<resources>
 
-    <style name="MainPage">
-        <item name="android:gravity">center_horizontal</item>
-        <item name="android:orientation">vertical</item>
-        <item name="android:background">@color/main_bg</item>
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">match_parent</item>
+    <!--
+        Base application theme, dependent on API level. This theme is replaced
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+    -->
+    <style name="AppBaseTheme" parent="android:Theme.Light">
+        <!--
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+        -->
     </style>
 
-    <!-- Single Mode View -->
-    <style name="ModeViewBlock">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">match_parent</item>
-        <item name="android:paddingLeft">@dimen/ModeBlockPadding</item>
-        <item name="android:paddingRight">@dimen/ModeBlockPadding</item>
-    </style>
-
-    <style name="ModeViewBlock.Button">
-        <item name="android:layout_width">@dimen/ModeBtnSize</item>
-        <item name="android:layout_height">@dimen/ModeBtnSize</item>
-        <item name="android:layout_centerInParent">true</item>
-    </style>
-
-    <style name="ModeViewBlock.TextView">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_centerHorizontal">true</item>
-        <item name="android:layout_marginTop">10dp</item>
-        <item name="android:textColor">@color/pink</item>
-        <item name="android:textSize">@dimen/ModeTextSize</item>
-    </style>
-
-    <!-- Button -->
-
-    <style name="Button">
-        <item name="android:textSize">@dimen/TextSize.Default</item>
-        <item name="android:background">@null</item>
-        <item name="android:gravity">center</item>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:minWidth">40.0dip</item>
-        <item name="android:minHeight">40.0dip</item>
-    </style>
-
-    <style name="Button.Grey" parent="@style/Button"></style>
-
-    <style name="Button.LightGrey" parent="@style/Button"></style>
-
-    <!-- FriendListView -->
-    <style name="ListView">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">match_parent</item>
-        <item name="android:dividerHeight">1dp</item>
-        <item name="android:cacheColorHint">@null</item>
-        <item name="android:divider">@color/listview_divider</item>
-    </style>
-
-    <style name="ListView.Cell">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:background">@color/listview_cell_bg</item>
-        <item name="android:gravity">center_vertical</item>
-        <item name="android:orientation">horizontal</item>
-    </style>
-
-    <style name="ListView.Cell.TextView">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_weight">1</item>
-        <item name="android:layout_height">@dimen/ListCellHeight</item>
-        <item name="android:layout_marginRight">@dimen/ListCellMargin</item>
-        <item name="android:textColor">@color/listview_cell_text</item>
-        <item name="android:textSize">@dimen/ListCellTextSize</item>
-    </style>
-
-    <!-- Setting -->
-    <style name="Setting"></style>
-
-    <style name="Setting.Item">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:gravity">center_vertical</item>
-        <item name="android:orientation">horizontal</item>
-    </style>
-
-    <style name="Setting.Item.TextView">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">@dimen/SettingItemHeight</item>
-        <item name="android:textSize">@dimen/SettingItemTextSize</item>
-    </style>
-
-    <style name="Setting.Item.Divider">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">1dp</item>
-        <item name="android:background">@color/listview_divider</item>
-    </style>
-
-    <style name="Setting.Item.TextView.Left" parent="@style/Setting.Item.TextView">
-        <item name="android:layout_weight">1</item>
-        <item name="android:layout_width">0dp</item>
-    </style>
-
-    <style name="Setting.Item.TextView.Right" parent="@style/Setting.Item.TextView">
-        <item name="android:textColor">@color/text_dark_grey</item>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:gravity">right|center_vertical</item>
+    <!-- Application theme. -->
+    <style name="AppTheme" parent="AppBaseTheme">
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
 
 </resources>

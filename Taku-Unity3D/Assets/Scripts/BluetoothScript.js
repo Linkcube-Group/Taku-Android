@@ -1,4 +1,4 @@
-#pragma strict
+﻿#pragma strict
 
 var RunnerGUI : GUISkin;
 
@@ -9,10 +9,10 @@ private var aniPlayer : Animation;
 private var strBluetoothData : String = "Data";
 private var arrBTDataSplitter : char[] = [(" ")[0]];
 private var arrBTData : String[];
-//private var strDeviceNames : String = "";
-//private var arrDeviceNameSplitter : char[] = [("|")[0]];
-//private var arrDeivceNameMacSplitter : char[] = [(" ")[0]];
-//private var arrDevices : String[];
+private var strDeviceNames : String = "";
+private var arrDeviceNameSplitter : char[] = [("|")[0]];
+private var arrDeivceNameMacSplitter : char[] = [(" ")[0]];
+private var arrDevices : String[];
 private var nSwitchStatusCount : int = 7;
 private var arrSwitchStatus : int[] = [
 	0x01, 
@@ -35,11 +35,11 @@ private var arrPlayerMotion : String[] = [
 private var nSignal : int = 0;
 private var sTestMotion : String = "";
 
-//private var nState : int = -2;
-//private var bSearchCalled : boolean = false;
-//private var bConnectCalled : boolean = false;
-//private var bGetDeviceName : boolean = false;
-//private var bDeviceSelected : boolean = false;
+private var nState : int = -2;
+private var bSearchCalled : boolean = false;
+private var bConnectCalled : boolean = false;
+private var bGetDeviceName : boolean = false;
+private var bDeviceSelected : boolean = false;
 
 private var bStartTiming : boolean = false;
 private var fPrevBTTime : float = 0.0f;
@@ -70,139 +70,89 @@ function Update()
 {
 	fNotRunningTime += Time.deltaTime;
 	
-//	nState = activity.Call.<int> ("GetState");	
-//	strDeviceNames = activity.Call.<String>("GetDeviceNames");
-//	arrDevices = strDeviceNames.Split(arrDeviceNameSplitter);
+	nState = activity.Call.<int> ("GetState");	
+	strDeviceNames = activity.Call.<String>("GetDeviceNames");
+	arrDevices = strDeviceNames.Split(arrDeviceNameSplitter);
 		
-	strBluetoothData = activity.Call.<String> ("getData");
+	strBluetoothData = activity.Call.<String> ("GetData");
 	
-	if(strBluetoothData!=null && !strBluetoothData.Equals("") && strBluetoothData.Length > 3)
+	if(!strBluetoothData.Equals("") && strBluetoothData.Length > 3)
 	{
-		var signal = "";
-		var control = "";
-		signal = strBluetoothData.Substring(0, 2);
-		if(signal == "25")
+		strBluetoothData = strBluetoothData.Substring(1, strBluetoothData.Length - 2);
+		var arrBTData = strBluetoothData.Split(arrBTDataSplitter);
+		
+		i = 0;		
+		while(i<arrBTData.Length)
 		{
-			control = strBluetoothData.Substring(2,4);
-			if("02" == control) //run
+			if(int.TryParse(arrBTData[i], nSignal))
 			{
-				fNotRunningTime = 0;
-				if(!bBTRunning)
+				if(nSignal == 0x25) //0x25开头的信号
 				{
-					fLastRunTime = Time.time;
-					bBTRunning = true;
+					i+=2;
+					if(i>=arrBTData.Length)
+					{
+						break;
 					}
-				else
+					
+					//检测第三个信号
+					if(int.TryParse(arrBTData[i], nSignal))
+					{
+						if(0x02 == nSignal) //run
+						{
+							fNotRunningTime = 0;
+							if(!bBTRunning)
+							{
+								fLastRunTime = Time.time;
+								bBTRunning = true;
+							}
+							else
+							{
+								fCurrentRunTime = Time.time;
+								fDeltaRunTime = (fCurrentRunTime - fLastRunTime) * 1000;					
+							}							
+						}
+						else if(0x01 == nSignal) //left
+						{
+							eSwipeDirection = SwipeDirection.Left;
+						}
+						else if(0x04 == nSignal) //right
+						{
+							eSwipeDirection = SwipeDirection.Right;
+						}
+						else if(0x05 == nSignal) //jump
+						{
+							eSwipeDirection = SwipeDirection.Jump;
+						}
+						
+						//根据信号播放动画
+						for(var j : int = 0; j < nSwitchStatusCount; ++j)
+						{
+							if(nSignal == arrSwitchStatus[j])
+							{
+								aniPlayer.Play(arrPlayerMotion[j]);
+								sTestMotion = arrPlayerMotion[j];
+								break;
+							}
+						}
+						i += 6;
+					}
+				}
+				else //信号非法
 				{
-					fCurrentRunTime = Time.time;
-					fDeltaRunTime = (fCurrentRunTime - fLastRunTime) * 1000;					
-				}							
-			}
-			else if("01" == control) //left
-			{
-				eSwipeDirection = SwipeDirection.Left;
-			}
-			else if("04" == control) //right
-			{
-				eSwipeDirection = SwipeDirection.Right;
-			}
-			else if("05" == control) //jump
-			{
-				eSwipeDirection = SwipeDirection.Jump;
-			}
-			
-			for(var j : int = 0; j < nSwitchStatusCount; ++j)
-			{
-				if(control == arrSwitchStatus[j])
-				{
-					aniPlayer.Play(arrPlayerMotion[j]);
-					sTestMotion = arrPlayerMotion[j];
 					break;
 				}
 			}
-			
+			else //无信号
+			{
+				break;
+			}
 		}
-		
-//		var arrBTData = strBluetoothData;
-		
-//		i = 0;		
-		
-		
-						
-//		while(i<arrBTData.Length)
-//		{
-//			if(int.TryParse(arrBTData[i], nSignal))
-//			{
-//				if(nSignal == 0x25) //0x25开头的信号
-//				{
-//					i+=2;
-//					if(i>=arrBTData.Length)
-//					{
-//						break;
-//					}
-//					
-//					//检测第三个信号
-//					if(int.TryParse(arrBTData[i], nSignal))
-//					{
-//						if(0x02 == nSignal) //run
-//						{
-//							fNotRunningTime = 0;
-//							if(!bBTRunning)
-//							{
-//								fLastRunTime = Time.time;
-//								bBTRunning = true;
-//							}
-//							else
-//							{
-//								fCurrentRunTime = Time.time;
-//								fDeltaRunTime = (fCurrentRunTime - fLastRunTime) * 1000;					
-//							}							
-//						}
-//						else if(0x01 == nSignal) //left
-//						{
-//							eSwipeDirection = SwipeDirection.Left;
-//						}
-//						else if(0x04 == nSignal) //right
-//						{
-//							eSwipeDirection = SwipeDirection.Right;
-//						}
-//						else if(0x05 == nSignal) //jump
-//						{
-//							eSwipeDirection = SwipeDirection.Jump;
-//						}
-//						
-//						//根据信号播放动画
-//						for(var j : int = 0; j < nSwitchStatusCount; ++j)
-//						{
-//							if(nSignal == arrSwitchStatus[j])
-//							{
-//								aniPlayer.Play(arrPlayerMotion[j]);
-//								sTestMotion = arrPlayerMotion[j];
-//								break;
-//							}
-//						}
-//						i += 6;
-//					}
-//				}
-//				else //信号非法
-//				{
-//					break;
-//				}
-//			}
-//			else //无信号
-//			{
-//				break;
-//			}
-//		}
 		
 		if(bBTRunning) //如果在跑步，更新一下时间
 		{
 			fLastRunTime = fCurrentRunTime;
 		}
 		fPrevBTTime = fCurrBTTime;
-		
-		activity.Call("clearBufferData");
-		
 	}
 	else if(fNotRunningTime > 1.0f)  //如果空闲的时间大于1秒，
 	{
@@ -250,26 +200,26 @@ function Update()
 function OnGUI(){
 	GUI.skin = RunnerGUI;
 	//GUI.Box(Rect(0, 400, 500, 100), strDeviceNames);
-//	if(GUI.Button(Rect(50, Screen.height-120, 200, 100), "Search Bluetooth")){
-//		activity.Call("Search");
-//		bDeviceSelected = false;
-//	}
-//	if(GUI.Button(Rect(300, Screen.height-120, 200, 100), "Stop Search")){
-//		activity.Call("StopSearch"); 
-//	}
-//	//GUI.Box(Rect(200, Screen.height-360, 400, 100), "State: " + nState);
-//	//GUI.Box(Rect(50, Screen.height-480, 600, 100), arrDevices.Length + " Devices: " + strDeviceNames);
-	GUI.Button(Rect(200, Screen.height - 240, 400, 100), strBluetoothData+"a");
-//	GUI.Button(Rect(200, Screen.height - 360, 400, 100), sTestMotion + "  " + fDeltaRunTime + "  " + iLeftRight);
-//	if(!bDeviceSelected){
-//		for(var i : int=0; i<arrDevices.Length; ++i){
-//			if(GUI.Button(Rect(100, 200+75*i, 500, 70), arrDevices[i])){
-//				activity.Call("SelectDevice", i);
-//				activity.Call("Connect");
-//				bDeviceSelected = true;
-//			}
-//		}
-//	}	
+	if(GUI.Button(Rect(50, Screen.height-120, 200, 100), "Search Bluetooth")){
+		activity.Call("Search");
+		bDeviceSelected = false;
+	}
+	if(GUI.Button(Rect(300, Screen.height-120, 200, 100), "Stop Search")){
+		activity.Call("StopSearch"); 
+	}
+	//GUI.Box(Rect(200, Screen.height-360, 400, 100), "State: " + nState);
+	//GUI.Box(Rect(50, Screen.height-480, 600, 100), arrDevices.Length + " Devices: " + strDeviceNames);
+	GUI.Button(Rect(200, Screen.height - 240, 400, 100), strBluetoothData);
+	GUI.Button(Rect(200, Screen.height - 360, 400, 100), sTestMotion + "  " + fDeltaRunTime + "  " + iLeftRight);
+	if(!bDeviceSelected){
+		for(var i : int=0; i<arrDevices.Length; ++i){
+			if(GUI.Button(Rect(100, 200+75*i, 500, 70), arrDevices[i])){
+				activity.Call("SelectDevice", i);
+				activity.Call("Connect");
+				bDeviceSelected = true;
+			}
+		}
+	}	
 }
 
 public function GetDirection()
