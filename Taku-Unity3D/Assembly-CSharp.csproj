@@ -57,11 +57,15 @@
     <None Include="Assets\Plugins\Android\res\values\ids.xml" />
     <None Include="Assets\Plugins\Android\res\layout\bt_help_activity.xml" />
     <None Include="Assets\Plugins\Android\res\values\strings.xml" />
-    <Compile Include="Assets\Scripts\DataControllerTest\TestMain.cs" />
     <Compile Include="Assets\Scripts\Menu\MainMenu.cs" />
-    <Compile Include="Assets\Scripts\Model\ModelConfig.cs" />
     <Compile Include="Assets\Scripts\Model\Charactor.cs" />
     <Compile Include="Assets\Scripts\Model\Enemy.cs" />
+    <Compile Include="Assets\Scripts\Model\ModelDataConfig.cs" />
+    <Compile Include="Assets\Scripts\DataMangerTest\TestMain.cs" />
+    <Compile Include="Assets\Scripts\Controller\BluetoothController.cs" />
+    <Compile Include="Assets\Scripts\Controller\ModelController.cs" />
+    <Compile Include="Assets\Scripts\Manager\DataManger.cs" />
+    <Compile Include="Assets\Scripts\Model\Fighter.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
@@ -78,8 +82,9 @@
   </Target>
   -->
   <ItemGroup>
-    <Folder Include="Assets\Scripts\DataController\" />
-    <Folder Include="Assets\Scripts\DataControllerTest\" />
+    <Folder Include="Assets\Scripts\Controller\" />
     <Folder Include="Assets\Scripts\Model\" />
+    <Folder Include="Assets\Scripts\DataMangerTest\" />
+    <Folder Include="Assets\Scripts\Manager\" />
   </ItemGroup>
 </Project>

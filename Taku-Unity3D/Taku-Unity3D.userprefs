@@ -1,8 +1,14 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/BluetoothScript.js">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Model\Enemy.cs">
     <Files>
-      <File FileName="Assets/Scripts/BluetoothScript.js" Line="79" Column="40" />
+      <File FileName="C:\Users\ervinwang\Documents\Projects\Model\Model\TestMain.cs" Line="13" Column="2" />
+      <File FileName="C:\Users\ervinwang\Documents\Projects\Model\Model\Model\Charactor.cs" Line="33" Column="11" />
+      <File FileName="Assets\Scripts\DataControllerTest\TestMain.cs" Line="8" Column="36" />
+      <File FileName="Assets\Scripts\Model\Charactor.cs" Line="2" Column="4" />
+      <File FileName="Assets\Scripts\Model\Enemy.cs" Line="9" Column="2" />
+      <File FileName="Assets\Scripts\Model\ModelConfig.cs" Line="20" Column="22" />
+      <File FileName="C:\Users\ervinwang\Documents\Projects\Model\Model\Model\Enemy.cs" Line="8" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
