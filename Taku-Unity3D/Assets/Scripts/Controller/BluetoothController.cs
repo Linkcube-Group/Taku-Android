@@ -64,7 +64,7 @@ public class BluetoothController
 	/**
 	 * 开启蓝牙界面
 	 * */
-	public static void StartBTSettingActivity()
+	public void StartBTSettingActivity()
 	{
 		AndroidJavaObject jo = GetAndroidJavaObject ();
 		jo.Call ("startBTSettingActivity");

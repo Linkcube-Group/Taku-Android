@@ -61,11 +61,11 @@
     <Compile Include="Assets\Scripts\Model\Charactor.cs" />
     <Compile Include="Assets\Scripts\Model\Enemy.cs" />
     <Compile Include="Assets\Scripts\Model\ModelDataConfig.cs" />
-    <Compile Include="Assets\Scripts\DataMangerTest\TestMain.cs" />
     <Compile Include="Assets\Scripts\Controller\BluetoothController.cs" />
     <Compile Include="Assets\Scripts\Controller\ModelController.cs" />
-    <Compile Include="Assets\Scripts\Manager\DataManger.cs" />
     <Compile Include="Assets\Scripts\Model\Fighter.cs" />
+    <Compile Include="Assets\Scripts\Test\TestMain.cs" />
+    <Compile Include="Assets\Scripts\Controller\DataController.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
@@ -84,7 +84,6 @@
   <ItemGroup>
     <Folder Include="Assets\Scripts\Controller\" />
     <Folder Include="Assets\Scripts\Model\" />
-    <Folder Include="Assets\Scripts\DataMangerTest\" />
-    <Folder Include="Assets\Scripts\Manager\" />
+    <Folder Include="Assets\Scripts\Test\" />
   </ItemGroup>
 </Project>

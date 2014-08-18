@@ -19,18 +19,26 @@ public class MainMenu : MonoBehaviour {
 	
 	
 	void OnGUI() {
-		
+
+		BluetoothController btController = new BluetoothController ();
+
 		if (GUI.Button(new Rect(220, 200, 150, 100), "Bluetooth Setting"))
 		{	
-			AndroidJavaClass jc = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
-			AndroidJavaObject jo = jc.GetStatic<AndroidJavaObject>("currentActivity");
-			jo.Call("startBTSettingActivity");
+			btController.StartBTSettingActivity();
 		}
-		
+
 		if (GUI.Button(new Rect(220, 320, 150, 100), "Play"))
 		{
-			//TODO 判断是否连接蓝牙了
-			Application.LoadLevel("main");
+
+			if(btController.IsBluetoothConncted)
+			{
+				Application.LoadLevel("main");
+			}
+			else
+			{
+				btController.StartBTSettingActivity();
+			}
+
 		}
 	}
 }

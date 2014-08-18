@@ -4,7 +4,7 @@ using UnityEngine;
 /**
  * 数据中心，接收蓝牙数据之后进行处理，并且全局保持唯一，是单例的。
  * */
-public class DataManager : MonoBehaviour
+public class DataController : MonoBehaviour
 {
 	private Fighter fighter;
 
@@ -14,7 +14,7 @@ public class DataManager : MonoBehaviour
 
 	private BluetoothController btController;
 
-	public DataManager ()
+	public DataController ()
 	{
 		btController = new BluetoothController ();
 	}
@@ -26,7 +26,12 @@ public class DataManager : MonoBehaviour
 
 	void OnUpdate ()
 	{
-		bluetoothData = btController.GetBluetoothData ();
+		if (btController.IsBluetoothConncted)
+				bluetoothData = btController.GetBluetoothData ();
+		else
+			//TODO 提示蓝牙断开
+			;
+			
 	}
 
 
