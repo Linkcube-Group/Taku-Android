@@ -1,8 +1,11 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/BluetoothScript.js">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/PreyScript.js">
     <Files>
-      <File FileName="Assets/Scripts/BluetoothScript.js" Line="79" Column="40" />
+      <File FileName="Assets/Scripts/BluetoothScript.js" Line="79" Column="36" />
+      <File FileName="Assets/Scripts/Model/Charactor.cs" Line="17" Column="29" />
+      <File FileName="Assets/Scripts/Model/ModelConfig.cs" Line="21" Column="20" />
+      <File FileName="Assets/Scripts/PreyScript.js" Line="69" Column="41" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

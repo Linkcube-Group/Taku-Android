@@ -35,27 +35,25 @@ private var hInGameScript : InGameScript;
 private var hPreyScript : PreyScript;
 
 private var tMenuTransforms : Transform[];
-//Main Menu
+//Main Menu and 2 buttons
 private var tMainMenuButtons:Transform[];
 private var iMainMenuButtonsCount:int = 2;
-//Pause Menu
+//Pause Menu and 2 buttons
 private var tPauseButtons:Transform[];
 private var iPauseButtonsCount:int = 2;
-//Game Over Menu
+//Game Over Menu 2 buttons
 private var tGameOverButtons:Transform[];
 private var iGameOverButtonsCount:int = 2;
-//instructions menu
+//Instructions menu and 4 buttons
 private var tInstructionsButtons : Transform[];
 private var iInstructionsButtonsCount : int = 4;
 private var mrSwipeControls : MeshRenderer;
 private var mrGyroControls : MeshRenderer;
 private var mrEasyControls : MeshRenderer;
-
-//resume game countdown
+//Resume game countdown
 private var iResumeGameState : int = 0;
 private var iResumeGameStartTime: int = 0;
 private var tmPauseCountdown : TextMesh;
-
 
 function Start ()
 {  	

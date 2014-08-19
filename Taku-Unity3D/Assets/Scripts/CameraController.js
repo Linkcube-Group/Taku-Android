@@ -49,6 +49,8 @@ function Update ()
 	if(hInGameScript.isGamePaused()==true)		
 		return;
 	
+	// When player's energy is empty, the game is over.
+	
 	if (hInGameScript.isEnergyZero())
 		iCameraState = 2;
 }
@@ -58,6 +60,7 @@ function FixedUpdate()
 	CameraMain();
 }
 
+//Initial camera
 private function CameraMain()
 {
 	fCameraDistance = Mathf.Lerp(fCameraDistance,fCameraLerpValue,Time.deltaTime*1.5);
