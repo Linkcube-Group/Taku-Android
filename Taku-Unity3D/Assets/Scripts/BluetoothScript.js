@@ -91,10 +91,10 @@ function Update()
 		var signal = "";
 		var control = "";
 		signal = strBluetoothData.Substring(0, 2);
-		if(signal == "25")
+		if(signal.Equals("25"))
 		{
 			control = strBluetoothData.Substring(2,4);
-			if("02" == control) //run
+			if("02".Equals(control)) //run
 			{
 				fNotRunningTime = 0;
 				if(!bBTRunning)
@@ -108,15 +108,15 @@ function Update()
 					fDeltaRunTime = (fCurrentRunTime - fLastRunTime) * 1000;					
 				}							
 			}
-			else if("01" == control) //left
+			else if("01".Equals(control)) //left
 			{
 				eSwipeDirection = SwipeDirection.Left;
 			}
-			else if("04" == control) //right
+			else if("04".Equals(control)) //right
 			{
 				eSwipeDirection = SwipeDirection.Right;
 			}
-			else if("05" == control) //jump
+			else if("05".Equals(control)) //jump
 			{
 				eSwipeDirection = SwipeDirection.Jump;
 			}
