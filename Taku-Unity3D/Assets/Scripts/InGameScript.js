@@ -224,12 +224,17 @@ public function showAddScore(iScore:int)
 	goScore.SetActive(true);
 }
 
+//游戏是否暂停
 public function isGamePaused() { return bGamePaused; }
 
 public function getLevelScore() { return iLevelScore; }
+//获取当前等级增加分数比例
 public function incrementLevelScore(iValue:int) { iLevelScore += iValue; }
-
+//获取当前能量值
 public function getCurrentEnergy() { return CurrentEnergy; }
+//判断当前能量值是否为0
 public function isEnergyZero():boolean { return (CurrentEnergy <= 0 ? true : false); }
+//置空当前能量值
 public function zeroEnergy(){CurrentEnergy = 0;}
+
 public function decrementEnergy(iValue:int) { CurrentEnergy -= iValue; }

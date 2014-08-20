@@ -34,7 +34,6 @@
 	<NoWarn>0169</NoWarn>
   </PropertyGroup>
   <ItemGroup>
-<<<<<<< HEAD
 	<Reference Include="System" />
     <Reference Include="System.XML" />
 	<Reference Include="System.Core" />
@@ -45,48 +44,17 @@
 	<Reference Include="UnityEditor">
 	  <HintPath>/Applications/Unity/Unity.app/Contents/Frameworks/Managed/UnityEditor.dll</HintPath>
 	</Reference>
-=======
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="UnityEngine">
-      <HintPath>C:\Program Files %28x86%29\Unity\Editor\Data\Managed\UnityEngine.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor">
-      <HintPath>C:\Program Files %28x86%29\Unity\Editor\Data\Managed\UnityEditor.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\Plugins\Android\res\values\colors.xml" />
-    <None Include="Assets\Plugins\Android\res\layout\bt_setting_activity.xml" />
-    <None Include="Assets\Plugins\Android\res\values\styles.xml" />
-    <None Include="Assets\Plugins\Android\res\values\dimens.xml" />
-    <None Include="Assets\Plugins\Android\res\layout\bt_device_listview_cell.xml" />
-    <None Include="Assets\Plugins\Android\res\drawable\toggle.xml" />
-    <None Include="Assets\Plugins\Android\res\layout\bt_device_listview.xml" />
-    <None Include="Assets\Plugins\Android\res\layout\bt_device_listview_header.xml" />
-    <None Include="Assets\Plugins\Android\AndroidManifest.xml" />
-    <None Include="Assets\Plugins\Android\res\values\ids.xml" />
-    <None Include="Assets\Plugins\Android\res\layout\bt_help_activity.xml" />
-    <None Include="Assets\Plugins\Android\res\values\strings.xml" />
-    <Compile Include="Assets\Scripts\Menu\MainMenu.cs" />
-    <Compile Include="Assets\Scripts\Model\Charactor.cs" />
-    <Compile Include="Assets\Scripts\Model\Enemy.cs" />
-    <Compile Include="Assets\Scripts\Model\ModelDataConfig.cs" />
-    <Compile Include="Assets\Scripts\Controller\BluetoothController.cs" />
-    <Compile Include="Assets\Scripts\Controller\ModelController.cs" />
-    <Compile Include="Assets\Scripts\Model\Fighter.cs" />
-    <Compile Include="Assets\Scripts\Test\TestMain.cs" />
-    <Compile Include="Assets\Scripts\Controller\DataController.cs" />
->>>>>>> 08a35923257913757de6927a7615f73c87150344
-  </ItemGroup>
-  <ItemGroup>
-     <Compile Include="Assets\Scripts\DataControllerTest\TestMain.cs" />
+     <Compile Include="Assets\Scripts\Controller\BluetoothController.cs" />
+     <Compile Include="Assets\Scripts\Controller\DataController.cs" />
+     <Compile Include="Assets\Scripts\Controller\ModelController.cs" />
      <Compile Include="Assets\Scripts\Menu\MainMenu.cs" />
      <Compile Include="Assets\Scripts\Model\Charactor.cs" />
      <Compile Include="Assets\Scripts\Model\Enemy.cs" />
-     <Compile Include="Assets\Scripts\Model\ModelConfig.cs" />
+     <Compile Include="Assets\Scripts\Model\Fighter.cs" />
+     <Compile Include="Assets\Scripts\Model\ModelDataConfig.cs" />
+     <Compile Include="Assets\Scripts\Test\TestMain.cs" />
      <None Include="Assets\Plugins\Android\res\values\colors.xml" />
      <None Include="Assets\Plugins\Android\res\layout\bt_setting_activity.xml" />
      <None Include="Assets\Plugins\Android\res\values\styles.xml" />
@@ -112,13 +80,5 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-<<<<<<< HEAD
   
-=======
-  <ItemGroup>
-    <Folder Include="Assets\Scripts\Controller\" />
-    <Folder Include="Assets\Scripts\Model\" />
-    <Folder Include="Assets\Scripts\Test\" />
-  </ItemGroup>
->>>>>>> 08a35923257913757de6927a7615f73c87150344
 </Project>

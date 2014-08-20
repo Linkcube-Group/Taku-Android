@@ -1,23 +1,10 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-<<<<<<< HEAD
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/PreyScript.js">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/InGameScript.js">
     <Files>
-      <File FileName="Assets/Scripts/BluetoothScript.js" Line="79" Column="36" />
-      <File FileName="Assets/Scripts/Model/Charactor.cs" Line="17" Column="29" />
-      <File FileName="Assets/Scripts/Model/ModelConfig.cs" Line="21" Column="20" />
-      <File FileName="Assets/Scripts/PreyScript.js" Line="69" Column="41" />
-=======
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Model\Enemy.cs">
-    <Files>
-      <File FileName="C:\Users\ervinwang\Documents\Projects\Model\Model\TestMain.cs" Line="13" Column="2" />
-      <File FileName="C:\Users\ervinwang\Documents\Projects\Model\Model\Model\Charactor.cs" Line="33" Column="11" />
-      <File FileName="Assets\Scripts\DataControllerTest\TestMain.cs" Line="8" Column="36" />
-      <File FileName="Assets\Scripts\Model\Charactor.cs" Line="2" Column="4" />
-      <File FileName="Assets\Scripts\Model\Enemy.cs" Line="9" Column="2" />
-      <File FileName="Assets\Scripts\Model\ModelConfig.cs" Line="20" Column="22" />
-      <File FileName="C:\Users\ervinwang\Documents\Projects\Model\Model\Model\Enemy.cs" Line="8" Column="3" />
->>>>>>> 08a35923257913757de6927a7615f73c87150344
+      <File FileName="Assets/Scripts/InGameScript.js" Line="186" Column="12" />
+      <File FileName="Assets/Scripts/ControllerScript.js" Line="202" Column="12" />
+      <File FileName="Assets/Scripts/MenuScript.js" Line="57" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
