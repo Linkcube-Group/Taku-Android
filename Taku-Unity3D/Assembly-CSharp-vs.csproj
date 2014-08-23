@@ -52,8 +52,8 @@
      <Compile Include="Assets\Scripts\Menu\MainMenu.cs" />
      <Compile Include="Assets\Scripts\Model\Charactor.cs" />
      <Compile Include="Assets\Scripts\Model\Enemy.cs" />
-     <Compile Include="Assets\Scripts\Model\Fighter.cs" />
      <Compile Include="Assets\Scripts\Model\ModelDataConfig.cs" />
+     <Compile Include="Assets\Scripts\Model\Player.cs" />
      <Compile Include="Assets\Scripts\Test\TestMain.cs" />
      <None Include="Assets\Plugins\Android\res\values\colors.xml" />
      <None Include="Assets\Plugins\Android\res\layout\bt_setting_activity.xml" />

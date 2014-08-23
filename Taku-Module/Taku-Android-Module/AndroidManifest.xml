@@ -28,6 +28,11 @@
             </intent-filter>
         </activity>
         <activity
+            android:name="me.linkcube.taku.main.MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Black.NoTitleBar" >
+        </activity>
+        <activity
             android:name="me.linkcube.taku.TakuActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Black.NoTitleBar" >
