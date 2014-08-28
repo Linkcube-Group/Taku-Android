@@ -13,7 +13,6 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -58,8 +57,7 @@ public class BTSettingActivity extends DialogActivity implements
 		bluetoothTb.setChecked(BTHelper.isBluetoothEnabled());
 		bluetoothTb.setOnCheckedChangeListener(switchListener);
 		BTHelper.regiserDeviceReceiver(mActivity, deviceDiscoveryReceiver);
-		deviceAdapter = new BTDeviceAdapter(mActivity);
-		deviceAdapter.setList(deviceList);
+		deviceAdapter = new BTDeviceAdapter(mActivity, deviceList);
 		deviceLv.setAdapter(deviceAdapter);
 
 	}

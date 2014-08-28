@@ -1,6 +1,5 @@
 package me.linkcube.taku.common.ui;
 
-import java.util.Collections;
 import java.util.List;
 
 import android.content.Context;
@@ -8,7 +7,7 @@ import android.support.v4.view.PagerAdapter;
 import android.view.View;
 import android.view.ViewGroup;
 
-public abstract class BasePagerAdapter extends PagerAdapter {
+public class BasePagerAdapter extends PagerAdapter {
 
 	protected List<View> mViewList;
 
@@ -17,11 +16,10 @@ public abstract class BasePagerAdapter extends PagerAdapter {
 	public BasePagerAdapter(Context context, List<View> viewList) {
 		mViewList = viewList;
 		mContext = context;
-	}
-
-	public BasePagerAdapter(Context context) {
-		mViewList = Collections.emptyList();
-		mContext = context;
+		if (viewList == null) {
+			throw new IllegalArgumentException(
+					"The second argument is non-null");
+		}
 	}
 
 	@Override

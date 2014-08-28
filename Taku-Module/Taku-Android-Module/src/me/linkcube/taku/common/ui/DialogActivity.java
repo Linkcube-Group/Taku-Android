@@ -3,7 +3,7 @@ package me.linkcube.taku.common.ui;
 import me.linkcube.taku.common.utils.AlertUtils;
 import android.app.ProgressDialog;
 
-public class DialogActivity extends BaseActivity {
+public abstract class DialogActivity extends BaseActivity {
 
 	protected ProgressDialog progressDialog = null;
 

@@ -1,5 +1,7 @@
 package me.linkcube.taku.ui.bt;
 
+import java.util.List;
+
 import com.ervinwang.bthelper.core.DeviceConnectionManager;
 
 import android.bluetooth.BluetoothDevice;
@@ -17,10 +19,8 @@ import me.linkcube.taku.common.ui.BaseListAdapter;
  */
 public class BTDeviceAdapter extends BaseListAdapter<BluetoothDevice> {
 
-	private Context mContext;
-
-	public BTDeviceAdapter(Context context) {
-		this.mContext = context;
+	public BTDeviceAdapter(Context context, List<BluetoothDevice> items) {
+		super(context, items);
 	}
 
 	@Override
