@@ -1,4 +1,4 @@
-package me.linkcube.taku.bt;
+package me.linkcube.taku.ui.bt;
 
 import me.linkcube.taku.R;
 import me.linkcube.taku.common.ui.BaseActivity;

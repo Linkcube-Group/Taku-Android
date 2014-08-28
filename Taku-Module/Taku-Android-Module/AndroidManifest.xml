@@ -17,10 +17,10 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name" >
         <activity
-            android:name="me.linkcube.taku.bt.BTSettingActivity"
+            android:name="me.linkcube.taku.ui.bt.BTSettingActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Black.NoTitleBar" >
+            android:theme="@style/Theme.AppCompat.Light" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,17 +28,27 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="me.linkcube.taku.main.MainActivity"
+            android:name="me.linkcube.taku.ui.main.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Black.NoTitleBar" >
         </activity>
         <activity
-            android:name="me.linkcube.taku.TakuActivity"
+            android:name="me.linkcube.taku.TakuUnityPlayerActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Black.NoTitleBar" >
         </activity>
         <activity
-            android:name="me.linkcube.taku.bt.BTHelpActivity"
+            android:name="me.linkcube.taku.ui.bt.BTHelpActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Black.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="me.linkcube.taku.ui.welcome.SplashActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Black.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="me.linkcube.taku.ui.welcome.GuideActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Black.NoTitleBar" >
         </activity>

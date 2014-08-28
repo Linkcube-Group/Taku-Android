@@ -1,8 +1,8 @@
 package me.linkcube.taku;
 
-import me.linkcube.taku.bt.BTSettingActivity;
 import me.linkcube.taku.common.utils.FormatUtils;
 import me.linkcube.taku.common.utils.Timber;
+import me.linkcube.taku.ui.bt.BTSettingActivity;
 
 import com.ervinwang.bthelper.BTHelper;
 import com.ervinwang.bthelper.BTManager;
@@ -14,7 +14,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
-public class TakuActivity extends UnityPlayerActivity implements ITakuActivity {
+/**
+ * Unity3D和Android通信的Activity
+ * 
+ * @author Ervin
+ * 
+ */
+public class TakuUnityPlayerActivity extends UnityPlayerActivity implements
+		ITakuUnityPlayerActivity {
 
 	Context mContext = null;
 

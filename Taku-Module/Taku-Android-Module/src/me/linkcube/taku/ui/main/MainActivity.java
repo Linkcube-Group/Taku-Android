@@ -1,4 +1,4 @@
-package me.linkcube.taku.main;
+package me.linkcube.taku.ui.main;
 
 import me.linkcube.taku.R;
 import android.support.v7.app.ActionBarActivity;

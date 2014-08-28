@@ -1,4 +1,4 @@
-package me.linkcube.taku.bt;
+package me.linkcube.taku.ui.bt;
 
 import com.ervinwang.bthelper.core.DeviceConnectionManager;
 

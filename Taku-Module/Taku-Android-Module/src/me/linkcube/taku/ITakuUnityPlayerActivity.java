@@ -1,6 +1,6 @@
 package me.linkcube.taku;
 
-public interface ITakuActivity {
+public interface ITakuUnityPlayerActivity {
 
 	public String getData();
 
