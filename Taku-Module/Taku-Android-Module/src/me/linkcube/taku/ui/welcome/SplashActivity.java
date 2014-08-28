@@ -47,15 +47,14 @@ public class SplashActivity extends DialogActivity {
 	}
 
 	private void init() {
-		boolean status = NetworkUtils.isNetworkAvailable(this);
+		boolean available = NetworkUtils.isNetworkAvailable(this);
 		isShowGuide = AppUtils.isShowGuide();
 		Timber.d("检查本地网络");
-		if (!status) {
+		if (!available) {
 			showNetworkDialog();
 			return;
 		} else {
-			showProgressDialog(getResources().getString(
-					R.string.toast_connect_network_wait));
+			startActivity(new Intent(this, GuideActivity.class));
 		}
 
 	}
@@ -82,7 +81,7 @@ public class SplashActivity extends DialogActivity {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						dialog.dismiss();
-						startActivity(new Intent(mActivity, MainActivity.class));
+						startActivity(new Intent(mActivity, GuideActivity.class));
 						finish();
 					}
 

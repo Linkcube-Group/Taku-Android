@@ -36,30 +36,30 @@ public class MainActivity extends ActionBarActivity implements
 
 			fragmentManager
 					.beginTransaction()
-					.replace(R.id.container, SportsGamesFragment.newInstance(position))
-					.commit();
+					.replace(R.id.container,
+							SportsGamesFragment.newInstance(position)).commit();
 			break;
 		case 1:
 			fragmentManager = getSupportFragmentManager();
 			fragmentManager
 					.beginTransaction()
-					.replace(R.id.container, SportsGamesFragment.newInstance(position))
-					.commit();
+					.replace(R.id.container,
+							SportsGamesFragment.newInstance(position)).commit();
 			break;
 		case 2:
 			fragmentManager = getSupportFragmentManager();
 			fragmentManager
 					.beginTransaction()
-					.replace(R.id.container, SportsGamesFragment.newInstance(position))
-					.commit();
+					.replace(R.id.container,
+							SportsGamesFragment.newInstance(position)).commit();
 			break;
 
 		case 3:
 			fragmentManager = getSupportFragmentManager();
 			fragmentManager
 					.beginTransaction()
-					.replace(R.id.container, SportsGamesFragment.newInstance(position))
-					.commit();
+					.replace(R.id.container,
+							SportsGamesFragment.newInstance(position)).commit();
 			break;
 		default:
 			break;
@@ -94,7 +94,6 @@ public class MainActivity extends ActionBarActivity implements
 		actionBar.setTitle(mTitle);
 	}
 
-	// TODO ���Menu��Ȼ�󵯳�����Drawer
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		if (!mNavigationDrawerFragment.isDrawerOpen()) {

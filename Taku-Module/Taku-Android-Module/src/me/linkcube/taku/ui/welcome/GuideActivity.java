@@ -19,7 +19,7 @@ import static me.linkcube.taku.AppConfig.GUIDE_IMAGES_RES;
 /**
  * 引导功能页
  * 
- * @author Orange
+ * @author Ervin
  * 
  */
 public class GuideActivity extends DialogActivity {
@@ -49,7 +49,7 @@ public class GuideActivity extends DialogActivity {
 		viewList = new ArrayList<View>();
 		for (int i = 0; i < GUIDE_IMAGES_RES.length; i++) {
 			View view = getImageView(GUIDE_IMAGES_RES[i]);
-			viewList.get(i).setOnClickListener(new OnGuideViewClick(i));
+			view.setOnClickListener(new OnGuideViewClick(i));
 			viewList.add(i, view);
 		}
 	}

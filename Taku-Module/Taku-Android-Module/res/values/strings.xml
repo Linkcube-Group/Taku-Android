@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">MenuDrawer</string>
+    <string name="app_name">Taku</string>
     <string name="dashboard">仪表盘</string>
     <string name="sports_games">运动游戏</string>
     <string name="history">历史记录</string>
