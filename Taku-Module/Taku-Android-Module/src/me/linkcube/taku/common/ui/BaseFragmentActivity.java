@@ -5,14 +5,9 @@ import java.io.Serializable;
 import me.linkcube.taku.common.utils.Timber;
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 
-/**
- * Activity基类，提供了生命周期的日志输出，定义了一些变量
- * 
- * @author Orange
- * 
- */
-public abstract class BaseActivity extends Activity {
+public class BaseFragmentActivity extends FragmentActivity {
 
 	protected Activity mActivity = this;
 

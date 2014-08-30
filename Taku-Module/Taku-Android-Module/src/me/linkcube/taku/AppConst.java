@@ -2,7 +2,7 @@ package me.linkcube.taku;
 
 public class AppConst {
 
-	public static class Preference {
+	public static class KEY {
 
 		/** 引导页展示标志位 */
 		public static final String SHOW_GUIDE = "ShowGuide";

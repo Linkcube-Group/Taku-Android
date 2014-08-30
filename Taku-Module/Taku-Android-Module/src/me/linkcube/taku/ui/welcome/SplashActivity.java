@@ -1,9 +1,10 @@
 package me.linkcube.taku.ui.welcome;
 
+import static me.linkcube.taku.AppConst.KEY.SHOW_GUIDE;
+import me.linkcube.taku.AppConfig;
 import me.linkcube.taku.R;
 import me.linkcube.taku.common.ui.DialogActivity;
 import me.linkcube.taku.common.utils.AlertUtils;
-import me.linkcube.taku.common.utils.AppUtils;
 import me.linkcube.taku.common.utils.NetworkUtils;
 import me.linkcube.taku.common.utils.PreferenceUtils;
 import me.linkcube.taku.common.utils.Timber;
@@ -48,14 +49,21 @@ public class SplashActivity extends DialogActivity {
 
 	private void init() {
 		boolean available = NetworkUtils.isNetworkAvailable(this);
-		isShowGuide = AppUtils.isShowGuide();
-		Timber.d("检查本地网络");
-		if (!available) {
-			showNetworkDialog();
-			return;
+		isShowGuide = isShowGuide();
+		if (isShowGuide) {
+			startActivity(new Intent(mActivity, GuideActivity.class));
+			finish();
 		} else {
-			startActivity(new Intent(this, GuideActivity.class));
+			startActivity(new Intent(SplashActivity.this, MainActivity.class));
+			finish();
 		}
+		// Timber.d("检查本地网络");
+		// if (!available) {
+		// showNetworkDialog();
+		// return;
+		// } else {
+		// startActivity(new Intent(this, GuideActivity.class));
+		// }
 
 	}
 
@@ -88,9 +96,21 @@ public class SplashActivity extends DialogActivity {
 				});
 	}
 
-	private void autoLogin() {
-		showProgressDialog(getResources().getString(
-				R.string.toast_auto_login_wait));
+	/**
+	 * 判断用户是否需要展示引导页
+	 */
+	public boolean isShowGuide() {
+		String guideTime = PreferenceUtils.getString(SHOW_GUIDE, null);
+		if (guideTime == null) {
+			PreferenceUtils.setString(SHOW_GUIDE, AppConfig.GUIDE_TIME);
+			return true;
+		} else {
+			if (guideTime.equals(AppConfig.GUIDE_TIME)) {
+				return false;
+			} else {
+				return true;
+			}
+		}
 	}
 
 }

@@ -156,19 +156,7 @@ public class BTSettingActivity extends DialogActivity implements
 			}
 			break;
 		case R.id.bluetooth_help_btn:
-			BTManager.getInstance().startReceiveData(new IReceiveData() {
-
-				@Override
-				public void receiveData(int bytes, byte[] buffer) {
-					String data = "";
-					byte[] buf_data = new byte[bytes];
-					for (int i = 0; i < bytes; i++) {
-						buf_data[i] = buffer[i];
-					}
-					data = FormatUtils.bytesToHexString(buf_data);
-				}
-			});
-
+			break;
 		default:
 			break;
 		}
