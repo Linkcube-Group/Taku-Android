@@ -51,7 +51,7 @@ public class MenuAdapter extends BaseAdapter {
 		Drawable drawable = mContext.getResources().getDrawable(
 				drawableIds[position]);
 		drawable.setBounds(0, 0, drawable.getMinimumWidth(),
-				drawable.getMinimumHeight());// ��������ͼƬ��С��������ʾ
+				drawable.getMinimumHeight());
 		titleTv.setCompoundDrawables(drawable, null, null, null);
 
 		return convertView;
