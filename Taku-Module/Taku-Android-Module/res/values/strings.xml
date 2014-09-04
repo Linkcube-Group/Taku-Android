@@ -7,9 +7,9 @@
     <string name="history">历史记录</string>
     <string name="network_games">联网游戏</string>
     <string name="settings">设置</string>
+    <string name="taku">踏库</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="action_example">Example action</string>
     <string name="action_settings">Settings</string>
 
     <!-- 蓝牙设置 -->

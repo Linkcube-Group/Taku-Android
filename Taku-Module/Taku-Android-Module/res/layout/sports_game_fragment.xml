@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/main_bg"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -12,26 +13,36 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical" >
 
         <Button
             android:id="@+id/dashboardBtn"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_marginTop="20dp"
+            android:background="@null"
+            android:drawablePadding="5dp"
             android:drawableTop="@drawable/ic_launcher"
-            android:text="仪表盘" />
+            android:text="@string/dashboard"
+            android:textColor="#ff8061"
+            android:textSize="20sp" />
 
         <Button
             android:id="@+id/takuBtn"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_below="@id/dashboardBtn"
+            android:layout_marginTop="20dp"
+            android:background="@null"
+            android:drawablePadding="5dp"
             android:drawableTop="@drawable/ic_launcher"
-            android:text="踏库" />
-    </LinearLayout>
+            android:text="@string/taku"
+            android:textColor="#ff8061"
+            android:textSize="20sp" />
+    </RelativeLayout>
 
 </RelativeLayout>

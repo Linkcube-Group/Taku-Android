@@ -1,16 +1,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.example.menudrawer.MainActivity" >
+    tools:context="me.linkcube.taku.ui.main.MainActivity" >
 
     <item
-        android:id="@+id/action_example"
-        android:title="@string/action_example"
-        app:showAsAction="withText|ifRoom"/>
-    <item
         android:id="@+id/action_settings"
+        android:icon="@drawable/connect_btn_normal"
         android:orderInCategory="100"
         android:title="@string/action_settings"
-        app:showAsAction="never"/>
+        app:showAsAction="withText|ifRoom"/>
 
 </menu>
