@@ -1,18 +1,18 @@
 package me.linkcube.taku.ui.main;
 
 import me.linkcube.taku.R;
+import me.linkcube.taku.ui.main.view.ResideMenu;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
-import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.support.v4.widget.DrawerLayout;
+import android.view.MotionEvent;
 
 public class MainActivity extends ActionBarActivity implements
-		NavigationDrawerFragment.NavigationDrawerCallbacks {
+		ResideMenu.OnMenuListener {
 
-	private NavigationDrawerFragment mNavigationDrawerFragment;
+	private ResideMenu resideMenu;
 
 	private CharSequence mTitle;
 
@@ -20,53 +20,63 @@ public class MainActivity extends ActionBarActivity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main_activity);
-
-		mNavigationDrawerFragment = (NavigationDrawerFragment) getSupportFragmentManager()
-				.findFragmentById(R.id.navigation_drawer);
-
-		mNavigationDrawerFragment.setUp(R.id.navigation_drawer,
-				(DrawerLayout) findViewById(R.id.drawer_layout));
+		resideMenu = new ResideMenu(this);
+		resideMenu.setBackground(R.drawable.menu_bg);
+		resideMenu.attachToActivity(this);
+		resideMenu.setMenuListener(this);
+		resideMenu.setShadowVisible(false);
+		// valid scale factor is between 0.0f and 1.0f. leftmenu'width is
+		// 150dip.
+		resideMenu.setScaleValue(0.6f);
+		getSupportFragmentManager().beginTransaction()
+				.replace(R.id.container, SportsGamesFragment.newInstance(0))
+				.commit();
 
 	}
 
 	@Override
-	public void onNavigationDrawerItemSelected(int position) {
-		FragmentManager fragmentManager = getSupportFragmentManager();
-		switch (position) {
-		case 0:
-
-			fragmentManager
-					.beginTransaction()
-					.replace(R.id.container,
-							SportsGamesFragment.newInstance(position)).commit();
-			break;
-		case 1:
-			fragmentManager = getSupportFragmentManager();
-			fragmentManager
-					.beginTransaction()
-					.replace(R.id.container,
-							SportsGamesFragment.newInstance(position)).commit();
-			break;
-		case 2:
-			fragmentManager = getSupportFragmentManager();
-			fragmentManager
-					.beginTransaction()
-					.replace(R.id.container,
-							SportsGamesFragment.newInstance(position)).commit();
-			break;
-
-		case 3:
-			fragmentManager = getSupportFragmentManager();
-			fragmentManager
-					.beginTransaction()
-					.replace(R.id.container,
-							SportsGamesFragment.newInstance(position)).commit();
-			break;
-		default:
-			break;
-		}
-
+	public boolean dispatchTouchEvent(MotionEvent ev) {
+		return resideMenu.dispatchTouchEvent(ev);
 	}
+
+	// @Override
+	// public void onNavigationDrawerItemSelected(int position) {
+	// FragmentManager fragmentManager = getSupportFragmentManager();
+	// switch (position) {
+	// case 0:
+	//
+	// fragmentManager
+	// .beginTransaction()
+	// .replace(R.id.container,
+	// SportsGamesFragment.newInstance(position)).commit();
+	// break;
+	// case 1:
+	// fragmentManager = getSupportFragmentManager();
+	// fragmentManager
+	// .beginTransaction()
+	// .replace(R.id.container,
+	// SportsGamesFragment.newInstance(position)).commit();
+	// break;
+	// case 2:
+	// fragmentManager = getSupportFragmentManager();
+	// fragmentManager
+	// .beginTransaction()
+	// .replace(R.id.container,
+	// SportsGamesFragment.newInstance(position)).commit();
+	// break;
+	//
+	// case 3:
+	// fragmentManager = getSupportFragmentManager();
+	// fragmentManager
+	// .beginTransaction()
+	// .replace(R.id.container,
+	// SportsGamesFragment.newInstance(position)).commit();
+	// break;
+	// default:
+	// break;
+	// }
+	//
+	// }
 
 	public void onSectionAttached(int number) {
 		switch (number) {
@@ -96,11 +106,7 @@ public class MainActivity extends ActionBarActivity implements
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		if (!mNavigationDrawerFragment.isDrawerOpen()) {
-			getMenuInflater().inflate(R.menu.main, menu);
-			restoreActionBar();
-			return true;
-		}
+		getMenuInflater().inflate(R.menu.main, menu);
 		return super.onCreateOptionsMenu(menu);
 	}
 
@@ -111,6 +117,18 @@ public class MainActivity extends ActionBarActivity implements
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+
+	@Override
+	public void openMenu() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void closeMenu() {
+		// TODO Auto-generated method stub
+
 	}
 
 }
