@@ -9,7 +9,6 @@ import android.view.*;
 import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.ScrollView;
 
 import com.nineoldandroids.animation.Animator;
 import com.nineoldandroids.animation.AnimatorSet;
@@ -80,7 +79,7 @@ public class ResideMenu extends FrameLayout {
 
 	/**
 	 * use the method to set up the activity which residemenu need to show;
-	 *
+	 * 
 	 * @param activity
 	 */
 	public void attachToActivity(Activity activity) {
@@ -118,7 +117,7 @@ public class ResideMenu extends FrameLayout {
 
 	/**
 	 * set the menu background picture;
-	 *
+	 * 
 	 * @param imageResrouce
 	 */
 	public void setBackground(int imageResrouce) {
@@ -127,7 +126,7 @@ public class ResideMenu extends FrameLayout {
 
 	/**
 	 * the visiblity of shadow under the activity view;
-	 *
+	 * 
 	 * @param isVisible
 	 */
 	public void setShadowVisible(boolean isVisible) {
@@ -144,7 +143,7 @@ public class ResideMenu extends FrameLayout {
 	/**
 	 * if you need to do something on the action of closing or opening menu, set
 	 * the listener here.
-	 *
+	 * 
 	 * @return
 	 */
 	public void setMenuListener(OnMenuListener menuListener) {
@@ -202,7 +201,6 @@ public class ResideMenu extends FrameLayout {
 		scaleUp_activity.start();
 	}
 
-	@Deprecated
 	public void setDirectionDisable(int direction) {
 		disabledSwipeDirection.add(direction);
 	}
@@ -231,7 +229,7 @@ public class ResideMenu extends FrameLayout {
 
 	/**
 	 * return the flag of menu status;
-	 *
+	 * 
 	 * @return
 	 */
 	public boolean isOpened() {
@@ -250,7 +248,7 @@ public class ResideMenu extends FrameLayout {
 		@Override
 		public void onAnimationStart(Animator animation) {
 			if (isOpened()) {
-				showScrollViewMenu();
+				showResideMenuDrawer();
 				if (menuListener != null)
 					menuListener.openMenu();
 			}
@@ -265,7 +263,7 @@ public class ResideMenu extends FrameLayout {
 			} else {
 				viewActivity.setTouchDisable(false);
 				viewActivity.setOnClickListener(null);
-				hideScrollViewMenu();
+				hideResideMenuDrawer();
 				if (menuListener != null)
 					menuListener.closeMenu();
 			}
@@ -284,7 +282,7 @@ public class ResideMenu extends FrameLayout {
 
 	/**
 	 * a helper method to build scale down animation;
-	 *
+	 * 
 	 * @param target
 	 * @param targetScaleX
 	 * @param targetScaleY
@@ -306,7 +304,7 @@ public class ResideMenu extends FrameLayout {
 
 	/**
 	 * a helper method to build scale up animation;
-	 *
+	 * 
 	 * @param target
 	 * @param targetScaleX
 	 * @param targetScaleY
@@ -337,7 +335,7 @@ public class ResideMenu extends FrameLayout {
 	/**
 	 * if there ware some view you don't want reside menu to intercept their
 	 * touch event,you can use the method to set.
-	 *
+	 * 
 	 * @param v
 	 */
 	public void addIgnoredView(View v) {
@@ -363,7 +361,7 @@ public class ResideMenu extends FrameLayout {
 	/**
 	 * if the motion evnent was relative to the view which in ignored view
 	 * list,return true;
-	 *
+	 * 
 	 * @param ev
 	 * @return
 	 */
@@ -427,7 +425,7 @@ public class ResideMenu extends FrameLayout {
 				}
 			} else if (pressedState == PRESSED_MOVE_HORIZANTAL) {
 				if (currentActivityScaleX < 0.95)
-					showScrollViewMenu();
+					showResideMenuDrawer();
 
 				float targetScale = getTargetScale(ev.getRawX());
 				ViewHelper.setScaleX(viewActivity, targetScale);
@@ -503,13 +501,13 @@ public class ResideMenu extends FrameLayout {
 		public void closeMenu();
 	}
 
-	private void showScrollViewMenu() {
+	private void showResideMenuDrawer() {
 		if (resideMenuDrawer != null && resideMenuDrawer.getParent() == null) {
 			addView(resideMenuDrawer);
 		}
 	}
 
-	private void hideScrollViewMenu() {
+	private void hideResideMenuDrawer() {
 		if (resideMenuDrawer != null && resideMenuDrawer.getParent() != null) {
 			removeView(resideMenuDrawer);
 		}

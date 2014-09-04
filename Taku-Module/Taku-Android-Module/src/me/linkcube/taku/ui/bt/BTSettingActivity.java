@@ -6,7 +6,6 @@ import com.ervinwang.bthelper.BTHelper;
 import com.ervinwang.bthelper.BTManager;
 import com.ervinwang.bthelper.core.DeviceBroadcastReceiver;
 import com.ervinwang.bthelper.core.DeviceConnectionManager;
-import com.ervinwang.bthelper.core.IReceiveData;
 import com.ervinwang.bthelper.core.OnBTDiscoveryListener;
 
 import android.bluetooth.BluetoothAdapter;
@@ -22,7 +21,6 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import me.linkcube.taku.R;
 import me.linkcube.taku.common.ui.DialogActivity;
 import me.linkcube.taku.common.utils.AlertUtils;
-import me.linkcube.taku.common.utils.FormatUtils;
 import me.linkcube.taku.common.utils.PreferenceUtils;
 import me.linkcube.taku.common.utils.Timber;
 import static com.ervinwang.bthelper.Const.Device.*;

@@ -20,7 +20,7 @@
     <me.linkcube.taku.ui.main.view.ResideMenuDrawer
         android:id="@+id/left_menu"
         android:layout_width="150dp"
-        android:layout_height="fill_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:paddingEnd="0dp"
         android:paddingLeft="30dp"

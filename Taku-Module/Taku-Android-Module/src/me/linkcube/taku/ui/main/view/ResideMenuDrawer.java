@@ -4,8 +4,13 @@ import me.linkcube.taku.R;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 
 public class ResideMenuDrawer extends LinearLayout {
+
+	private ListView listView;
+
+	private MenuDrawerAdapter adapter;
 
 	public ResideMenuDrawer(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -19,6 +24,9 @@ public class ResideMenuDrawer extends LinearLayout {
 
 	private void init(Context context) {
 		inflate(context, R.layout.residemenu_drawer, this);
+		listView = (ListView) findViewById(R.id.list);
+		adapter = new MenuDrawerAdapter(context);
+		listView.setAdapter(adapter);
 	}
 
 }
