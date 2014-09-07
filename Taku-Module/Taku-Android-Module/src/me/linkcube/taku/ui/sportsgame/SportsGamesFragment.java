@@ -1,4 +1,4 @@
-package me.linkcube.taku.ui.main;
+package me.linkcube.taku.ui.sportsgame;
 
 import me.linkcube.taku.R;
 import android.app.Activity;

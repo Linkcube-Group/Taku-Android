@@ -6,7 +6,7 @@ import java.util.List;
 import me.linkcube.taku.R;
 import me.linkcube.taku.common.ui.BasePagerAdapter;
 import me.linkcube.taku.common.ui.DialogActivity;
-import me.linkcube.taku.ui.main.MainActivity;
+import me.linkcube.taku.ui.MainActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;

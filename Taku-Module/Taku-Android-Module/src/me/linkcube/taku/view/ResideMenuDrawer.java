@@ -1,4 +1,4 @@
-package me.linkcube.taku.ui.main.view;
+package me.linkcube.taku.view;
 
 import me.linkcube.taku.R;
 import android.content.Context;

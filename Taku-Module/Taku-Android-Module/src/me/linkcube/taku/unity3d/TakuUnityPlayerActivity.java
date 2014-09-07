@@ -1,5 +1,6 @@
-package me.linkcube.taku;
+package me.linkcube.taku.unity3d;
 
+import me.linkcube.taku.ITakuUnityPlayerActivity;
 import me.linkcube.taku.common.utils.FormatUtils;
 import me.linkcube.taku.common.utils.Timber;
 import me.linkcube.taku.ui.bt.BTSettingActivity;

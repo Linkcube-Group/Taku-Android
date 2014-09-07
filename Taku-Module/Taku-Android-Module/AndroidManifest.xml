@@ -28,11 +28,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="me.linkcube.taku.ui.main.MainActivity"
+            android:name="me.linkcube.taku.ui.MainActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="me.linkcube.taku.TakuUnityPlayerActivity"
+            android:name="me.linkcube.taku.unity3d.TakuUnityPlayerActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
