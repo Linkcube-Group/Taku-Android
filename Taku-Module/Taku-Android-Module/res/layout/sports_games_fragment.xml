@@ -5,7 +5,7 @@
     android:background="@drawable/main_bg"
     android:orientation="vertical" >
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/ActionBarHeight"
         android:gravity="center_vertical"
@@ -17,15 +17,17 @@
             android:id="@+id/backBtn"
             android:layout_width="@dimen/ActionBarButtonSize"
             android:layout_height="@dimen/ActionBarButtonSize"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
             android:background="@null"
             android:contentDescription="@null"
             android:src="@drawable/drawer_btn" />
 
         <TextView
             android:id="@+id/titleTv"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="@dimen/ActionBarHeight"
-            android:layout_weight="1"
+            android:layout_centerInParent="true"
             android:gravity="center"
             android:text="@string/sports_games"
             android:textSize="@dimen/ActionBarTextSize" />
@@ -34,10 +36,12 @@
             android:id="@+id/connectBtn"
             android:layout_width="@dimen/ActionBarButtonSize"
             android:layout_height="@dimen/ActionBarButtonSize"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
             android:background="@null"
             android:contentDescription="@null"
             android:src="@drawable/connect" />
-    </LinearLayout>
+    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
