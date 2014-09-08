@@ -34,7 +34,8 @@ public class MenuItem extends LinearLayout {
 
 		TypedArray a = context.obtainStyledAttributes(attrs,
 				R.styleable.MenuItem);
-		textView.setText(a.getString(R.attr.MenuItemText));
+
+		textView.setText(a.getString(R.styleable.MenuItem_MenuItemText));
 		textView.setTextColor(a.getColor(R.attr.MenuItemTextColor,
 				defaultTextColor));
 		textView.setTextSize(a.getDimension(R.attr.MenuItemTextSize,

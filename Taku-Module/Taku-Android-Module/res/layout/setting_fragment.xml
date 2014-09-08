@@ -41,8 +41,8 @@
         <me.linkcube.taku.view.MenuItem
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            menuItem:MenuItemBackground="@color/text_white"
             menuItem:MenuItemText="@string/app_name"
-            menuItem:MenuItemTextColor="@color/black"
             menuItem:MenuItemTextSize="34dp" />
     </LinearLayout>
 
