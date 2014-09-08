@@ -41,7 +41,7 @@ public class SportsGamesFragment extends Fragment implements OnClickListener {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View rootView = inflater.inflate(R.layout.sports_game_fragment,
+		View rootView = inflater.inflate(R.layout.sports_games_fragment,
 				container, false);
 		return rootView;
 	}
