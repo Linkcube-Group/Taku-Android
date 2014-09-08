@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <bool name="default_menu_item_textSize">true</bool>
+
+    <color name="default_menu_item_textColor">#00000000</color>
+
+    <drawable name="default_menu_item_src">#ffffffff</drawable>
+
+    <dimen name="default_menu_item_textSize">20sp</dimen>
+
+    <color name="default_menu_item_background">#FF000000</color>
+
+    <dimen name="default_circle_indicator_stroke_width">1dp</dimen>
+
+</resources>

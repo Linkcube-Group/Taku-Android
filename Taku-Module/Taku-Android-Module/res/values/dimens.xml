@@ -5,11 +5,16 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
 
     <!-- ActionBar -->
-
     <dimen name="ActionBarHeight">60dp</dimen>
     <dimen name="ActionBarTextSize">20sp</dimen>
     <dimen name="ActionBarButtonSize">48dp</dimen>
     <dimen name="ActionBarPadding">10dp</dimen>
+
+    <!-- Menu Item -->
+    <dimen name="MenuItemHeight">60dp</dimen>
+    <dimen name="MenuButtonSize">48dp</dimen>
+    <dimen name="MenuTextSize">20sp</dimen>
+    <dimen name="MenuPadding">10dp</dimen>
 
     <!-- MainPageBlock -->
     <dimen name="BlockPadding">20dp</dimen>

@@ -2,7 +2,7 @@ package me.linkcube.taku.ui;
 
 import me.linkcube.taku.R;
 import me.linkcube.taku.ui.sportsgame.SportsGamesFragment;
-import me.linkcube.taku.view.ResideMenu;
+import me.linkcube.taku.view.menu.ResideMenu;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.os.Bundle;

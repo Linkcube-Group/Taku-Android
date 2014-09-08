@@ -1,4 +1,4 @@
-package me.linkcube.taku.view;
+package me.linkcube.taku.view.menu;
 
 
 
