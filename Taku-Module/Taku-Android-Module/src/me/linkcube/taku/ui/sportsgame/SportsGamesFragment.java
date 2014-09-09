@@ -1,12 +1,11 @@
 package me.linkcube.taku.ui.sportsgame;
 
 import me.linkcube.taku.R;
+import me.linkcube.taku.ui.main.MainActivity;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -15,21 +14,29 @@ import android.widget.Button;
 
 public class SportsGamesFragment extends Fragment implements OnClickListener {
 
-	private static final String ARG_SECTION_NUMBER = "section_number";
+	private static final String ARG_DRAWER_POSITION = "drawer_position";
 
 	private Button dashboardBtn;
 
 	private Button takuBtn;
 
-	public static SportsGamesFragment newInstance(int sectionNumber) {
+	public static SportsGamesFragment newInstance(int position) {
 		SportsGamesFragment fragment = new SportsGamesFragment();
 		Bundle args = new Bundle();
-		args.putInt(ARG_SECTION_NUMBER, sectionNumber);
+		args.putInt(ARG_DRAWER_POSITION, position);
 		fragment.setArguments(args);
 		return fragment;
 	}
 
 	public SportsGamesFragment() {
+	}
+
+	@Override
+	public void onAttach(Activity activity) {
+		super.onAttach(activity);
+		((MainActivity) activity).onDrawerItemSelected(getArguments().getInt(
+				ARG_DRAWER_POSITION));
+
 	}
 
 	@Override
@@ -49,31 +56,17 @@ public class SportsGamesFragment extends Fragment implements OnClickListener {
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
-		dashboardBtn = (Button) view.findViewById(R.id.dashboardBtn);
+		dashboardBtn = (Button) view.findViewById(R.id.panelBtn);
 		takuBtn = (Button) view.findViewById(R.id.takuBtn);
 		dashboardBtn.setOnClickListener(this);
 		takuBtn.setOnClickListener(this);
 	}
 
 	@Override
-	public void onAttach(Activity activity) {
-		super.onAttach(activity);
-		// ((MainActivity) activity).onSectionAttached(getArguments().getInt(
-		// ARG_SECTION_NUMBER));
-
-	}
-
-	@Override
-	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		// TODO Auto-generated method stub
-		super.onCreateOptionsMenu(menu, inflater);
-	}
-
-	@Override
 	public void onClick(View v) {
 
 		switch (v.getId()) {
-		case R.id.dashboardBtn:
+		case R.id.panelBtn:
 			// TODO
 			break;
 		case R.id.takuBtn:

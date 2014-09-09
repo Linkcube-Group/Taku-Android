@@ -1,21 +1,31 @@
-package me.linkcube.taku.ui;
+package me.linkcube.taku.ui.main;
 
 import me.linkcube.taku.R;
+import me.linkcube.taku.ui.main.view.ResideMenu;
 import me.linkcube.taku.ui.sportsgame.SportsGamesFragment;
-import me.linkcube.taku.view.menu.ResideMenu;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 
 public class MainActivity extends ActionBarActivity implements
-		ResideMenu.OnMenuListener {
+		ResideMenu.OnMenuListener, OnItemClickListener {
+
+	private final int SPORTS_GAMES = 0;
+
+	private final int HISTORY = 1;
+
+	private final int NETWORK_GAMES = 2;
+
+	private final int SETTINGS = 3;
 
 	private ResideMenu resideMenu;
-
-	private CharSequence mTitle;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +36,7 @@ public class MainActivity extends ActionBarActivity implements
 		resideMenu.attachToActivity(this);
 		resideMenu.setMenuListener(this);
 		resideMenu.setShadowVisible(false);
+		resideMenu.setOnItemClickListener(this);
 		// valid scale factor is between 0.0f and 1.0f. leftmenu'width is
 		// 150dip.
 		resideMenu.setScaleValue(0.6f);
@@ -40,69 +51,46 @@ public class MainActivity extends ActionBarActivity implements
 		return resideMenu.dispatchTouchEvent(ev);
 	}
 
-	// @Override
-	// public void onNavigationDrawerItemSelected(int position) {
-	// FragmentManager fragmentManager = getSupportFragmentManager();
-	// switch (position) {
-	// case 0:
-	//
-	// fragmentManager
-	// .beginTransaction()
-	// .replace(R.id.container,
-	// SportsGamesFragment.newInstance(position)).commit();
-	// break;
-	// case 1:
-	// fragmentManager = getSupportFragmentManager();
-	// fragmentManager
-	// .beginTransaction()
-	// .replace(R.id.container,
-	// SportsGamesFragment.newInstance(position)).commit();
-	// break;
-	// case 2:
-	// fragmentManager = getSupportFragmentManager();
-	// fragmentManager
-	// .beginTransaction()
-	// .replace(R.id.container,
-	// SportsGamesFragment.newInstance(position)).commit();
-	// break;
-	//
-	// case 3:
-	// fragmentManager = getSupportFragmentManager();
-	// fragmentManager
-	// .beginTransaction()
-	// .replace(R.id.container,
-	// SportsGamesFragment.newInstance(position)).commit();
-	// break;
-	// default:
-	// break;
-	// }
-	//
-	// }
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int position,
+			long id) {
+		FragmentManager fragmentManager = getSupportFragmentManager();
+		switch (position) {
+		case SPORTS_GAMES:// 运动游戏
+			fragmentManager
+					.beginTransaction()
+					.replace(R.id.container,
+							SportsGamesFragment.newInstance(position)).commit();
+			break;
+		case HISTORY:// 历史记录
+			fragmentManager = getSupportFragmentManager();
+			fragmentManager
+					.beginTransaction()
+					.replace(R.id.container,
+							SportsGamesFragment.newInstance(position)).commit();
+			break;
+		case NETWORK_GAMES:// 联网游戏
+			fragmentManager = getSupportFragmentManager();
+			fragmentManager
+					.beginTransaction()
+					.replace(R.id.container,
+							SportsGamesFragment.newInstance(position)).commit();
+			break;
 
-	public void onSectionAttached(int number) {
-		switch (number) {
-		case 0:
-			mTitle = getString(R.string.sports_games);
-			break;
-		case 1:
-			mTitle = getString(R.string.history);
-			break;
-		case 2:
-			mTitle = getString(R.string.network_games);
-			break;
-		case 3:
-			mTitle = getString(R.string.settings);
+		case SETTINGS:// 设置
+			fragmentManager = getSupportFragmentManager();
+			fragmentManager
+					.beginTransaction()
+					.replace(R.id.container,
+							SportsGamesFragment.newInstance(position)).commit();
 			break;
 		default:
 			break;
 		}
-		restoreActionBar();
 	}
 
-	public void restoreActionBar() {
-		ActionBar actionBar = getSupportActionBar();
-		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
-		actionBar.setTitle(mTitle);
+	public void onDrawerItemSelected(int drawerPosition) {
+
 	}
 
 	@Override

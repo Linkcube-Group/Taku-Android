@@ -7,14 +7,12 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-@SuppressLint("NewApi")
 public class MenuItem extends LinearLayout {
 
 	/** menu item icon */
@@ -26,6 +24,7 @@ public class MenuItem extends LinearLayout {
 		this(context, null);
 	}
 
+	@SuppressLint("NewApi")
 	public MenuItem(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		initViews(context);

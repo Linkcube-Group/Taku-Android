@@ -17,7 +17,7 @@
         android:background="@drawable/shadow"
         android:scaleType="fitXY" />
 
-    <me.linkcube.taku.view.menu.ResideMenuDrawer
+    <me.linkcube.taku.ui.main.view.ResideMenuDrawer
         android:id="@+id/left_menu"
         android:layout_width="150dp"
         android:layout_height="match_parent"

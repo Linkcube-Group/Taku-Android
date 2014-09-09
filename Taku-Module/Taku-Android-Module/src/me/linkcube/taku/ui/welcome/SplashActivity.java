@@ -8,7 +8,7 @@ import me.linkcube.taku.common.utils.AlertUtils;
 import me.linkcube.taku.common.utils.NetworkUtils;
 import me.linkcube.taku.common.utils.PreferenceUtils;
 import me.linkcube.taku.common.utils.Timber;
-import me.linkcube.taku.ui.MainActivity;
+import me.linkcube.taku.ui.main.MainActivity;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;

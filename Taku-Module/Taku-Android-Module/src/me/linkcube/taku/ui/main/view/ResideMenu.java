@@ -1,4 +1,4 @@
-package me.linkcube.taku.view.menu;
+package me.linkcube.taku.ui.main.view;
 
 import android.app.Activity;
 import android.content.Context;
@@ -7,6 +7,7 @@ import android.graphics.Rect;
 import android.util.DisplayMetrics;
 import android.view.*;
 import android.view.animation.AnimationUtils;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
@@ -511,5 +512,9 @@ public class ResideMenu extends FrameLayout {
 		if (resideMenuDrawer != null && resideMenuDrawer.getParent() != null) {
 			removeView(resideMenuDrawer);
 		}
+	}
+
+	public void setOnItemClickListener(OnItemClickListener listener) {
+		resideMenuDrawer.getListView().setOnItemClickListener(listener);
 	}
 }

@@ -1,4 +1,4 @@
-package me.linkcube.taku.view.menu;
+package me.linkcube.taku.ui.main.view;
 
 import me.linkcube.taku.R;
 import android.content.Context;
@@ -27,6 +27,10 @@ public class ResideMenuDrawer extends LinearLayout {
 		listView = (ListView) findViewById(R.id.list);
 		adapter = new MenuDrawerAdapter(context);
 		listView.setAdapter(adapter);
+	}
+
+	public ListView getListView() {
+		return listView;
 	}
 
 }
