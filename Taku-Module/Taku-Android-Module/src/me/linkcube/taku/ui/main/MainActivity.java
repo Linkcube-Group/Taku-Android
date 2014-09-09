@@ -3,6 +3,7 @@ package me.linkcube.taku.ui.main;
 import me.linkcube.taku.R;
 import me.linkcube.taku.common.ui.DialogFragmentActivity;
 import me.linkcube.taku.ui.history.HistoryFragment;
+import me.linkcube.taku.ui.main.view.Drawer.OnDrawerItemClickListener;
 import me.linkcube.taku.ui.main.view.ResideMenu;
 import me.linkcube.taku.ui.networkgames.NetworkGamesFragment;
 import me.linkcube.taku.ui.setting.SettingFragment;
@@ -15,7 +16,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 
 public class MainActivity extends DialogFragmentActivity implements
-		ResideMenu.OnMenuListener, OnItemClickListener {
+		ResideMenu.OnMenuListener, OnDrawerItemClickListener {
 
 	private final int SPORTS_GAMES = 0;
 
@@ -27,6 +28,8 @@ public class MainActivity extends DialogFragmentActivity implements
 
 	private ResideMenu resideMenu;
 
+	private int mPosition = SPORTS_GAMES;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -36,7 +39,7 @@ public class MainActivity extends DialogFragmentActivity implements
 		resideMenu.attachToActivity(this);
 		resideMenu.setMenuListener(this);
 		resideMenu.setShadowVisible(false);
-		resideMenu.setOnItemClickListener(this);
+		resideMenu.setOnDrawerItemClickListener(this);
 		// valid scale factor is between 0.0f and 1.0f. leftmenu'width is
 		// 150dip.
 		resideMenu.setScaleValue(0.6f);
@@ -52,8 +55,24 @@ public class MainActivity extends DialogFragmentActivity implements
 	}
 
 	@Override
-	public void onItemClick(AdapterView<?> parent, View view, int position,
-			long id) {
+	public void openMenu() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void closeMenu() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void onDrawerItemClick(View view, int position) {
+		if (mPosition != position) {
+			resideMenu.closeMenu();
+			mPosition = position;
+			return;
+		}
 		FragmentManager fragmentManager = getSupportFragmentManager();
 		switch (position) {
 		case SPORTS_GAMES:// 运动游戏
@@ -88,21 +107,6 @@ public class MainActivity extends DialogFragmentActivity implements
 		default:
 			break;
 		}
-	}
-
-	public void onDrawerItemSelected(int drawerPosition) {
-		resideMenu.closeMenu();
-	}
-
-	@Override
-	public void openMenu() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void closeMenu() {
-		// TODO Auto-generated method stub
 
 	}
 

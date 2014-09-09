@@ -2,31 +2,38 @@ package me.linkcube.taku.ui.main.view;
 
 import me.linkcube.taku.R;
 import android.content.Context;
+import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class ResideMenuItem extends LinearLayout {
+public class DrawerItem extends LinearLayout {
 
 	/** menu item icon */
 	private ImageView iv_icon;
 	/** menu item title */
 	private TextView tv_title;
 
-	public ResideMenuItem(Context context) {
+	public DrawerItem(Context context) {
 		super(context);
 		initViews(context);
 	}
 
-	public ResideMenuItem(Context context, int icon, int title) {
+	public DrawerItem(Context context, AttributeSet attrs) {
+		super(context, attrs);
+		initViews(context);
+
+	}
+
+	public DrawerItem(Context context, int icon, int title) {
 		super(context);
 		initViews(context);
 		iv_icon.setImageResource(icon);
 		tv_title.setText(title);
 	}
 
-	public ResideMenuItem(Context context, int icon, String title) {
+	public DrawerItem(Context context, int icon, String title) {
 		super(context);
 		initViews(context);
 		iv_icon.setImageResource(icon);
@@ -36,7 +43,7 @@ public class ResideMenuItem extends LinearLayout {
 	private void initViews(Context context) {
 		LayoutInflater inflater = (LayoutInflater) context
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		inflater.inflate(R.layout.residemenu_item, this);
+		inflater.inflate(R.layout.drawer_item, this);
 		iv_icon = (ImageView) findViewById(R.id.iv_icon);
 		tv_title = (TextView) findViewById(R.id.tv_title);
 	}
@@ -46,8 +53,9 @@ public class ResideMenuItem extends LinearLayout {
 	 * 
 	 * @param icon
 	 */
-	public void setIcon(int icon) {
+	public DrawerItem setIcon(int icon) {
 		iv_icon.setImageResource(icon);
+		return this;
 	}
 
 	/**
@@ -55,8 +63,10 @@ public class ResideMenuItem extends LinearLayout {
 	 * 
 	 * @param title
 	 */
-	public void setTitle(int title) {
+	public DrawerItem setTitle(int title) {
 		tv_title.setText(title);
+		return this;
+
 	}
 
 	/**
@@ -64,7 +74,8 @@ public class ResideMenuItem extends LinearLayout {
 	 * 
 	 * @param title
 	 */
-	public void setTitle(String title) {
+	public DrawerItem setTitle(String title) {
 		tv_title.setText(title);
+		return this;
 	}
 }

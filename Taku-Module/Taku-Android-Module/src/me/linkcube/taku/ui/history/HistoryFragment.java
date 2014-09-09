@@ -3,7 +3,6 @@ package me.linkcube.taku.ui.history;
 import android.app.Activity;
 import android.os.Bundle;
 import me.linkcube.taku.common.ui.DialogFragment;
-import me.linkcube.taku.ui.main.MainActivity;
 
 public class HistoryFragment extends DialogFragment {
 
@@ -23,8 +22,6 @@ public class HistoryFragment extends DialogFragment {
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
-		((MainActivity) activity).onDrawerItemSelected(getArguments().getInt(
-				ARG_DRAWER_POSITION));
 
 	}
 }

@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import me.linkcube.taku.R;
 import me.linkcube.taku.common.ui.DialogFragment;
-import me.linkcube.taku.ui.main.MainActivity;
 
 public class SettingFragment extends DialogFragment {
 
@@ -27,8 +26,6 @@ public class SettingFragment extends DialogFragment {
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
-		((MainActivity) activity).onDrawerItemSelected(getArguments().getInt(
-				ARG_DRAWER_POSITION));
 
 	}
 

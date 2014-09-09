@@ -27,10 +27,28 @@
             android:textColor="@android:color/background_light" />
     </LinearLayout>
 
-    <ListView
-        android:id="@+id/list"
+    <me.linkcube.taku.ui.main.view.DrawerItem
+        android:id="@+id/sportsGamesBtn"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
-    </ListView>
+        android:layout_height="wrap_content" >
+    </me.linkcube.taku.ui.main.view.DrawerItem>
+
+    <me.linkcube.taku.ui.main.view.DrawerItem
+        android:id="@+id/historyBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </me.linkcube.taku.ui.main.view.DrawerItem>
+
+    <me.linkcube.taku.ui.main.view.DrawerItem
+        android:id="@+id/networkGamesBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </me.linkcube.taku.ui.main.view.DrawerItem>
+
+    <me.linkcube.taku.ui.main.view.DrawerItem
+        android:id="@+id/settingsBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </me.linkcube.taku.ui.main.view.DrawerItem>
 
 </LinearLayout>

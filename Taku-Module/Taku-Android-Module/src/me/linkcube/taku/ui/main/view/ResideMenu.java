@@ -7,7 +7,6 @@ import android.graphics.Rect;
 import android.util.DisplayMetrics;
 import android.view.*;
 import android.view.animation.AnimationUtils;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
@@ -20,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.linkcube.taku.R;
+import me.linkcube.taku.ui.main.view.Drawer.OnDrawerItemClickListener;
 
 public class ResideMenu extends FrameLayout {
 
@@ -33,7 +33,7 @@ public class ResideMenu extends FrameLayout {
 
 	private ImageView imageViewBackground;
 
-	private ResideMenuDrawer resideMenuDrawer;
+	private Drawer drawer;
 	/** the activity that view attach to */
 	private Activity activity;
 	/** the decorview of the activity */
@@ -73,7 +73,7 @@ public class ResideMenu extends FrameLayout {
 		LayoutInflater inflater = (LayoutInflater) context
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		inflater.inflate(R.layout.residemenu, this);
-		resideMenuDrawer = (ResideMenuDrawer) findViewById(R.id.left_menu);
+		drawer = (Drawer) findViewById(R.id.left_menu);
 		imageViewShadow = (ImageView) findViewById(R.id.iv_shadow);
 		imageViewBackground = (ImageView) findViewById(R.id.iv_background);
 	}
@@ -100,9 +100,8 @@ public class ResideMenu extends FrameLayout {
 		viewDecor.removeViewAt(0);
 		viewActivity.setContent(mContent);
 		addView(viewActivity);
-
-		ViewGroup parent = (ViewGroup) resideMenuDrawer.getParent();
-		parent.removeView(resideMenuDrawer);
+		ViewGroup parent = (ViewGroup) drawer.getParent();
+		parent.removeView(drawer);
 	}
 
 	private void setShadowAdjustScaleXByOrientation() {
@@ -138,7 +137,7 @@ public class ResideMenu extends FrameLayout {
 	}
 
 	public void setMenuView(View view) {
-		resideMenuDrawer.addView(view);
+		drawer.addView(view);
 	}
 
 	/**
@@ -178,7 +177,7 @@ public class ResideMenu extends FrameLayout {
 		AnimatorSet scaleDown_shadow = buildScaleDownAnimation(imageViewShadow,
 				mScaleValue + shadowAdjustScaleX, mScaleValue
 						+ shadowAdjustScaleY);
-		AnimatorSet alpha_menu = buildMenuAnimation(resideMenuDrawer, 1.0f);
+		AnimatorSet alpha_menu = buildMenuAnimation(drawer, 1.0f);
 		scaleDown_shadow.addListener(animationListener);
 		scaleDown_activity.playTogether(scaleDown_shadow);
 		scaleDown_activity.playTogether(alpha_menu);
@@ -195,7 +194,7 @@ public class ResideMenu extends FrameLayout {
 				1.0f, 1.0f);
 		AnimatorSet scaleUp_shadow = buildScaleUpAnimation(imageViewShadow,
 				1.0f, 1.0f);
-		AnimatorSet alpha_menu = buildMenuAnimation(resideMenuDrawer, 0.0f);
+		AnimatorSet alpha_menu = buildMenuAnimation(drawer, 0.0f);
 		scaleUp_activity.addListener(animationListener);
 		scaleUp_activity.playTogether(scaleUp_shadow);
 		scaleUp_activity.playTogether(alpha_menu);
@@ -435,7 +434,7 @@ public class ResideMenu extends FrameLayout {
 						+ shadowAdjustScaleX);
 				ViewHelper.setScaleY(imageViewShadow, targetScale
 						+ shadowAdjustScaleY);
-				ViewHelper.setAlpha(resideMenuDrawer, (1 - targetScale) * 2.0f);
+				ViewHelper.setAlpha(drawer, (1 - targetScale) * 2.0f);
 
 				lastRawX = ev.getRawX();
 				return true;
@@ -503,18 +502,18 @@ public class ResideMenu extends FrameLayout {
 	}
 
 	private void showResideMenuDrawer() {
-		if (resideMenuDrawer != null && resideMenuDrawer.getParent() == null) {
-			addView(resideMenuDrawer);
+		if (drawer != null && drawer.getParent() == null) {
+			addView(drawer);
 		}
 	}
 
 	private void hideResideMenuDrawer() {
-		if (resideMenuDrawer != null && resideMenuDrawer.getParent() != null) {
-			removeView(resideMenuDrawer);
+		if (drawer != null && drawer.getParent() != null) {
+			removeView(drawer);
 		}
 	}
 
-	public void setOnItemClickListener(OnItemClickListener listener) {
-		resideMenuDrawer.getListView().setOnItemClickListener(listener);
+	public void setOnDrawerItemClickListener(OnDrawerItemClickListener listener) {
+		drawer.getDrawer().setOnDrawerItemClickListener(listener);
 	}
 }

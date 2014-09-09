@@ -1,7 +1,6 @@
 package me.linkcube.taku.ui.sportsgame;
 
 import me.linkcube.taku.R;
-import me.linkcube.taku.ui.main.MainActivity;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -34,8 +33,6 @@ public class SportsGamesFragment extends Fragment implements OnClickListener {
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
-		((MainActivity) activity).onDrawerItemSelected(getArguments().getInt(
-				ARG_DRAWER_POSITION));
 
 	}
 
