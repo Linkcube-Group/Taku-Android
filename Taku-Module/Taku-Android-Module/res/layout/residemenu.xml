@@ -15,7 +15,8 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:background="@drawable/shadow"
-        android:scaleType="fitXY" />
+        android:scaleType="fitXY"
+        android:visibility="invisible" />
 
     <me.linkcube.taku.ui.main.view.ResideMenuDrawer
         android:id="@+id/left_menu"

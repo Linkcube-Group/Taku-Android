@@ -1,20 +1,20 @@
 package me.linkcube.taku.ui.main;
 
 import me.linkcube.taku.R;
+import me.linkcube.taku.common.ui.DialogFragmentActivity;
+import me.linkcube.taku.ui.history.HistoryFragment;
 import me.linkcube.taku.ui.main.view.ResideMenu;
+import me.linkcube.taku.ui.networkgames.NetworkGamesFragment;
+import me.linkcube.taku.ui.setting.SettingFragment;
 import me.linkcube.taku.ui.sportsgame.SportsGamesFragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 
-public class MainActivity extends ActionBarActivity implements
+public class MainActivity extends DialogFragmentActivity implements
 		ResideMenu.OnMenuListener, OnItemClickListener {
 
 	private final int SPORTS_GAMES = 0;
@@ -67,14 +67,15 @@ public class MainActivity extends ActionBarActivity implements
 			fragmentManager
 					.beginTransaction()
 					.replace(R.id.container,
-							SportsGamesFragment.newInstance(position)).commit();
+							HistoryFragment.newInstance(position)).commit();
 			break;
 		case NETWORK_GAMES:// 联网游戏
 			fragmentManager = getSupportFragmentManager();
 			fragmentManager
 					.beginTransaction()
 					.replace(R.id.container,
-							SportsGamesFragment.newInstance(position)).commit();
+							NetworkGamesFragment.newInstance(position))
+					.commit();
 			break;
 
 		case SETTINGS:// 设置
@@ -82,7 +83,7 @@ public class MainActivity extends ActionBarActivity implements
 			fragmentManager
 					.beginTransaction()
 					.replace(R.id.container,
-							SportsGamesFragment.newInstance(position)).commit();
+							SettingFragment.newInstance(position)).commit();
 			break;
 		default:
 			break;
@@ -90,22 +91,7 @@ public class MainActivity extends ActionBarActivity implements
 	}
 
 	public void onDrawerItemSelected(int drawerPosition) {
-
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.main, menu);
-		return super.onCreateOptionsMenu(menu);
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
+		resideMenu.closeMenu();
 	}
 
 	@Override

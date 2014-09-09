@@ -36,7 +36,29 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <me.linkcube.taku.view.MenuItem
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            menuItem:Background="@color/text_white"
+            menuItem:Text="@string/app_name"
+            menuItem:TextSize="20sp" />
+
+        <me.linkcube.taku.view.MenuItem
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            menuItem:Background="@color/text_white"
+            menuItem:Text="@string/app_name"
+            menuItem:TextSize="20sp" />
+
+        <me.linkcube.taku.view.MenuItem
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            menuItem:Background="@color/text_white"
+            menuItem:Text="@string/app_name"
+            menuItem:TextSize="20sp" />
 
         <me.linkcube.taku.view.MenuItem
             android:layout_width="match_parent"
