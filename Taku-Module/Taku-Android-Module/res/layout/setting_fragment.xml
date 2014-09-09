@@ -43,29 +43,29 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             menuItem:Background="@color/text_white"
-            menuItem:Text="@string/app_name"
-            menuItem:TextSize="20sp" />
+            menuItem:TitleText="@string/app_name"
+            menuItem:TitleTextSize="20sp" />
 
         <me.linkcube.taku.view.MenuItem
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             menuItem:Background="@color/text_white"
-            menuItem:Text="@string/app_name"
-            menuItem:TextSize="20sp" />
+            menuItem:TitleText="@string/app_name"
+            menuItem:TitleTextSize="20sp" />
 
         <me.linkcube.taku.view.MenuItem
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             menuItem:Background="@color/text_white"
-            menuItem:Text="@string/app_name"
-            menuItem:TextSize="20sp" />
+            menuItem:TitleText="@string/app_name"
+            menuItem:TitleTextSize="20sp" />
 
         <me.linkcube.taku.view.MenuItem
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             menuItem:Background="@color/text_white"
-            menuItem:Text="@string/app_name"
-            menuItem:TextSize="20sp" />
+            menuItem:TitleText="@string/app_name"
+            menuItem:TitleTextSize="20sp" />
     </LinearLayout>
 
 </LinearLayout>

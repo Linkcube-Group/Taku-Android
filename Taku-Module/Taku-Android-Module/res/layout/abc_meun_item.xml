@@ -18,6 +18,15 @@
         android:textColor="@android:color/white"
         android:textSize="@dimen/MenuTextSize" />
 
+    <TextView
+        android:id="@+id/tipTv"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/MenuItemHeight"
+        android:layout_marginLeft="10dp"
+        android:gravity="left|center_vertical"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/MenuTextSize" />
+
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="30dp"

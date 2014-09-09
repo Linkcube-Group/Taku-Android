@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="default_menu_item_textColor">#FFFFFF</color>
+    <color name="default_menu_item_titleTextColor">#FFFFFF</color>
 
-    <dimen name="default_menu_item_textSize">20sp</dimen>
+    <dimen name="default_menu_item_titleTextSize">20sp</dimen>
 
     <color name="default_menu_item_background">#FFFFFF</color>
+    
+    <color name="default_menu_item_tipTextColor">#FFFFFF</color>
+
+    <dimen name="default_menu_item_tipTextSize">20sp</dimen>
 
 </resources>
