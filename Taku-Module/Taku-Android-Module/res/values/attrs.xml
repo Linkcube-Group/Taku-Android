@@ -2,12 +2,12 @@
 <resources>
 
     <declare-styleable name="MenuItem">
-        <attr name="MenuItemStyle" format="reference" />
-        <attr name="MenuItemText" format="reference|string" />
-        <attr name="MenuItemTextSize" format="dimension" />
-        <attr name="MenuItemTextColor" format="color" />
-        <attr name="MenuItemBackground" format="reference|color" />
-        <attr name="MenuSrc" format="reference" />
+        <attr name="Style" format="reference" />
+        <attr name="Text" format="reference|string" />
+        <attr name="TextSize" format="dimension" />
+        <attr name="TextColor" format="color" />
+        <attr name="Background" format="reference|color" />
+        <attr name="Src" format="reference" />
     </declare-styleable>
 
 </resources>

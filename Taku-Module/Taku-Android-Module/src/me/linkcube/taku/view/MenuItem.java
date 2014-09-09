@@ -1,15 +1,20 @@
 package me.linkcube.taku.view;
 
 import me.linkcube.taku.R;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
+import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+@SuppressLint("NewApi")
 public class MenuItem extends LinearLayout {
 
 	/** menu item icon */
@@ -29,19 +34,39 @@ public class MenuItem extends LinearLayout {
 				.getColor(R.color.default_menu_item_textColor);
 		final float defaultTextSize = res
 				.getDimension(R.dimen.default_menu_item_textSize);
-		final int defaultTextBackground = res
+		final int defaultBackground = res
 				.getColor(R.color.default_menu_item_background);
 
 		TypedArray a = context.obtainStyledAttributes(attrs,
 				R.styleable.MenuItem);
 
-		textView.setText(a.getString(R.styleable.MenuItem_MenuItemText));
-		textView.setTextColor(a.getColor(R.attr.MenuItemTextColor,
+		textView.setText(a.getString(R.styleable.MenuItem_Text));
+		textView.setTextColor(a.getColor(R.styleable.MenuItem_TextColor,
 				defaultTextColor));
-		textView.setTextSize(a.getDimension(R.attr.MenuItemTextSize,
+		textView.setTextSize(a.getDimension(R.styleable.MenuItem_TextSize,
 				defaultTextSize));
-		setBackgroundColor(a.getColor(R.attr.MenuItemBackground,
-				defaultTextBackground));
+
+		Drawable background = a.getDrawable(R.styleable.MenuItem_Src);
+		if (background != null) {
+			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+				setBackground(background);
+			} else {
+				setBackgroundDrawable(background);
+			}
+		} else {
+			int bgColor = a.getColor(R.styleable.MenuItem_Background,
+					defaultBackground);
+			setBackgroundColor(bgColor);
+		}
+
+		Drawable d = a.getDrawable(R.styleable.MenuItem_Src);
+		if (d != null) {
+			imageView.setImageDrawable(d);
+		} else {
+			d = res.getDrawable(R.drawable.ic_search);
+			imageView.setImageDrawable(d);
+		}
+
 		a.recycle();
 
 	}
