@@ -2,7 +2,7 @@ package me.linkcube.taku.common.ui;
 
 import java.io.Serializable;
 
-import me.linkcube.taku.common.utils.Timber;
+import me.linkcube.taku.common.util.Timber;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

@@ -1,6 +1,6 @@
 package me.linkcube.taku.common.ui;
 
-import me.linkcube.taku.common.utils.AlertUtils;
+import me.linkcube.taku.common.util.AlertUtils;
 import android.app.ProgressDialog;
 
 public abstract class DialogActivity extends BaseActivity {

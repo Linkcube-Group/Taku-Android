@@ -1,7 +1,7 @@
 package me.linkcube.taku.ui.bt;
 
 import me.linkcube.taku.R;
-import me.linkcube.taku.common.utils.ViewUtils;
+import me.linkcube.taku.common.util.ViewUtils;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.util.AttributeSet;

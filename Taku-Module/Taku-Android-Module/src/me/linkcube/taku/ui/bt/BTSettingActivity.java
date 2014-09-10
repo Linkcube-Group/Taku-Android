@@ -20,9 +20,9 @@ import android.widget.ToggleButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import me.linkcube.taku.R;
 import me.linkcube.taku.common.ui.DialogActivity;
-import me.linkcube.taku.common.utils.AlertUtils;
-import me.linkcube.taku.common.utils.PreferenceUtils;
-import me.linkcube.taku.common.utils.Timber;
+import me.linkcube.taku.common.util.AlertUtils;
+import me.linkcube.taku.common.util.PreferenceUtils;
+import me.linkcube.taku.common.util.Timber;
 import static com.ervinwang.bthelper.Const.Device.*;
 
 public class BTSettingActivity extends DialogActivity implements
