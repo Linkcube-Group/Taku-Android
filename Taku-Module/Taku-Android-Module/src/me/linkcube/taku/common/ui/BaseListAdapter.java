@@ -1,14 +1,25 @@
 package me.linkcube.taku.common.ui;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 
 public abstract class BaseListAdapter<E> extends android.widget.BaseAdapter {
 
-	protected List<E> items = new ArrayList<E>();
+	protected List<E> items;
+
+	protected Context mContext;
+
+	public BaseListAdapter(Context context, List<E> items) {
+		mContext = context;
+		this.items = items;
+		if (items == null) {
+			throw new IllegalArgumentException(
+					"The second argument is non-null");
+		}
+	}
 
 	public void setList(List<E> items) {
 		this.items = items;

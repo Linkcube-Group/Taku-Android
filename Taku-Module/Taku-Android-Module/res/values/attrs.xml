@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="MenuItem">
+        <attr name="Style" format="reference" />
+        <attr name="TitleText" format="reference|string" />
+        <attr name="TitleTextSize" format="dimension" />
+        <attr name="TitleTextColor" format="color" />
+        <attr name="Background" format="reference|color" />
+        <attr name="Src" format="reference" />
+        <attr name="TipText" format="reference|string" />
+        <attr name="TipTextSize" format="dimension" />
+        <attr name="TipTextColor" format="color" />
+    </declare-styleable>
+
+</resources>

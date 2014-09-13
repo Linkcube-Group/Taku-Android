@@ -1,0 +1,71 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:menuItem="http://schemas.android.com/apk/res/me.linkcube.taku"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/main_bg"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/ActionBarHeight"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/ActionBarPadding"
+        android:paddingRight="@dimen/ActionBarPadding" >
+
+        <ImageButton
+            android:id="@+id/backBtn"
+            android:layout_width="@dimen/ActionBarButtonSize"
+            android:layout_height="@dimen/ActionBarButtonSize"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="@null"
+            android:contentDescription="@null"
+            android:src="@drawable/drawer_btn" />
+
+        <TextView
+            android:id="@+id/titleTv"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/ActionBarHeight"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="@string/settings"
+            android:textSize="@dimen/ActionBarTextSize" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <me.linkcube.taku.view.MenuItem
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            menuItem:Background="@color/text_white"
+            menuItem:TitleText="@string/app_name"
+            menuItem:TitleTextSize="20sp" />
+
+        <me.linkcube.taku.view.MenuItem
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            menuItem:Background="@color/text_white"
+            menuItem:TitleText="@string/app_name"
+            menuItem:TitleTextSize="20sp" />
+
+        <me.linkcube.taku.view.MenuItem
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            menuItem:Background="@color/text_white"
+            menuItem:TitleText="@string/app_name"
+            menuItem:TitleTextSize="20sp" />
+
+        <me.linkcube.taku.view.MenuItem
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            menuItem:Background="@color/text_white"
+            menuItem:TitleText="@string/app_name"
+            menuItem:TitleTextSize="20sp" />
+    </LinearLayout>
+
+</LinearLayout>

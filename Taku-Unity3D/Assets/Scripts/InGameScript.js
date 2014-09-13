@@ -26,6 +26,7 @@ private var fScoreTime : float;
 
 function Start()
 {
+	//Initial the target frame rate as 60.
 	Application.targetFrameRate = 60;
 	
 	RenderSettings.fog = true;
@@ -67,16 +68,17 @@ function Update()
 	
 	if (iMenuStatus == 0)
 		;
+	//菜单状态1时，游戏暂停，菜单状态设为2；
 	else if (iMenuStatus == 1)
 	{
 		hMenuScript.setMenuScriptStatus(true);
-				
 		bGamePaused = true;
 		iMenuStatus = 2;
 	}
 	
 	if(iPauseStatus==0)
 		;
+	//暂停状态1时，设定菜单脚本为true，展现暂停menu，同时设定暂停状态为2
 	else if(iPauseStatus==1)
 	{	
 		hMenuScript.setMenuScriptStatus(true);		
@@ -84,6 +86,7 @@ function Update()
 		
 		iPauseStatus = 2;
 	}
+	//暂停状态3时，游戏不暂停，设定菜单脚本为false，同时暂停状态设为0；
 	else if(iPauseStatus==3)
 	{		
 		bGamePaused = false;		
@@ -94,12 +97,14 @@ function Update()
 	
 	if(iDeathStatus==0)
 		;
+	//死亡状态为1时，释放所有能量宝石，同时设定死亡状态为2；
 	else if(iDeathStatus==1)
 	{
 		hPowerupsMainController.deactivateAllPowerups();
 		
 		iDeathStatus = 2;
 	}
+	//死亡状态为2时，设定菜单状态为true，展示游戏结束菜单，设定死亡状态为0；
 	else if (iDeathStatus == 2)
 	{		
 		hMenuScript.setMenuScriptStatus(true);
@@ -107,7 +112,7 @@ function Update()
 		
 		iDeathStatus = 0;
 	}
-	
+	//
 	if (bGamePaused == true)
 		return;
 	
@@ -117,12 +122,14 @@ function FixedUpdate(){
 	goScore.transform.position = goPlayer.transform.position + Vector3(0, 20 + 40 * fScoreTime, 0);
 }
 
+
 public function pauseGame()
 {
+	//Stop player's animation
 	hControllerScript.togglePlayerAnimation(false);
 	bGamePaused = true;
 	iPauseStatus = 1;
-	
+	//Pause play
 	hSoundManager.stopAllSounds();
 }
 
@@ -176,6 +183,7 @@ public function procesClicksDeathMenu(index : GameOverMenuEvents)
 	}
 }
 
+//撞到障碍之后减分数
 public function collidedWithObstacle()
 {
 	showAddScore(-hConfigScript.ScoreOnBarrier);
@@ -216,12 +224,17 @@ public function showAddScore(iScore:int)
 	goScore.SetActive(true);
 }
 
+//游戏是否暂停
 public function isGamePaused() { return bGamePaused; }
 
 public function getLevelScore() { return iLevelScore; }
+//获取当前等级增加分数比例
 public function incrementLevelScore(iValue:int) { iLevelScore += iValue; }
-
+//获取当前能量值
 public function getCurrentEnergy() { return CurrentEnergy; }
+//判断当前能量值是否为0
 public function isEnergyZero():boolean { return (CurrentEnergy <= 0 ? true : false); }
+//置空当前能量值
 public function zeroEnergy(){CurrentEnergy = 0;}
+
 public function decrementEnergy(iValue:int) { CurrentEnergy -= iValue; }

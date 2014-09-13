@@ -160,7 +160,7 @@ function Start()
 	iLanePosition = 0;	//set current lane to mid	
 	fCurrentWalkSpeed = fStartingWalkSpeed;
 
-
+	
 	if (PlayerPrefs.HasKey("ControlsType"))
 	    swipeControlsEnabled = PlayerPrefs.GetInt("ControlsType") == 1 ? true : false;
 	else

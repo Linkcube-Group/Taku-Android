@@ -8,19 +8,19 @@
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
 
     <uses-sdk
-        android:minSdkVersion="9"
+        android:minSdkVersion="8"
         android:targetSdkVersion="20" />
 
     <application
         android:name="me.linkcube.taku.TakuApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name" >
+        android:label="@string/app_name"
+        android:theme="@android:style/Theme.Black.NoTitleBar" >
         <activity
-            android:name="me.linkcube.taku.bt.BTSettingActivity"
+            android:name="me.linkcube.taku.ui.welcome.SplashActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Black.NoTitleBar" >
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,14 +28,24 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="me.linkcube.taku.TakuActivity"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Black.NoTitleBar" >
+            android:name="me.linkcube.taku.ui.main.MainActivity"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="me.linkcube.taku.bt.BTHelpActivity"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Black.NoTitleBar" >
+            android:name="me.linkcube.taku.unity3d.TakuUnityPlayerActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="me.linkcube.taku.ui.bt.BTHelpActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="me.linkcube.taku.ui.bt.BTSettingActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="me.linkcube.taku.ui.welcome.GuideActivity"
+            android:screenOrientation="portrait" >
         </activity>
     </application>
 

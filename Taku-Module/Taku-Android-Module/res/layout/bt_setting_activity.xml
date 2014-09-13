@@ -56,7 +56,7 @@
 
     <View style="@style/Setting.Item.Divider" />
 
-    <me.linkcube.taku.bt.BTDeviceListView
+    <me.linkcube.taku.ui.bt.BTDeviceListView
         android:id="@id/device_lv"
         style="@style/ListView"
         android:layout_height="0dp"

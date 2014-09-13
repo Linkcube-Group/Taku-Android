@@ -1,0 +1,79 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/main_bg"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/ActionBarHeight"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/ActionBarPadding"
+        android:paddingRight="@dimen/ActionBarPadding" >
+
+        <ImageButton
+            android:id="@+id/backBtn"
+            android:layout_width="@dimen/ActionBarButtonSize"
+            android:layout_height="@dimen/ActionBarButtonSize"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="@null"
+            android:contentDescription="@null"
+            android:src="@drawable/drawer_btn" />
+
+        <TextView
+            android:id="@+id/titleTv"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/ActionBarHeight"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="@string/sports_games"
+            android:textSize="@dimen/ActionBarTextSize" />
+
+        <ImageButton
+            android:id="@+id/connectBtn"
+            android:layout_width="@dimen/ActionBarButtonSize"
+            android:layout_height="@dimen/ActionBarButtonSize"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@null"
+            android:contentDescription="@null"
+            android:src="@drawable/connect" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical" >
+
+        <Button
+            android:id="@+id/panelBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@null"
+            android:drawablePadding="5dp"
+            android:drawableTop="@drawable/ic_launcher"
+            android:gravity="center_horizontal"
+            android:text="@string/dashboard"
+            android:textColor="#ff8061"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/takuBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/panelBtn"
+            android:layout_marginTop="20dp"
+            android:background="@null"
+            android:drawablePadding="5dp"
+            android:drawableTop="@drawable/ic_launcher"
+            android:text="@string/taku"
+            android:textColor="#ff8061"
+            android:textSize="20sp" />
+    </RelativeLayout>
+
+</LinearLayout>
