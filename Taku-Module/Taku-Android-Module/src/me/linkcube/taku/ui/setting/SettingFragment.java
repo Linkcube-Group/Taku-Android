@@ -1,12 +1,12 @@
 package me.linkcube.taku.ui.setting;
 
+import base.common.ui.DialogFragment;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import me.linkcube.taku.R;
-import me.linkcube.taku.common.ui.DialogFragment;
 
 public class SettingFragment extends DialogFragment {
 

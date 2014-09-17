@@ -1,9 +1,9 @@
 package me.linkcube.taku.unity3d;
 
 import me.linkcube.taku.ITakuUnityPlayerActivity;
-import me.linkcube.taku.common.util.FormatUtils;
-import me.linkcube.taku.common.util.Timber;
 import me.linkcube.taku.ui.bt.BTSettingActivity;
+import base.common.util.FormatUtils;
+import base.common.util.Timber;
 
 import com.ervinwang.bthelper.BTHelper;
 import com.ervinwang.bthelper.BTManager;
