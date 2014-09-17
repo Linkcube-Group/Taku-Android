@@ -1,7 +1,9 @@
 package me.linkcube.taku.ui.sportsgame;
 
 import me.linkcube.taku.R;
+import me.linkcube.taku.ui.sportsgame.dashboardgame.DashboardActivity;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -15,8 +17,10 @@ public class SportsGamesFragment extends Fragment implements OnClickListener {
 
 	private static final String ARG_DRAWER_POSITION = "drawer_position";
 
+	//仪表盘
 	private Button dashboardBtn;
 
+	//踏酷
 	private Button takuBtn;
 
 	public static SportsGamesFragment newInstance(int position) {
@@ -65,6 +69,7 @@ public class SportsGamesFragment extends Fragment implements OnClickListener {
 		switch (v.getId()) {
 		case R.id.panelBtn:
 			// TODO
+			startActivity(new Intent(getActivity(), DashboardActivity.class));
 			break;
 		case R.id.takuBtn:
 			// TODO

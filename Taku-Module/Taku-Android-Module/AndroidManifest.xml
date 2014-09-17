@@ -47,6 +47,19 @@
             android:name="me.linkcube.taku.ui.welcome.GuideActivity"
             android:screenOrientation="portrait" >
         </activity>
+        <activity 
+            android:name="me.linkcube.taku.ui.sportsgame.dashboardgame.DashboardActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity 
+            android:name="me.linkcube.taku.ui.sportsgame.dashboardgame.TagetSettingActiviey"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity 
+            android:name="me.linkcube.taku.ui.sportsgame.dashboardgame.DashboardRunActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        
     </application>
 
 </manifest>
