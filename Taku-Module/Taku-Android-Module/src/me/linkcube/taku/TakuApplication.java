@@ -1,8 +1,8 @@
 package me.linkcube.taku;
 
+import base.common.util.PreferenceUtils;
+import base.common.util.Timber;
 import me.linkcube.taku.BuildConfig;
-import me.linkcube.taku.common.util.PreferenceUtils;
-import me.linkcube.taku.common.util.Timber;
 import android.app.Application;
 
 public class TakuApplication extends Application {

@@ -2,6 +2,11 @@ package me.linkcube.taku.ui.bt;
 
 import java.util.List;
 
+import base.common.ui.DialogActivity;
+import base.common.util.AlertUtils;
+import base.common.util.PreferenceUtils;
+import base.common.util.Timber;
+
 import com.ervinwang.bthelper.BTHelper;
 import com.ervinwang.bthelper.BTManager;
 import com.ervinwang.bthelper.core.DeviceBroadcastReceiver;
@@ -19,10 +24,6 @@ import android.widget.CompoundButton;
 import android.widget.ToggleButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import me.linkcube.taku.R;
-import me.linkcube.taku.common.ui.DialogActivity;
-import me.linkcube.taku.common.util.AlertUtils;
-import me.linkcube.taku.common.util.PreferenceUtils;
-import me.linkcube.taku.common.util.Timber;
 import static com.ervinwang.bthelper.Const.Device.*;
 
 public class BTSettingActivity extends DialogActivity implements

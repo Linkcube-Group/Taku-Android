@@ -1,6 +1,6 @@
 package me.linkcube.taku.ui.panel;
 
-import me.linkcube.taku.common.ui.DialogActivity;
+import base.common.ui.DialogActivity;
 
 public class PanelActivity extends DialogActivity {
 

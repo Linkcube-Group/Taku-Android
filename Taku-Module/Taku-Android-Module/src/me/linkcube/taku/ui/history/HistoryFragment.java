@@ -1,8 +1,8 @@
 package me.linkcube.taku.ui.history;
 
+import base.common.ui.DialogFragment;
 import android.app.Activity;
 import android.os.Bundle;
-import me.linkcube.taku.common.ui.DialogFragment;
 
 public class HistoryFragment extends DialogFragment {
 

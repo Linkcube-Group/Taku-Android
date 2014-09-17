@@ -1,13 +1,13 @@
 package me.linkcube.taku.ui.welcome;
 
 import static me.linkcube.taku.AppConst.KEY.SHOW_GUIDE;
+import base.common.ui.DialogActivity;
+import base.common.util.AlertUtils;
+import base.common.util.NetworkUtils;
+import base.common.util.PreferenceUtils;
+import base.common.util.Timber;
 import me.linkcube.taku.AppConfig;
 import me.linkcube.taku.R;
-import me.linkcube.taku.common.ui.DialogActivity;
-import me.linkcube.taku.common.util.AlertUtils;
-import me.linkcube.taku.common.util.NetworkUtils;
-import me.linkcube.taku.common.util.PreferenceUtils;
-import me.linkcube.taku.common.util.Timber;
 import me.linkcube.taku.ui.main.MainActivity;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;

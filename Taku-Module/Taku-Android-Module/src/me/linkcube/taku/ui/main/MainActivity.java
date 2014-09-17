@@ -1,7 +1,7 @@
 package me.linkcube.taku.ui.main;
 
+import base.common.ui.DialogFragmentActivity;
 import me.linkcube.taku.R;
-import me.linkcube.taku.common.ui.DialogFragmentActivity;
 import me.linkcube.taku.ui.history.HistoryFragment;
 import me.linkcube.taku.ui.main.view.Drawer.OnDrawerItemClickListener;
 import me.linkcube.taku.ui.main.view.ResideMenu;
