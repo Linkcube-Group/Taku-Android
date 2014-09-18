@@ -47,6 +47,16 @@
             android:name="me.linkcube.taku.ui.welcome.GuideActivity"
             android:screenOrientation="portrait" >
         </activity>
+        
+        <activity
+            android:name="me.linkcube.taku.ui.user.LoginActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="me.linkcube.taku.ui.user.RegisterActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        
     </application>
 
 </manifest>

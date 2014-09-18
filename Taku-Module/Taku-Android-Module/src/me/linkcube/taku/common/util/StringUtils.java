@@ -273,4 +273,18 @@ public class StringUtils {
 		}
 		return new String(source);
 	}
+	
+	/**
+	 * 判断是不是邮箱格式
+	 * 
+	 * @param str
+	 * @return
+	 */
+	public static boolean isEmailAddress(String str) {
+		if (str.matches("^([a-z0-9A-Z]+[-|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$")) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }
