@@ -1,4 +1,4 @@
-package me.linkcube.taku.ui.sportsgame.dashboardgame;
+package me.linkcube.taku.ui.sportsgame;
 
 import me.linkcube.taku.R;
 import android.app.Activity;
@@ -11,14 +11,14 @@ import android.widget.ImageButton;
 /**
  * 设定运动目标
  * */
-public class TagetSettingActiviey extends Activity {
+public class TagetSettingActivity extends Activity {
 	private ImageButton back_imgBtn;
 	private ImageButton submit_imgBtn;
 
 	// 距离选择器如何实现－－－待定
 	// 可以参考“生日”选择器－－－待定
 
-	public TagetSettingActiviey() {
+	public TagetSettingActivity() {
 		super();
 		// TODO Auto-generated constructor stub
 	}

@@ -1,4 +1,4 @@
-package me.linkcube.taku.ui.sportsgame.dashboardgame;
+package me.linkcube.taku.ui.sportsgame.view;
 
 import android.util.Log;
 import android.view.animation.AccelerateInterpolator;

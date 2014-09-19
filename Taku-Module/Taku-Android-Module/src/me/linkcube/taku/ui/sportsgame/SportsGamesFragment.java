@@ -1,11 +1,10 @@
 package me.linkcube.taku.ui.sportsgame;
 
+import base.common.ui.DialogFragment;
 import me.linkcube.taku.R;
-import me.linkcube.taku.ui.sportsgame.dashboardgame.DashboardActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,7 +12,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-public class SportsGamesFragment extends Fragment implements OnClickListener {
+public class SportsGamesFragment extends DialogFragment implements OnClickListener {
 
 	private static final String ARG_DRAWER_POSITION = "drawer_position";
 
