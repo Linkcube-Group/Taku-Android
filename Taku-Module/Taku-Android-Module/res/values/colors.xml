@@ -5,7 +5,7 @@
     <color name="actionbar_bg">#FF3C3C3C</color>
 
     <!-- TextColor -->
-    <color name="text_white">#FF000000</color>
+    <color name="text_white">#FFFFFFFF</color>
     <color name="text_black">#FF000000</color>
     <color name="text_pink">#FFF22B89</color>
     <color name="text_light_grey">#DFDFDF</color>

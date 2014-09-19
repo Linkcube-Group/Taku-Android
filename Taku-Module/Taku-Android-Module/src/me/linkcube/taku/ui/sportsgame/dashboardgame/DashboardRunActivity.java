@@ -68,14 +68,15 @@ public class DashboardRunActivity extends Activity {
 		connDevice_imgBtn.setOnClickListener(dashboardClickListener);
 		stop_imgBtn.setOnClickListener(dashboardClickListener);
 		stop_imgBtn.setOnClickListener(dashboardClickListener);
-		currentDistance_sb.setOnSeekBarChangeListener(currentDistanceChangedListener);
+		currentDistance_sb
+				.setOnSeekBarChangeListener(currentDistanceChangedListener);
 
 		// 设置属性
-		speedRate.setScaleImageViewRes(R.drawable.dashboard_scale);
+		speedRate.setScaleImageViewRes(R.drawable.dashboard_speed_bg);
 		speedRate.setPointerImageViewRes(R.drawable.dashboard_pointer);
-		heartRate.setScaleImageViewRes(R.drawable.dashboard_scale);
+		heartRate.setScaleImageViewRes(R.drawable.dashboard_heartrate_bg);
 		heartRate.setPointerImageViewRes(R.drawable.dashboard_pointer);
-		cal.setCalImageViewRes(R.drawable.dashboard_scale);
+		cal.setCalImageViewRes(R.drawable.dashboard_cal_bg);
 		cal.setCalTextView("消耗:XXXX卡");
 
 		setDistanceText("0000");
@@ -114,26 +115,26 @@ public class DashboardRunActivity extends Activity {
 
 		}
 	};
-	
-	OnSeekBarChangeListener currentDistanceChangedListener=new OnSeekBarChangeListener() {
-		
+
+	OnSeekBarChangeListener currentDistanceChangedListener = new OnSeekBarChangeListener() {
+
 		@Override
 		public void onStopTrackingTouch(SeekBar seekBar) {
 			// TODO Auto-generated method stub
-			showInfo("当前运动距离："+seekBar.getProgress()+"米");
+			showInfo("当前运动距离：" + seekBar.getProgress() + "米");
 		}
-		
+
 		@Override
 		public void onStartTrackingTouch(SeekBar seekBar) {
 			// TODO Auto-generated method stub
-			
+
 		}
-		
+
 		@Override
 		public void onProgressChanged(SeekBar seekBar, int progress,
 				boolean fromUser) {
 			// TODO Auto-generated method stub
-			
+
 		}
 	};
 
@@ -162,6 +163,11 @@ public class DashboardRunActivity extends Activity {
 		// 设置字体前景色
 		distanceString.setSpan(new ForegroundColorSpan(Color.RED), 5, 9,
 				Spanned.SPAN_EXCLUSIVE_EXCLUSIVE); // 设置前景色为红色
+
+		distanceString.setSpan(new ForegroundColorSpan(Color.BLACK), 0, 5,
+				Spanned.SPAN_EXCLUSIVE_EXCLUSIVE); // 设置前景色为黑色
+		distanceString.setSpan(new ForegroundColorSpan(Color.BLACK), 9, 10,
+				Spanned.SPAN_EXCLUSIVE_EXCLUSIVE); // 设置前景色为黑色
 		distance_tv.setText(distanceString);
 
 	}
@@ -176,8 +182,12 @@ public class DashboardRunActivity extends Activity {
 		// 设置字体前景色
 		timeString.setSpan(new ForegroundColorSpan(Color.RED), 5, 10,
 				Spanned.SPAN_EXCLUSIVE_EXCLUSIVE); // 设置前景色为红色
+
+		timeString.setSpan(new ForegroundColorSpan(Color.BLACK), 0, 5,
+				Spanned.SPAN_EXCLUSIVE_EXCLUSIVE); // 设置前景色为黑色
+		timeString.setSpan(new ForegroundColorSpan(Color.BLACK), 10, 11,
+				Spanned.SPAN_EXCLUSIVE_EXCLUSIVE); // 设置前景色为黑色
 		time_tv.setText(timeString);
 
 	}
-
 }

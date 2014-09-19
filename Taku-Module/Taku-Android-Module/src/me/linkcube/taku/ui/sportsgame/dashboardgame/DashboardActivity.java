@@ -72,12 +72,12 @@ public class DashboardActivity extends Activity {
 		setTaget_btn.setOnClickListener(dashboardClickListener);
 
 		// 设置属性
-		speedRate.setScaleImageViewRes(R.drawable.dashboard_scale);
+		speedRate.setScaleImageViewRes(R.drawable.dashboard_speed_bg);
 		speedRate.setPointerImageViewRes(R.drawable.dashboard_pointer);
-		heartRate.setScaleImageViewRes(R.drawable.dashboard_scale);
+		heartRate.setScaleImageViewRes(R.drawable.dashboard_heartrate_bg);
 		heartRate.setPointerImageViewRes(R.drawable.dashboard_pointer);
-		cal.setCalImageViewRes(R.drawable.dashboard_scale);
-		cal.setCalTextView("消耗:XXXX卡");
+		cal.setCalImageViewRes(R.drawable.dashboard_cal_bg);
+		cal.setCalTextView("XXX");
 		
 		setDistanceText("0000");
 		setTimeText("00:00");
@@ -100,6 +100,7 @@ public class DashboardActivity extends Activity {
 				break;
 			case R.id.share_imgBtn:// 分享
 				showInfo("点击－－分享");
+				startActivity(new Intent(getApplicationContext(), ShareActivity.class));
 				// TODO
 				break;
 			case R.id.setTaget_btn:// 设定运动目标
@@ -140,6 +141,11 @@ public class DashboardActivity extends Activity {
 		// 设置字体前景色
 		distanceString.setSpan(new ForegroundColorSpan(Color.RED), 5, 9,
 				Spanned.SPAN_EXCLUSIVE_EXCLUSIVE); // 设置前景色为红色
+		
+		distanceString.setSpan(new ForegroundColorSpan(Color.BLACK), 0, 5,
+				Spanned.SPAN_EXCLUSIVE_EXCLUSIVE); // 设置前景色为黑色
+		distanceString.setSpan(new ForegroundColorSpan(Color.BLACK), 9, 10,
+				Spanned.SPAN_EXCLUSIVE_EXCLUSIVE); // 设置前景色为黑色
 		distance_tv.setText(distanceString);
 
 	}
@@ -154,6 +160,11 @@ public class DashboardActivity extends Activity {
 		// 设置字体前景色
 		timeString.setSpan(new ForegroundColorSpan(Color.RED), 5, 10,
 				Spanned.SPAN_EXCLUSIVE_EXCLUSIVE); // 设置前景色为红色
+		
+		timeString.setSpan(new ForegroundColorSpan(Color.BLACK), 0, 5,
+				Spanned.SPAN_EXCLUSIVE_EXCLUSIVE); // 设置前景色为黑色
+		timeString.setSpan(new ForegroundColorSpan(Color.BLACK), 10, 11,
+				Spanned.SPAN_EXCLUSIVE_EXCLUSIVE); // 设置前景色为黑色
 		time_tv.setText(timeString);
 
 	}
