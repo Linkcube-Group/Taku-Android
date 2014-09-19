@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/dashboard_bg" >
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:contentDescription="@null"
+        android:src="@drawable/share_head_img" />
+
+    <ImageButton
+        android:id="@+id/back_imgBtn"
+        android:layout_width="@dimen/ActionBarButtonSize"
+        android:layout_height="@dimen/ActionBarButtonSize"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/back_img"
+        android:contentDescription="@null"
+        android:layout_marginLeft="@dimen/ActionBarPadding"
+        android:layout_marginTop="@dimen/ActionBarPadding" />
+
+    <Button
+        android:id="@+id/share_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="25dp"
+        android:background="@drawable/share_button_bg"
+        android:text="分享" />
+
+    <TextView
+        android:id="@+id/cal_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/share_btn"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="15dp"
+        android:text="燃烧475大卡"
+        android:textColor="@color/text_white"
+        android:textSize="@dimen/TextSize.Large" />
+
+    <TextView
+        android:id="@+id/time_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/cal_tv"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:text="运动时间：00:00  分/秒"
+        android:textColor="@color/text_white"
+        android:textSize="@dimen/TextSize.Large" />
+
+    <TextView
+        android:id="@+id/distance_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/time_tv"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:text="运动距离：3000米"
+        android:textColor="@color/text_white"
+        android:textSize="@dimen/TextSize.Large" />
+
+</RelativeLayout>

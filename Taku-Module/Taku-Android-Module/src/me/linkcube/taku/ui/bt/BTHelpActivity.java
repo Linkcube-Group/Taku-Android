@@ -1,7 +1,7 @@
 package me.linkcube.taku.ui.bt;
 
+import base.common.ui.BaseActivity;
 import me.linkcube.taku.R;
-import me.linkcube.taku.common.ui.BaseActivity;
 import android.os.Bundle;
 
 public class BTHelpActivity extends BaseActivity {

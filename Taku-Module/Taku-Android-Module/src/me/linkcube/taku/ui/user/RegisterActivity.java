@@ -1,18 +1,22 @@
 package me.linkcube.taku.ui.user;
 
+import me.linkcube.taku.R;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import me.linkcube.taku.R;
-import me.linkcube.taku.common.ui.BaseActivity;
-import me.linkcube.taku.common.util.AlertUtils;
-import me.linkcube.taku.common.util.StringUtils;
+import android.widget.ImageButton;
+import android.widget.TextClock;
+import android.widget.TextView;
+import base.common.ui.BaseActivity;
+import base.common.util.AlertUtils;
+import base.common.util.StringUtils;
 
 public class RegisterActivity extends BaseActivity implements OnClickListener {
-
+	private ImageButton backBtn;
+	private TextView titleTv;
 	private Button titleRightBtn;
 	private Button registerBtn;
 	private EditText emailEt;
@@ -29,6 +33,10 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 	}
 
 	private void initView() {
+		backBtn=(ImageButton)findViewById(R.id.back_btn);
+		backBtn.setOnClickListener(this);
+		titleTv=(TextView)findViewById(R.id.title_tv);
+		titleTv.setText(getResources().getString(R.string.register_text));
 		emailEt = (EditText) findViewById(R.id.user_email_et);
 		passWordEt = (EditText) findViewById(R.id.user_psw_et);
 		confirmPswEt = (EditText) findViewById(R.id.user_confirm_psw_et);
@@ -42,7 +50,6 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 	public void onClick(View view) {
 		switch (view.getId()) {
 		case R.id.register_btn:
-			Log.d("onClick", R.id.register_btn+"");
 			if (!StringUtils.isEmailAddress(emailEt.getText().toString())) {
 				AlertUtils.showToast(
 						this,
@@ -60,9 +67,10 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 				confirmPswEt.setText("");
 			}
 			// TODO 注册相关事情
+			break;
+		case R.id.back_btn:
 			finish();
 			break;
-
 		default:
 			break;
 		}

@@ -26,7 +26,7 @@
             android:src="@drawable/ic_back_btn" />
 
         <TextView
-            android:id="@+id/titleTv"
+            android:id="@+id/title_tv"
             android:layout_width="match_parent"
             android:layout_height="@dimen/ActionBarHeight"
             android:layout_centerInParent="true"

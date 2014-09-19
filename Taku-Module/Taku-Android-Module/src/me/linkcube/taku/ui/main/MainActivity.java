@@ -1,19 +1,18 @@
 package me.linkcube.taku.ui.main;
 
+import base.common.ui.DialogFragmentActivity;
 import me.linkcube.taku.R;
-import me.linkcube.taku.common.ui.DialogFragmentActivity;
 import me.linkcube.taku.ui.history.HistoryFragment;
 import me.linkcube.taku.ui.main.view.Drawer.OnDrawerItemClickListener;
 import me.linkcube.taku.ui.main.view.ResideMenu;
 import me.linkcube.taku.ui.networkgames.NetworkGamesFragment;
 import me.linkcube.taku.ui.setting.SettingFragment;
 import me.linkcube.taku.ui.sportsgame.SportsGamesFragment;
-import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 
 public class MainActivity extends DialogFragmentActivity implements
 		ResideMenu.OnMenuListener, OnDrawerItemClickListener {
@@ -68,6 +67,8 @@ public class MainActivity extends DialogFragmentActivity implements
 
 	@Override
 	public void onDrawerItemClick(View view, int position) {
+		Log.i("CXC", "----position:"+position);
+		Log.i("CXC","++++mPosition:"+mPosition);
 		if (mPosition != position) {
 			resideMenu.closeMenu();
 			mPosition = position;
@@ -105,6 +106,7 @@ public class MainActivity extends DialogFragmentActivity implements
 							SettingFragment.newInstance(position)).commit();
 			break;
 		default:
+			
 			break;
 		}
 

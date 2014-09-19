@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/dashboard_bg"
+    android:gravity="center_horizontal"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/ActionBarHeight"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/ActionBarPadding"
+        android:paddingRight="@dimen/ActionBarPadding" >
+
+        <ImageButton
+            android:id="@+id/close_imgBtn"
+            android:layout_width="@dimen/ActionBarButtonSize"
+            android:layout_height="@dimen/ActionBarButtonSize"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="2dp"
+            android:background="@drawable/close_imgbtn"
+            android:contentDescription="@null" />
+
+        <TextView
+            android:id="@+id/dashboard_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:text="仪表盘"
+            android:textSize="@dimen/ActionBarTextSize" />
+
+        <ImageButton
+            android:id="@+id/connDevice_imgBtn"
+            android:layout_width="@dimen/ActionBarButtonSize"
+            android:layout_height="@dimen/ActionBarButtonSize"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/connDevice_tv"
+            android:background="@drawable/conn_device"
+            android:contentDescription="@null" />
+
+        <TextView
+            android:id="@+id/connDevice_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/ActionBarButtonSize"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="2dp"
+            android:gravity="center"
+            android:text="未连接设备"
+            android:textSize="12sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center_vertical" >
+
+        <TextView
+            android:id="@+id/share_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:paddingRight="10dp"
+            android:text="分享"
+            android:textSize="16sp" />
+
+        <ImageButton
+            android:id="@+id/share_imgBtn"
+            android:layout_width="@dimen/ActionBarButtonSize"
+            android:layout_height="@dimen/ActionBarButtonSize"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@id/share_tv"
+            android:background="@drawable/share_img" />
+    </RelativeLayout>
+
+    <!-- 添加仪表盘组 -->
+
+    <include layout="@layout/dashboard_group" />
+
+    <!-- 添加距离和时间TextView -->
+
+    <include layout="@layout/distance_time_group" />
+
+    <Button
+        android:id="@+id/setTaget_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="设定运行目标"
+        android:textSize="20sp" />
+
+</LinearLayout>
