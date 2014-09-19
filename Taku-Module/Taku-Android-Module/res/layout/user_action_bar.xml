@@ -2,12 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="@dimen/ActionBarHeight"
-    android:gravity="center_vertical"
+    android:gravity="top"
     android:orientation="horizontal"
     android:paddingLeft="@dimen/ActionBarPadding"
     android:paddingRight="@dimen/ActionBarPadding" >
 
     <RelativeLayout
+        android:id="@+id/title_layout"
         android:layout_width="match_parent"
         android:layout_height="@dimen/ActionBarHeight"
         android:gravity="center_vertical"
@@ -15,8 +16,8 @@
         android:paddingLeft="@dimen/ActionBarPadding"
         android:paddingRight="@dimen/ActionBarPadding" >
 
-        <ImageButton
-            android:id="@+id/back_btn"
+        <ImageView
+            android:id="@+id/title_left_iv"
             android:layout_width="@dimen/ActionBarButtonSize"
             android:layout_height="@dimen/ActionBarButtonSize"
             android:layout_alignParentLeft="true"
@@ -26,7 +27,7 @@
             android:src="@drawable/ic_back_btn" />
 
         <TextView
-            android:id="@+id/title_tv"
+            android:id="@+id/title_text"
             android:layout_width="match_parent"
             android:layout_height="@dimen/ActionBarHeight"
             android:layout_centerInParent="true"
