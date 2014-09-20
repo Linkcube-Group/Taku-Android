@@ -1,6 +1,7 @@
 package me.linkcube.taku.ui.user;
 
 import me.linkcube.taku.R;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -61,6 +62,7 @@ public class RegisterActivity extends TitleBaseActivity implements
 				confirmPswEt.setText("");
 			}
 			// TODO 注册相关事情
+			startActivity(new Intent(RegisterActivity.this,InitUserInfoActivity.class));
 			break;
 		default:
 			break;

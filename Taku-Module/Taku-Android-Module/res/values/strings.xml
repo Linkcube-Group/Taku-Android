@@ -64,14 +64,23 @@
     <string name="toast_psw_too_short">密码长度太短</string>
     <string name="toast_psw_couldnot_contain_space">密码中不能包含空格</string>
     <string name="toast_psw_not_match">密码不一致，请重新输入</string>
-    
+
     <!-- 用户相关 -->
     <string name="login_text">登录Taku</string>
     <string name="register_text">注册Taku</string>
+    <string name="init_user_info_text">请填写资料</string>
     <string name="login_btn_text">登录</string>
     <string name="register_btn_text">注册</string>
     <string name="email_text">邮箱</string>
     <string name="password_text">密码</string>
     <string name="confirm_password_text">确认密码</string>
+    <string name="submit_btn_text">提交</string>
+    <string name="user_nickname_text">昵称</string>
+    <string name="user_birthday_text">生日</string>
+    <string name="user_height_text">身高</string>
+    <string name="user_weight_text">体重</string>
+    <string name="user_gender_text">性别</string>
+    <string name="user_gender_female_text">女</string>
+    <string name="user_gender_male_text">男</string>
 
 </resources>

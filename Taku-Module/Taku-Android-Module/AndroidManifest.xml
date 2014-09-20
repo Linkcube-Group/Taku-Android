@@ -56,6 +56,10 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
+            android:name="me.linkcube.taku.ui.user.InitUserInfoActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
             android:name="me.linkcube.taku.ui.sportsgame.dashboardgame.DashboardActivity"
             android:screenOrientation="portrait" >
         </activity>
