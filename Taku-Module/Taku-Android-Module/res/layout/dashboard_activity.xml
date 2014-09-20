@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tc="http://schemas.android.com/apk/res/me.linkcube.taku"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/dashboard_bg"
@@ -20,7 +21,7 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="2dp"
-            android:background="@drawable/close_imgbtn"
+            android:background="@drawable/back_img"
             android:contentDescription="@null" />
 
         <TextView
@@ -37,27 +38,15 @@
             android:id="@+id/connDevice_imgBtn"
             android:layout_width="@dimen/ActionBarButtonSize"
             android:layout_height="@dimen/ActionBarButtonSize"
-            android:layout_centerVertical="true"
-            android:layout_toLeftOf="@+id/connDevice_tv"
-            android:background="@drawable/conn_device"
-            android:contentDescription="@null" />
-
-        <TextView
-            android:id="@+id/connDevice_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/ActionBarButtonSize"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="2dp"
-            android:gravity="center"
-            android:text="未连接设备"
-            android:textSize="12sp" />
+            android:background="@drawable/connect"
+            android:contentDescription="@null" />
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:gravity="center_vertical" >
 
         <TextView
@@ -66,9 +55,9 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:paddingRight="10dp"
+            android:layout_marginRight="10dp"
             android:text="分享"
-            android:textSize="16sp" />
+            android:textSize="@dimen/TextSize.Large" />
 
         <ImageButton
             android:id="@+id/share_imgBtn"
@@ -77,23 +66,143 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
             android:layout_toLeftOf="@id/share_tv"
-            android:background="@drawable/share_img" />
+            android:background="@drawable/share_img"
+            android:contentDescription="@null" />
     </RelativeLayout>
 
     <!-- 添加仪表盘组 -->
 
-    <include layout="@layout/dashboard_group" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="10dp"
+        android:layout_weight="1"
+        android:gravity="center_horizontal" >
 
-    <!-- 添加距离和时间TextView -->
+        <!-- Heart Rate -->
 
-    <include layout="@layout/distance_time_group" />
+        <LinearLayout
+            android:id="@+id/heartRateLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical" >
 
-    <Button
-        android:id="@+id/setTaget_btn"
-        android:layout_width="wrap_content"
+            <me.linkcube.taku.ui.sportsgame.dashboardgame.InfoDashboard
+                android:id="@+id/heartRate"
+                android:layout_width="100dp"
+                android:layout_height="100dp" >
+            </me.linkcube.taku.ui.sportsgame.dashboardgame.InfoDashboard>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="心率"
+                android:textSize="@dimen/TextSize.Large" />
+        </LinearLayout>
+
+        <!-- Speed -->
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/heartRateLayout"
+            android:gravity="center_horizontal"
+            android:orientation="vertical" >
+
+            <me.linkcube.taku.ui.sportsgame.dashboardgame.SpeedDashboard
+                android:id="@+id/speedRate"
+                android:layout_width="160dp"
+                android:layout_height="160dp" >
+            </me.linkcube.taku.ui.sportsgame.dashboardgame.SpeedDashboard>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="速度"
+                android:textSize="@dimen/TextSize.Large" />
+        </LinearLayout>
+
+        <!-- Cal -->
+
+        <LinearLayout
+            android:id="@+id/calLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:gravity="center_horizontal"
+            android:orientation="vertical" >
+
+            <me.linkcube.taku.ui.sportsgame.dashboardgame.InfoDashboard
+                android:id="@+id/cal"
+                android:layout_width="100dp"
+                android:layout_height="100dp" >
+            </me.linkcube.taku.ui.sportsgame.dashboardgame.InfoDashboard>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="消耗"
+                android:textSize="@dimen/TextSize.Large" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/taskLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:layout_alignParentRight="true"
+            android:layout_above="@id/calLayout" >
+
+            <me.linkcube.taku.ui.sportsgame.dashboardgame.TasksCompletedView
+                android:id="@+id/tasks_view"
+                android:layout_width="180dp"
+                android:layout_height="180dp"
+                tc:mCircleColor="@color/grey"
+                tc:mRadius="80dip"
+                tc:mRingColor="@color/pink"
+                tc:mStrokeWidth="10dip" >
+            </me.linkcube.taku.ui.sportsgame.dashboardgame.TasksCompletedView>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="设定运行目标"
-        android:textSize="20sp" />
+        android:background="@drawable/dashboard_info_bg"
+        android:paddingLeft="30dp"
+        android:paddingRight="10dp" >
+
+        <TextView
+            android:id="@+id/distance_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:drawableLeft="@drawable/dashboard_distance_img"
+            android:drawableRight="@drawable/dashboard_distance_km"
+            android:gravity="center_vertical"
+            android:textSize="@dimen/TextSize.Large" />
+
+        <TextView
+            android:id="@+id/time_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/distance_tv"
+            android:drawableLeft="@drawable/dashboard_time_img"
+            android:gravity="center_vertical"
+            android:textSize="@dimen/TextSize.Large" />
+
+        <ImageButton
+            android:id="@+id/setTaget_imgBtn"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/dashboard_taget_bg"
+            android:contentDescription="@null" />
+    </RelativeLayout>
 
 </LinearLayout>

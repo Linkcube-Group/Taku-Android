@@ -11,6 +11,7 @@
     <color name="text_light_grey">#DFDFDF</color>
     <color name="text_grey">#BFBFBF</color>
     <color name="text_dark_grey">#A4A4A4</color>
+    <color name="text_green">#00FF00</color>
 
     <!-- ListView -->
     <color name="listview_divider">#BFBFBF</color>

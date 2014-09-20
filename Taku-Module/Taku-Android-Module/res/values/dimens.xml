@@ -22,7 +22,7 @@
     <dimen name="TextSize.Default">16.0dip</dimen>
     <dimen name="TextSize.Small">14.0dip</dimen>
     <dimen name="TextSize.Large">18.0dip</dimen>
-    <dimen name="TextSize.Title">20.0dip</dimen>
+    <dimen name="TextSize.Super">24.0dip</dimen><dimen name="TextSize.Title">20.0dip</dimen>
     <!-- EditText -->
     <dimen name="EditTextHeight">44.0dip</dimen>
     <!-- Status Bar -->
@@ -54,5 +54,6 @@
     <dimen name="SettingSubTextSize">14sp</dimen>
     <dimen name="SettingItemHeight">60.0dip</dimen>
     <dimen name="SettingItemTextSize">20sp</dimen>
+    
 
 </resources>

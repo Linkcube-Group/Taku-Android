@@ -6,25 +6,26 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 /**
- * 仪表盘－－心率和速度显示组合控件
+ * 仪表盘－－速度显示组合控件
  * */
-public class Dashboard extends RelativeLayout {
+public class SpeedDashboard extends RelativeLayout {
 
 	private ImageView scaleImageView;
 	private ImageView pointerImageView;
 	private DashboardRotateAnimation rotateAnimation;
 
-	public Dashboard(Context context) {
+	public SpeedDashboard(Context context) {
 		this(context, null);
 	}
 
-	public Dashboard(Context context, AttributeSet attrs) {
+	public SpeedDashboard(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		// TODO Auto-generated constructor stub
-		LayoutInflater.from(context).inflate(R.layout.dashboard_layout, this,
-				true);
+		LayoutInflater.from(context).inflate(R.layout.dashboard_speed_layout,
+				this, true);
 		scaleImageView = (ImageView) findViewById(R.id.scaleImageView);
 		pointerImageView = (ImageView) findViewById(R.id.pointerImageView);
 		// 初始化旋转类
