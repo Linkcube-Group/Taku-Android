@@ -1,9 +1,12 @@
 package me.linkcube.taku.ui.main.view;
 
 import me.linkcube.taku.R;
+import me.linkcube.taku.ui.user.LoginActivity;
 import android.content.Context;
+import android.content.Intent;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 public class Drawer extends LinearLayout implements View.OnClickListener {
@@ -29,7 +32,7 @@ public class Drawer extends LinearLayout implements View.OnClickListener {
 		init(context);
 	}
 
-	private void init(Context context) {
+	private void init(final Context context) {
 		inflate(context, R.layout.residemenu_drawer, this);
 		items = new DrawerItem[4];
 		items[0] = (DrawerItem) findViewById(R.id.sportsGamesBtn);
@@ -40,7 +43,14 @@ public class Drawer extends LinearLayout implements View.OnClickListener {
 			items[i].setTitle(titles[i]).setIcon(icons[i])
 					.setOnClickListener(this);
 		}
-
+		ImageView avatar_iv=(ImageView)findViewById(R.id.avatar_iv);
+		avatar_iv.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				context.startActivity(new Intent(getContext(),LoginActivity.class));
+			}
+		});
 	}
 
 	public void setOnDrawerItemClickListener(OnDrawerItemClickListener listener) {

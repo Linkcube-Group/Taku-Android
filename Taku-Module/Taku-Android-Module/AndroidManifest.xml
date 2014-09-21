@@ -47,24 +47,30 @@
             android:name="me.linkcube.taku.ui.welcome.GuideActivity"
             android:screenOrientation="portrait" >
         </activity>
-        <activity 
-            android:name="me.linkcube.taku.ui.sportsgame.dashboardgame.DashboardActivity"
-            android:screenOrientation="portrait">
+        <activity
+            android:name="me.linkcube.taku.ui.user.LoginActivity"
+            android:screenOrientation="portrait" >
         </activity>
-        <activity 
-            android:name="me.linkcube.taku.ui.sportsgame.dashboardgame.TagetSettingActiviey"
-            android:screenOrientation="portrait">
+        <activity
+            android:name="me.linkcube.taku.ui.user.RegisterActivity"
+            android:screenOrientation="portrait" >
         </activity>
-        <activity 
-            android:name="me.linkcube.taku.ui.sportsgame.dashboardgame.DashboardRunActivity"
-            android:screenOrientation="portrait">
+        <activity
+            android:name="me.linkcube.taku.ui.user.InitUserInfoActivity"
+            android:screenOrientation="portrait" >
         </activity>
-        
-        <activity 
-            android:name="me.linkcube.taku.ui.sportsgame.dashboardgame.ShareActivity"
-            android:screenOrientation="portrait">
+        <activity
+            android:name="me.linkcube.taku.ui.sportsgame.DashboardActivity"
+            android:screenOrientation="portrait" >
         </activity>
-        
+        <activity
+            android:name="me.linkcube.taku.ui.sportsgame.TagetSettingActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="me.linkcube.taku.ui.share.ShareActivity"
+            android:screenOrientation="portrait" >
+        </activity>
     </application>
 
 </manifest>

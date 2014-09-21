@@ -1,5 +1,6 @@
 package me.linkcube.taku.ui.main;
 
+import base.common.ui.DialogFragment;
 import base.common.ui.DialogFragmentActivity;
 import me.linkcube.taku.R;
 import me.linkcube.taku.ui.history.HistoryFragment;
@@ -9,7 +10,6 @@ import me.linkcube.taku.ui.networkgames.NetworkGamesFragment;
 import me.linkcube.taku.ui.setting.SettingFragment;
 import me.linkcube.taku.ui.sportsgame.SportsGamesFragment;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -42,9 +42,7 @@ public class MainActivity extends DialogFragmentActivity implements
 		// valid scale factor is between 0.0f and 1.0f. leftmenu'width is
 		// 150dip.
 		resideMenu.setScaleValue(0.6f);
-		getSupportFragmentManager().beginTransaction()
-				.replace(R.id.container, SportsGamesFragment.newInstance(0))
-				.commit();
+		replaceFragment(SportsGamesFragment.newInstance(0));
 
 	}
 
@@ -67,49 +65,35 @@ public class MainActivity extends DialogFragmentActivity implements
 
 	@Override
 	public void onDrawerItemClick(View view, int position) {
-		Log.i("CXC", "----position:"+position);
-		Log.i("CXC","++++mPosition:"+mPosition);
+		Log.i("CXC", "----position:" + position);
+		Log.i("CXC", "++++mPosition:" + mPosition);
 		if (mPosition != position) {
 			resideMenu.closeMenu();
 			mPosition = position;
 			return;
 		}
-		FragmentManager fragmentManager = getSupportFragmentManager();
 		switch (position) {
 		case SPORTS_GAMES:// 运动游戏
-			fragmentManager
-					.beginTransaction()
-					.replace(R.id.container,
-							SportsGamesFragment.newInstance(position)).commit();
+			replaceFragment(SportsGamesFragment.newInstance(position));
 			break;
 		case HISTORY:// 历史记录
-			fragmentManager = getSupportFragmentManager();
-			fragmentManager
-					.beginTransaction()
-					.replace(R.id.container,
-							HistoryFragment.newInstance(position)).commit();
+			replaceFragment(HistoryFragment.newInstance(position));
 			break;
 		case NETWORK_GAMES:// 联网游戏
-			fragmentManager = getSupportFragmentManager();
-			fragmentManager
-					.beginTransaction()
-					.replace(R.id.container,
-							NetworkGamesFragment.newInstance(position))
-					.commit();
+			replaceFragment(NetworkGamesFragment.newInstance(position));
 			break;
-
 		case SETTINGS:// 设置
-			fragmentManager = getSupportFragmentManager();
-			fragmentManager
-					.beginTransaction()
-					.replace(R.id.container,
-							SettingFragment.newInstance(position)).commit();
+			replaceFragment(SettingFragment.newInstance(position));
 			break;
 		default:
-			
 			break;
 		}
 
+	}
+
+	private void replaceFragment(DialogFragment fragment) {
+		getSupportFragmentManager().beginTransaction()
+				.replace(R.id.container, fragment).commit();
 	}
 
 }

@@ -1,6 +1,7 @@
 package me.linkcube.taku.ui.sportsgame.dashboardgame;
 
 import me.linkcube.taku.R;
+import me.linkcube.taku.ui.sportsgame.view.DashboardRotateAnimation;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;

@@ -1,6 +1,10 @@
-package me.linkcube.taku.ui.sportsgame.dashboardgame;
+package me.linkcube.taku.ui.sportsgame;
 
 import me.linkcube.taku.R;
+import me.linkcube.taku.ui.share.ShareActivity;
+import me.linkcube.taku.ui.sportsgame.dashboardgame.InfoDashboard;
+import me.linkcube.taku.ui.sportsgame.dashboardgame.SpeedDashboard;
+import me.linkcube.taku.ui.sportsgame.dashboardgame.TasksCompletedView;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
@@ -116,8 +120,9 @@ public class DashboardActivity extends Activity {
 			case R.id.setTaget_imgBtn:// 设定运动目标
 				// TODO
 				showInfo("点击－－设定运动目标");
+
 				startActivity(new Intent(getApplicationContext(),
-						TagetSettingActiviey.class));
+						TagetSettingActivity.class));
 				break;
 
 			default:
