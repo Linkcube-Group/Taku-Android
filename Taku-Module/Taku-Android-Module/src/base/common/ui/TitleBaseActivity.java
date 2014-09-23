@@ -1,7 +1,6 @@
 package base.common.ui;
 
 import me.linkcube.taku.R;
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -85,7 +84,7 @@ public class TitleBaseActivity extends BaseActivity {
 	 * 
 	 * @param resId
 	 */
-	protected void setRightTitleIv(int resId) {
+	protected void setRightTitleBtn(int resId) {
 		if (null != rightTitleBtn) {
 			rightTitleBtn.setBackgroundResource(resId);
 		}

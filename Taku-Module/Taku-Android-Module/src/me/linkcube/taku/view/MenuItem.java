@@ -40,8 +40,8 @@ public class MenuItem extends LinearLayout {
 		final float defaultTipTextSize = res
 				.getDimension(R.dimen.default_menu_item_tipTextSize);
 
-		final int defaultTitleBackground = res
-				.getColor(R.color.default_menu_item_background);
+//		final int defaultTitleBackground = res
+//				.getColor(R.color.default_menu_item_background);
 
 		TypedArray a = context.obtainStyledAttributes(attrs,
 				R.styleable.MenuItem);
@@ -49,32 +49,32 @@ public class MenuItem extends LinearLayout {
 		titleView.setText(a.getString(R.styleable.MenuItem_TitleText));
 		titleView.setTextColor(a.getColor(R.styleable.MenuItem_TitleTextColor,
 				defaultTitleTextColor));
-		titleView.setTextSize(a.getDimension(
-				R.styleable.MenuItem_TitleTextSize, defaultTitleTextSize));
+//		titleView.setTextSize(a.getDimension(
+//				R.styleable.MenuItem_TitleTextSize, defaultTitleTextSize));
 		tipView.setText(a.getString(R.styleable.MenuItem_TipText));
 		tipView.setTextColor(a.getColor(R.styleable.MenuItem_TipTextColor,
 				defaultTipTextColor));
-		tipView.setTextSize(a.getDimension(R.styleable.MenuItem_TipTextSize,
-				defaultTipTextSize));
+//		tipView.setTextSize(a.getDimension(R.styleable.MenuItem_TipTextSize,
+//				defaultTipTextSize));
 
-		Drawable background = a.getDrawable(R.styleable.MenuItem_Src);
-		if (background != null) {
-			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-				setBackground(background);
-			} else {
-				setBackgroundDrawable(background);
-			}
-		} else {
-			int bgColor = a.getColor(R.styleable.MenuItem_Background,
-					defaultTitleBackground);
-			setBackgroundColor(bgColor);
-		}
+//		Drawable background = a.getDrawable(R.styleable.MenuItem_Src);
+//		if (background != null) {
+//			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+//				setBackground(background);
+//			} else {
+//				setBackgroundDrawable(background);
+//			}
+//		} else {
+//			int bgColor = a.getColor(R.styleable.MenuItem_Background,
+//					defaultTitleBackground);
+//			setBackgroundColor(bgColor);
+//		}
 
 		Drawable d = a.getDrawable(R.styleable.MenuItem_Src);
 		if (d != null) {
 			imageView.setImageDrawable(d);
 		} else {
-			d = res.getDrawable(R.drawable.ic_search);
+			d = res.getDrawable(R.drawable.ic_right_arrow);
 			imageView.setImageDrawable(d);
 		}
 

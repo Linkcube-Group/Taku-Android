@@ -2,6 +2,7 @@ package me.linkcube.taku.ui.main.view;
 
 import me.linkcube.taku.R;
 import me.linkcube.taku.ui.user.LoginActivity;
+import me.linkcube.taku.ui.user.UserInfoActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.util.AttributeSet;
@@ -48,7 +49,8 @@ public class Drawer extends LinearLayout implements View.OnClickListener {
 			
 			@Override
 			public void onClick(View arg0) {
-				context.startActivity(new Intent(getContext(),LoginActivity.class));
+				//context.startActivity(new Intent(getContext(),LoginActivity.class));
+				context.startActivity(new Intent(getContext(),UserInfoActivity.class));
 			}
 		});
 	}

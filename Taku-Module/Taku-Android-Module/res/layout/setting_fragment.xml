@@ -3,69 +3,72 @@
     xmlns:menuItem="http://schemas.android.com/apk/res/me.linkcube.taku"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/main_bg"
+    android:background="@drawable/menu_bg"
     android:orientation="vertical" >
 
-    <RelativeLayout
+    <me.linkcube.taku.view.TitleView
+        android:id="@+id/title_layout"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/ActionBarHeight"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingLeft="@dimen/ActionBarPadding"
-        android:paddingRight="@dimen/ActionBarPadding" >
-
-        <ImageButton
-            android:id="@+id/backBtn"
-            android:layout_width="@dimen/ActionBarButtonSize"
-            android:layout_height="@dimen/ActionBarButtonSize"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:background="@null"
-            android:contentDescription="@null"
-            android:src="@drawable/drawer_btn" />
-
-        <TextView
-            android:id="@+id/titleTv"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/ActionBarHeight"
-            android:layout_centerInParent="true"
-            android:gravity="center"
-            android:text="@string/settings"
-            android:textSize="@dimen/ActionBarTextSize" />
-    </RelativeLayout>
+        android:layout_height="wrap_content" >
+    </me.linkcube.taku.view.TitleView>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical" >
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/LayoutContentPadding"
+        android:paddingRight="@dimen/LayoutContentPadding" >
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/light_white" />
 
         <me.linkcube.taku.view.MenuItem
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            menuItem:Background="@color/text_white"
-            menuItem:TitleText="@string/app_name"
+            menuItem:TitleText="@string/checkout_for_update_text"
             menuItem:TitleTextSize="20sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/light_white" />
 
         <me.linkcube.taku.view.MenuItem
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            menuItem:Background="@color/text_white"
-            menuItem:TitleText="@string/app_name"
+            menuItem:TitleText="@string/feedback_text"
             menuItem:TitleTextSize="20sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/light_white" />
 
         <me.linkcube.taku.view.MenuItem
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            menuItem:Background="@color/text_white"
-            menuItem:TitleText="@string/app_name"
+            menuItem:TitleText="@string/about_us_text"
             menuItem:TitleTextSize="20sp" />
 
-        <me.linkcube.taku.view.MenuItem
+        <View
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            menuItem:Background="@color/text_white"
-            menuItem:TitleText="@string/app_name"
-            menuItem:TitleTextSize="20sp" />
+            android:layout_height="0.5dp"
+            android:background="@color/light_white" />
     </LinearLayout>
+
+    <Button
+        android:id="@+id/seeting_login_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/user_btn_bg"
+        android:text="@string/login_btn_text"
+        android:textColor="@drawable/user_btn_color"
+        android:layout_marginLeft="@dimen/BtnMargin"
+        android:layout_marginRight="@dimen/BtnMargin"
+        android:textSize="20sp" />
+
 
 </LinearLayout>

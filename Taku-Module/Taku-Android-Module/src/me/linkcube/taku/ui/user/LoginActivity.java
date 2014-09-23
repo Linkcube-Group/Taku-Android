@@ -34,6 +34,8 @@ public class LoginActivity extends TitleBaseActivity {
 		setTitleText(getResources().getString(R.string.login_text));
 		getRightTitleBtn().setText(
 				getResources().getString(R.string.register_btn_text));
+		getRightTitleBtn().setTextColor(R.drawable.user_btn_color);
+		setRightTitleBtn(R.drawable.ic_update_user_info);
 		getRightTitleBtn().setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View arg0) {

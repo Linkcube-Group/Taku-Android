@@ -62,7 +62,7 @@ public class ResideMenu extends FrameLayout {
 
 	private List<Integer> disabledSwipeDirection = new ArrayList<Integer>();
 	// valid scale factor is between 0.0f and 1.0f.
-	private float mScaleValue = 0.5f;
+	private float mScaleValue = 0.7f;
 
 	public ResideMenu(Context context) {
 		super(context);

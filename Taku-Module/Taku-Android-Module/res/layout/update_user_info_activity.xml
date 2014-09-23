@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:menuItem="http://schemas.android.com/apk/res/me.linkcube.taku"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/main_bg"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="60dp"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/ActionBarPadding"
+        android:paddingRight="@dimen/ActionBarPadding" >
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/light_black" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+             android:gravity="center_vertical" >
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/MenuItemHeight"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:gravity="left|center_vertical"
+                android:textColor="@color/black"
+                android:textSize="@dimen/MenuTextSize"
+                android:text="@string/user_avator_text"
+                 />
+
+            <TextView
+                android:id="@+id/tipTv"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="10dp"
+                android:gravity="right"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/MenuTextSize"
+                android:background="@drawable/defalut_user_avator" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:contentDescription="@null"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_right_arrow" />
+        </LinearLayout>
+        
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/light_black" />
+
+        <me.linkcube.taku.view.MenuItem
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            menuItem:TipTextColor="@color/black"
+            menuItem:TitleText="@string/user_nickname_text"
+            menuItem:TitleTextColor="@color/black" />
+        
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/light_black" />
+
+        <me.linkcube.taku.view.MenuItem
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            menuItem:TipTextColor="@color/black"
+            menuItem:TitleText="@string/user_gender_text"
+            menuItem:TitleTextColor="@color/black" />
+        
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/light_black" />
+
+        <me.linkcube.taku.view.MenuItem
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            menuItem:TipTextColor="@color/black"
+            menuItem:TitleText="@string/user_age_text"
+            menuItem:TitleTextColor="@color/black" />
+        
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/light_black" />
+
+        <me.linkcube.taku.view.MenuItem
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            menuItem:TipTextColor="@color/black"
+            menuItem:TitleText="@string/user_height_text"
+            menuItem:TitleTextColor="@color/black" />
+        
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/light_black" />
+
+        <me.linkcube.taku.view.MenuItem
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            menuItem:TipTextColor="@color/black"
+            menuItem:TitleText="@string/user_weight_text"
+            menuItem:TitleTextColor="@color/black" />
+        
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/light_black" />
+    </LinearLayout>
+
+</LinearLayout>

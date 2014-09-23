@@ -6,11 +6,15 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import me.linkcube.taku.R;
+import me.linkcube.taku.view.TitleView;
 
 public class SettingFragment extends DialogFragment {
 
 	private static final String ARG_DRAWER_POSITION = "drawer_position";
+	
+	private View layoutView;
 
 	public static SettingFragment newInstance(int position) {
 		SettingFragment fragment = new SettingFragment();
@@ -32,11 +36,20 @@ public class SettingFragment extends DialogFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		return inflater.inflate(R.layout.setting_fragment, container, false);
+		layoutView=inflater.inflate(R.layout.setting_fragment, container, false);
+		TitleView titleview=(TitleView)layoutView.findViewById(R.id.title_layout);
+		initTitle(titleview);
+		return  layoutView;
+	}
+	private void initTitle(TitleView titleview){
+		titleview.setTitleText("设置");
+		titleview.getRightTitleBtn().setVisibility(View.GONE);
 	}
 
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 	}
+	
+	
 }

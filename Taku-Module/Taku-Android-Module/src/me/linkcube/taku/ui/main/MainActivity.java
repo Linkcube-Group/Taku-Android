@@ -53,13 +53,11 @@ public class MainActivity extends DialogFragmentActivity implements
 
 	@Override
 	public void openMenu() {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void closeMenu() {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -67,11 +65,10 @@ public class MainActivity extends DialogFragmentActivity implements
 	public void onDrawerItemClick(View view, int position) {
 		Log.i("CXC", "----position:" + position);
 		Log.i("CXC", "++++mPosition:" + mPosition);
-		if (mPosition != position) {
-			resideMenu.closeMenu();
-			mPosition = position;
-			return;
-		}
+//		if (mPosition == position) {
+//			resideMenu.closeMenu();
+//			return;
+//		}
 		switch (position) {
 		case SPORTS_GAMES:// 运动游戏
 			replaceFragment(SportsGamesFragment.newInstance(position));
@@ -88,7 +85,7 @@ public class MainActivity extends DialogFragmentActivity implements
 		default:
 			break;
 		}
-
+		resideMenu.closeMenu();
 	}
 
 	private void replaceFragment(DialogFragment fragment) {

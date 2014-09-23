@@ -9,6 +9,8 @@
     <dimen name="ActionBarTextSize">20sp</dimen>
     <dimen name="ActionBarButtonSize">48dp</dimen>
     <dimen name="ActionBarPadding">10dp</dimen>
+    <dimen name="LayoutContentPadding">10dp</dimen>
+    <dimen name="BtnMargin">10dp</dimen>
     
     <!-- User Login&Register -->
     <dimen name="UserLoginTitleTextSize">22dp</dimen>
