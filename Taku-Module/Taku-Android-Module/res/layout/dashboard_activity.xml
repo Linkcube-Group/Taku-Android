@@ -85,6 +85,9 @@
             android:id="@+id/heartRateLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="40dp"
             android:gravity="center_horizontal"
             android:orientation="vertical" >
 
@@ -131,6 +134,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
+            android:layout_marginRight="30dp"
             android:gravity="center_horizontal"
             android:orientation="vertical" >
 
@@ -151,20 +155,26 @@
             android:id="@+id/taskLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:orientation="vertical"
+            android:layout_above="@id/calLayout"
             android:layout_alignParentRight="true"
-            android:layout_above="@id/calLayout" >
+            android:gravity="center_horizontal"
+            android:orientation="vertical" >
 
-            <me.linkcube.taku.ui.sportsgame.dashboardgame.TasksCompletedView
+            <me.linkcube.taku.ui.sportsgame.dashboardgame.TargetCompletedView
                 android:id="@+id/tasks_view"
-                android:layout_width="180dp"
-                android:layout_height="180dp"
+                android:layout_width="160dp"
+                android:layout_height="160dp"
                 tc:mCircleColor="@color/grey"
-                tc:mRadius="80dip"
+                tc:mRadius="70dip"
                 tc:mRingColor="@color/pink"
                 tc:mStrokeWidth="10dip" >
-            </me.linkcube.taku.ui.sportsgame.dashboardgame.TasksCompletedView>
+            </me.linkcube.taku.ui.sportsgame.dashboardgame.TargetCompletedView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="目标完成"
+                android:textSize="@dimen/TextSize.Large" />
         </LinearLayout>
     </RelativeLayout>
 
@@ -172,6 +182,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/dashboard_info_bg"
+        android:gravity="center_vertical"
         android:paddingLeft="30dp"
         android:paddingRight="10dp" >
 
@@ -201,7 +212,7 @@
             android:layout_height="100dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:background="@drawable/dashboard_taget_bg"
+            android:background="@drawable/dashboard_target_bg"
             android:contentDescription="@null" />
     </RelativeLayout>
 

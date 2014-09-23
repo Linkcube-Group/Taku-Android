@@ -79,6 +79,10 @@
             android:name="me.linkcube.taku.ui.share.ShareActivity"
             android:screenOrientation="portrait" >
         </activity>
+        <activity
+            android:name="me.linkcube.taku.ui.sportsgame.ConnectDeviceActivity"
+            android:screenOrientation="portrait" >
+        </activity>
     </application>
 
 </manifest>

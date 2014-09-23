@@ -1,5 +1,7 @@
 package me.linkcube.taku.ui.main;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
+
 import base.common.ui.DialogFragment;
 import base.common.ui.DialogFragmentActivity;
 import me.linkcube.taku.R;
@@ -43,7 +45,6 @@ public class MainActivity extends DialogFragmentActivity implements
 		// 150dip.
 		resideMenu.setScaleValue(0.6f);
 		replaceFragment(SportsGamesFragment.newInstance(0));
-
 	}
 
 	@Override
