@@ -1,10 +1,11 @@
 package me.linkcube.taku.ui.sportsgame;
 
 import me.linkcube.taku.R;
+import me.linkcube.taku.ui.bt.BTSettingActivity;
 import me.linkcube.taku.ui.share.ShareActivity;
 import me.linkcube.taku.ui.sportsgame.dashboardgame.InfoDashboard;
 import me.linkcube.taku.ui.sportsgame.dashboardgame.SpeedDashboard;
-import me.linkcube.taku.ui.sportsgame.dashboardgame.TasksCompletedView;
+import me.linkcube.taku.ui.sportsgame.dashboardgame.TargetCompletedView;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
@@ -36,7 +37,7 @@ public class DashboardActivity extends Activity {
 	// 卡路里
 	private InfoDashboard cal;
 	// 目标完成
-	private TasksCompletedView mTasksView;
+	private TargetCompletedView mTasksView;
 	private int mTotalProgress;
 	private int mCurrentProgress;
 	// 运动距离
@@ -72,7 +73,7 @@ public class DashboardActivity extends Activity {
 		heartRate = (InfoDashboard) findViewById(R.id.heartRate);
 		speedRate = (SpeedDashboard) findViewById(R.id.speedRate);
 		cal = (InfoDashboard) findViewById(R.id.cal);
-		mTasksView = (TasksCompletedView) findViewById(R.id.tasks_view);
+		mTasksView = (TargetCompletedView) findViewById(R.id.tasks_view);
 
 		distance_tv = (TextView) findViewById(R.id.distance_tv);
 		time_tv = (TextView) findViewById(R.id.time_tv);
@@ -109,17 +110,16 @@ public class DashboardActivity extends Activity {
 				break;
 			case R.id.connDevice_imgBtn:// 连接设备
 				// TODO
-				showInfo("点击－－连接设备");
+				startActivity(new Intent(getApplicationContext(),
+						BTSettingActivity.class));
 				break;
 			case R.id.share_imgBtn:// 分享
-				showInfo("点击－－分享");
 				startActivity(new Intent(getApplicationContext(),
 						ShareActivity.class));
 				// TODO
 				break;
 			case R.id.setTaget_imgBtn:// 设定运动目标
 				// TODO
-				showInfo("点击－－设定运动目标");
 
 				startActivity(new Intent(getApplicationContext(),
 						TagetSettingActivity.class));
@@ -182,7 +182,7 @@ public class DashboardActivity extends Activity {
 	}
 
 	private void initView() {
-		mTasksView = (TasksCompletedView) findViewById(R.id.tasks_view);
+		mTasksView = (TargetCompletedView) findViewById(R.id.tasks_view);
 	}
 
 	class ProgressRunable implements Runnable {

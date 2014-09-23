@@ -21,6 +21,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.ImageButton;
 import android.widget.ToggleButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import me.linkcube.taku.R;
@@ -29,6 +30,7 @@ import static com.ervinwang.bthelper.Const.Device.*;
 public class BTSettingActivity extends DialogActivity implements
 		OnClickListener, OnDeviceItemClickListener, OnBTDiscoveryListener {
 
+	private ImageButton back_imgBtn;
 	private ToggleButton bluetoothTb;
 
 	private Button discoverDevicesBtn, bluetoothHelpBtn;
@@ -80,6 +82,8 @@ public class BTSettingActivity extends DialogActivity implements
 	}
 
 	private void initViews() {
+		back_imgBtn = (ImageButton) findViewById(R.id.back_imgBtn);
+		back_imgBtn.setOnClickListener(this);
 		bluetoothTb = (ToggleButton) findViewById(R.id.bluetooth_tb);
 		deviceLv = (BTDeviceListView) findViewById(R.id.device_lv);
 		deviceLv.setOnDeviceItemClickListener(this);
@@ -155,6 +159,9 @@ public class BTSettingActivity extends DialogActivity implements
 			}
 			break;
 		case R.id.bluetooth_help_btn:
+			break;
+		case R.id.back_imgBtn:
+			this.finish();
 			break;
 		default:
 			break;

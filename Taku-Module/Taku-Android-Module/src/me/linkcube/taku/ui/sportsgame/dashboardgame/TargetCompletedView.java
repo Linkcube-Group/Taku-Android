@@ -10,14 +10,15 @@ import android.graphics.Paint.FontMetrics;
 import android.util.AttributeSet;
 import android.view.View;
 
-public class TasksCompletedView extends View {
+public class TargetCompletedView extends View {
 
 	// 画实心圆的画笔
 	private Paint mCirclePaint;
 	// 画圆环的画笔
 	private Paint mRingPaint;
 	// 画字体的画笔
-	private Paint mTextPaint;
+	private Paint mProgressTextPaint;
+	private Paint mDistanceTextPaint;
 	// 圆形颜色
 	private int mCircleColor;
 	// 圆环颜色
@@ -42,8 +43,10 @@ public class TasksCompletedView extends View {
 	private int mTotalProgress = 100;
 	// 当前进度
 	private int mProgress;
+	//运行目标
+	private int targetDistance=10;
 
-	public TasksCompletedView(Context context, AttributeSet attrs) {
+	public TargetCompletedView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		// 获取自定义的属性
 		initAttrs(context, attrs);
@@ -52,15 +55,15 @@ public class TasksCompletedView extends View {
 
 	private void initAttrs(Context context, AttributeSet attrs) {
 		TypedArray typeArray = context.getTheme().obtainStyledAttributes(attrs,
-				R.styleable.TasksCompletedView, 0, 0);
+				R.styleable.TargetCompletedView, 0, 0);
 		mRadius = typeArray.getDimension(
-				R.styleable.TasksCompletedView_mRadius, 80);
+				R.styleable.TargetCompletedView_mRadius, 80);
 		mStrokeWidth = typeArray.getDimension(
-				R.styleable.TasksCompletedView_mStrokeWidth, 10);
+				R.styleable.TargetCompletedView_mStrokeWidth, 10);
 		mCircleColor = typeArray.getColor(
-				R.styleable.TasksCompletedView_mCircleColor, 0xFFFFFFFF);
+				R.styleable.TargetCompletedView_mCircleColor, 0xFFFFFFFF);
 		mRingColor = typeArray.getColor(
-				R.styleable.TasksCompletedView_mRingColor, 0xFFFFFFFF);
+				R.styleable.TargetCompletedView_mRingColor, 0xFFFFFFFF);
 
 		mRingRadius = mRadius + mStrokeWidth / 2;
 	}
@@ -77,13 +80,19 @@ public class TasksCompletedView extends View {
 		mRingPaint.setStyle(Paint.Style.STROKE);
 		mRingPaint.setStrokeWidth(mStrokeWidth);
 
-		mTextPaint = new Paint();
-		mTextPaint.setAntiAlias(true);
-		mTextPaint.setStyle(Paint.Style.FILL);
-		mTextPaint.setARGB(255, 0, 0, 255);
-		mTextPaint.setTextSize(mRadius / 2);
+		mProgressTextPaint = new Paint();
+		mProgressTextPaint.setAntiAlias(true);
+		mProgressTextPaint.setStyle(Paint.Style.FILL);
+		mProgressTextPaint.setARGB(255, 0, 0, 255);
+		mProgressTextPaint.setTextSize(mRadius / 2);
+		
+		mDistanceTextPaint=new Paint();
+		mDistanceTextPaint.setAntiAlias(true);
+		mDistanceTextPaint.setStyle(Paint.Style.FILL);
+		mDistanceTextPaint.setARGB(255, 255, 0, 255);
+		mDistanceTextPaint.setTextSize(mRadius/3);
 
-		FontMetrics fm = mTextPaint.getFontMetrics();
+		FontMetrics fm = mProgressTextPaint.getFontMetrics();
 		mProgressTxtHeight = (int) Math.ceil(fm.descent - fm.ascent);
 
 	}
@@ -108,21 +117,34 @@ public class TasksCompletedView extends View {
 					((float) mProgress / mTotalProgress) * 360, false,
 					mRingPaint); //
 			String txt = mProgress + "%";
-			mProgressTxtWidth = mTextPaint.measureText(txt, 0, txt.length());
+			mProgressTxtWidth = mProgressTextPaint.measureText(txt, 0,
+					txt.length());
 			canvas.drawText(txt, mXCenter - mProgressTxtWidth / 2, mYCenter
-					+ mProgressTxtHeight / 4, mTextPaint);
+					+ mProgressTxtHeight / 4, mProgressTextPaint);
 			// 这里设定运动目标距离
-			String txt2 = "XXKM";
-			mDistanceTxtWidth = mTextPaint.measureText(txt2, 0, txt2.length());
+			String txt2 = targetDistance+"KM";
+			mDistanceTxtWidth = mDistanceTextPaint.measureText(txt2, 0,
+					txt2.length());
 			canvas.drawText(txt2, mXCenter - mDistanceTxtWidth / 2, mYCenter
-					+ mProgressTxtHeight, mTextPaint);
+					+ mProgressTxtHeight, mDistanceTextPaint);
 		}
 	}
 
 	public void setProgress(int progress) {
 		mProgress = progress;
-		// invalidate();
 		postInvalidate();
 	}
+
+	public int getTargetDistance() {
+		return targetDistance;
+	}
+
+	/**
+	 * 设定运动目标值－－－“设定运动目标”界面设定的值
+	 * */
+	public void setTargetDistance(int targetDistance) {
+		this.targetDistance = targetDistance;
+	}
+	
 
 }
