@@ -287,4 +287,17 @@ public class StringUtils {
 			return false;
 		}
 	}
+	
+	/**
+	 * 判断给定字符串中是否包含空格
+	 * 
+	 * @param input
+	 * @return
+	 */
+	public static boolean containWhiteSpace(String input) {
+		Pattern pattern = Pattern.compile("\\s");
+		Matcher matcher = pattern.matcher(input);
+		boolean found = matcher.find();
+		return found;
+	}
 }
