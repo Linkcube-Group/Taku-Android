@@ -72,7 +72,7 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="me.linkcube.taku.ui.sportsgame.TagetSettingActivity"
+            android:name="me.linkcube.taku.ui.sportsgame.TargetSettingActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity

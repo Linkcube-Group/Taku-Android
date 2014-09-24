@@ -46,7 +46,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="30dp" >
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="30dp"
+        android:gravity="center_horizontal" >
 
         <TextView
             android:id="@+id/distance_tv"
@@ -65,19 +67,19 @@
             android:layout_toRightOf="@id/distance_tv"
             android:src="@drawable/distance_img" />
 
-        <TextView
-            android:id="@+id/setDistance_tv"
-            android:layout_width="wrap_content"
+        <me.linkcube.taku.ui.sportsgame.dashboardgame.wheel.WheelView
+            android:id="@+id/setDistance_wheel"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_toRightOf="@id/distance_iv"
-            android:text="在这里设定距离" />
+            android:layout_alignParentRight="true" />
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:layout_marginTop="20dp" >
 
         <TextView
@@ -97,19 +99,20 @@
             android:layout_toRightOf="@id/time_tv"
             android:src="@drawable/time_img" />
 
-        <TextView
-            android:id="@+id/setTime_tv"
-            android:layout_width="wrap_content"
+        <me.linkcube.taku.ui.sportsgame.dashboardgame.wheel.WheelView
+            android:id="@+id/setTime_wheel"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_toRightOf="@id/time_iv"
-            android:text="在这里设定时间" />
+            android:layout_alignParentRight="true" />
+
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:layout_marginTop="20dp" >
 
         <TextView
@@ -129,13 +132,12 @@
             android:layout_toRightOf="@id/cal_tv"
             android:src="@drawable/cal_img" />
 
-        <TextView
-            android:id="@+id/setCal_tv"
-            android:layout_width="wrap_content"
+       <me.linkcube.taku.ui.sportsgame.dashboardgame.wheel.WheelView
+            android:id="@+id/setCal_wheel"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_toRightOf="@id/cal_iv"
-            android:text="在这里设定热量" />
+            android:layout_alignParentRight="true" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -148,9 +150,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+            android:background="@drawable/share_button_bg"
             android:text="确定"
-            android:textSize="@dimen/TextSize.Super"
-            android:background="@drawable/share_button_bg" />
+            android:textSize="@dimen/TextSize.Super" />
     </RelativeLayout>
 
 </LinearLayout>

@@ -43,8 +43,8 @@ public class TargetCompletedView extends View {
 	private int mTotalProgress = 100;
 	// 当前进度
 	private int mProgress;
-	//运行目标
-	private int targetDistance=10;
+	// 运行目标
+	private double targetDistance = 3.0;
 
 	public TargetCompletedView(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -69,6 +69,7 @@ public class TargetCompletedView extends View {
 	}
 
 	private void initVariable() {
+
 		mCirclePaint = new Paint();
 		mCirclePaint.setAntiAlias(true);
 		mCirclePaint.setColor(mCircleColor);
@@ -85,12 +86,12 @@ public class TargetCompletedView extends View {
 		mProgressTextPaint.setStyle(Paint.Style.FILL);
 		mProgressTextPaint.setARGB(255, 0, 0, 255);
 		mProgressTextPaint.setTextSize(mRadius / 2);
-		
-		mDistanceTextPaint=new Paint();
+
+		mDistanceTextPaint = new Paint();
 		mDistanceTextPaint.setAntiAlias(true);
 		mDistanceTextPaint.setStyle(Paint.Style.FILL);
 		mDistanceTextPaint.setARGB(255, 255, 0, 255);
-		mDistanceTextPaint.setTextSize(mRadius/3);
+		mDistanceTextPaint.setTextSize(mRadius / 3);
 
 		FontMetrics fm = mProgressTextPaint.getFontMetrics();
 		mProgressTxtHeight = (int) Math.ceil(fm.descent - fm.ascent);
@@ -107,7 +108,7 @@ public class TargetCompletedView extends View {
 
 		canvas.drawCircle(mXCenter, mYCenter, mRadius, mCirclePaint);
 
-		if (mProgress > 0) {
+		if (mProgress >= 0) {
 
 			oval.left = (mXCenter - mRingRadius);
 			oval.top = (mYCenter - mRingRadius);
@@ -122,7 +123,7 @@ public class TargetCompletedView extends View {
 			canvas.drawText(txt, mXCenter - mProgressTxtWidth / 2, mYCenter
 					+ mProgressTxtHeight / 4, mProgressTextPaint);
 			// 这里设定运动目标距离
-			String txt2 = targetDistance+"KM";
+			String txt2 = targetDistance + "KM";
 			mDistanceTxtWidth = mDistanceTextPaint.measureText(txt2, 0,
 					txt2.length());
 			canvas.drawText(txt2, mXCenter - mDistanceTxtWidth / 2, mYCenter
@@ -132,19 +133,19 @@ public class TargetCompletedView extends View {
 
 	public void setProgress(int progress) {
 		mProgress = progress;
+		//重绘
 		postInvalidate();
 	}
 
-	public int getTargetDistance() {
+	public double getTargetDistance() {
 		return targetDistance;
 	}
 
 	/**
 	 * 设定运动目标值－－－“设定运动目标”界面设定的值
 	 * */
-	public void setTargetDistance(int targetDistance) {
+	public void setTargetDistance(double targetDistance) {
 		this.targetDistance = targetDistance;
 	}
-	
 
 }

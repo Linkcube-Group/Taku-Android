@@ -14,11 +14,11 @@ import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.RelativeSizeSpan;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 /**
  * 仪表盘
@@ -36,8 +36,11 @@ public class DashboardActivity extends Activity {
 	private SpeedDashboard speedRate;
 	// 卡路里
 	private InfoDashboard cal;
+
 	// 目标完成
 	private TargetCompletedView mTasksView;
+	// 记录用户设定的运动距离
+	private double mtargetDistance;
 	private int mTotalProgress;
 	private int mCurrentProgress;
 	// 运动距离
@@ -48,6 +51,8 @@ public class DashboardActivity extends Activity {
 	private SpannableString timeString;
 	// 设定运行目标
 	private ImageButton setTaget_imgBtn;
+	private static final int SETTING_TARGET_REQUEST_CODE = 1;
+
 
 	public DashboardActivity() {
 		// TODO Auto-generated constructor stub
@@ -59,9 +64,10 @@ public class DashboardActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.dashboard_activity);
 		init();
-		initVariable();
-		initView();
-		new Thread(new ProgressRunable()).start();
+
+		//new Thread(new ProgressRunable()).start();
+		speedRate.showRotateAnimation(0, 180);
+		speedRate.showRotateAnimation(90, 180);
 	}
 
 	private void init() {
@@ -89,10 +95,13 @@ public class DashboardActivity extends Activity {
 		speedRate.setScaleImageViewRes(R.drawable.dashboard_speed_bg);
 		speedRate.setPointerImageViewRes(R.drawable.dashboard_pointer);
 		heartRate.setInfoImageViewRes(R.drawable.dashboard_heartrate_bg);
-		heartRate.setInfoTextView("87");
+		heartRate.setInfoTextView("88");
 		cal.setInfoImageViewRes(R.drawable.dashboard_cal_bg);
-		cal.setInfoTextView("XXX");
+		cal.setInfoTextView("888");
 
+		mTotalProgress = 100;
+		mCurrentProgress = 0;
+		mTasksView.setProgress(mCurrentProgress);
 		setDistanceText("000");
 		setTimeText("00:00");
 
@@ -105,7 +114,6 @@ public class DashboardActivity extends Activity {
 			// TODO Auto-generated method stub
 			switch (v.getId()) {
 			case R.id.close_imgBtn:// 关闭
-				showInfo("点击－－关闭");
 				exitDashbord();
 				break;
 			case R.id.connDevice_imgBtn:// 连接设备
@@ -120,9 +128,9 @@ public class DashboardActivity extends Activity {
 				break;
 			case R.id.setTaget_imgBtn:// 设定运动目标
 				// TODO
-
-				startActivity(new Intent(getApplicationContext(),
-						TagetSettingActivity.class));
+				startActivityForResult(new Intent(getApplicationContext(),
+						TargetSettingActivity.class),
+						SETTING_TARGET_REQUEST_CODE);
 				break;
 
 			default:
@@ -131,11 +139,6 @@ public class DashboardActivity extends Activity {
 
 		}
 	};
-
-	private void showInfo(String infoString) {
-		Toast.makeText(getApplicationContext(), infoString, Toast.LENGTH_LONG)
-				.show();
-	}
 
 	/**
 	 * 退出
@@ -176,15 +179,6 @@ public class DashboardActivity extends Activity {
 
 	}
 
-	private void initVariable() {
-		mTotalProgress = 100;
-		mCurrentProgress = 0;
-	}
-
-	private void initView() {
-		mTasksView = (TargetCompletedView) findViewById(R.id.tasks_view);
-	}
-
 	class ProgressRunable implements Runnable {
 
 		@Override
@@ -192,6 +186,7 @@ public class DashboardActivity extends Activity {
 			while (mCurrentProgress < mTotalProgress) {
 				mCurrentProgress += 1;
 				mTasksView.setProgress(mCurrentProgress);
+
 				try {
 					Thread.sleep(100);
 				} catch (Exception e) {
@@ -199,7 +194,21 @@ public class DashboardActivity extends Activity {
 				}
 			}
 		}
-
 	}
 
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+		super.onActivityResult(requestCode, resultCode, data);
+		if (requestCode == SETTING_TARGET_REQUEST_CODE
+				&& resultCode == RESULT_OK) {
+			mtargetDistance = data.getDoubleExtra(
+					TargetSettingActivity.TARGET_DISTANCE, 0.0);
+			// 更新“目标完成”仪表盘中的目标运动距离
+			mTasksView.setTargetDistance(mtargetDistance);
+			// dashboardThread.start();
+			new Thread(new ProgressRunable()).start();
+
+		}
+	}
 }
