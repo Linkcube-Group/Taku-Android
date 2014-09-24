@@ -9,7 +9,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
         android:orientation="vertical"
         android:paddingLeft="@dimen/ActionBarPadding"
@@ -21,42 +21,39 @@
             android:background="@color/light_black" />
 
         <LinearLayout
+            android:id="@+id/userAvatorLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-             android:gravity="center_vertical" >
+            android:gravity="center_vertical" >
 
             <TextView
-                android:id="@+id/textView"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/MenuItemHeight"
                 android:layout_marginLeft="10dp"
                 android:layout_weight="1"
                 android:gravity="left|center_vertical"
-                android:textColor="@color/black"
-                android:textSize="@dimen/MenuTextSize"
                 android:text="@string/user_avator_text"
-                 />
+                android:textColor="@color/black"
+                android:textSize="@dimen/MenuTextSize" />
 
-            <TextView
-                android:id="@+id/tipTv"
+            <ImageView
+                android:id="@+id/userAvatorIv"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="10dp"
-                android:gravity="right"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/MenuTextSize"
-                android:background="@drawable/defalut_user_avator" />
+                android:scaleType="centerCrop"
+                android:src="@drawable/defalut_user_avator"
+                android:gravity="right" />
 
             <ImageView
-                android:id="@+id/imageView"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:contentDescription="@null"
                 android:scaleType="fitCenter"
                 android:src="@drawable/ic_right_arrow" />
         </LinearLayout>
-        
+
         <View
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
@@ -68,7 +65,7 @@
             menuItem:TipTextColor="@color/black"
             menuItem:TitleText="@string/user_nickname_text"
             menuItem:TitleTextColor="@color/black" />
-        
+
         <View
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
@@ -80,7 +77,7 @@
             menuItem:TipTextColor="@color/black"
             menuItem:TitleText="@string/user_gender_text"
             menuItem:TitleTextColor="@color/black" />
-        
+
         <View
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
@@ -92,7 +89,7 @@
             menuItem:TipTextColor="@color/black"
             menuItem:TitleText="@string/user_age_text"
             menuItem:TitleTextColor="@color/black" />
-        
+
         <View
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
@@ -104,7 +101,7 @@
             menuItem:TipTextColor="@color/black"
             menuItem:TitleText="@string/user_height_text"
             menuItem:TitleTextColor="@color/black" />
-        
+
         <View
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
@@ -116,11 +113,12 @@
             menuItem:TipTextColor="@color/black"
             menuItem:TitleText="@string/user_weight_text"
             menuItem:TitleTextColor="@color/black" />
-        
+
         <View
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
             android:background="@color/light_black" />
     </LinearLayout>
+
 
 </LinearLayout>

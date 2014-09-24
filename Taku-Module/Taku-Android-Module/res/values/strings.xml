@@ -89,6 +89,7 @@
     <string name="moving_target">设定每日运动目标</string>
     <string name="historical_records">运动历史记录</string>
     <string name="update_user_info_text">个人资料编辑</string>
+    <string name="user_history">您已累计使用Taku:</string>
     
     <!-- 设置界面 -->
     <string name="checkout_for_update_text">检测更新</string>

@@ -49,8 +49,8 @@ public class Drawer extends LinearLayout implements View.OnClickListener {
 			
 			@Override
 			public void onClick(View arg0) {
-				//context.startActivity(new Intent(getContext(),LoginActivity.class));
-				context.startActivity(new Intent(getContext(),UserInfoActivity.class));
+				context.startActivity(new Intent(getContext(),LoginActivity.class));
+				//context.startActivity(new Intent(getContext(),UserInfoActivity.class));
 			}
 		});
 	}

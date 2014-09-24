@@ -1,11 +1,26 @@
 package me.linkcube.taku.ui.user;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+
 import me.linkcube.taku.R;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import base.common.ui.TitleBaseActivity;
 
-public class UpdateUserInfoActivity extends TitleBaseActivity {
+public class UpdateUserInfoActivity extends TitleBaseActivity implements
+		OnClickListener {
+
+	private static final int REQUEST_CODE = 1;
+	private ImageView userAvatorIv;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -15,9 +30,56 @@ public class UpdateUserInfoActivity extends TitleBaseActivity {
 	}
 
 	private void initView() {
+		initTitle();
+
+		LinearLayout userAvatorLayout = (LinearLayout) findViewById(R.id.userAvatorLayout);
+		userAvatorLayout.setOnClickListener(this);
+		userAvatorIv=(ImageView)findViewById(R.id.userAvatorIv);
+	}
+
+	private void initTitle() {
 		setTitleText(getResources().getString(R.string.update_user_info_text));
 		getRightTitleBtn().setVisibility(View.GONE);
 	}
 
-	
+	@Override
+	public void onClick(View view) {
+
+		switch (view.getId()) {
+		case R.id.userAvatorLayout:
+			Intent intent = new Intent();
+			intent.addCategory(Intent.CATEGORY_OPENABLE);
+			intent.setType("image/*");
+			// 根据版本号不同使用不同的Action
+			if (Build.VERSION.SDK_INT < 19) {
+				intent.setAction(Intent.ACTION_GET_CONTENT);
+			} else {
+				intent.setAction(Intent.ACTION_OPEN_DOCUMENT);
+			}
+			startActivityForResult(intent, REQUEST_CODE);
+			break;
+
+		default:
+			break;
+		}
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if (requestCode == REQUEST_CODE) {
+			if (null != data) {
+				Uri uri = data.getData();
+				// 根据需要，也可以加上Option这个参数
+				InputStream inputStream;
+				try {
+					inputStream = getContentResolver().openInputStream(uri);
+					Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+					userAvatorIv.setImageBitmap(bitmap);
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
 }
