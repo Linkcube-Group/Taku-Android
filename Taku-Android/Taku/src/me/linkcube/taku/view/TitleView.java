@@ -7,13 +7,12 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class TitleView extends LinearLayout {
 
-	protected ImageView leftTitleBtn;
+	protected Button leftTitleBtn;
 	private TextView titleText;
 	protected Button rightTitleBtn;
 
@@ -29,7 +28,7 @@ public class TitleView extends LinearLayout {
 	private void initView(Context context) {
 		View titleLayout = LayoutInflater.from(context).inflate(
 				R.layout.user_action_bar, this);
-		leftTitleBtn = (ImageView) titleLayout.findViewById(R.id.title_left_btn);
+		leftTitleBtn = (Button) titleLayout.findViewById(R.id.title_left_btn);
 		titleText = (TextView) titleLayout.findViewById(R.id.title_text);
 		rightTitleBtn = (Button) titleLayout.findViewById(R.id.title_right_btn);
 	}

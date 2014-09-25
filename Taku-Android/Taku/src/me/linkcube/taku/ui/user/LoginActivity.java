@@ -1,31 +1,20 @@
 package me.linkcube.taku.ui.user;
 
-import java.util.List;
-
 import me.linkcube.taku.R;
-
-import org.apache.http.Header;
-import org.apache.http.client.CookieStore;
-import org.apache.http.client.protocol.ClientContext;
-import org.apache.http.cookie.Cookie;
-import org.apache.http.protocol.HttpContext;
-import org.json.JSONObject;
-
+import me.linkcube.taku.AppConst.ErrorFlag;
+import me.linkcube.taku.AppConst.ParamKey;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import base.common.ui.TitleBaseActivity;
+import base.common.util.AlertUtils;
 
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.JsonHttpResponseHandler;
-import com.loopj.android.http.PersistentCookieStore;
 import com.loopj.android.http.RequestParams;
 
-public class LoginActivity extends TitleBaseActivity implements OnClickListener{
+public class LoginActivity extends TitleBaseActivity implements OnClickListener {
 
 	private Button loginBtn;
 	private EditText emailEt;
@@ -50,10 +39,10 @@ public class LoginActivity extends TitleBaseActivity implements OnClickListener{
 
 	private void initTitle() {
 		setTitleText(getResources().getString(R.string.login_text));
+		getRightTitleBtn().setTextColor(R.drawable.user_btn_color);
 		getRightTitleBtn().setText(
 				getResources().getString(R.string.register_btn_text));
-		getRightTitleBtn().setTextColor(R.drawable.user_btn_color);
-		setRightTitleBtn(R.drawable.ic_update_user_info);
+		setRightTitleBtn(R.drawable.user_btn_bg);
 		getRightTitleBtn().setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
@@ -62,67 +51,48 @@ public class LoginActivity extends TitleBaseActivity implements OnClickListener{
 			}
 		});
 	}
-	
+
 	@Override
 	public void onClick(View view) {
 		switch (view.getId()) {
 		case R.id.login_btn:
-			final AsyncHttpClient client = new AsyncHttpClient();
-			PersistentCookieStore myCookieStore = new PersistentCookieStore(getApplicationContext());
-	        client.setCookieStore(myCookieStore);
+			CookieInstance.getInstance().initCookie(this);
 			RequestParams params = new RequestParams();
-			params.put("email", "313832830@qq.com");
-			params.put("pwd", "shisong");
-			client.post("http://115.29.175.17:8000/login", params,
-					new JsonHttpResponseHandler() {
+			params.put(ParamKey.EMAIL, "yangxintest@qq.com");//yangxintest@qq.com/313832830@qq.com
+			params.put(ParamKey.PWD, "1234567");//shisong/1234567
+			// params.put("email", emailEt.getText().toString());
+			// params.put("pwd", passWordEt.getText().toString());
+			UserManager.getInstance().userLogin(params,
+					new HttpResponseListener() {
+
 						@Override
-						public void onSuccess(int statusCode, Header[] headers,
-								JSONObject response) {
-							super.onSuccess(statusCode, headers, response);
-							Log.d("RegisterActivity", "statusCode:"+statusCode);
-							HttpContext httpContext = client.getHttpContext();
-							
-					        CookieStore cookies = (CookieStore) httpContext.getAttribute(ClientContext.COOKIE_STORE);
-					        if(cookies!=null){
-					            for(Cookie c:cookies.getCookies()){
-					            	Log.d("main after ~~"+c.getName(),c.getValue());
-					            }
-					        }else{
-					        	Log.d("main  after~~","cookies is null");
-					        }
+						public void responseSuccess() {
+							finish();
+						}
+
+						@Override
+						public void responseFailed(int flag) {
+							switch (flag) {
+							case ErrorFlag.NETWORK_ERROR:
+								AlertUtils.showToast(LoginActivity.this,
+										"网络错误，请检查！");
+								break;
+							case ErrorFlag.EMAIL_PSW_WRONG:
+								AlertUtils.showToast(LoginActivity.this,
+										"账号或密码错误！");
+								break;
+
+							default:
+								break;
+							}
+
 						}
 					});
-			
 			break;
 
 		default:
 			break;
 		}
-	}
-
-	@Override
-	protected void onStart() {
-		super.onStart();
-	}
-
-	@Override
-	protected void onResume() {
-		super.onResume();
-	}
-
-	@Override
-	protected void onPause() {
-		super.onPause();
-	}
-
-	@Override
-	protected void onStop() {
-		super.onStop();
-	}
-
-	@Override
-	protected void onDestroy() {
-		super.onDestroy();
 	}
 
 }

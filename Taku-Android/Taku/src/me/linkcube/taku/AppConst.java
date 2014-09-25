@@ -82,5 +82,49 @@ public class AppConst {
 		public static String CONNECT_TOY_DURATION = "ConnectToyDuration";
 
 	}
+	/**
+	 * 网络请求错误时返回的标识
+	 * @author xinyang
+	 *
+	 */
+	public static class ErrorFlag {
+
+		public static final int NETWORK_ERROR = -1;
+
+		public static final int EMAIL_PSW_WRONG = -2;
+		
+		public static final int EMAIL_REGISTER = -3;
+		
+		public static final int INIT_USER_INFO_ERROR = -4;
+		
+		public static final int LOGOUT_ERROR = -5;
+		
+	}
+	
+	public static class ResponseKey {
+
+		public static final String STATUS = "status";
+
+		public static final String MSG = "msg";
+		
+	}
+	
+	public static class ParamKey {
+
+		public static final String EMAIL = "email";
+		
+		public static final String PWD = "pwd";
+
+		public static final String NICKNAME = "nickname";
+		
+		public static final String GENDER = "gender";
+
+		public static final String AGE = "age";
+		
+		public static final String HEIGHT = "height";
+		
+		public static final String WEIGHT = "weight";
+
+	}
 
 }

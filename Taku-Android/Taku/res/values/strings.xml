@@ -70,6 +70,7 @@
     <string name="register_text">注册Taku</string>
     <string name="init_user_info_text">请填写资料</string>
     <string name="login_btn_text">登录</string>
+    <string name="logout_btn_text">退出登录</string>
     <string name="register_btn_text">注册</string>
     <string name="email_text">邮箱</string>
     <string name="password_text">密码</string>
@@ -92,6 +93,7 @@
     <string name="user_history">您已累计使用Taku:</string>
     
     <!-- 设置界面 -->
+    <string name="setting_title_text">检测更新</string>
     <string name="checkout_for_update_text">检测更新</string>
     <string name="feedback_text">意见反馈</string>
     <string name="about_us_text">关于linkcube</string>

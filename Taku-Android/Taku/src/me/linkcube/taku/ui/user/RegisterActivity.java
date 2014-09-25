@@ -1,16 +1,10 @@
 package me.linkcube.taku.ui.user;
 
-import java.io.UnsupportedEncodingException;
-
 import me.linkcube.taku.R;
+import me.linkcube.taku.AppConst.ErrorFlag;
+import me.linkcube.taku.AppConst.ParamKey;
 
 import org.apache.http.Header;
-import org.apache.http.client.CookieStore;
-import org.apache.http.client.protocol.ClientContext;
-import org.apache.http.cookie.Cookie;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.protocol.HttpContext;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Intent;
@@ -25,9 +19,7 @@ import base.common.ui.TitleBaseActivity;
 import base.common.util.AlertUtils;
 import base.common.util.StringUtils;
 
-import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
-import com.loopj.android.http.PersistentCookieStore;
 import com.loopj.android.http.RequestParams;
 
 public class RegisterActivity extends TitleBaseActivity implements
@@ -64,93 +56,56 @@ public class RegisterActivity extends TitleBaseActivity implements
 	public void onClick(View view) {
 		switch (view.getId()) {
 		case R.id.register_btn:
-			// if (!StringUtils.isEmailAddress(emailEt.getText().toString())) {
-			// AlertUtils.showToast(
-			// this,
-			// getResources().getString(
-			// R.string.toast_username_hasbeen_email));
-			// emailEt.setText("");
-			// }
-			// if (!passWordEt.getText().toString()
-			// .equals(confirmPswEt.getText().toString())) {
-			// AlertUtils.showToast(
-			// this,
-			// getResources().getString(
-			// R.string.toast_psw_not_match));
-			// passWordEt.setText("");
-			// confirmPswEt.setText("");
-			// }
-			// if (passWordEt.getText().toString().length() < 6) {
-			// Toast.makeText(RegisterActivity.this,
-			// R.string.toast_psw_too_short, Toast.LENGTH_SHORT)
-			// .show();
-			// }
-			// if
-			// (StringUtils.containWhiteSpace(passWordEt.getText().toString()))
-			// {
-			// Toast.makeText(RegisterActivity.this,
-			// R.string.toast_psw_couldnot_contain_space,
-			// Toast.LENGTH_SHORT).show();
-			// }
+			if (!StringUtils.isEmailAddress(emailEt.getText().toString())) {
+				AlertUtils.showToast(
+						this,
+						getResources().getString(
+								R.string.toast_username_hasbeen_email));
+				emailEt.setText("");
+			}else if (!passWordEt.getText().toString()
+					.equals(confirmPswEt.getText().toString())) {
+				AlertUtils.showToast(this,
+						getResources().getString(R.string.toast_psw_not_match));
+				passWordEt.setText("");
+				confirmPswEt.setText("");
+			}else if (passWordEt.getText().toString().length() < 6) {
+				Toast.makeText(RegisterActivity.this,
+						R.string.toast_psw_too_short, Toast.LENGTH_SHORT)
+						.show();
+			}else if (StringUtils.containWhiteSpace(passWordEt.getText().toString())) {
+				Toast.makeText(RegisterActivity.this,
+						R.string.toast_psw_couldnot_contain_space,
+						Toast.LENGTH_SHORT).show();
+			}
 			// TODO 注册相关事情
-			AsyncHttpClient client = new AsyncHttpClient();
-//			RequestParams params = new RequestParams();
-//			params.put("email", "yangxintest@163.com");
-//			params.put("pwd", "1234567");
-//			client.post("http://115.29.175.17/register", params,
-//					new JsonHttpResponseHandler() {
-//
-//						@Override
-//						public void onSuccess(int statusCode, Header[] headers,
-//								JSONObject response) {
-//							super.onSuccess(statusCode, headers, response);
-//							Log.d("RegisterActivity", "statusCode:"+statusCode);
-//						}
-//				
-//					});
-//			client.post("http://115.29.175.17:8000/getinfo", new JsonHttpResponseHandler() {
-//				@Override
-//				public void onSuccess(int statusCode, Header[] headers,
-//						JSONObject response) {
-//					super.onSuccess(statusCode, headers, response);
-//					Log.d("RegisterActivity", "statusCode:"+statusCode+"--response:"+response.toString());
-//				}
-//			});
-			
-			HttpContext httpContext = client.getHttpContext();
-	        CookieStore cookies = (CookieStore) httpContext.getAttribute(ClientContext.COOKIE_STORE);//获取AsyncHttpClient中的CookieStore
-	        if(cookies!=null){
-	            for(Cookie c:cookies.getCookies()){
-	            	Log.d("main before ~~"+c.getName(),c.getValue());
-	            }
-	        }else{
-	        	Log.d("main  before~~","cookies is null");
-	        }
-	        PersistentCookieStore myCookieStore = new PersistentCookieStore(this);
-	        client.setCookieStore(myCookieStore);
-	        httpContext = client.getHttpContext();
-	        cookies = (CookieStore) httpContext.getAttribute(ClientContext.COOKIE_STORE);
-	        if(cookies!=null){
-	            for(Cookie c:cookies.getCookies()){
-	            	Log.d("main after ~~"+c.getName(),c.getValue());
-	            }
-	        }else{
-	        	Log.d("main  after~~","cookies is null");
-	        }
-			
-			// client.post(RegisterActivity.this,
-			// "http://115.29.175.17/register", stringEntity,
-			// "application/json", new JsonHttpResponseHandler(){
-			//
-			// @Override
-			// public void onSuccess(int statusCode, Header[] headers,
-			// JSONObject response) {
-			// Log.d("RegisterActivity", "statusCode:"+statusCode);
-			// }
-			// });
-
-			// startActivity(new
-			// Intent(RegisterActivity.this,InitUserInfoActivity.class));
+			RequestParams params = new RequestParams();
+			params.put(ParamKey.EMAIL, "yangxintest@qq.com");
+			params.put(ParamKey.PWD, "1234567");
+			UserManager.getInstance().userRegister(params, new HttpResponseListener() {
+				
+				@Override
+				public void responseSuccess() {
+					startActivity(new Intent(RegisterActivity.this,InitUserInfoActivity.class));
+				}
+				
+				@Override
+				public void responseFailed(int flag) {
+					switch (flag) {
+					case ErrorFlag.EMAIL_REGISTER:
+						AlertUtils.showToast(RegisterActivity.this,
+								"此邮箱已经注册！");
+						break;
+					case ErrorFlag.NETWORK_ERROR:
+						AlertUtils.showToast(RegisterActivity.this,
+								"网络错误，请检查！");
+						break;
+					default:
+						break;
+					}
+				}
+			});
+			//TODO 测试使用
+			startActivity(new Intent(RegisterActivity.this,InitUserInfoActivity.class));
 			break;
 		default:
 			break;

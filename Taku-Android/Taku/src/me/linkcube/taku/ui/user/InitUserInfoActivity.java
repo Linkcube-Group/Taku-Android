@@ -3,6 +3,10 @@ package me.linkcube.taku.ui.user;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.loopj.android.http.RequestParams;
+
+import me.linkcube.taku.AppConst.ErrorFlag;
+import me.linkcube.taku.AppConst.ParamKey;
 import me.linkcube.taku.R;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -19,12 +23,13 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import base.common.ui.TitleBaseActivity;
+import base.common.util.AlertUtils;
 import base.common.util.Rotate3DUtils;
 
 public class InitUserInfoActivity extends TitleBaseActivity implements
 		OnTouchListener {
 
-	//private List<ViewGroup> viewGroups = new ArrayList<ViewGroup>();
+	// private List<ViewGroup> viewGroups = new ArrayList<ViewGroup>();
 	private List<EditText> editTexts = new ArrayList<EditText>();
 	private int[] viewGroupsRes = { R.id.user_nickname_fl,
 			R.id.user_birthday_fl, R.id.user_weight_fl, R.id.user_height_fl };
@@ -33,7 +38,7 @@ public class InitUserInfoActivity extends TitleBaseActivity implements
 	private ImageView user_gender_female_iv;
 	private ImageView user_gender_male_iv;
 	private Button submitBtn;
-	private int isFemale = -1;
+	private int isFemale = 0;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -81,15 +86,51 @@ public class InitUserInfoActivity extends TitleBaseActivity implements
 		submitBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
-				for (int i = 0; i < editTextsRes.length; i++) {
-					Log.d("InitUserInfoActivity", editTexts.get(i).getText().toString());
+				RequestParams params=new RequestParams();
+				params.put(ParamKey.NICKNAME, editTexts.get(0).getText()
+						.toString());
+				if(isFemale==0){
+					params.put(ParamKey.GENDER, "男");
+				}else{
+					params.put(ParamKey.GENDER, "女");
 				}
+				params.put(ParamKey.AGE, editTexts.get(1).getText()
+						.toString());
+				params.put(ParamKey.WEIGHT, editTexts.get(2).getText()
+						.toString());
+				params.put(ParamKey.HEIGHT, editTexts.get(3).getText()
+						.toString());
+				UserManager.getInstance().initUserInfo(params,
+						new HttpResponseListener() {
+
+							@Override
+							public void responseSuccess() {
+								
+							}
+
+							@Override
+							public void responseFailed(int flag) {
+								switch (flag) {
+								case ErrorFlag.INIT_USER_INFO_ERROR:
+									AlertUtils.showToast(InitUserInfoActivity.this,
+											"初始化用户信息失败！");
+									break;
+								case ErrorFlag.NETWORK_ERROR:
+									AlertUtils.showToast(InitUserInfoActivity.this,
+											"网络错误，请检查！");
+									break;
+								default:
+									break;
+								}
+							}
+						});
 			}
 		});
 	}
 
 	private void initTitle() {
 		setTitleText(getResources().getString(R.string.init_user_info_text));
+		getLeftTitleBtn().setVisibility(View.GONE);
 		getRightTitleBtn().setVisibility(View.INVISIBLE);
 	}
 
@@ -109,7 +150,6 @@ public class InitUserInfoActivity extends TitleBaseActivity implements
 				};
 				Dialog dialog = new DatePickerDialog(this, dateListener, 1988,
 						0, 23);
-				// calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH)
 				dialog.show();
 				break;
 
@@ -141,7 +181,6 @@ public class InitUserInfoActivity extends TitleBaseActivity implements
 	private final class DisplayNextView implements Animation.AnimationListener {
 
 		private View showView;
-		private boolean which = false;
 
 		private DisplayNextView(View showView) {
 			this.showView = showView;

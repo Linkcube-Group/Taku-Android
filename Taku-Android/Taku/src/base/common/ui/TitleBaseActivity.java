@@ -24,7 +24,7 @@ public class TitleBaseActivity extends BaseActivity {
 	private View contentView;
 	public View titleLayout;
 	private RelativeLayout titleRelativeLayout;
-	protected ImageView leftTitleIv;
+	protected Button leftTitleBtn;
 	private TextView titleText;
 	protected Button rightTitleBtn;
 
@@ -35,11 +35,11 @@ public class TitleBaseActivity extends BaseActivity {
 				R.layout.user_action_bar, null);
 		titleRelativeLayout = (RelativeLayout) titleLayout
 				.findViewById(R.id.title_layout);
-		leftTitleIv = (ImageView) titleLayout.findViewById(R.id.title_left_iv);
+		leftTitleBtn = (Button) titleLayout.findViewById(R.id.title_left_btn);
 		titleText = (TextView) titleLayout.findViewById(R.id.title_text);
 		rightTitleBtn = (Button) titleLayout.findViewById(R.id.title_right_btn);
 
-		leftTitleIv.setOnClickListener(new View.OnClickListener() {
+		leftTitleBtn.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
@@ -99,6 +99,10 @@ public class TitleBaseActivity extends BaseActivity {
 		if (null != rightTitleBtn) {
 			rightTitleBtn.setBackgroundDrawable(drawable);
 		}
+	}
+	
+	public Button getLeftTitleBtn(){
+		return leftTitleBtn;
 	}
 
 	/**
