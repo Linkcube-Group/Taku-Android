@@ -1,6 +1,6 @@
-package base.common.view;
+package custom.android.widget;
 
-import me.linkcube.taku.R;
+import custom.android.widget.R;
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;

@@ -1,4 +1,4 @@
-package base.common.view;
+package custom.android.widget;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -16,22 +16,22 @@ import android.view.View.OnFocusChangeListener;
  * @author Ervin
  * 
  */
-public class CWClearEditText extends EditText implements OnFocusChangeListener,
+public class ClearEditText extends EditText implements OnFocusChangeListener,
 		TextWatcher {
 
 	private Drawable mClearDrawable;
 
 	private boolean hasFoucs;
 
-	public CWClearEditText(Context context) {
+	public ClearEditText(Context context) {
 		this(context, null);
 	}
 
-	public CWClearEditText(Context context, AttributeSet attrs) {
+	public ClearEditText(Context context, AttributeSet attrs) {
 		this(context, attrs, android.R.attr.editTextStyle);
 	}
 
-	public CWClearEditText(Context context, AttributeSet attrs, int defStyle) {
+	public ClearEditText(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 		init();
 	}
