@@ -176,13 +176,14 @@ public class UserManager {
 					}
 				});
 	}
+	
 	/**
 	 * 根据生日获取年龄
 	 * @param birthday
 	 * @return
 	 */
 	public static String getUserAge(String birthday) {
-		if (birthday != null) {
+		if (birthday != null&&!birthday.equals("")) {
 			String[] birthData = birthday.split("-");
 			int birthYear = Integer.parseInt(birthData[0]);
 			Calendar cal = Calendar.getInstance();

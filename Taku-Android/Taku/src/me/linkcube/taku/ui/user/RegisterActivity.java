@@ -4,12 +4,8 @@ import me.linkcube.taku.R;
 import me.linkcube.taku.AppConst.ErrorFlag;
 import me.linkcube.taku.AppConst.ParamKey;
 
-import org.apache.http.Header;
-import org.json.JSONObject;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -19,7 +15,6 @@ import base.common.ui.TitleBaseActivity;
 import base.common.util.AlertUtils;
 import base.common.util.StringUtils;
 
-import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
 public class RegisterActivity extends TitleBaseActivity implements
@@ -76,36 +71,60 @@ public class RegisterActivity extends TitleBaseActivity implements
 				Toast.makeText(RegisterActivity.this,
 						R.string.toast_psw_couldnot_contain_space,
 						Toast.LENGTH_SHORT).show();
-			}
-			// TODO 注册相关事情
-			RequestParams params = new RequestParams();
-			params.put(ParamKey.EMAIL, "yangxintest@qq.com");
-			params.put(ParamKey.PWD, "1234567");
-			UserManager.getInstance().userRegister(params, new HttpResponseListener() {
-				
-				@Override
-				public void responseSuccess() {
-					startActivity(new Intent(RegisterActivity.this,InitUserInfoActivity.class));
-				}
-				
-				@Override
-				public void responseFailed(int flag) {
-					switch (flag) {
-					case ErrorFlag.EMAIL_REGISTER:
-						AlertUtils.showToast(RegisterActivity.this,
-								"此邮箱已经注册！");
-						break;
-					case ErrorFlag.NETWORK_ERROR:
-						AlertUtils.showToast(RegisterActivity.this,
-								"网络错误，请检查！");
-						break;
-					default:
-						break;
+			}else{
+				final RequestParams params = new RequestParams();
+				params.put(ParamKey.EMAIL, emailEt.getText().toString());
+				params.put(ParamKey.PWD, passWordEt.getText().toString());
+				UserManager.getInstance().userRegister(params, new HttpResponseListener() {
+					
+					@Override
+					public void responseSuccess() {
+						//注册成功之后直接登录
+						UserManager.getInstance().userLogin(params,
+								new HttpResponseListener() {
+
+									@Override
+									public void responseSuccess() {
+										startActivity(new Intent(RegisterActivity.this,InitUserInfoActivity.class));
+									}
+
+									@Override
+									public void responseFailed(int flag) {
+										switch (flag) {
+										case ErrorFlag.NETWORK_ERROR:
+											AlertUtils.showToast(RegisterActivity.this,
+													"网络错误，请检查！");
+											break;
+										case ErrorFlag.EMAIL_PSW_WRONG:
+											AlertUtils.showToast(RegisterActivity.this,
+													"账号或密码错误！");
+											break;
+
+										default:
+											break;
+										}
+
+									}
+								});
 					}
-				}
-			});
-			//TODO 测试使用
-			startActivity(new Intent(RegisterActivity.this,InitUserInfoActivity.class));
+					
+					@Override
+					public void responseFailed(int flag) {
+						switch (flag) {
+						case ErrorFlag.EMAIL_REGISTER:
+							AlertUtils.showToast(RegisterActivity.this,
+									"此邮箱已经注册！");
+							break;
+						case ErrorFlag.NETWORK_ERROR:
+							AlertUtils.showToast(RegisterActivity.this,
+									"网络错误，请检查！");
+							break;
+						default:
+							break;
+						}
+					}
+				});
+			}
 			break;
 		default:
 			break;

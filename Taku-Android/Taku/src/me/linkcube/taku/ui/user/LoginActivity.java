@@ -39,7 +39,6 @@ public class LoginActivity extends TitleBaseActivity implements OnClickListener 
 
 	private void initTitle() {
 		setTitleText(getResources().getString(R.string.login_text));
-		getRightTitleBtn().setTextColor(R.drawable.user_btn_color);
 		getRightTitleBtn().setText(
 				getResources().getString(R.string.register_btn_text));
 		setRightTitleBtn(R.drawable.user_btn_bg);
@@ -58,10 +57,10 @@ public class LoginActivity extends TitleBaseActivity implements OnClickListener 
 		case R.id.login_btn:
 			CookieInstance.getInstance().initCookie(this);
 			RequestParams params = new RequestParams();
-			params.put(ParamKey.EMAIL, "yangxintest@qq.com");//yangxintest@qq.com/313832830@qq.com
-			params.put(ParamKey.PWD, "1234567");//shisong/1234567
-			// params.put("email", emailEt.getText().toString());
-			// params.put("pwd", passWordEt.getText().toString());
+			//params.put(ParamKey.EMAIL, "yxtest1@qq.com");//yangxintest@qq.com/313832830@qq.com
+			//params.put(ParamKey.PWD, "1234567");//shisong/1234567
+			params.put(ParamKey.EMAIL, emailEt.getText().toString());
+			params.put(ParamKey.PWD, passWordEt.getText().toString());
 			UserManager.getInstance().userLogin(params,
 					new HttpResponseListener() {
 
@@ -85,7 +84,6 @@ public class LoginActivity extends TitleBaseActivity implements OnClickListener 
 							default:
 								break;
 							}
-
 						}
 					});
 			break;

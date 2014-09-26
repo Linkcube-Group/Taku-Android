@@ -76,6 +76,7 @@
     <string name="password_text">密码</string>
     <string name="confirm_password_text">确认密码</string>
     <string name="submit_btn_text">提交</string>
+    <string name="save_btn_text">保存</string>
     <string name="user_nickname_text">昵称</string>
     <string name="user_avator_text">头像</string>
     <string name="user_birthday_text">生日</string>

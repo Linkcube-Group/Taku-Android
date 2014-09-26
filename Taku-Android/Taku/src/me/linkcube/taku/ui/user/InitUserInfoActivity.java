@@ -11,7 +11,6 @@ import me.linkcube.taku.R;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
@@ -86,44 +85,63 @@ public class InitUserInfoActivity extends TitleBaseActivity implements
 		submitBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
-				RequestParams params=new RequestParams();
-				params.put(ParamKey.NICKNAME, editTexts.get(0).getText()
-						.toString());
-				if(isFemale==0){
-					params.put(ParamKey.GENDER, "男");
-				}else{
-					params.put(ParamKey.GENDER, "女");
-				}
-				params.put(ParamKey.AGE, editTexts.get(1).getText()
-						.toString());
-				params.put(ParamKey.WEIGHT, editTexts.get(2).getText()
-						.toString());
-				params.put(ParamKey.HEIGHT, editTexts.get(3).getText()
-						.toString());
-				UserManager.getInstance().initUserInfo(params,
-						new HttpResponseListener() {
+				if (editTexts.get(0).getText().toString() == null
+						|| editTexts.get(0).getText().toString().equals("")) {
+					AlertUtils.showToast(InitUserInfoActivity.this,
+							"给自己设置个昵称吧～");
+				} else if (editTexts.get(2).getText().toString() == null
+						|| editTexts.get(2).getText().toString().equals("")) {
+					AlertUtils.showToast(InitUserInfoActivity.this,
+							"没有身高这可不太好～");
+				} else if (editTexts.get(2).getText().toString() == null
+						|| editTexts.get(2).getText().toString().equals("")) {
+					AlertUtils.showToast(InitUserInfoActivity.this,
+							"不要隐藏体重啦，我们不会告诉别人的～");
+				} else {
+					RequestParams params = new RequestParams();
+					params.put(ParamKey.NICKNAME, editTexts.get(0).getText()
+							.toString());
+					if (isFemale == 0) {
+						params.put(ParamKey.GENDER, "男");
+					} else {
+						params.put(ParamKey.GENDER, "女");
+					}
+					UserManager.getInstance();
+					params.put(
+							ParamKey.AGE,
+							UserManager.getUserAge(editTexts.get(1).getText()
+									.toString()));
+					params.put(ParamKey.WEIGHT, editTexts.get(2).getText()
+							.toString());
+					params.put(ParamKey.HEIGHT, editTexts.get(3).getText()
+							.toString());
+					UserManager.getInstance().initUserInfo(params,
+							new HttpResponseListener() {
 
-							@Override
-							public void responseSuccess() {
-								
-							}
-
-							@Override
-							public void responseFailed(int flag) {
-								switch (flag) {
-								case ErrorFlag.INIT_USER_INFO_ERROR:
-									AlertUtils.showToast(InitUserInfoActivity.this,
-											"初始化用户信息失败！");
-									break;
-								case ErrorFlag.NETWORK_ERROR:
-									AlertUtils.showToast(InitUserInfoActivity.this,
-											"网络错误，请检查！");
-									break;
-								default:
-									break;
+								@Override
+								public void responseSuccess() {
+									finish();
 								}
-							}
-						});
+
+								@Override
+								public void responseFailed(int flag) {
+									switch (flag) {
+									case ErrorFlag.INIT_USER_INFO_ERROR:
+										AlertUtils.showToast(
+												InitUserInfoActivity.this,
+												"初始化用户信息失败！");
+										break;
+									case ErrorFlag.NETWORK_ERROR:
+										AlertUtils.showToast(
+												InitUserInfoActivity.this,
+												"网络错误，请检查！");
+										break;
+									default:
+										break;
+									}
+								}
+							});
+				}
 			}
 		});
 	}

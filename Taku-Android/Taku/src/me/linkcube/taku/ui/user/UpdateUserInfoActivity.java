@@ -4,15 +4,20 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 
 import me.linkcube.taku.R;
+import me.linkcube.taku.view.CircularImage;
+import android.content.ContentProvider;
+import android.content.ContentResolver;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import base.common.ui.TitleBaseActivity;
 
@@ -20,7 +25,7 @@ public class UpdateUserInfoActivity extends TitleBaseActivity implements
 		OnClickListener {
 
 	private static final int REQUEST_CODE = 1;
-	private ImageView userAvatorIv;
+	private CircularImage userAvatorIv;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -31,15 +36,22 @@ public class UpdateUserInfoActivity extends TitleBaseActivity implements
 
 	private void initView() {
 		initTitle();
-
 		LinearLayout userAvatorLayout = (LinearLayout) findViewById(R.id.userAvatorLayout);
 		userAvatorLayout.setOnClickListener(this);
-		userAvatorIv=(ImageView)findViewById(R.id.userAvatorIv);
+		userAvatorIv = (CircularImage) findViewById(R.id.userAvatorIv);
 	}
 
 	private void initTitle() {
 		setTitleText(getResources().getString(R.string.update_user_info_text));
-		getRightTitleBtn().setVisibility(View.GONE);
+		getRightTitleBtn().setText(
+				getResources().getString(R.string.save_btn_text));
+		setRightTitleBtn(R.drawable.user_btn_bg);
+		getRightTitleBtn().setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				finish();
+			}
+		});
 	}
 
 	@Override
@@ -70,8 +82,19 @@ public class UpdateUserInfoActivity extends TitleBaseActivity implements
 		if (requestCode == REQUEST_CODE) {
 			if (null != data) {
 				Uri uri = data.getData();
-				// 根据需要，也可以加上Option这个参数
 				InputStream inputStream;
+				String[] proj = { MediaStore.Images.Media.DATA };
+				ContentResolver cr = this.getContentResolver();
+				Cursor cursor = cr.query(uri, proj, null, null, null);
+				String imagePath = null;
+				if (cursor != null) {
+					int column_index = cursor
+							.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+					if (cursor.getCount() > 0 && cursor.moveToFirst()) {
+						imagePath = cursor.getString(column_index);
+					}
+				}
+				Log.d("UpdateUserInfoActivity", "uri:" + imagePath);
 				try {
 					inputStream = getContentResolver().openInputStream(uri);
 					Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
