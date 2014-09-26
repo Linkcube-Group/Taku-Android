@@ -2,7 +2,7 @@ package base.common.ui;
 
 import java.io.Serializable;
 
-import base.common.util.Timber;
+import custom.android.util.Timber;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

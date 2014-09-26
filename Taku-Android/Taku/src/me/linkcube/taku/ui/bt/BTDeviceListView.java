@@ -1,6 +1,6 @@
 package me.linkcube.taku.ui.bt;
 
-import base.common.util.ViewUtils;
+import custom.android.util.ViewUtils;
 import me.linkcube.taku.R;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
@@ -41,8 +41,7 @@ public class BTDeviceListView extends RelativeLayout {
 	private void init(Context context) {
 		LayoutInflater mInflater = (LayoutInflater) context
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		View view = mInflater.inflate(R.layout.bt_device_listview, this,
-				true);
+		View view = mInflater.inflate(R.layout.bt_device_listview, this, true);
 		mTipTv = (TextView) view.findViewById(R.id.tip_tv);
 		mDeviceLv = (ListView) view.findViewById(android.R.id.list);
 		// View header =

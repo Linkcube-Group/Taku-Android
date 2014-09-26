@@ -16,11 +16,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import base.common.ui.TitleBaseActivity;
-import base.common.util.AlertUtils;
-import base.common.util.StringUtils;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+
+import custom.android.util.AlertUtils;
+import custom.android.util.StringUtils;
 
 public class RegisterActivity extends TitleBaseActivity implements
 		OnClickListener {
@@ -62,17 +63,18 @@ public class RegisterActivity extends TitleBaseActivity implements
 						getResources().getString(
 								R.string.toast_username_hasbeen_email));
 				emailEt.setText("");
-			}else if (!passWordEt.getText().toString()
+			} else if (!passWordEt.getText().toString()
 					.equals(confirmPswEt.getText().toString())) {
 				AlertUtils.showToast(this,
 						getResources().getString(R.string.toast_psw_not_match));
 				passWordEt.setText("");
 				confirmPswEt.setText("");
-			}else if (passWordEt.getText().toString().length() < 6) {
+			} else if (passWordEt.getText().toString().length() < 6) {
 				Toast.makeText(RegisterActivity.this,
 						R.string.toast_psw_too_short, Toast.LENGTH_SHORT)
 						.show();
-			}else if (StringUtils.containWhiteSpace(passWordEt.getText().toString())) {
+			} else if (StringUtils.containWhiteSpace(passWordEt.getText()
+					.toString())) {
 				Toast.makeText(RegisterActivity.this,
 						R.string.toast_psw_couldnot_contain_space,
 						Toast.LENGTH_SHORT).show();
@@ -81,31 +83,34 @@ public class RegisterActivity extends TitleBaseActivity implements
 			RequestParams params = new RequestParams();
 			params.put(ParamKey.EMAIL, "yangxintest@qq.com");
 			params.put(ParamKey.PWD, "1234567");
-			UserManager.getInstance().userRegister(params, new HttpResponseListener() {
-				
-				@Override
-				public void responseSuccess() {
-					startActivity(new Intent(RegisterActivity.this,InitUserInfoActivity.class));
-				}
-				
-				@Override
-				public void responseFailed(int flag) {
-					switch (flag) {
-					case ErrorFlag.EMAIL_REGISTER:
-						AlertUtils.showToast(RegisterActivity.this,
-								"此邮箱已经注册！");
-						break;
-					case ErrorFlag.NETWORK_ERROR:
-						AlertUtils.showToast(RegisterActivity.this,
-								"网络错误，请检查！");
-						break;
-					default:
-						break;
-					}
-				}
-			});
-			//TODO 测试使用
-			startActivity(new Intent(RegisterActivity.this,InitUserInfoActivity.class));
+			UserManager.getInstance().userRegister(params,
+					new HttpResponseListener() {
+
+						@Override
+						public void responseSuccess() {
+							startActivity(new Intent(RegisterActivity.this,
+									InitUserInfoActivity.class));
+						}
+
+						@Override
+						public void responseFailed(int flag) {
+							switch (flag) {
+							case ErrorFlag.EMAIL_REGISTER:
+								AlertUtils.showToast(RegisterActivity.this,
+										"此邮箱已经注册！");
+								break;
+							case ErrorFlag.NETWORK_ERROR:
+								AlertUtils.showToast(RegisterActivity.this,
+										"网络错误，请检查！");
+								break;
+							default:
+								break;
+							}
+						}
+					});
+			// TODO 测试使用
+			startActivity(new Intent(RegisterActivity.this,
+					InitUserInfoActivity.class));
 			break;
 		default:
 			break;

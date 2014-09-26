@@ -1,4 +1,4 @@
-package base.common.util;
+package custom.android.util;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -46,7 +46,7 @@ public final class AlertUtils {
 	}
 
 	/**
-	 * 创建一个AlertDialog，有“确定”按钮，对此按钮按钮事件不监听。
+	 * 创建�?个AlertDialog，有“确定�?�按钮，对此按钮按钮事件不监听�??
 	 * 
 	 * @param context
 	 * @param msg
@@ -77,7 +77,7 @@ public final class AlertUtils {
 	}
 
 	/**
-	 * 创建一个AlertDialog，有“确定”按钮，对此按钮点击事件不监听。
+	 * 创建�?个AlertDialog，有“确定�?�按钮，对此按钮点击事件不监听�??
 	 * 
 	 * @param context
 	 * @param msgId
@@ -108,7 +108,7 @@ public final class AlertUtils {
 	}
 
 	/**
-	 * 创建一个AlertDialog，有“确定”按钮，对此按钮事件监听。
+	 * 创建�?个AlertDialog，有“确定�?�按钮，对此按钮事件监听�?
 	 * 
 	 * @param context
 	 * @param msgId
@@ -133,7 +133,7 @@ public final class AlertUtils {
 	}
 
 	/**
-	 * 创建一个AlertDialog，有“确定”按钮，对此按钮事件监听。
+	 * 创建�?个AlertDialog，有“确定�?�按钮，对此按钮事件监听�?
 	 * 
 	 * @param context
 	 * @param msg
@@ -159,7 +159,7 @@ public final class AlertUtils {
 	}
 
 	/**
-	 * 创建一个AlertDialog，有“确定”和“取消”按钮，对此两个按钮按钮事件监听。
+	 * 创建�?个AlertDialog，有“确定�?�和“取消�?�按钮，对此两个按钮按钮事件监听�?
 	 * 
 	 * @param context
 	 * @param msgId
@@ -188,7 +188,7 @@ public final class AlertUtils {
 	}
 
 	/**
-	 * 创建一个AlertDialog，有“确定”和“取消”按钮，对此两个按钮按钮事件监听。
+	 * 创建�?个AlertDialog，有“确定�?�和“取消�?�按钮，对此两个按钮按钮事件监听�?
 	 * 
 	 * @param context
 	 * @param msg
@@ -217,7 +217,7 @@ public final class AlertUtils {
 	}
 
 	/**
-	 * 创建一个AlertDialog，有“按钮左”和“按钮右”按钮，并可对这两个按钮的文字进行配置，同时两个按钮按钮事件监听。
+	 * 创建�?个AlertDialog，有“按钮左”和“按钮右”按钮，并可对这两个按钮的文字进行配置，同时两个按钮按钮事件监听�?
 	 * 
 	 * @param context
 	 * @param msg
@@ -248,7 +248,7 @@ public final class AlertUtils {
 	}
 
 	/**
-	 * 创建一个AlertDialog，有“按钮左”和“按钮右”按钮，并可对这两个按钮的文字进行配置，同时两个按钮按钮事件监听。
+	 * 创建�?个AlertDialog，有“按钮左”和“按钮右”按钮，并可对这两个按钮的文字进行配置，同时两个按钮按钮事件监听�?
 	 * 
 	 * @param context
 	 * @param msg
@@ -280,7 +280,7 @@ public final class AlertUtils {
 	}
 
 	/**
-	 * 创建一个AlertDialog，有用户自定义视图和一个“确定”按钮，并对此按钮进行监听。
+	 * 创建�?个AlertDialog，有用户自定义视图和�?个�?�确定�?�按钮，并对此按钮进行监听�??
 	 * 
 	 * @param context
 	 * @param title
@@ -306,7 +306,7 @@ public final class AlertUtils {
 	}
 
 	/**
-	 * 创建一个AlertDialog，有用户自定义视图和一个“取消”按钮，并此按钮进行监听。
+	 * 创建�?个AlertDialog，有用户自定义视图和�?个�?�取消�?�按钮，并此按钮进行监听�?
 	 * 
 	 * @param context
 	 * @param title
@@ -332,7 +332,7 @@ public final class AlertUtils {
 	}
 
 	/**
-	 * 新建一个AlertDialog，有用户自定义视图、一个“按钮左”和一个“按钮右”，并可对这两个按钮的文字进行配置，并对这两个按钮进行监听。
+	 * 新建�?个AlertDialog，有用户自定义视图�?�一个�?�按钮左”和�?个�?�按钮右”，并可对这两个按钮的文字进行配置，并对这两个按钮进行监听�??
 	 * 
 	 * @param context
 	 * @param title
@@ -364,7 +364,7 @@ public final class AlertUtils {
 	}
 
 	/**
-	 * 新建一个AlertDialog，有用户自定义视图、一个“确定”按钮和一个“取消”按钮，并对这两个按钮进行监听。
+	 * 新建�?个AlertDialog，有用户自定义视图�?�一个�?�确定�?�按钮和�?个�?�取消�?�按钮，并对这两个按钮进行监听�??
 	 * 
 	 * @param context
 	 * @param title
@@ -404,7 +404,7 @@ public final class AlertUtils {
 	}
 
 	/**
-	 * 创建带有单选的AlertDialog
+	 * 创建带有单�?�的AlertDialog
 	 * 
 	 * @param context
 	 * @param title
@@ -439,7 +439,7 @@ public final class AlertUtils {
 	}
 
 	/**
-	 * 创建带有单选的AlertDialog
+	 * 创建带有单�?�的AlertDialog
 	 * 
 	 * @param context
 	 * @param title

@@ -1,4 +1,4 @@
-package base.common.util;
+package custom.android.util;
 
 import android.view.View;
 

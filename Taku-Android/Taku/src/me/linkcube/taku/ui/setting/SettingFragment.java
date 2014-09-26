@@ -1,7 +1,7 @@
 package me.linkcube.taku.ui.setting;
 
+import custom.android.util.AlertUtils;
 import base.common.ui.DialogFragment;
-import base.common.util.AlertUtils;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -78,11 +78,13 @@ public class SettingFragment extends DialogFragment {
 
 								@Override
 								public void responseSuccess() {
-									settingLoginBtn.setText(getResources().getString(
-											R.string.login_btn_text));
+									settingLoginBtn
+											.setText(getResources().getString(
+													R.string.login_btn_text));
 									AlertUtils.showToast(getActivity(),
 											"当前用户已退出！");
 								}
+
 								@Override
 								public void responseFailed(int flag) {
 									switch (flag) {

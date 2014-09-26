@@ -3,9 +3,6 @@ package me.linkcube.taku.ui.bt;
 import java.util.List;
 
 import base.common.ui.DialogActivity;
-import base.common.util.AlertUtils;
-import base.common.util.PreferenceUtils;
-import base.common.util.Timber;
 
 import com.ervinwang.bthelper.BTHelper;
 import com.ervinwang.bthelper.BTManager;
@@ -13,6 +10,9 @@ import com.ervinwang.bthelper.core.DeviceBroadcastReceiver;
 import com.ervinwang.bthelper.core.DeviceConnectionManager;
 import com.ervinwang.bthelper.core.OnBTDiscoveryListener;
 
+import custom.android.util.AlertUtils;
+import custom.android.util.PreferenceUtils;
+import custom.android.util.Timber;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.os.AsyncTask;

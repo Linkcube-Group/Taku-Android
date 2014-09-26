@@ -10,9 +10,10 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import base.common.ui.TitleBaseActivity;
-import base.common.util.AlertUtils;
 
 import com.loopj.android.http.RequestParams;
+
+import custom.android.util.AlertUtils;
 
 public class LoginActivity extends TitleBaseActivity implements OnClickListener {
 
@@ -58,8 +59,8 @@ public class LoginActivity extends TitleBaseActivity implements OnClickListener 
 		case R.id.login_btn:
 			CookieInstance.getInstance().initCookie(this);
 			RequestParams params = new RequestParams();
-			params.put(ParamKey.EMAIL, "yangxintest@qq.com");//yangxintest@qq.com/313832830@qq.com
-			params.put(ParamKey.PWD, "1234567");//shisong/1234567
+			params.put(ParamKey.EMAIL, "yangxintest@qq.com");// yangxintest@qq.com/313832830@qq.com
+			params.put(ParamKey.PWD, "1234567");// shisong/1234567
 			// params.put("email", emailEt.getText().toString());
 			// params.put("pwd", passWordEt.getText().toString());
 			UserManager.getInstance().userLogin(params,

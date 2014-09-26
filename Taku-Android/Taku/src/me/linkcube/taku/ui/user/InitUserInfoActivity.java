@@ -5,6 +5,8 @@ import java.util.List;
 
 import com.loopj.android.http.RequestParams;
 
+import custom.android.util.AlertUtils;
+import custom.android.util.Rotate3DUtils;
 import me.linkcube.taku.AppConst.ErrorFlag;
 import me.linkcube.taku.AppConst.ParamKey;
 import me.linkcube.taku.R;
@@ -23,8 +25,6 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import base.common.ui.TitleBaseActivity;
-import base.common.util.AlertUtils;
-import base.common.util.Rotate3DUtils;
 
 public class InitUserInfoActivity extends TitleBaseActivity implements
 		OnTouchListener {
@@ -86,16 +86,15 @@ public class InitUserInfoActivity extends TitleBaseActivity implements
 		submitBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
-				RequestParams params=new RequestParams();
+				RequestParams params = new RequestParams();
 				params.put(ParamKey.NICKNAME, editTexts.get(0).getText()
 						.toString());
-				if(isFemale==0){
+				if (isFemale == 0) {
 					params.put(ParamKey.GENDER, "男");
-				}else{
+				} else {
 					params.put(ParamKey.GENDER, "女");
 				}
-				params.put(ParamKey.AGE, editTexts.get(1).getText()
-						.toString());
+				params.put(ParamKey.AGE, editTexts.get(1).getText().toString());
 				params.put(ParamKey.WEIGHT, editTexts.get(2).getText()
 						.toString());
 				params.put(ParamKey.HEIGHT, editTexts.get(3).getText()
@@ -105,18 +104,20 @@ public class InitUserInfoActivity extends TitleBaseActivity implements
 
 							@Override
 							public void responseSuccess() {
-								
+
 							}
 
 							@Override
 							public void responseFailed(int flag) {
 								switch (flag) {
 								case ErrorFlag.INIT_USER_INFO_ERROR:
-									AlertUtils.showToast(InitUserInfoActivity.this,
+									AlertUtils.showToast(
+											InitUserInfoActivity.this,
 											"初始化用户信息失败！");
 									break;
 								case ErrorFlag.NETWORK_ERROR:
-									AlertUtils.showToast(InitUserInfoActivity.this,
+									AlertUtils.showToast(
+											InitUserInfoActivity.this,
 											"网络错误，请检查！");
 									break;
 								default:
