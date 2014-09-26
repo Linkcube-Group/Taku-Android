@@ -1,11 +1,11 @@
 package me.linkcube.taku.ui.welcome;
 
 import static me.linkcube.taku.AppConst.KEY.SHOW_GUIDE;
+import custom.android.util.AlertUtils;
+import custom.android.util.NetworkUtils;
+import custom.android.util.PreferenceUtils;
+import custom.android.util.Timber;
 import base.common.ui.DialogActivity;
-import base.common.util.AlertUtils;
-import base.common.util.NetworkUtils;
-import base.common.util.PreferenceUtils;
-import base.common.util.Timber;
 import me.linkcube.taku.AppConfig;
 import me.linkcube.taku.R;
 import me.linkcube.taku.ui.main.MainActivity;
@@ -15,7 +15,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Window;
-
 
 /**
  * 欢迎页面

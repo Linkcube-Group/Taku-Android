@@ -1,4 +1,4 @@
-package base.common.util;
+package custom.android.util;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -92,7 +92,7 @@ public class StringUtils {
 		if (isEmpty(str)) {
 			return str;
 		}
-
+	
 		char c = str.charAt(0);
 		return (!Character.isLetter(c) || Character.isUpperCase(c)) ? str
 				: new StringBuilder(str.length())
@@ -275,7 +275,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * 判断是不是邮箱格式
+	 * 判断是不是邮箱格�?
 	 * 
 	 * @param str
 	 * @return

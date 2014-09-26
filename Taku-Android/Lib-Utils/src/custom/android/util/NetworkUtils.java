@@ -1,11 +1,11 @@
-package base.common.util;
+package custom.android.util;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
 /**
- * 判断网络状况类
+ * 判断网络状况�?
  * 
  * @author Ervin
  * 

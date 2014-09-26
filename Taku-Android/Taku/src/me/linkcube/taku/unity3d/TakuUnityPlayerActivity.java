@@ -2,14 +2,13 @@ package me.linkcube.taku.unity3d;
 
 import me.linkcube.taku.ITakuUnityPlayerActivity;
 import me.linkcube.taku.ui.bt.BTSettingActivity;
-import base.common.util.FormatUtils;
-import base.common.util.Timber;
-
 import com.ervinwang.bthelper.BTHelper;
 import com.ervinwang.bthelper.BTManager;
 import com.ervinwang.bthelper.core.IReceiveData;
 import com.unity3d.player.UnityPlayerActivity;
-
+import custom.android.util.FormatUtils;
+import custom.android.util.Timber;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -34,9 +33,10 @@ public class TakuUnityPlayerActivity extends UnityPlayerActivity implements
 		mContext = this;
 	}
 
+	@SuppressLint("NewApi")
 	public void startBTSettingActivity() {
 		Intent intent = new Intent(mContext, BTSettingActivity.class);
-		this.startActivity(intent);
+		startActivity(intent);
 	}
 
 	@Override

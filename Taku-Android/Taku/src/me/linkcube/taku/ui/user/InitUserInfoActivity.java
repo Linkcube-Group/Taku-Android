@@ -5,6 +5,8 @@ import java.util.List;
 
 import com.loopj.android.http.RequestParams;
 
+import custom.android.util.AlertUtils;
+import custom.android.util.Rotate3DUtils;
 import me.linkcube.taku.AppConst.ErrorFlag;
 import me.linkcube.taku.AppConst.ParamKey;
 import me.linkcube.taku.R;
@@ -22,8 +24,6 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import base.common.ui.TitleBaseActivity;
-import base.common.util.AlertUtils;
-import base.common.util.Rotate3DUtils;
 
 public class InitUserInfoActivity extends TitleBaseActivity implements
 		OnTouchListener {

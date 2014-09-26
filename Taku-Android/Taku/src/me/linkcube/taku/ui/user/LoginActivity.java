@@ -10,9 +10,10 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import base.common.ui.TitleBaseActivity;
-import base.common.util.AlertUtils;
 
 import com.loopj.android.http.RequestParams;
+
+import custom.android.util.AlertUtils;
 
 public class LoginActivity extends TitleBaseActivity implements OnClickListener {
 

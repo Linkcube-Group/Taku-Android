@@ -1,6 +1,6 @@
 package base.common.ui;
 
-import base.common.util.AlertUtils;
+import custom.android.util.AlertUtils;
 import android.app.ProgressDialog;
 
 public abstract class DialogFragment extends BaseFragment {

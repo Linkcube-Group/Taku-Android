@@ -1,4 +1,4 @@
-package base.common.util;
+package custom.android.util;
 
 import android.graphics.Camera;
 import android.graphics.Matrix;
