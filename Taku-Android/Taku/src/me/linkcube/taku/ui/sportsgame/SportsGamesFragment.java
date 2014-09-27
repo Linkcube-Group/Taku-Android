@@ -2,6 +2,7 @@ package me.linkcube.taku.ui.sportsgame;
 
 import base.common.ui.DialogFragment;
 import me.linkcube.taku.R;
+import me.linkcube.taku.ui.bt.BTSettingActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,15 +12,19 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 
-public class SportsGamesFragment extends DialogFragment implements OnClickListener {
+public class SportsGamesFragment extends DialogFragment implements
+		OnClickListener {
 
 	private static final String ARG_DRAWER_POSITION = "drawer_position";
+	// 连接蓝牙设备按钮
+	private ImageButton connectBtn = null;
 
-	//仪表盘
+	// 仪表盘
 	private Button dashboardBtn;
 
-	//踏酷
+	// 踏酷
 	private Button takuBtn;
 
 	public static SportsGamesFragment newInstance(int position) {
@@ -56,10 +61,14 @@ public class SportsGamesFragment extends DialogFragment implements OnClickListen
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
+		//得到控件引用
 		dashboardBtn = (Button) view.findViewById(R.id.panelBtn);
 		takuBtn = (Button) view.findViewById(R.id.takuBtn);
+		connectBtn = (ImageButton) view.findViewById(R.id.connectBtn);
+		// 注册事件
 		dashboardBtn.setOnClickListener(this);
 		takuBtn.setOnClickListener(this);
+		connectBtn.setOnClickListener(this);
 	}
 
 	@Override
@@ -72,6 +81,10 @@ public class SportsGamesFragment extends DialogFragment implements OnClickListen
 			break;
 		case R.id.takuBtn:
 			// TODO
+			break;
+		case R.id.connectBtn:// 连接蓝牙设备
+			// TODO
+			startActivity(new Intent(getActivity(), BTSettingActivity.class));
 			break;
 		default:
 			break;
