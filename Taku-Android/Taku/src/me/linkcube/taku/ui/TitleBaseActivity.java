@@ -1,5 +1,6 @@
-package base.common.ui;
+package me.linkcube.taku.ui;
 
+import base.common.ui.BaseActivity;
 import me.linkcube.taku.R;
 import android.content.Context;
 import android.graphics.drawable.Drawable;

@@ -3,13 +3,13 @@ package me.linkcube.taku.ui.user;
 import me.linkcube.taku.R;
 import me.linkcube.taku.AppConst.ErrorFlag;
 import me.linkcube.taku.AppConst.ParamKey;
+import me.linkcube.taku.ui.TitleBaseActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import base.common.ui.TitleBaseActivity;
 
 import com.loopj.android.http.RequestParams;
 
@@ -58,8 +58,9 @@ public class LoginActivity extends TitleBaseActivity implements OnClickListener 
 		case R.id.login_btn:
 			CookieInstance.getInstance().initCookie(this);
 			RequestParams params = new RequestParams();
-			//params.put(ParamKey.EMAIL, "yxtest1@qq.com");//yangxintest@qq.com/313832830@qq.com
-			//params.put(ParamKey.PWD, "1234567");//shisong/1234567
+			// params.put(ParamKey.EMAIL,
+			// "yxtest1@qq.com");//yangxintest@qq.com/313832830@qq.com
+			// params.put(ParamKey.PWD, "1234567");//shisong/1234567
 			params.put(ParamKey.EMAIL, emailEt.getText().toString());
 			params.put(ParamKey.PWD, passWordEt.getText().toString());
 			UserManager.getInstance().userLogin(params,

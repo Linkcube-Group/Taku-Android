@@ -3,7 +3,7 @@ package me.linkcube.taku.ui.user;
 import me.linkcube.taku.R;
 import me.linkcube.taku.AppConst.ErrorFlag;
 import me.linkcube.taku.AppConst.ParamKey;
-
+import me.linkcube.taku.ui.TitleBaseActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,7 +11,6 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-import base.common.ui.TitleBaseActivity;
 
 import com.loopj.android.http.RequestParams;
 

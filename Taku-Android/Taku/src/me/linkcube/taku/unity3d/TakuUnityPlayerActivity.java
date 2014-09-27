@@ -76,6 +76,7 @@ public class TakuUnityPlayerActivity extends UnityPlayerActivity implements
 				data = FormatUtils.bytesToHexString(buf_data);
 				Log.d("Receive Data Hex 1 = ", data);
 				Log.d("Receive Data Hex 2 = ", getData());
+				
 			}
 		});
 	}
