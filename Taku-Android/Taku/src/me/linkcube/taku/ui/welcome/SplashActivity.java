@@ -1,11 +1,11 @@
 package me.linkcube.taku.ui.welcome;
 
 import static me.linkcube.taku.AppConst.KEY.SHOW_GUIDE;
+import custom.android.app.DialogActivity;
 import custom.android.util.AlertUtils;
 import custom.android.util.NetworkUtils;
 import custom.android.util.PreferenceUtils;
 import custom.android.util.Timber;
-import base.common.ui.DialogActivity;
 import me.linkcube.taku.AppConfig;
 import me.linkcube.taku.R;
 import me.linkcube.taku.ui.main.MainActivity;

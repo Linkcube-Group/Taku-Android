@@ -1,6 +1,6 @@
 package me.linkcube.taku.ui.sportsgame;
 
-import base.common.ui.DialogFragment;
+import custom.android.app.DialogFragment;
 import me.linkcube.taku.R;
 import android.app.Activity;
 import android.content.Intent;

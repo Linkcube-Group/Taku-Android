@@ -2,14 +2,13 @@ package me.linkcube.taku.ui.bt;
 
 import java.util.List;
 
-import base.common.ui.DialogActivity;
-
 import com.ervinwang.bthelper.BTHelper;
 import com.ervinwang.bthelper.BTManager;
 import com.ervinwang.bthelper.core.DeviceBroadcastReceiver;
 import com.ervinwang.bthelper.core.DeviceConnectionManager;
 import com.ervinwang.bthelper.core.OnBTDiscoveryListener;
 
+import custom.android.app.DialogActivity;
 import custom.android.util.AlertUtils;
 import custom.android.util.PreferenceUtils;
 import custom.android.util.Timber;

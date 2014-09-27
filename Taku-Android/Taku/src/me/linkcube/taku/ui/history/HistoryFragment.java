@@ -1,9 +1,9 @@
 package me.linkcube.taku.ui.history;
 
+import custom.android.app.DialogFragment;
 import me.linkcube.taku.R;
 import me.linkcube.taku.view.HistoryCircleChartView;
 import me.linkcube.taku.view.TitleView;
-import base.common.ui.DialogFragment;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,9 +13,9 @@ import android.view.ViewGroup;
 public class HistoryFragment extends DialogFragment {
 
 	private static final String ARG_DRAWER_POSITION = "drawer_position";
-	
+
 	private View layoutView;
-	
+
 	private HistoryCircleChartView historyCircleChartView;
 
 	public static HistoryFragment newInstance(int position) {
@@ -38,13 +38,16 @@ public class HistoryFragment extends DialogFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		layoutView=inflater.inflate(R.layout.history_fragment, container, false);
-		TitleView titleview=(TitleView)layoutView.findViewById(R.id.title_layout);
+		layoutView = inflater.inflate(R.layout.history_fragment, container,
+				false);
+		TitleView titleview = (TitleView) layoutView
+				.findViewById(R.id.title_layout);
 		initTitle(titleview);
-		
-		historyCircleChartView=(HistoryCircleChartView)layoutView.findViewById(R.id.historyCircleChartView);
-		
-		return  layoutView;
+
+		historyCircleChartView = (HistoryCircleChartView) layoutView
+				.findViewById(R.id.historyCircleChartView);
+
+		return layoutView;
 	}
 
 	private void initTitle(TitleView titleview) {
@@ -55,7 +58,7 @@ public class HistoryFragment extends DialogFragment {
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
-		
+
 		historyCircleChartView.onDrawHistory(70);
 		historyCircleChartView.invalidate();
 	}
