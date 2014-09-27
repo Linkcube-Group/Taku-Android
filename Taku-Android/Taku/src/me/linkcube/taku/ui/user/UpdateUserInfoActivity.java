@@ -4,7 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 
 import me.linkcube.taku.R;
-import me.linkcube.taku.ui.TitleBaseActivity;
+import me.linkcube.taku.ui.BaseTitleActivity;
 import me.linkcube.taku.view.CircularImage;
 import android.content.ContentProvider;
 import android.content.ContentResolver;
@@ -21,7 +21,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
 
-public class UpdateUserInfoActivity extends TitleBaseActivity implements
+public class UpdateUserInfoActivity extends BaseTitleActivity implements
 		OnClickListener {
 
 	private static final int REQUEST_CODE = 1;

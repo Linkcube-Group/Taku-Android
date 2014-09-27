@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -21,7 +20,7 @@ import android.widget.TextView;
  * @author xinyang
  * 
  */
-public class TitleBaseActivity extends BaseActivity {
+public class BaseTitleActivity extends BaseActivity {
 
 	public FrameLayout ly_content;
 	private View contentView;

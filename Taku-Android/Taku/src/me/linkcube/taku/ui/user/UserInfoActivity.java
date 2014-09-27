@@ -1,14 +1,14 @@
 package me.linkcube.taku.ui.user;
 
 import me.linkcube.taku.R;
-import me.linkcube.taku.ui.TitleBaseActivity;
+import me.linkcube.taku.ui.BaseTitleActivity;
 import me.linkcube.taku.view.MenuItem;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 
-public class UserInfoActivity extends TitleBaseActivity {
+public class UserInfoActivity extends BaseTitleActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

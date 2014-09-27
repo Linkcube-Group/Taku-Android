@@ -3,7 +3,7 @@ package me.linkcube.taku.ui.user;
 import me.linkcube.taku.R;
 import me.linkcube.taku.AppConst.ErrorFlag;
 import me.linkcube.taku.AppConst.ParamKey;
-import me.linkcube.taku.ui.TitleBaseActivity;
+import me.linkcube.taku.ui.BaseTitleActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -15,7 +15,7 @@ import com.loopj.android.http.RequestParams;
 
 import custom.android.util.AlertUtils;
 
-public class LoginActivity extends TitleBaseActivity implements OnClickListener {
+public class LoginActivity extends BaseTitleActivity implements OnClickListener {
 
 	private Button loginBtn;
 	private EditText emailEt;
