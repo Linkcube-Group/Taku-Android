@@ -1,9 +1,9 @@
-package base.common.ui;
+package custom.android.app;
 
 import custom.android.util.AlertUtils;
 import android.app.ProgressDialog;
 
-public abstract class DialogFragmentActivity extends BaseFragmentActivity {
+public abstract class DialogActivity extends BaseActivity {
 
 	protected ProgressDialog progressDialog = null;
 

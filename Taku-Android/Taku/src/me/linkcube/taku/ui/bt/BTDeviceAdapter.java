@@ -2,10 +2,9 @@ package me.linkcube.taku.ui.bt;
 
 import java.util.List;
 
-import base.common.ui.BaseListAdapter;
-
 import com.ervinwang.bthelper.core.DeviceConnectionManager;
 
+import custom.android.app.BaseListAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.view.View;

@@ -1,8 +1,7 @@
 package me.linkcube.taku.ui.setting;
 
-import base.common.ui.DialogActivity;
+import custom.android.app.DialogActivity;
 
 public class FeedbackActivity extends DialogActivity {
-	
-}
 
+}

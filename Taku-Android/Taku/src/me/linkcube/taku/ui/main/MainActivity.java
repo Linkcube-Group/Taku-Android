@@ -2,8 +2,8 @@ package me.linkcube.taku.ui.main;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 
-import base.common.ui.DialogFragment;
-import base.common.ui.DialogFragmentActivity;
+import custom.android.app.DialogFragment;
+import custom.android.app.DialogFragmentActivity;
 import me.linkcube.taku.R;
 import me.linkcube.taku.ui.history.HistoryFragment;
 import me.linkcube.taku.ui.main.view.Drawer.OnDrawerItemClickListener;
@@ -66,10 +66,10 @@ public class MainActivity extends DialogFragmentActivity implements
 	public void onDrawerItemClick(View view, int position) {
 		Log.i("CXC", "----position:" + position);
 		Log.i("CXC", "++++mPosition:" + mPosition);
-//		if (mPosition == position) {
-//			resideMenu.closeMenu();
-//			return;
-//		}
+		// if (mPosition == position) {
+		// resideMenu.closeMenu();
+		// return;
+		// }
 		switch (position) {
 		case SPORTS_GAMES:// 运动游戏
 			replaceFragment(SportsGamesFragment.newInstance(position));

@@ -1,9 +1,9 @@
-package base.common.ui;
+package custom.android.app;
 
 import custom.android.util.AlertUtils;
 import android.app.ProgressDialog;
 
-public abstract class DialogActivity extends BaseActivity {
+public abstract class DialogFragment extends BaseFragment {
 
 	protected ProgressDialog progressDialog = null;
 
@@ -12,7 +12,7 @@ public abstract class DialogActivity extends BaseActivity {
 	 */
 	protected void showProgressDialog(String message) {
 		if (progressDialog == null)
-			progressDialog = new ProgressDialog(this);
+			progressDialog = new ProgressDialog(getActivity());
 		progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 		progressDialog.setIndeterminate(false);
 		progressDialog.setCancelable(true);
@@ -35,7 +35,7 @@ public abstract class DialogActivity extends BaseActivity {
 	 * @param msg
 	 */
 	protected void showToast(final String msg) {
-		runOnUiThread(new Runnable() {
+		getActivity().runOnUiThread(new Runnable() {
 
 			@Override
 			public void run() {
@@ -51,7 +51,7 @@ public abstract class DialogActivity extends BaseActivity {
 	 * @param title
 	 */
 	protected void showAlert(final String msg, final String title) {
-		runOnUiThread(new Runnable() {
+		getActivity().runOnUiThread(new Runnable() {
 
 			@Override
 			public void run() {

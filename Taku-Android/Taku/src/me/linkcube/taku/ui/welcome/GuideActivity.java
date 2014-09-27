@@ -3,8 +3,8 @@ package me.linkcube.taku.ui.welcome;
 import java.util.ArrayList;
 import java.util.List;
 
-import base.common.ui.BasePagerAdapter;
-import base.common.ui.DialogActivity;
+import custom.android.app.BasePagerAdapter;
+import custom.android.app.DialogActivity;
 import me.linkcube.taku.R;
 import me.linkcube.taku.ui.main.MainActivity;
 import android.content.Intent;

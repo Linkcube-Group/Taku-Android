@@ -10,6 +10,7 @@ import custom.android.util.Rotate3DUtils;
 import me.linkcube.taku.AppConst.ErrorFlag;
 import me.linkcube.taku.AppConst.ParamKey;
 import me.linkcube.taku.R;
+import me.linkcube.taku.ui.TitleBaseActivity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.os.Bundle;
@@ -23,7 +24,6 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
-import base.common.ui.TitleBaseActivity;
 
 public class InitUserInfoActivity extends TitleBaseActivity implements
 		OnTouchListener {

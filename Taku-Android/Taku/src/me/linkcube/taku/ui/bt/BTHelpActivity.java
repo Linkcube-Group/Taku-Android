@@ -1,6 +1,6 @@
 package me.linkcube.taku.ui.bt;
 
-import base.common.ui.BaseActivity;
+import custom.android.app.BaseActivity;
 import me.linkcube.taku.R;
 import android.os.Bundle;
 

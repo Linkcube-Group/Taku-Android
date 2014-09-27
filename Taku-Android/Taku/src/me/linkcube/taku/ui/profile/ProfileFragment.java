@@ -1,6 +1,6 @@
 package me.linkcube.taku.ui.profile;
 
-import base.common.ui.DialogFragment;
+import custom.android.app.DialogFragment;
 import android.app.Activity;
 import android.os.Bundle;
 

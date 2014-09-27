@@ -1,7 +1,7 @@
 package me.linkcube.taku.ui.setting;
 
+import custom.android.app.DialogFragment;
 import custom.android.util.AlertUtils;
-import base.common.ui.DialogFragment;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;

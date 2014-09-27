@@ -1,5 +1,6 @@
-package base.common.ui;
+package me.linkcube.taku.ui;
 
+import custom.android.app.BaseActivity;
 import me.linkcube.taku.R;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -13,10 +14,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
 /**
  * 用于显示title的activity基类
+ * 
  * @author xinyang
- *
+ * 
  */
 public class TitleBaseActivity extends BaseActivity {
 
@@ -100,8 +103,8 @@ public class TitleBaseActivity extends BaseActivity {
 			rightTitleBtn.setBackgroundDrawable(drawable);
 		}
 	}
-	
-	public Button getLeftTitleBtn(){
+
+	public Button getLeftTitleBtn() {
 		return leftTitleBtn;
 	}
 
