@@ -1,9 +1,11 @@
 package custom.android.app;
 
+import custom.android.app.dialog.ISimpleDialogListener;
 import custom.android.util.AlertUtils;
 import android.app.ProgressDialog;
 
-public abstract class DialogFragmentActivity extends BaseFragmentActivity {
+public abstract class CustomDialogFragmentActivity extends
+		CustomFragmentActivity implements ISimpleDialogListener {
 
 	protected ProgressDialog progressDialog = null;
 
@@ -58,6 +60,24 @@ public abstract class DialogFragmentActivity extends BaseFragmentActivity {
 				AlertUtils.showAlert(mActivity, msg, title);
 			}
 		});
+	}
+
+	@Override
+	public void onPositiveButtonClicked(int requestCode) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void onNegativeButtonClicked(int requestCode) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void onNeutralButtonClicked(int requestCode) {
+		// TODO Auto-generated method stub
+
 	}
 
 }
