@@ -1,6 +1,6 @@
 package me.linkcube.taku.ui.sportsgame;
 
-import custom.android.app.DialogFragment;
+import custom.android.app.CustomDialogFragment;
 import me.linkcube.taku.R;
 import me.linkcube.taku.ui.bt.BTSettingActivity;
 import android.app.Activity;
@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 
-public class SportsGamesFragment extends DialogFragment implements
+public class SportsGamesFragment extends CustomDialogFragment implements
 		OnClickListener {
 
 	private static final String ARG_DRAWER_POSITION = "drawer_position";

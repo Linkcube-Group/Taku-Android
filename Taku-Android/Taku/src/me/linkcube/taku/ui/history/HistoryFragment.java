@@ -1,6 +1,6 @@
 package me.linkcube.taku.ui.history;
 
-import custom.android.app.DialogFragment;
+import custom.android.app.CustomDialogFragment;
 import me.linkcube.taku.R;
 import me.linkcube.taku.view.HistoryCircleChartView;
 import me.linkcube.taku.view.TitleView;
@@ -10,7 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class HistoryFragment extends DialogFragment {
+public class HistoryFragment extends CustomDialogFragment {
 
 	private static final String ARG_DRAWER_POSITION = "drawer_position";
 

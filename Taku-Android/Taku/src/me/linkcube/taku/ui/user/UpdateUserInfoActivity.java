@@ -68,12 +68,12 @@ public class UpdateUserInfoActivity extends BaseTitleActivity implements
 		getRightTitleBtn().setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
-				try {
-//					params.put(ParamKey.AVATAR, userAvatar,"multipart/form-data");
-//					params.put(ParamKey.AVATAR, userAvatar, name, "multipart/form-data", true);
-				} catch (FileNotFoundException e) {
-					e.printStackTrace();
-				}
+//				try {
+////					params.put(ParamKey.AVATAR, userAvatar,"multipart/form-data");
+////					params.put(ParamKey.AVATAR, userAvatar, name, "multipart/form-data", true);
+//				} catch (FileNotFoundException e) {
+//					e.printStackTrace();
+//				}
 				UserRequest.changeAvatar(UpdateUserInfoActivity.this, params,
 						new HttpResponseListener() {
 

@@ -1,7 +1,6 @@
 package me.linkcube.taku.ui.main;
 
 import custom.android.app.CustomDialogFragmentActivity;
-import custom.android.app.DialogFragment;
 import me.linkcube.taku.R;
 import me.linkcube.taku.ui.history.HistoryFragment;
 import me.linkcube.taku.ui.main.view.Drawer.OnDrawerItemClickListener;
@@ -10,6 +9,7 @@ import me.linkcube.taku.ui.networkgames.NetworkGamesFragment;
 import me.linkcube.taku.ui.setting.SettingFragment;
 import me.linkcube.taku.ui.sportsgame.SportsGamesFragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -87,7 +87,7 @@ public class MainActivity extends CustomDialogFragmentActivity implements
 		resideMenu.closeMenu();
 	}
 
-	private void replaceFragment(DialogFragment fragment) {
+	private void replaceFragment(Fragment fragment) {
 		getSupportFragmentManager().beginTransaction()
 				.replace(R.id.container, fragment).commit();
 	}

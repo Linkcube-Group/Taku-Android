@@ -1,6 +1,6 @@
 package me.linkcube.taku.ui.setting;
 
-import custom.android.app.DialogFragment;
+import custom.android.app.CustomDialogFragment;
 import custom.android.util.AlertUtils;
 import android.app.Activity;
 import android.content.Intent;
@@ -21,7 +21,7 @@ import me.linkcube.taku.ui.user.UserRequest;
 import me.linkcube.taku.view.MenuItem;
 import me.linkcube.taku.view.TitleView;
 
-public class SettingFragment extends DialogFragment {
+public class SettingFragment extends CustomDialogFragment {
 
 	private static final String ARG_DRAWER_POSITION = "drawer_position";
 
