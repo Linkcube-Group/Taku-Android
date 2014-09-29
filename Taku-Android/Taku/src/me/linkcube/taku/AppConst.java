@@ -33,6 +33,14 @@ public class AppConst {
 		public static final String PERSONSTATE = "PERSONSTATE";
 
 	}
+	
+	public static class Gender {
+
+		public static final String MALE = "男";
+
+		public static final String FEMALE = "女";
+
+	}
 
 	/**
 	 * 软件更新

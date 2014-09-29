@@ -1,8 +1,8 @@
 package me.linkcube.taku.core.entity;
 
-import com.orm.SugarRecord;
-
-public class UserInfoEntity extends SugarRecord<UserInfoEntity> {
+import com.orm.dsl.Table;
+@Table(name = "UserInfoEntity")
+public class UserInfoEntity{
 	
 	private String username;
 	private String nickname;
@@ -60,8 +60,8 @@ public class UserInfoEntity extends SugarRecord<UserInfoEntity> {
 		this.avatar = avatar;
 	}
 
-	public int getAge() {
-		return age;
+	public String getAge() {
+		return age+"";
 	}
 
 	public void setAge(int age) {

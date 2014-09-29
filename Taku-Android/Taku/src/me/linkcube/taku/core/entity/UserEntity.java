@@ -1,8 +1,6 @@
 package me.linkcube.taku.core.entity;
 
-import com.orm.SugarRecord;
-
-public class UserEntity extends SugarRecord<UserEntity>{
+public class UserEntity{
 
 	private String email;
 	private String password;

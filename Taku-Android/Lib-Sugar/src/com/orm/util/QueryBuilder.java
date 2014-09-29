@@ -1,13 +1,12 @@
-package com.orm;
+package com.orm.util;
+
+import com.orm.SugarRecord;
 
 public class QueryBuilder {
 
     public static String getColumnType(Class<?> type) {
         if ((type.equals(Boolean.class)) ||
                 (type.equals(Boolean.TYPE)) ||
-                (type.equals(java.util.Date.class)) ||
-                (type.equals(java.util.Calendar.class)) ||
-                (type.equals(java.sql.Date.class)) ||
                 (type.equals(Integer.class)) ||
                 (type.equals(Integer.TYPE)) ||
                 (type.equals(Long.class)) ||
@@ -15,6 +14,12 @@ public class QueryBuilder {
                 (!type.isPrimitive()) &&
                         (SugarRecord.class.isAssignableFrom(type))))  {
             return "INTEGER";
+        }
+
+        if ((type.equals(java.util.Date.class)) ||
+                (type.equals(java.sql.Date.class)) ||
+                (type.equals(java.util.Calendar.class))) {
+            return "INTEGER NULL";
         }
 
         if (type.getName().equals("[B")) {
@@ -32,4 +37,5 @@ public class QueryBuilder {
 
         return "";
     }
+
 }

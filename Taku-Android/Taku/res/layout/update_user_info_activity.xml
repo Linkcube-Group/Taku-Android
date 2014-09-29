@@ -60,6 +60,7 @@
             android:background="@color/light_black" />
 
         <me.linkcube.taku.view.MenuItem
+            android:id="@+id/nicknameItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             menuItem:TipTextColor="@color/black"
@@ -72,6 +73,7 @@
             android:background="@color/light_black" />
 
         <me.linkcube.taku.view.MenuItem
+            android:id="@+id/genderItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             menuItem:TipTextColor="@color/black"
@@ -84,6 +86,7 @@
             android:background="@color/light_black" />
 
         <me.linkcube.taku.view.MenuItem
+            android:id="@+id/ageItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             menuItem:TipTextColor="@color/black"
@@ -96,6 +99,7 @@
             android:background="@color/light_black" />
 
         <me.linkcube.taku.view.MenuItem
+            android:id="@+id/heightItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             menuItem:TipTextColor="@color/black"
@@ -108,6 +112,7 @@
             android:background="@color/light_black" />
 
         <me.linkcube.taku.view.MenuItem
+            android:id="@+id/weightItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             menuItem:TipTextColor="@color/black"

@@ -1,28 +1,21 @@
 package com.orm;
 
-public class SugarApp extends android.app.Application{
+import com.orm.SugarContext;
 
-    private Database database;
-    private static SugarApp sugarContext;
+import android.app.Application;
 
-    public void onCreate(){
+public class SugarApp extends Application {
+
+    @Override
+    public void onCreate() {
         super.onCreate();
-        SugarApp.sugarContext = this;
-        this.database = new Database(this);
+        SugarContext.init(this);
     }
 
-    public void onTerminate(){
-        if (this.database != null) {
-            this.database.getDB().close();
-        }
+    @Override
+    public void onTerminate() {
         super.onTerminate();
+        SugarContext.terminate();
     }
 
-    public static SugarApp getSugarContext(){
-        return sugarContext;
-    }
-
-    protected Database getDatabase() {
-        return database;
-    }
 }

@@ -2,6 +2,7 @@ package me.linkcube.taku.ui.user;
 
 import me.linkcube.taku.AppConst.ErrorFlag;
 import me.linkcube.taku.AppConst.ResponseKey;
+import me.linkcube.taku.core.entity.UserInfoEntity;
 
 import org.apache.http.Header;
 import org.json.JSONException;
@@ -10,8 +11,10 @@ import org.json.JSONObject;
 import android.content.Context;
 import android.util.Log;
 
+import com.google.gson.Gson;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+import com.orm.SugarRecord;
 
 /**
  * 用户相关的网络请求
@@ -93,10 +96,12 @@ public class UserRequest {
 					if (statusCode == 200) {
 						if (response.getBoolean(ResponseKey.STATUS)) {
 							String userInfo = response.getString("info");
-							// Gson gson = new Gson();
-							// UserInfoEntity userInfoEntity = gson.fromJson(
-							// userInfo, UserInfoEntity.class);
-							// userInfoEntity.save();
+							 Gson gson = new Gson();
+							 UserInfoEntity userInfoEntity = gson.fromJson(
+							 userInfo, UserInfoEntity.class);
+							 if(UserManager.getInstance().getUserInfo()==null){
+								 SugarRecord.save(userInfoEntity);
+							 }
 							// TODO 获取到用户个人信息后的一些操作
 							// Log.d("getUserInfo",
 							// "Nickname:" + userInfoEntity.getNickname());

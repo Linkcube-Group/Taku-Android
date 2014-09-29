@@ -2,6 +2,7 @@ package me.linkcube.taku.ui.user;
 
 import me.linkcube.taku.R;
 import me.linkcube.taku.AppConst.ErrorFlag;
+import me.linkcube.taku.AppConst.KEY;
 import me.linkcube.taku.AppConst.ParamKey;
 import me.linkcube.taku.ui.BaseTitleActivity;
 import android.content.Intent;
@@ -14,6 +15,7 @@ import android.widget.EditText;
 import com.loopj.android.http.RequestParams;
 
 import custom.android.util.AlertUtils;
+import custom.android.util.PreferenceUtils;
 
 public class LoginActivity extends BaseTitleActivity implements OnClickListener {
 
@@ -66,6 +68,9 @@ public class LoginActivity extends BaseTitleActivity implements OnClickListener 
 
 						@Override
 						public void responseSuccess() {
+							//保存当前用户
+							PreferenceUtils.setString(KEY.USER_NAME, "yxtest1@qq.com");
+							PreferenceUtils.setString(KEY.USER_PWD, "1234567");
 							finish();
 						}
 
