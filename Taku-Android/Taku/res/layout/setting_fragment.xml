@@ -36,6 +36,7 @@
             android:background="@color/light_white" />
 
         <me.linkcube.taku.view.MenuItem
+            android:id="@+id/feedbackItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             menuItem:TitleText="@string/feedback_text"

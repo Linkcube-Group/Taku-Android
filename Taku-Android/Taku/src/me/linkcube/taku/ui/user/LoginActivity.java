@@ -27,7 +27,6 @@ public class LoginActivity extends BaseTitleActivity implements OnClickListener 
 		setContentView(R.layout.login_activity);
 
 		initView();
-
 	}
 
 	private void initView() {
@@ -56,14 +55,13 @@ public class LoginActivity extends BaseTitleActivity implements OnClickListener 
 	public void onClick(View view) {
 		switch (view.getId()) {
 		case R.id.login_btn:
-			CookieInstance.getInstance().initCookie(this);
+			TakuHttpClient.initCookie(this);
 			RequestParams params = new RequestParams();
-			// params.put(ParamKey.EMAIL,
-			// "yxtest1@qq.com");//yangxintest@qq.com/313832830@qq.com
-			// params.put(ParamKey.PWD, "1234567");//shisong/1234567
-			params.put(ParamKey.EMAIL, emailEt.getText().toString());
-			params.put(ParamKey.PWD, passWordEt.getText().toString());
-			UserManager.getInstance().userLogin(params,
+			params.put(ParamKey.EMAIL, "yxtest1@qq.com");// yangxintest@qq.com/313832830@qq.com
+			params.put(ParamKey.PWD, "1234567");// shisong/1234567
+			// params.put(ParamKey.EMAIL, emailEt.getText().toString());
+			// params.put(ParamKey.PWD, passWordEt.getText().toString());
+			UserRequest.userLogin(params,
 					new HttpResponseListener() {
 
 						@Override

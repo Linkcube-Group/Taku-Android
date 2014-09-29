@@ -10,10 +10,10 @@
     android:paddingTop="30dp" >
 
     <ImageView
-        android:id="@+id/userAvatorIv"
+        android:id="@+id/userAvatarIv"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:background="@drawable/defalut_user_avator" />
+        android:background="@drawable/defalut_user_avatar" />
 
     <TextView
         android:id="@+id/userNameTv"

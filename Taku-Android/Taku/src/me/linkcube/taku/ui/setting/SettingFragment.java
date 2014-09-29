@@ -17,6 +17,8 @@ import me.linkcube.taku.ui.user.HttpResponseListener;
 import me.linkcube.taku.ui.user.LoginActivity;
 import me.linkcube.taku.ui.user.RegisterActivity;
 import me.linkcube.taku.ui.user.UserManager;
+import me.linkcube.taku.ui.user.UserRequest;
+import me.linkcube.taku.view.MenuItem;
 import me.linkcube.taku.view.TitleView;
 
 public class SettingFragment extends DialogFragment {
@@ -26,6 +28,8 @@ public class SettingFragment extends DialogFragment {
 	private View layoutView;
 
 	private Button settingLoginBtn;
+	
+	private MenuItem feedbackItem;
 
 	public static SettingFragment newInstance(int position) {
 		SettingFragment fragment = new SettingFragment();
@@ -67,6 +71,13 @@ public class SettingFragment extends DialogFragment {
 		TitleView titleview = (TitleView) layoutView
 				.findViewById(R.id.title_layout);
 		initTitle(titleview);
+		feedbackItem=(MenuItem)layoutView.findViewById(R.id.feedbackItem);
+		feedbackItem.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				startActivity(new Intent(getActivity(),FeedbackActivity.class));
+			}
+		});
 		settingLoginBtn = (Button) layoutView
 				.findViewById(R.id.setting_login_btn);
 		settingLoginBtn.setOnClickListener(new View.OnClickListener() {
@@ -74,7 +85,7 @@ public class SettingFragment extends DialogFragment {
 			@Override
 			public void onClick(View arg0) {
 				if (UserManager.getInstance().isLogin()) {
-					UserManager.getInstance().userLogout(
+					UserRequest.userLogout(
 							new HttpResponseListener() {
 
 								@Override

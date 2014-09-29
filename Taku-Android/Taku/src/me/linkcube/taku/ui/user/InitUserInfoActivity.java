@@ -115,7 +115,7 @@ public class InitUserInfoActivity extends BaseTitleActivity implements
 							.toString());
 					params.put(ParamKey.HEIGHT, editTexts.get(3).getText()
 							.toString());
-					UserManager.getInstance().initUserInfo(params,
+					UserRequest.editUserInfo(params,
 							new HttpResponseListener() {
 
 								@Override

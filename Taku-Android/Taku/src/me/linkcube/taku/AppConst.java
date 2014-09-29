@@ -124,6 +124,8 @@ public class AppConst {
 		public static final String HEIGHT = "height";
 		
 		public static final String WEIGHT = "weight";
+		
+		public static final String AVATAR = "avatar";
 
 	}
 

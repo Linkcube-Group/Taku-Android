@@ -76,13 +76,13 @@ public class RegisterActivity extends BaseTitleActivity implements
 				final RequestParams params = new RequestParams();
 				params.put(ParamKey.EMAIL, emailEt.getText().toString());
 				params.put(ParamKey.PWD, passWordEt.getText().toString());
-				UserManager.getInstance().userRegister(params,
+				UserRequest.userRegister(params,
 						new HttpResponseListener() {
 
 							@Override
 							public void responseSuccess() {
 								// 注册成功之后直接登录
-								UserManager.getInstance().userLogin(params,
+								UserRequest.userLogin(params,
 										new HttpResponseListener() {
 
 											@Override

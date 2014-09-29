@@ -1,10 +1,14 @@
 package me.linkcube.taku.ui.user;
 
+import java.util.List;
+
 import me.linkcube.taku.R;
+import me.linkcube.taku.core.entity.UserInfoEntity;
 import me.linkcube.taku.ui.BaseTitleActivity;
 import me.linkcube.taku.view.MenuItem;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 
@@ -15,6 +19,8 @@ public class UserInfoActivity extends BaseTitleActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.user_info_activity);
 		initView();
+		
+		//initData();
 	}
 
 	private void initView() {
@@ -28,6 +34,11 @@ public class UserInfoActivity extends BaseTitleActivity {
 						UpdateUserInfoActivity.class));
 			}
 		});
+	}
+
+	private void initData() {
+		List<UserInfoEntity> userInfoEntity = UserInfoEntity.find(UserInfoEntity.class, "username=?", new String[]{"yxtest1@qq.com"}, null, null, null);
+		Log.d("UserInfoActivity", "msg:"+userInfoEntity.get(0).getUsername());
 	}
 
 	private void initTitle() {

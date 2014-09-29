@@ -2,72 +2,70 @@ package me.linkcube.taku.core.entity;
 
 import com.orm.SugarRecord;
 
-public class UserEntity extends SugarRecord<UserEntity>{
-
-	private String email;
-	private String password;
+public class UserInfoEntity extends SugarRecord<UserInfoEntity> {
+	
+	private String username;
 	private String nickname;
 	private String gender;
 	private String height;
 	private String weight;
 	private String avatar;
-	private String birthday;
 	private int age;
-	public String getEmail() {
-		return email;
+	
+	public String getUsername() {
+		return username;
 	}
-	public void setEmail(String email) {
-		this.email = email;
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
+
 	public String getNickname() {
 		return nickname;
 	}
+
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
+
 	public String getGender() {
 		return gender;
 	}
+
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
+
 	public String getHeight() {
 		return height;
 	}
+
 	public void setHeight(String height) {
 		this.height = height;
 	}
+
 	public String getWeight() {
 		return weight;
 	}
+
 	public void setWeight(String weight) {
 		this.weight = weight;
 	}
+
 	public String getAvatar() {
 		return avatar;
 	}
+
 	public void setAvatar(String avatar) {
 		this.avatar = avatar;
 	}
-	public String getBirthday() {
-		return birthday;
-	}
-	public void setBirthday(String birthday) {
-		this.birthday = birthday;
-	}
+
 	public int getAge() {
 		return age;
 	}
+
 	public void setAge(int age) {
 		this.age = age;
 	}
-	
-	
-	
+
 }
