@@ -7,9 +7,11 @@ import me.linkcube.taku.ui.user.UserManager;
 import android.content.Context;
 import android.content.Intent;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 public class Drawer extends LinearLayout implements View.OnClickListener {
 
@@ -46,6 +48,7 @@ public class Drawer extends LinearLayout implements View.OnClickListener {
 					.setOnClickListener(this);
 		}
 		ImageView avatar_iv=(ImageView)findViewById(R.id.avatar_iv);
+		TextView user_name_tv=(TextView)findViewById(R.id.user_name_tv);
 		avatar_iv.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -57,6 +60,9 @@ public class Drawer extends LinearLayout implements View.OnClickListener {
 				}
 			}
 		});
+		if(UserManager.getInstance().getUserInfo()!=null)
+		user_name_tv.setText(UserManager.getInstance().getUserInfo().getNickname());
+		Log.d("Drawer", "residemenu_drawer-------init");
 	}
 
 	public void setOnDrawerItemClickListener(OnDrawerItemClickListener listener) {

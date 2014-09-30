@@ -1,10 +1,10 @@
 package me.linkcube.taku.ui.networkgames;
 
-import custom.android.app.DialogFragment;
+import custom.android.app.CustomDialogFragment;
 import android.app.Activity;
 import android.os.Bundle;
 
-public class NetworkGamesFragment extends DialogFragment {
+public class NetworkGamesFragment extends CustomDialogFragment {
 
 	private static final String ARG_DRAWER_POSITION = "drawer_position";
 

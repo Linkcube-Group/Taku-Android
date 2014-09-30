@@ -9,7 +9,7 @@ import com.ervinwang.bthelper.core.DeviceConnectionManager;
 import com.ervinwang.bthelper.core.OnBTDiscoveryListener;
 import com.unity3d.player.f;
 
-import custom.android.app.DialogActivity;
+import custom.android.app.CustomDialogFragmentActivity;
 import custom.android.util.AlertUtils;
 import custom.android.util.PreferenceUtils;
 import custom.android.util.Timber;
@@ -27,7 +27,7 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import me.linkcube.taku.R;
 import static com.ervinwang.bthelper.Const.Device.*;
 
-public class BTSettingActivity extends DialogActivity implements
+public class BTSettingActivity extends CustomDialogFragmentActivity implements
 		OnClickListener, OnDeviceItemClickListener, OnBTDiscoveryListener {
 
 	private ImageButton back_imgBtn;

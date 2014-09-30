@@ -1,9 +1,6 @@
 package me.linkcube.taku.ui.main;
 
-import com.nostra13.universalimageloader.core.ImageLoader;
-
-import custom.android.app.DialogFragment;
-import custom.android.app.DialogFragmentActivity;
+import custom.android.app.CustomDialogFragmentActivity;
 import me.linkcube.taku.R;
 import me.linkcube.taku.ui.history.HistoryFragment;
 import me.linkcube.taku.ui.main.view.Drawer.OnDrawerItemClickListener;
@@ -12,11 +9,12 @@ import me.linkcube.taku.ui.networkgames.NetworkGamesFragment;
 import me.linkcube.taku.ui.setting.SettingFragment;
 import me.linkcube.taku.ui.sportsgame.SportsGamesFragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
-public class MainActivity extends DialogFragmentActivity implements
+public class MainActivity extends CustomDialogFragmentActivity implements
 		ResideMenu.OnMenuListener, OnDrawerItemClickListener {
 
 	private final int SPORTS_GAMES = 0;
@@ -89,7 +87,7 @@ public class MainActivity extends DialogFragmentActivity implements
 		resideMenu.closeMenu();
 	}
 
-	private void replaceFragment(DialogFragment fragment) {
+	private void replaceFragment(Fragment fragment) {
 		getSupportFragmentManager().beginTransaction()
 				.replace(R.id.container, fragment).commit();
 	}

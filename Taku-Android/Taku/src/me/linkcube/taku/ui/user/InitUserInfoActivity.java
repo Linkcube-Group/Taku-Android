@@ -10,7 +10,7 @@ import custom.android.util.Rotate3DUtils;
 import me.linkcube.taku.AppConst.ErrorFlag;
 import me.linkcube.taku.AppConst.ParamKey;
 import me.linkcube.taku.R;
-import me.linkcube.taku.ui.TitleBaseActivity;
+import me.linkcube.taku.ui.BaseTitleActivity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.os.Bundle;
@@ -25,7 +25,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-public class InitUserInfoActivity extends TitleBaseActivity implements
+public class InitUserInfoActivity extends BaseTitleActivity implements
 		OnTouchListener {
 
 	// private List<ViewGroup> viewGroups = new ArrayList<ViewGroup>();
@@ -115,7 +115,7 @@ public class InitUserInfoActivity extends TitleBaseActivity implements
 							.toString());
 					params.put(ParamKey.HEIGHT, editTexts.get(3).getText()
 							.toString());
-					UserManager.getInstance().initUserInfo(params,
+					UserRequest.editUserInfo(params,
 							new HttpResponseListener() {
 
 								@Override

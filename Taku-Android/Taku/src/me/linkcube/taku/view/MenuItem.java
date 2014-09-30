@@ -110,5 +110,9 @@ public class MenuItem extends LinearLayout {
 	public void setTip(String tip) {
 		tipView.setText(tip);
 	}
+	
+	public String getTip(){
+		return tipView.getText().toString();
+	}
 
 }

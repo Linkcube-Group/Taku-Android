@@ -1,6 +1,6 @@
 package me.linkcube.taku.core.entity;
 
-public class UserEntity {
+public class UserEntity{
 
 	private String email;
 	private String password;
@@ -8,7 +8,7 @@ public class UserEntity {
 	private String gender;
 	private String height;
 	private String weight;
-	private String avator;
+	private String avatar;
 	private String birthday;
 	private int age;
 	public String getEmail() {
@@ -47,11 +47,11 @@ public class UserEntity {
 	public void setWeight(String weight) {
 		this.weight = weight;
 	}
-	public String getAvator() {
-		return avator;
+	public String getAvatar() {
+		return avatar;
 	}
-	public void setAvator(String avator) {
-		this.avator = avator;
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
 	}
 	public String getBirthday() {
 		return birthday;

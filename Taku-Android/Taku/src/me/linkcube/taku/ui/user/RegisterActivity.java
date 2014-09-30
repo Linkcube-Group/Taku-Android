@@ -3,7 +3,7 @@ package me.linkcube.taku.ui.user;
 import me.linkcube.taku.R;
 import me.linkcube.taku.AppConst.ErrorFlag;
 import me.linkcube.taku.AppConst.ParamKey;
-import me.linkcube.taku.ui.TitleBaseActivity;
+import me.linkcube.taku.ui.BaseTitleActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -17,7 +17,7 @@ import com.loopj.android.http.RequestParams;
 import custom.android.util.AlertUtils;
 import custom.android.util.StringUtils;
 
-public class RegisterActivity extends TitleBaseActivity implements
+public class RegisterActivity extends BaseTitleActivity implements
 		OnClickListener {
 	private Button registerBtn;
 	private EditText emailEt;
@@ -76,13 +76,13 @@ public class RegisterActivity extends TitleBaseActivity implements
 				final RequestParams params = new RequestParams();
 				params.put(ParamKey.EMAIL, emailEt.getText().toString());
 				params.put(ParamKey.PWD, passWordEt.getText().toString());
-				UserManager.getInstance().userRegister(params,
+				UserRequest.userRegister(params,
 						new HttpResponseListener() {
 
 							@Override
 							public void responseSuccess() {
 								// 注册成功之后直接登录
-								UserManager.getInstance().userLogin(params,
+								UserRequest.userLogin(params,
 										new HttpResponseListener() {
 
 											@Override

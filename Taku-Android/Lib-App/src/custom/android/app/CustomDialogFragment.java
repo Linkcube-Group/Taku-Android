@@ -3,7 +3,7 @@ package custom.android.app;
 import custom.android.util.AlertUtils;
 import android.app.ProgressDialog;
 
-public abstract class DialogFragment extends BaseFragment {
+public abstract class CustomDialogFragment extends BaseFragment {
 
 	protected ProgressDialog progressDialog = null;
 

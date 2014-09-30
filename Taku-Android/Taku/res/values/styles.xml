@@ -105,5 +105,27 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:gravity">right|center_vertical</item>
     </style>
+    
+    <style name="EditText">
+        <item name="android:textSize">@dimen/TextSize.Default</item>
+        <item name="android:textColorHint">@color/light_grey</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:background">@drawable/edit_text_bg</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minHeight">@dimen/EditTextHeight</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="LineEditText" parent="@style/EditText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="LineEditTextPwd" parent="@style/LineEditText">
+        <item name="android:password">true</item>
+        <item name="android:inputType">textPassword</item>
+    </style>
 
 </resources>

@@ -2,8 +2,9 @@ package me.linkcube.taku.ui.user;
 
 import me.linkcube.taku.R;
 import me.linkcube.taku.AppConst.ErrorFlag;
+import me.linkcube.taku.AppConst.KEY;
 import me.linkcube.taku.AppConst.ParamKey;
-import me.linkcube.taku.ui.TitleBaseActivity;
+import me.linkcube.taku.ui.BaseTitleActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -14,8 +15,9 @@ import android.widget.EditText;
 import com.loopj.android.http.RequestParams;
 
 import custom.android.util.AlertUtils;
+import custom.android.util.PreferenceUtils;
 
-public class LoginActivity extends TitleBaseActivity implements OnClickListener {
+public class LoginActivity extends BaseTitleActivity implements OnClickListener {
 
 	private Button loginBtn;
 	private EditText emailEt;
@@ -27,7 +29,6 @@ public class LoginActivity extends TitleBaseActivity implements OnClickListener 
 		setContentView(R.layout.login_activity);
 
 		initView();
-
 	}
 
 	private void initView() {
@@ -56,18 +57,20 @@ public class LoginActivity extends TitleBaseActivity implements OnClickListener 
 	public void onClick(View view) {
 		switch (view.getId()) {
 		case R.id.login_btn:
-			CookieInstance.getInstance().initCookie(this);
+			TakuHttpClient.initCookie(this);
 			RequestParams params = new RequestParams();
-			// params.put(ParamKey.EMAIL,
-			// "yxtest1@qq.com");//yangxintest@qq.com/313832830@qq.com
-			// params.put(ParamKey.PWD, "1234567");//shisong/1234567
-			params.put(ParamKey.EMAIL, emailEt.getText().toString());
-			params.put(ParamKey.PWD, passWordEt.getText().toString());
-			UserManager.getInstance().userLogin(params,
+			params.put(ParamKey.EMAIL, "yxtest1@qq.com");// yangxintest@qq.com/313832830@qq.com
+			params.put(ParamKey.PWD, "1234567");// shisong/1234567
+			// params.put(ParamKey.EMAIL, emailEt.getText().toString());
+			// params.put(ParamKey.PWD, passWordEt.getText().toString());
+			UserRequest.userLogin(params,
 					new HttpResponseListener() {
 
 						@Override
 						public void responseSuccess() {
+							//保存当前用户
+							PreferenceUtils.setString(KEY.USER_NAME, "yxtest1@qq.com");
+							PreferenceUtils.setString(KEY.USER_PWD, "1234567");
 							finish();
 						}
 

@@ -78,7 +78,7 @@
     <string name="submit_btn_text">提交</string>
     <string name="save_btn_text">保存</string>
     <string name="user_nickname_text">昵称</string>
-    <string name="user_avator_text">头像</string>
+    <string name="user_avatar_text">头像</string>
     <string name="user_birthday_text">生日</string>
     <string name="user_height_text">身高</string>
     <string name="user_weight_text">体重</string>
@@ -94,10 +94,15 @@
     <string name="user_history">您已累计使用Taku:</string>
     
     <!-- 设置界面 -->
-    <string name="setting_title_text">检测更新</string>
+    <string name="setting_title_text">设置</string>
     <string name="checkout_for_update_text">检测更新</string>
-    <string name="feedback_text">意见反馈</string>
     <string name="about_us_text">关于linkcube</string>
     
+    <!-- 意见反馈 -->
+    <string name="character_exceed">你输入的字数已经超过了限制！</string>
+    <string name="thanks_feed_back">感谢您的反馈意见！</string>
+    <string name="limit_word">字</string>
+    <string name="feedback_email">邮箱</string>
+    <string name="feedback_text">意见反馈</string>
 
 </resources>

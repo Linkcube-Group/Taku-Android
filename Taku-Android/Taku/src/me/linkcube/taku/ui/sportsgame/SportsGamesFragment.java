@@ -1,8 +1,5 @@
 package me.linkcube.taku.ui.sportsgame;
 
-import com.ervinwang.bthelper.BTManager;
-
-import custom.android.app.DialogFragment;
 import me.linkcube.taku.R;
 import me.linkcube.taku.ui.bt.BTSettingActivity;
 import android.app.Activity;
@@ -16,7 +13,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 
-public class SportsGamesFragment extends DialogFragment implements
+import com.ervinwang.bthelper.BTManager;
+
+import custom.android.app.CustomDialogFragment;
+
+public class SportsGamesFragment extends CustomDialogFragment implements
 		OnClickListener {
 
 	private static final int BT_SETTING_REQUEST_CODE = 2;

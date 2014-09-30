@@ -1,5 +1,8 @@
 package me.linkcube.taku;
 
+
+import com.orm.SugarContext;
+
 import custom.android.util.PreferenceUtils;
 import custom.android.util.Timber;
 import me.linkcube.taku.BuildConfig;
@@ -19,6 +22,13 @@ public class TakuApplication extends Application {
 			Timber.plant(new Timber.HollowTree());
 		}
 		PreferenceUtils.initDataShare(getApplicationContext());
+		SugarContext.init(this);
 	}
+	
+	@Override
+    public void onTerminate() {
+        super.onTerminate();
+        SugarContext.terminate();
+    }
 
 }
