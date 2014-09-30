@@ -1,5 +1,7 @@
 package me.linkcube.taku.ui.sportsgame;
 
+import com.ervinwang.bthelper.BTManager;
+
 import custom.android.app.DialogFragment;
 import me.linkcube.taku.R;
 import me.linkcube.taku.ui.bt.BTSettingActivity;
@@ -16,6 +18,8 @@ import android.widget.ImageButton;
 
 public class SportsGamesFragment extends DialogFragment implements
 		OnClickListener {
+
+	private static final int BT_SETTING_REQUEST_CODE = 2;
 
 	private static final String ARG_DRAWER_POSITION = "drawer_position";
 	// 连接蓝牙设备按钮
@@ -61,7 +65,7 @@ public class SportsGamesFragment extends DialogFragment implements
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
-		//得到控件引用
+		// 得到控件引用
 		dashboardBtn = (Button) view.findViewById(R.id.panelBtn);
 		takuBtn = (Button) view.findViewById(R.id.takuBtn);
 		connectBtn = (ImageButton) view.findViewById(R.id.connectBtn);
@@ -80,7 +84,14 @@ public class SportsGamesFragment extends DialogFragment implements
 			startActivity(new Intent(getActivity(), DashboardActivity.class));
 			break;
 		case R.id.takuBtn:
-			// TODO
+			// if (!isToyConnected()) {
+			// getActivity().startActivityForResult(
+			// new Intent(getActivity(), BTSettingActivity.class),
+			// BT_SETTING_REQUEST_CODE);
+			//
+			// } else {
+			// // TODO
+			// }
 			break;
 		case R.id.connectBtn:// 连接蓝牙设备
 			// TODO
@@ -90,6 +101,18 @@ public class SportsGamesFragment extends DialogFragment implements
 			break;
 		}
 
+	}
+
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if (requestCode == BT_SETTING_REQUEST_CODE) {
+			
+		}
+	}
+
+	private boolean isToyConnected() {
+		return BTManager.getInstance().getDeviceService().checkConnection();
 	}
 
 	@Override

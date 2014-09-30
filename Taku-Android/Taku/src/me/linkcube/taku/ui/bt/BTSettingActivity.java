@@ -7,6 +7,7 @@ import com.ervinwang.bthelper.BTManager;
 import com.ervinwang.bthelper.core.DeviceBroadcastReceiver;
 import com.ervinwang.bthelper.core.DeviceConnectionManager;
 import com.ervinwang.bthelper.core.OnBTDiscoveryListener;
+import com.unity3d.player.f;
 
 import custom.android.app.DialogActivity;
 import custom.android.util.AlertUtils;
@@ -160,11 +161,25 @@ public class BTSettingActivity extends DialogActivity implements
 		case R.id.bluetooth_help_btn:
 			break;
 		case R.id.back_imgBtn:
-			this.finish();
+			if (isToyConnected()) {
+				setResult(RESULT_OK);
+				this.finish();
+			}
 			break;
 		default:
 			break;
 		}
+
+	}
+
+	private boolean isToyConnected() {
+		return BTManager.getInstance().getDeviceService().checkConnection();
+	}
+
+	@Override
+	public void onBackPressed() {
+		super.onBackPressed();
+		// TODO
 
 	}
 

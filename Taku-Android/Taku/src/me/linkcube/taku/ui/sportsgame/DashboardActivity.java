@@ -6,7 +6,6 @@ import me.linkcube.taku.ui.share.ShareActivity;
 import me.linkcube.taku.ui.sportsgame.dashboardgame.InfoDashboard;
 import me.linkcube.taku.ui.sportsgame.dashboardgame.SpeedDashboard;
 import me.linkcube.taku.ui.sportsgame.dashboardgame.TargetCompletedView;
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -24,16 +23,16 @@ import android.view.View.OnClickListener;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.ervinwang.bthelper.BTHelper;
 import com.ervinwang.bthelper.BTManager;
 import com.ervinwang.bthelper.core.IReceiveData;
 import com.ervinwang.bthelper.utils.FormatUtils;
-import com.unity3d.player.l;
+
+import custom.android.app.BaseActivity;
 
 /**
  * 仪表盘
  * */
-public class DashboardActivity extends Activity {
+public class DashboardActivity extends BaseActivity {
 	// 关闭
 	private ImageButton close_imgBtn;
 	// 连接设备
@@ -61,10 +60,51 @@ public class DashboardActivity extends Activity {
 	private SpannableString timeString;
 	// 设定运行目标
 	private ImageButton setTaget_imgBtn;
+
 	private static final int SETTING_TARGET_REQUEST_CODE = 1;
+
+	private boolean connectBtSuccess = false;
 
 	// Just for Test
 	private int precent = 0;
+
+	// 起始时间－－记录用户进入taku仪表盘的时间点
+	private long startTime = System.currentTimeMillis();
+
+	// 记录前一帧的时间点
+	private long preTime = startTime;
+	// 记录当前帧的时间点
+	private long currenTime = startTime;
+
+	// 身高，单位cm
+	private double userHeight = 175;
+	// 体重， 单位kg
+	private double userWeight = 70.0;
+	// 步长，单位m
+	private double stepLength = (userHeight - 155.911) / 26.2;
+	// 步数，记录总步数
+	private int stepCount = 0;
+
+	// 运动距离，单位km.距离 = 步长*N/1000
+	private double distance = 0.0;
+	// 消耗cal,消耗 = 距离*体重（kg）
+	private double consumeCal = 0.0;
+	private double speed = 0.0;
+
+	private DashboardHander dashboardHander;
+
+	// 计算运行情况数据
+	private void calculatePrameter() {
+		stepCount++;
+
+		distance = stepLength * stepCount / 1000.0;
+		consumeCal = distance * userWeight;
+
+		preTime = currenTime;
+		currenTime = System.currentTimeMillis();
+		speed = 1000 * (stepLength * 3.6) / (currenTime - preTime);
+
+	}
 
 	// 解析蓝牙发送过来的数据
 	String blueToothString = "";
@@ -80,14 +120,16 @@ public class DashboardActivity extends Activity {
 		setContentView(R.layout.dashboard_activity);
 		init();
 
-		// new Thread(new ProgressRunable()).start();
-		// speedRate.showRotateAnimation(0, 180);
-		// speedRate.showRotateAnimation(90, 180);
 
 		HandlerThread handlerThread = new HandlerThread("Dashboard_Handler");
 		handlerThread.start();
-		final DashboardHander dashboardHander = new DashboardHander(
-				handlerThread.getLooper());
+		dashboardHander = new DashboardHander(handlerThread.getLooper());
+
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
 
 		// 接收玩具发送过来的数据
 		BTManager.getInstance().startReceiveData(new IReceiveData() {
@@ -109,11 +151,6 @@ public class DashboardActivity extends Activity {
 
 			}
 		});
-
-	}
-
-	private int computeData() {
-		return 88;
 	}
 
 	private void init() {
@@ -197,70 +234,61 @@ public class DashboardActivity extends Activity {
 	 * 设置TextView 文字效果
 	 * */
 	private void setDistanceText(String distanceStr) {
+		int length = distanceStr.length();
 		// 创建一个 SpannableString对象
 		distanceString = new SpannableString(distanceStr);
 		// 设置字体大小（相对值,单位：像素） 参数表示为默认字体大小的多少倍
-		distanceString.setSpan(new RelativeSizeSpan(3.0f), 0, 2,
+		distanceString.setSpan(new RelativeSizeSpan(3.0f), 0, length,
 				Spanned.SPAN_EXCLUSIVE_EXCLUSIVE); // 2.0f表示默认字体大小的两倍
 
 		// 设置字体前景色
-		distanceString.setSpan(new ForegroundColorSpan(Color.RED), 0, 2,
+		distanceString.setSpan(new ForegroundColorSpan(Color.RED), 0, length,
 				Spanned.SPAN_EXCLUSIVE_EXCLUSIVE); // 设置前景色为红色
 		distance_tv.setText(distanceString);
 
 	}
 
 	private void setTimeText(String timeStr) {
+		int length = timeStr.length();
 		// 创建一个 SpannableString对象
 		timeString = new SpannableString(timeStr);
 		// 设置字体大小（相对值,单位：像素） 参数表示为默认字体大小的多少倍
-		timeString.setSpan(new RelativeSizeSpan(3.0f), 0, 5,
+		timeString.setSpan(new RelativeSizeSpan(3.0f), 0, length,
 				Spanned.SPAN_EXCLUSIVE_EXCLUSIVE); // 2.0f表示默认字体大小的两倍
 
 		// 设置字体前景色
-		timeString.setSpan(new ForegroundColorSpan(Color.RED), 0, 5,
+		timeString.setSpan(new ForegroundColorSpan(Color.RED), 0, length,
 				Spanned.SPAN_EXCLUSIVE_EXCLUSIVE); // 设置前景色为红色
 
 		time_tv.setText(timeString);
 
 	}
 
-	Runnable dashboardRunnable = new Runnable() {
-
-		@Override
-		public void run() {
-			// TODO Auto-generated method stub
-			// 更新“目标完成”
-			while (mCurrentProgress < mTotalProgress) {
-				mCurrentProgress += 1;
-				// mTasksView.setProgress(mCurrentProgress);
-
-				try {
-					Thread.sleep(100);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-
-		}
-	};
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// TODO Auto-generated method stub
 		super.onActivityResult(requestCode, resultCode, data);
-		if (requestCode == SETTING_TARGET_REQUEST_CODE
-				&& resultCode == RESULT_OK) {
-			mtargetDistance = data.getDoubleExtra(
-					TargetSettingActivity.TARGET_DISTANCE, 0.0);
-			// 更新“目标完成”仪表盘中的目标运动距离---只有重绘的时候，显示才能改变
-			mTasksView.setTargetDistance(mtargetDistance);
-			mTasksView.setProgress(0);
+
+		switch (requestCode) {
+		case SETTING_TARGET_REQUEST_CODE:
+			if (resultCode == RESULT_OK) {
+				mtargetDistance = data.getDoubleExtra(
+						TargetSettingActivity.TARGET_DISTANCE, 0.0);
+				// 更新“目标完成”仪表盘中的目标运动距离---只有重绘的时候，显示才能改变
+				mTasksView.setTargetDistance(mtargetDistance);
+				mTasksView.setProgress(0);
+				// 每一次都要记得把之前的信息清零！！！，比如当前进度
+			}
+			break;
+		default:
+			break;
 		}
+
 	}
 
 	/**
-	 * 用于更新UI控件
+	 * 更新UI显示
 	 * */
 	class DashboardHander extends Handler {
 		// 构造函数
@@ -281,7 +309,7 @@ public class DashboardActivity extends Activity {
 			int progress = (int) bundle.getInt("progress");
 			mTasksView.setProgress(progress);
 			Log.i("CXC", "---progress:" + progress);
-
 		}
 	}
+
 }
