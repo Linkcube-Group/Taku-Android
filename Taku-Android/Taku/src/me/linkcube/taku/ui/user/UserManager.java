@@ -60,8 +60,15 @@ public class UserManager {
 			userInfoEntity=userInfoEntities.get(0);
 			return userInfoEntity;
 		}else{
+			Log.d("getUserInfo", "userInfoEntity:"+userInfoEntity.getNickname());
 			return userInfoEntity;
 		}
+	}
+	
+	
+
+	public static void setUserInfoEntity(UserInfoEntity userInfoEntity) {
+		UserManager.userInfoEntity = userInfoEntity;
 	}
 
 	/**
