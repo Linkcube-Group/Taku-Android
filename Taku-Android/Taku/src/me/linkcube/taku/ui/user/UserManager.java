@@ -27,8 +27,6 @@ public class UserManager {
 
 	private boolean isLogin = false;
 	
-	private static UserInfoEntity userInfoEntity=null;
-
 	private UserManager() {
 	}
 
@@ -47,28 +45,14 @@ public class UserManager {
 
 	public void setLogin(boolean isLogin) {
 		this.isLogin = isLogin;
-		if(!isLogin){
-			userInfoEntity=null;
-		}
 	}
 	
 	public UserInfoEntity getUserInfo(){
-		if(userInfoEntity==null){
 			List<UserInfoEntity> userInfoEntities = Select.from(UserInfoEntity.class).where("username=?", new String[]{PreferenceUtils.getString(KEY.USER_NAME, "")}).list();
 			if(userInfoEntities==null||userInfoEntities.isEmpty())
 				return null;
-			userInfoEntity=userInfoEntities.get(0);
-			return userInfoEntity;
-		}else{
-			Log.d("getUserInfo", "userInfoEntity:"+userInfoEntity.getNickname());
-			return userInfoEntity;
-		}
-	}
-	
-	
-
-	public static void setUserInfoEntity(UserInfoEntity userInfoEntity) {
-		UserManager.userInfoEntity = userInfoEntity;
+			Log.d("getUserInfo", "userInfoEntity:"+userInfoEntities.get(0).getNickname());
+			return userInfoEntities.get(0);
 	}
 
 	/**

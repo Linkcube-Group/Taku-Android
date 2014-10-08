@@ -1,6 +1,6 @@
 package me.linkcube.taku.core.entity;
 
-import java.io.File;
+import android.graphics.Bitmap;
 
 import com.orm.dsl.Table;
 
@@ -85,5 +85,5 @@ public class UserInfoEntity {
 	public void setAge(int age) {
 		this.age = age;
 	}
-
+	
 }

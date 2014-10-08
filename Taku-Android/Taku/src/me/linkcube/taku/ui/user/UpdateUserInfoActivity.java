@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import me.linkcube.taku.AppConst.ErrorFlag;
+import me.linkcube.taku.AppConst.HttpUrl;
 import me.linkcube.taku.AppConst.KEY;
 import me.linkcube.taku.AppConst.ParamKey;
 import me.linkcube.taku.R;
@@ -12,6 +13,7 @@ import me.linkcube.taku.core.entity.UserInfoEntity;
 import me.linkcube.taku.ui.BaseTitleActivity;
 import me.linkcube.taku.view.CircularImage;
 import me.linkcube.taku.view.MenuItem;
+import android.annotation.TargetApi;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -26,7 +28,7 @@ import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
 
 import com.loopj.android.http.RequestParams;
-import com.orm.SugarDb;
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.orm.SugarRecord;
 
 import custom.android.util.AlertUtils;
@@ -67,69 +69,62 @@ public class UpdateUserInfoActivity extends BaseTitleActivity implements
 		getRightTitleBtn().setText(
 				getResources().getString(R.string.save_btn_text));
 		setRightTitleBtn(R.drawable.user_btn_bg);
-		// params.set
 		getRightTitleBtn().setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
-				// TODO 上传头像还是有问题
-				// try {
-				// params.put(ParamKey.AVATAR, userAvatar,
-				// "multipart/form-data");
-				// } catch (FileNotFoundException e) {
-				// e.printStackTrace();
-				// }
-				// UserRequest.changeAvatar(UpdateUserInfoActivity.this, params,
-				// new HttpResponseListener() {
-				//
-				// @Override
-				// public void responseSuccess() {
-				// AlertUtils.showToast(
-				// UpdateUserInfoActivity.this, "修改头像完成！");
-				// }
-				//
-				// @Override
-				// public void responseFailed(int flag) {
-				//
-				// }
-				// });
-				params.put(ParamKey.NICKNAME, "哈哈12334");//nicknameItem.getTip());
-				params.put(ParamKey.GENDER, genderItem.getTip());
-				params.put(ParamKey.AGE, ageItem.getTip());
-				params.put(ParamKey.WEIGHT, weightItem.getTip());
-				params.put(ParamKey.HEIGHT, heightItem.getTip());
-				UserRequest.editUserInfo(params, new HttpResponseListener() {
+				// 上传头像
+				try {
+					params.put(ParamKey.AVATAR, userAvatar, "image/jpeg");
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				}
+				UserRequest.changeAvatar(UpdateUserInfoActivity.this, params,
+						new HttpResponseListener() {
 
-					@Override
-					public void responseSuccess() {
-						AlertUtils.showToast(UpdateUserInfoActivity.this,
-								"更新用户信息成功！");
-						SugarRecord.deleteAll(UserInfoEntity.class, "username=?", new String[]{PreferenceUtils.getString(KEY.USER_NAME, "")});
-						//SugarRecord.deleteAll(UserInfoEntity.class);
-						UserInfoEntity userInfoEntity=new UserInfoEntity(PreferenceUtils.getString(KEY.USER_NAME, ""), nicknameItem.getTip(), genderItem.getTip(), heightItem.getTip(), weightItem.getTip(), null, Integer.parseInt(ageItem.getTip()));
-						UserManager.setUserInfoEntity(null);
-						if (UserManager.getInstance().getUserInfo() == null) {
-							SugarRecord.save(userInfoEntity);
-							Log.d("Nickname", UserManager.getInstance().getUserInfo().getNickname());
-						}
-						
-					}
+							@Override
+							public void responseSuccess() {
+								params.put(ParamKey.NICKNAME, "踩踩踩踩");//nicknameItem.getTip()
+								params.put(ParamKey.GENDER, genderItem.getTip());
+								params.put(ParamKey.AGE, ageItem.getTip());
+								params.put(ParamKey.WEIGHT, weightItem.getTip());
+								params.put(ParamKey.HEIGHT, heightItem.getTip());
+								UserRequest.editUserInfo(params, new HttpResponseListener() {
 
-					@Override
-					public void responseFailed(int flag) {
-						switch (flag) {
-						case ErrorFlag.INIT_USER_INFO_ERROR:
-							AlertUtils.showToast(UpdateUserInfoActivity.this,
-									"初始化用户信息失败！");
-							break;
-						case ErrorFlag.NETWORK_ERROR:
-							AlertUtils.showToast(UpdateUserInfoActivity.this,
-									"网络错误，请检查！");
-							break;
-						default:
-							break;
-						}
-					}
-				});
+									@Override
+									public void responseSuccess() {
+										AlertUtils.showToast(UpdateUserInfoActivity.this,
+												"更新用户信息成功！");
+										SugarRecord.deleteAll(UserInfoEntity.class,
+												"username=?", new String[] { PreferenceUtils
+														.getString(KEY.USER_NAME, "") });
+										SugarRecord.deleteAll(UserInfoEntity.class);
+										UserRequest.getUserInfo();
+										finish();
+									}
+
+									@Override
+									public void responseFailed(int flag) {
+										switch (flag) {
+										case ErrorFlag.INIT_USER_INFO_ERROR:
+											AlertUtils.showToast(UpdateUserInfoActivity.this,
+													"更新用户信息失败！");
+											break;
+										case ErrorFlag.NETWORK_ERROR:
+											AlertUtils.showToast(UpdateUserInfoActivity.this,
+													"网络错误，请检查！");
+											break;
+										default:
+											break;
+										}
+									}
+								});
+							}
+
+							@Override
+							public void responseFailed(int flag) {
+
+							}
+						});
 			}
 		});
 	}
@@ -138,6 +133,7 @@ public class UpdateUserInfoActivity extends BaseTitleActivity implements
 		params = new RequestParams();
 		UserInfoEntity userInfoEntity = UserManager.getInstance().getUserInfo();
 		if (userInfoEntity != null) {
+			ImageLoader.getInstance().displayImage(HttpUrl.BASE_URL+userInfoEntity.getAvatar(), userAvatarIv);
 			nicknameItem.setTip(userInfoEntity.getNickname());
 			genderItem.setTip(userInfoEntity.getGender());
 			ageItem.setTip(userInfoEntity.getAge());
@@ -146,6 +142,7 @@ public class UpdateUserInfoActivity extends BaseTitleActivity implements
 		}
 	}
 
+	@TargetApi(Build.VERSION_CODES.KITKAT)
 	@Override
 	public void onClick(View view) {
 
