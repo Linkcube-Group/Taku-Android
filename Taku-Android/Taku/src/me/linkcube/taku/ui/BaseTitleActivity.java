@@ -1,6 +1,6 @@
 package me.linkcube.taku.ui;
 
-import custom.android.app.BaseActivity;
+import custom.android.app.CustomFragmentActivity;
 import me.linkcube.taku.R;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -20,7 +20,7 @@ import android.widget.TextView;
  * @author xinyang
  * 
  */
-public class BaseTitleActivity extends BaseActivity {
+public class BaseTitleActivity extends CustomFragmentActivity {
 
 	public FrameLayout ly_content;
 	private View contentView;
