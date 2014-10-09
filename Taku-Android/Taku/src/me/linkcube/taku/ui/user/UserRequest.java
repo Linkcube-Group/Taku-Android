@@ -1,6 +1,7 @@
 package me.linkcube.taku.ui.user;
 
 import me.linkcube.taku.AppConst.ErrorFlag;
+import me.linkcube.taku.AppConst.KEY;
 import me.linkcube.taku.AppConst.ResponseKey;
 import me.linkcube.taku.core.entity.UserInfoEntity;
 
@@ -15,6 +16,8 @@ import com.google.gson.Gson;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.orm.SugarRecord;
+
+import custom.android.util.PreferenceUtils;
 
 /**
  * 用户相关的网络请求
@@ -84,7 +87,7 @@ public class UserRequest {
 		});
 	}
 
-	private static void getUserInfo() {
+	public static void getUserInfo() {
 		TakuHttpClient.post("getinfo", new JsonHttpResponseHandler() {
 			@Override
 			public void onSuccess(int statusCode, Header[] headers,
@@ -96,17 +99,17 @@ public class UserRequest {
 					if (statusCode == 200) {
 						if (response.getBoolean(ResponseKey.STATUS)) {
 							String userInfo = response.getString("info");
-							 Gson gson = new Gson();
-							 UserInfoEntity userInfoEntity = gson.fromJson(
-							 userInfo, UserInfoEntity.class);
-							 if(UserManager.getInstance().getUserInfo()==null){
-								 SugarRecord.save(userInfoEntity);
-							 }
+							Gson gson = new Gson();
+							UserInfoEntity userInfoEntity = gson.fromJson(
+									userInfo, UserInfoEntity.class);
+							if (UserManager.getInstance().getUserInfo() == null) {
+								SugarRecord.save(userInfoEntity);
+							}
 							// TODO 获取到用户个人信息后的一些操作
 							// Log.d("getUserInfo",
 							// "Nickname:" + userInfoEntity.getNickname());
 						} else {
-
+							
 						}
 					} else {
 
@@ -176,12 +179,13 @@ public class UserRequest {
 
 	public static void changeAvatar(Context context, RequestParams params,
 			final HttpResponseListener httpResponseListener) {
-		TakuHttpClient.post("changeavatar", params,new JsonHttpResponseHandler() {
+		TakuHttpClient.post("changeavatar", params,
+				new JsonHttpResponseHandler() {
 					@Override
 					public void onSuccess(int statusCode, Header[] headers,
 							JSONObject response) {
 						super.onSuccess(statusCode, headers, response);
-						Log.d("initUserInfo", "statusCode:" + statusCode
+						Log.d("changeAvatar", "statusCode:" + statusCode
 								+ "---response:" + response.toString());
 						try {
 							if (statusCode == 200) {

@@ -24,7 +24,7 @@
         android:layout_gravity="center_vertical"
         android:layout_marginRight="10dp"
         android:gravity="right|center_vertical"
-        android:textColor="@android:color/white"
+        android:textColor="@android:color/black"
         android:textSize="@dimen/MenuTextSize" />
 
     <ImageView

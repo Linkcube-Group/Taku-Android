@@ -1,7 +1,6 @@
 package me.linkcube.taku.ui.user;
 
 import org.apache.http.Header;
-import org.apache.http.HttpEntity;
 import org.apache.http.client.CookieStore;
 import org.apache.http.client.protocol.ClientContext;
 import org.apache.http.cookie.Cookie;
@@ -32,7 +31,7 @@ public class TakuHttpClient {
 	// }
 	// }
 
-	private static final String BASE_URL = "http://115.29.175.17:8000/";
+	private static final String BASE_URL = "http://112.124.22.252:8000/";
 
 	private static AsyncHttpClient client = new AsyncHttpClient();
 

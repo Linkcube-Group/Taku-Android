@@ -39,7 +39,7 @@ public abstract class CustomDialogFragment extends BaseFragment {
 
 			@Override
 			public void run() {
-				AlertUtils.showToast(mActivity, msg);
+				AlertUtils.showToast(getActivity(), msg);
 			}
 		});
 	}
@@ -55,7 +55,7 @@ public abstract class CustomDialogFragment extends BaseFragment {
 
 			@Override
 			public void run() {
-				AlertUtils.showAlert(mActivity, msg, title);
+				AlertUtils.showAlert(getActivity(), msg, title);
 			}
 		});
 	}

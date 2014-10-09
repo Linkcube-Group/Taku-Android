@@ -51,7 +51,7 @@ public class SplashActivity extends CustomDialogFragmentActivity {
 		boolean available = NetworkUtils.isNetworkAvailable(this);
 		isShowGuide = isShowGuide();
 		if (isShowGuide) {
-			startActivity(new Intent(mActivity, GuideActivity.class));
+			startActivity(new Intent(this, GuideActivity.class));
 			finish();
 		} else {
 			startActivity(new Intent(SplashActivity.this, MainActivity.class));
@@ -89,7 +89,8 @@ public class SplashActivity extends CustomDialogFragmentActivity {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						dialog.dismiss();
-						startActivity(new Intent(mActivity, GuideActivity.class));
+						startActivity(new Intent(SplashActivity.this,
+								GuideActivity.class));
 						finish();
 					}
 

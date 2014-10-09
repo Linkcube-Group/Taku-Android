@@ -7,11 +7,13 @@ import com.ervinwang.bthelper.BTManager;
 import com.ervinwang.bthelper.core.DeviceBroadcastReceiver;
 import com.ervinwang.bthelper.core.DeviceConnectionManager;
 import com.ervinwang.bthelper.core.OnBTDiscoveryListener;
+import com.unity3d.player.f;
 
 import custom.android.app.CustomDialogFragmentActivity;
 import custom.android.util.AlertUtils;
 import custom.android.util.PreferenceUtils;
 import custom.android.util.Timber;
+import custom.android.widget.Toaster;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.os.AsyncTask;
@@ -56,8 +58,8 @@ public class BTSettingActivity extends CustomDialogFragmentActivity implements
 		super.onResume();
 		bluetoothTb.setChecked(BTHelper.isBluetoothEnabled());
 		bluetoothTb.setOnCheckedChangeListener(switchListener);
-		BTHelper.regiserDeviceReceiver(mActivity, deviceDiscoveryReceiver);
-		deviceAdapter = new BTDeviceAdapter(mActivity, deviceList);
+		BTHelper.regiserDeviceReceiver(this, deviceDiscoveryReceiver);
+		deviceAdapter = new BTDeviceAdapter(this, deviceList);
 		deviceLv.setAdapter(deviceAdapter);
 
 	}
@@ -76,7 +78,7 @@ public class BTSettingActivity extends CustomDialogFragmentActivity implements
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		BTHelper.unregisterDeviceReceiver(mActivity, deviceDiscoveryReceiver);
+		BTHelper.unregisterDeviceReceiver(this, deviceDiscoveryReceiver);
 		deviceList.clear();
 	}
 
@@ -124,7 +126,7 @@ public class BTSettingActivity extends CustomDialogFragmentActivity implements
 					R.string.dialog_bonding_bluetooth));
 		} else {
 			Timber.d("绑定拉玩具失败");
-			AlertUtils.showToast(mActivity,
+			AlertUtils.showToast(this,
 					getResources().getString(R.string.toast_toy_unbonded));
 		}
 	}
@@ -152,7 +154,7 @@ public class BTSettingActivity extends CustomDialogFragmentActivity implements
 				startDiscoverBluetoothDevices();
 			} else {
 				AlertUtils.showToast(
-						mActivity,
+						this,
 						getResources().getString(
 								R.string.toast_pls_open_bluetooth));
 			}
@@ -160,11 +162,25 @@ public class BTSettingActivity extends CustomDialogFragmentActivity implements
 		case R.id.bluetooth_help_btn:
 			break;
 		case R.id.back_imgBtn:
-			this.finish();
+			if (isToyConnected()) {
+				setResult(RESULT_OK);
+				this.finish();
+			}
 			break;
 		default:
 			break;
 		}
+
+	}
+
+	private boolean isToyConnected() {
+		return BTManager.getInstance().getDeviceService().checkConnection();
+	}
+
+	@Override
+	public void onBackPressed() {
+		super.onBackPressed();
+		// TODO
 
 	}
 
@@ -276,14 +292,14 @@ public class BTSettingActivity extends CustomDialogFragmentActivity implements
 			dismissProgressDialog();
 			if (success) {
 				DeviceConnectionManager.getInstance().startCheckConnetionTask();
-				AlertUtils.showToast(mActivity,
+				Toaster.showLong(BTSettingActivity.this,
 						R.string.toast_connect_toy_success);
 				// 保存连接上的设备名和状态
 				PreferenceUtils.setString(DEVICE_NAME, mDevice.getName());
 				PreferenceUtils.setString(DEVICE_ADDRESS, mDevice.getAddress());
 				deviceAdapter.notifyDataSetChanged();
 			} else {
-				AlertUtils.showToast(mActivity,
+				Toaster.showLong(BTSettingActivity.this,
 						R.string.toast_connect_toy_failure);
 			}
 
@@ -306,7 +322,7 @@ public class BTSettingActivity extends CustomDialogFragmentActivity implements
 		Timber.d("onReceive:bluetooth bond state changed -> " + "BONDED");
 		Timber.d("玩具配对成功");
 		dismissProgressDialog();
-		AlertUtils.showToast(mActivity,
+		AlertUtils.showToast(this,
 				getResources().getString(R.string.toast_bond_toy_success));
 		deviceAdapter.notifyDataSetChanged();
 	}
