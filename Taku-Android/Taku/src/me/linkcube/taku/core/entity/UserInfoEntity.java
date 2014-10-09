@@ -1,7 +1,5 @@
 package me.linkcube.taku.core.entity;
 
-import android.graphics.Bitmap;
-
 import com.orm.dsl.Table;
 
 @Table(name = "UserInfoEntity")
@@ -14,9 +12,9 @@ public class UserInfoEntity {
 	private String weight;
 	private String avatar;
 	private int age;
-	
-	public UserInfoEntity(){
-		
+
+	public UserInfoEntity() {
+
 	}
 
 	public UserInfoEntity(String username, String nickname, String gender,
@@ -85,5 +83,5 @@ public class UserInfoEntity {
 	public void setAge(int age) {
 		this.age = age;
 	}
-	
+
 }
