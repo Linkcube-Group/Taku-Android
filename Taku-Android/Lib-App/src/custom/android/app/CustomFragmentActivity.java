@@ -3,13 +3,10 @@ package custom.android.app;
 import java.io.Serializable;
 
 import custom.android.util.Timber;
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 
 public class CustomFragmentActivity extends FragmentActivity {
-
-	protected Activity mActivity = this;
 
 	@SuppressWarnings("unchecked")
 	protected <V extends Serializable> V getSerializable(final String name) {

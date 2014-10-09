@@ -31,37 +31,6 @@ public abstract class CustomDialogFragmentActivity extends
 		}
 	}
 
-	/**
-	 * 主UI上的Toast展示
-	 * 
-	 * @param msg
-	 */
-	protected void showToast(final String msg) {
-		runOnUiThread(new Runnable() {
-
-			@Override
-			public void run() {
-				AlertUtils.showToast(mActivity, msg);
-			}
-		});
-	}
-
-	/**
-	 * 主UI上的AlertDialog展示，带有一个确定按钮，并对词按钮无监听
-	 * 
-	 * @param msg
-	 * @param title
-	 */
-	protected void showAlert(final String msg, final String title) {
-		runOnUiThread(new Runnable() {
-
-			@Override
-			public void run() {
-				AlertUtils.showAlert(mActivity, msg, title);
-			}
-		});
-	}
-
 	@Override
 	public void onPositiveButtonClicked(int requestCode) {
 		// TODO Auto-generated method stub
