@@ -10,10 +10,10 @@ import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
-import com.nineoldandroids.animation.Animator;
-import com.nineoldandroids.animation.AnimatorSet;
-import com.nineoldandroids.animation.ObjectAnimator;
-import com.nineoldandroids.view.ViewHelper;
+import custom.android.animation.Animator;
+import custom.android.animation.AnimatorSet;
+import custom.android.animation.ObjectAnimator;
+import custom.android.view.ViewHelper;
 
 import java.util.ArrayList;
 import java.util.List;
