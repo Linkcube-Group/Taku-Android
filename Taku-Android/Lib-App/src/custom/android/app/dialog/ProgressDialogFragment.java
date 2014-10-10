@@ -17,14 +17,18 @@ import android.view.View;
 import android.widget.TextView;
 
 /**
- * Simple progress dialog that shows indeterminate progress bar together with message and dialog title (optional).<br/>
+ * Simple progress dialog that shows indeterminate progress bar together with
+ * message and dialog title (optional).<br/>
  * <p>
- * To show the dialog, start with {@link #createBuilder(android.content.Context, android.support.v4.app.FragmentManager)}.
+ * To show the dialog, start with
+ * {@link #createBuilder(android.content.Context, android.support.v4.app.FragmentManager)}
+ * .
  * </p>
  * <p>
- * Dialog can be cancelable - to listen to cancellation, activity or target fragment must implement {@link ISimpleDialogCancelListener}
+ * Dialog can be cancelable - to listen to cancellation, activity or target
+ * fragment must implement {@link ISimpleDialogCancelListener}
  * </p>
- *
+ * 
  * @author Ervin Wang
  */
 public class ProgressDialogFragment extends BaseDialogFragment {
@@ -34,20 +38,27 @@ public class ProgressDialogFragment extends BaseDialogFragment {
 
 	protected int mRequestCode;
 
-	public static ProgressDialogBuilder createBuilder(Context context, FragmentManager fragmentManager) {
+	public static ProgressDialogBuilder createBuilder(Context context,
+			FragmentManager fragmentManager) {
 		return new ProgressDialogBuilder(context, fragmentManager);
 	}
 
 	@Override
 	protected Builder build(Builder builder) {
-		final int defaultMessageTextColor = getResources().getColor(R.color.sdl_message_text_dark);
-		final TypedArray a = getActivity().getTheme().obtainStyledAttributes(null, R.styleable.DialogStyle, R.attr.sdlDialogStyle, 0);
-		final int messageTextColor = a.getColor(R.styleable.DialogStyle_messageTextColor, defaultMessageTextColor);
+		final int defaultMessageTextColor = getResources().getColor(
+				R.color.sdl_message_text_dark);
+		final TypedArray a = getActivity().getTheme().obtainStyledAttributes(
+				null, R.styleable.DialogStyle, R.attr.sdlDialogStyle, 0);
+		final int messageTextColor = a.getColor(
+				R.styleable.DialogStyle_messageTextColor,
+				defaultMessageTextColor);
 		a.recycle();
 
 		final LayoutInflater inflater = builder.getLayoutInflater();
-		final View view = inflater.inflate(R.layout.dialog_part_progress, null, false);
-		final TextView tvMessage = (TextView) view.findViewById(R.id.sdl__message);
+		final View view = inflater.inflate(R.layout.dialog_part_progress, null,
+				false);
+		final TextView tvMessage = (TextView) view
+				.findViewById(R.id.sdl__message);
 		tvMessage.setText(getArguments().getString(ARG_MESSAGE));
 		tvMessage.setTextColor(messageTextColor);
 
@@ -62,11 +73,12 @@ public class ProgressDialogFragment extends BaseDialogFragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		if (getArguments() == null) {
-			throw new IllegalArgumentException("use ProgressDialogBuilder to construct this dialog");
+			throw new IllegalArgumentException(
+					"use ProgressDialogBuilder to construct this dialog");
 		}
 		final Fragment targetFragment = getTargetFragment();
-		mRequestCode = targetFragment != null ?
-				getTargetRequestCode() : getArguments().getInt(BaseDialogBuilder.ARG_REQUEST_CODE, 0);
+		mRequestCode = targetFragment != null ? getTargetRequestCode()
+				: getArguments().getInt(BaseDialogBuilder.ARG_REQUEST_CODE, 0);
 	}
 
 	@Override
@@ -92,12 +104,14 @@ public class ProgressDialogFragment extends BaseDialogFragment {
 		return null;
 	}
 
-	public static class ProgressDialogBuilder extends BaseDialogBuilder<ProgressDialogBuilder> {
+	public static class ProgressDialogBuilder extends
+			BaseDialogBuilder<ProgressDialogBuilder> {
 
 		private String mTitle;
 		private String mMessage;
 
-		protected ProgressDialogBuilder(Context context, FragmentManager fragmentManager) {
+		protected ProgressDialogBuilder(Context context,
+				FragmentManager fragmentManager) {
 			super(context, fragmentManager, ProgressDialogFragment.class);
 		}
 
@@ -110,7 +124,6 @@ public class ProgressDialogFragment extends BaseDialogFragment {
 			mTitle = mContext.getString(titleResourceId);
 			return this;
 		}
-
 
 		public ProgressDialogBuilder setTitle(String title) {
 			mTitle = title;

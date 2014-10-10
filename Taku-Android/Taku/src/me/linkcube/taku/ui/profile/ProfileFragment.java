@@ -1,10 +1,10 @@
 package me.linkcube.taku.ui.profile;
 
-import custom.android.app.CustomDialogFragment;
+import custom.android.app.BaseFragment;
 import android.app.Activity;
 import android.os.Bundle;
 
-public class ProfileFragment extends CustomDialogFragment {
+public class ProfileFragment extends BaseFragment {
 
 	private static final String ARG_DRAWER_POSITION = "drawer_position";
 

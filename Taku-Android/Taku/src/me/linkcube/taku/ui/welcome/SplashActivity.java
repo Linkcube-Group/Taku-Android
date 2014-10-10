@@ -1,7 +1,7 @@
 package me.linkcube.taku.ui.welcome;
 
 import static me.linkcube.taku.AppConst.KEY.SHOW_GUIDE;
-import custom.android.app.CustomDialogFragmentActivity;
+import custom.android.app.CustomFragmentActivity;
 import custom.android.util.AlertUtils;
 import custom.android.util.NetworkUtils;
 import custom.android.util.PreferenceUtils;
@@ -22,7 +22,7 @@ import android.view.Window;
  * @author Orange
  * 
  */
-public class SplashActivity extends CustomDialogFragmentActivity {
+public class SplashActivity extends CustomFragmentActivity {
 
 	private boolean isShowGuide;
 

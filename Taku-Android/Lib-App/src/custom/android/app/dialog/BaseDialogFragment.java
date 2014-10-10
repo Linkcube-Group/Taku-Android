@@ -294,6 +294,9 @@ public abstract class BaseDialogFragment extends DialogFragment {
 	    mIcon = drawable;
 	    return this;
 	}
+	
+	
+
 
 	public View create() {
 	    final Resources res = mContext.getResources();

@@ -9,7 +9,8 @@ import com.ervinwang.bthelper.core.DeviceConnectionManager;
 import com.ervinwang.bthelper.core.OnBTDiscoveryListener;
 import com.unity3d.player.f;
 
-import custom.android.app.CustomDialogFragmentActivity;
+import custom.android.app.CustomFragmentActivity;
+import custom.android.app.dialog.ProgressDialogFragment;
 import custom.android.util.AlertUtils;
 import custom.android.util.PreferenceUtils;
 import custom.android.util.Timber;
@@ -18,6 +19,7 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -28,7 +30,7 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import me.linkcube.taku.R;
 import static com.ervinwang.bthelper.Const.Device.*;
 
-public class BTSettingActivity extends CustomDialogFragmentActivity implements
+public class BTSettingActivity extends CustomFragmentActivity implements
 		OnClickListener, OnDeviceItemClickListener, OnBTDiscoveryListener {
 
 	private ImageButton back_imgBtn;
@@ -43,6 +45,8 @@ public class BTSettingActivity extends CustomDialogFragmentActivity implements
 	private BTDeviceAdapter deviceAdapter;
 
 	private DeviceBroadcastReceiver deviceDiscoveryReceiver;
+
+	private DialogFragment progress;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -122,8 +126,13 @@ public class BTSettingActivity extends CustomDialogFragmentActivity implements
 
 	private void bondDevice(BluetoothDevice device, int position) {
 		if (BTManager.getInstance().bondDevice(device)) {
-			showProgressDialog(getResources().getString(
-					R.string.dialog_bonding_bluetooth));
+
+			progress = ProgressDialogFragment
+					.createBuilder(this, getSupportFragmentManager())
+					.setMessage(R.string.dialog_bonding_bluetooth).show();
+
+			// showProgressDialog(getResources().getString(
+			// R.string.dialog_bonding_bluetooth));
 		} else {
 			Timber.d("绑定拉玩具失败");
 			AlertUtils.showToast(this,
@@ -272,8 +281,10 @@ public class BTSettingActivity extends CustomDialogFragmentActivity implements
 		protected void onPreExecute() {
 			super.onPreExecute();
 			Timber.d("准备连接设备");
-			showProgressDialog(getResources().getString(
-					R.string.toast_connecting_toy));
+			progress = ProgressDialogFragment
+					.createBuilder(BTSettingActivity.this,
+							getSupportFragmentManager())
+					.setMessage(R.string.toast_connecting_toy).show();
 		}
 
 		@Override
@@ -289,7 +300,7 @@ public class BTSettingActivity extends CustomDialogFragmentActivity implements
 		protected void onPostExecute(Boolean success) {
 			super.onPostExecute(success);
 			Timber.d("连接设备完毕");
-			dismissProgressDialog();
+			progress.dismiss();
 			if (success) {
 				DeviceConnectionManager.getInstance().startCheckConnetionTask();
 				Toaster.showLong(BTSettingActivity.this,
@@ -321,7 +332,7 @@ public class BTSettingActivity extends CustomDialogFragmentActivity implements
 	public void onBTStateBonded() {
 		Timber.d("onReceive:bluetooth bond state changed -> " + "BONDED");
 		Timber.d("玩具配对成功");
-		dismissProgressDialog();
+		progress.dismiss();
 		AlertUtils.showToast(this,
 				getResources().getString(R.string.toast_bond_toy_success));
 		deviceAdapter.notifyDataSetChanged();
