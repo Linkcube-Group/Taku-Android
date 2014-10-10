@@ -1,6 +1,6 @@
 package me.linkcube.taku.ui.main;
 
-import custom.android.app.CustomDialogFragmentActivity;
+import custom.android.app.CustomFragmentActivity;
 import me.linkcube.taku.R;
 import me.linkcube.taku.ui.history.HistoryFragment;
 import me.linkcube.taku.ui.main.view.Drawer.OnDrawerItemClickListener;
@@ -14,7 +14,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
-public class MainActivity extends CustomDialogFragmentActivity implements
+public class MainActivity extends CustomFragmentActivity implements
 		ResideMenu.OnMenuListener, OnDrawerItemClickListener {
 
 	private final int SPORTS_GAMES = 0;

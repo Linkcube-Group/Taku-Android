@@ -12,13 +12,12 @@ import android.view.ViewGroup;
 
 /**
  * Fragment基类,提供了便捷的Activity向Fragment传递的Serializable和简单类型数据的方法，
+ * 
  * 并在重要的生命周期中打印Log，方便调试
  * 
  * @author Ervin
  */
 public class BaseFragment extends Fragment {
-
-	protected Activity mActivity;
 
 	@SuppressWarnings("unchecked")
 	protected <V extends Serializable> V getSerializable(final String name) {
@@ -40,7 +39,6 @@ public class BaseFragment extends Fragment {
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
-		mActivity = activity;
 		Timber.d(this.getClass().getName() + " onAttach");
 	}
 

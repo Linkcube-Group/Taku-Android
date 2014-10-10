@@ -1,7 +1,5 @@
 package me.linkcube.taku.core.entity;
 
-import java.io.File;
-
 import com.orm.dsl.Table;
 
 @Table(name = "UserInfoEntity")
@@ -14,9 +12,9 @@ public class UserInfoEntity {
 	private String weight;
 	private String avatar;
 	private int age;
-	
-	public UserInfoEntity(){
-		
+
+	public UserInfoEntity() {
+
 	}
 
 	public UserInfoEntity(String username, String nickname, String gender,

@@ -1,7 +1,7 @@
 package me.linkcube.taku.ui.welcome;
 
 import static me.linkcube.taku.AppConst.KEY.SHOW_GUIDE;
-import custom.android.app.CustomDialogFragmentActivity;
+import custom.android.app.CustomFragmentActivity;
 import custom.android.util.AlertUtils;
 import custom.android.util.NetworkUtils;
 import custom.android.util.PreferenceUtils;
@@ -22,7 +22,7 @@ import android.view.Window;
  * @author Orange
  * 
  */
-public class SplashActivity extends CustomDialogFragmentActivity {
+public class SplashActivity extends CustomFragmentActivity {
 
 	private boolean isShowGuide;
 
@@ -51,7 +51,7 @@ public class SplashActivity extends CustomDialogFragmentActivity {
 		boolean available = NetworkUtils.isNetworkAvailable(this);
 		isShowGuide = isShowGuide();
 		if (isShowGuide) {
-			startActivity(new Intent(mActivity, GuideActivity.class));
+			startActivity(new Intent(this, GuideActivity.class));
 			finish();
 		} else {
 			startActivity(new Intent(SplashActivity.this, MainActivity.class));
@@ -89,7 +89,8 @@ public class SplashActivity extends CustomDialogFragmentActivity {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						dialog.dismiss();
-						startActivity(new Intent(mActivity, GuideActivity.class));
+						startActivity(new Intent(SplashActivity.this,
+								GuideActivity.class));
 						finish();
 					}
 

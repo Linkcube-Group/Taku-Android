@@ -27,12 +27,12 @@ import com.ervinwang.bthelper.BTManager;
 import com.ervinwang.bthelper.core.IReceiveData;
 import com.ervinwang.bthelper.utils.FormatUtils;
 
-import custom.android.app.BaseActivity;
+import custom.android.app.CustomFragmentActivity;
 
 /**
  * 仪表盘
  * */
-public class DashboardActivity extends BaseActivity {
+public class DashboardActivity extends CustomFragmentActivity {
 	// 关闭
 	private ImageButton close_imgBtn;
 	// 连接设备
@@ -119,7 +119,6 @@ public class DashboardActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.dashboard_activity);
 		init();
-
 
 		HandlerThread handlerThread = new HandlerThread("Dashboard_Handler");
 		handlerThread.start();
@@ -263,7 +262,6 @@ public class DashboardActivity extends BaseActivity {
 		time_tv.setText(timeString);
 
 	}
-
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {

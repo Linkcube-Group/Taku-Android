@@ -1,6 +1,7 @@
 package custom.android.widget;
 
 import custom.android.widget.R;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
@@ -56,6 +57,7 @@ public class CirclePageIndicator extends View implements
 		this(context, attrs, R.attr.vpiCirclePageIndicatorStyle);
 	}
 
+	@SuppressLint("NewApi")
 	public CirclePageIndicator(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 		if (isInEditMode())
@@ -109,7 +111,11 @@ public class CirclePageIndicator extends View implements
 		Drawable background = a
 				.getDrawable(R.styleable.CirclePageIndicator_android_background);
 		if (background != null) {
-			setBackgroundDrawable(background);
+			if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN) {
+				setBackground(background);
+			} else {
+				setBackgroundDrawable(background);
+			}
 		}
 
 		a.recycle();

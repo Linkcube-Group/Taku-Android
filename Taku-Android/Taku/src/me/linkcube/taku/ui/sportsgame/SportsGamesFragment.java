@@ -15,9 +15,9 @@ import android.widget.ImageButton;
 
 import com.ervinwang.bthelper.BTManager;
 
-import custom.android.app.CustomDialogFragment;
+import custom.android.app.BaseFragment;
 
-public class SportsGamesFragment extends CustomDialogFragment implements
+public class SportsGamesFragment extends BaseFragment implements
 		OnClickListener {
 
 	private static final int BT_SETTING_REQUEST_CODE = 2;
@@ -108,7 +108,7 @@ public class SportsGamesFragment extends CustomDialogFragment implements
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		if (requestCode == BT_SETTING_REQUEST_CODE) {
-			
+
 		}
 	}
 

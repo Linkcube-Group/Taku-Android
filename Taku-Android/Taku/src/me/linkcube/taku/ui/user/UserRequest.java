@@ -87,7 +87,7 @@ public class UserRequest {
 		});
 	}
 
-	private static void getUserInfo() {
+	public static void getUserInfo() {
 		TakuHttpClient.post("getinfo", new JsonHttpResponseHandler() {
 			@Override
 			public void onSuccess(int statusCode, Header[] headers,
@@ -185,7 +185,7 @@ public class UserRequest {
 					public void onSuccess(int statusCode, Header[] headers,
 							JSONObject response) {
 						super.onSuccess(statusCode, headers, response);
-						Log.d("initUserInfo", "statusCode:" + statusCode
+						Log.d("changeAvatar", "statusCode:" + statusCode
 								+ "---response:" + response.toString());
 						try {
 							if (statusCode == 200) {

@@ -90,6 +90,10 @@ public class AppConst {
 		public static String CONNECT_TOY_DURATION = "ConnectToyDuration";
 
 	}
+	
+	public static class HttpUrl{
+		public static final String BASE_URL = "http://112.124.22.252:8000/";
+	}
 	/**
 	 * 网络请求错误时返回的标识
 	 * @author xinyang
@@ -107,6 +111,7 @@ public class AppConst {
 		
 		public static final int LOGOUT_ERROR = -5;
 		
+		public static final int GET_AVATAR_ERROR = -6;
 	}
 	
 	public static class ResponseKey {

@@ -1,10 +1,10 @@
 package me.linkcube.taku.ui.bt;
 
-import custom.android.app.BaseActivity;
+import custom.android.app.CustomFragmentActivity;
 import me.linkcube.taku.R;
 import android.os.Bundle;
 
-public class BTHelpActivity extends BaseActivity {
+public class BTHelpActivity extends CustomFragmentActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

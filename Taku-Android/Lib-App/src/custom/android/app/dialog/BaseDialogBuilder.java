@@ -29,6 +29,7 @@ abstract class BaseDialogBuilder<T extends BaseDialogBuilder<T>> {
 		mFragmentManager = fragmentManager;
 		mContext = context.getApplicationContext();
 		mClass = clazz;
+
 	}
 
 	protected abstract T self();
@@ -83,4 +84,5 @@ abstract class BaseDialogBuilder<T extends BaseDialogBuilder<T>> {
 
 		return fragment;
 	}
+
 }

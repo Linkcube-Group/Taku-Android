@@ -1,12 +1,11 @@
 package me.linkcube.taku.ui.user;
 
-import java.util.List;
-
 import me.linkcube.taku.AppConst.Gender;
-import me.linkcube.taku.AppConst.KEY;
+import me.linkcube.taku.AppConst.HttpUrl;
 import me.linkcube.taku.R;
 import me.linkcube.taku.core.entity.UserInfoEntity;
 import me.linkcube.taku.ui.BaseTitleActivity;
+import me.linkcube.taku.view.CircularImage;
 import me.linkcube.taku.view.MenuItem;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,12 +15,11 @@ import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.orm.query.Select;
-
-import custom.android.util.PreferenceUtils;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 public class UserInfoActivity extends BaseTitleActivity {
 
+	private CircularImage userAvatarIv;
 	private TextView userNameTv;
 	private TextView userAge;
 	private ImageView userGenderIv;
@@ -30,18 +28,24 @@ public class UserInfoActivity extends BaseTitleActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.user_info_activity);
-		initView();
 		
+		initView();
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
 		initData();
 	}
 
 	private void initView() {
 		initTitle();
+		userAvatarIv=(CircularImage)findViewById(R.id.userAvatarIv);
 		userNameTv=(TextView)findViewById(R.id.userNameTv);
 		userAge=(TextView)findViewById(R.id.userAge);
 		userGenderIv=(ImageView)findViewById(R.id.userGenderIv);
-		MenuItem movingTargetItem = (MenuItem) findViewById(R.id.movingTargetItem);
-		movingTargetItem.setOnClickListener(new View.OnClickListener() {
+		MenuItem updateUserInfoItem = (MenuItem) findViewById(R.id.movingTargetItem);
+		updateUserInfoItem.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View arg0) {
@@ -52,6 +56,7 @@ public class UserInfoActivity extends BaseTitleActivity {
 	}
 
 	private void initData() {
+		
 		UserInfoEntity userInfoEntity=UserManager.getInstance().getUserInfo();
 		if(userInfoEntity!=null){
 			userNameTv.setText(userInfoEntity.getNickname());
@@ -61,6 +66,8 @@ public class UserInfoActivity extends BaseTitleActivity {
 			}else{
 				userGenderIv.setBackgroundResource(R.drawable.user_gender_male);
 			}
+			//显示头像
+			ImageLoader.getInstance().displayImage(HttpUrl.BASE_URL+userInfoEntity.getAvatar(), userAvatarIv);
 		}
 	}
 

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import custom.android.app.BasePagerAdapter;
-import custom.android.app.CustomDialogFragmentActivity;
+import custom.android.app.CustomFragmentActivity;
 import me.linkcube.taku.R;
 import me.linkcube.taku.ui.main.MainActivity;
 import android.content.Intent;
@@ -22,7 +22,7 @@ import static me.linkcube.taku.AppConfig.GUIDE_IMAGES_RES;
  * @author Ervin
  * 
  */
-public class GuideActivity extends CustomDialogFragmentActivity {
+public class GuideActivity extends CustomFragmentActivity {
 
 	private ViewPager viewPager;
 
