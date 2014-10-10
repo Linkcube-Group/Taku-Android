@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingTop="20dp" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:id="@+id/avatar_iv"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:contentDescription="@null"
+            android:src="@drawable/avatar_default" />
+
+        <TextView
+            android:id="@+id/user_name_tv"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="left|bottom"
+            android:text="@string/please_login_text"
+            android:textColor="@android:color/background_light" />
+    </LinearLayout>
+
+    <me.linkcube.taku.ui.main.view.SlidingMenuItem
+        android:id="@+id/sportsGamesBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <me.linkcube.taku.ui.main.view.SlidingMenuItem
+        android:id="@+id/historyBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <me.linkcube.taku.ui.main.view.SlidingMenuItem
+        android:id="@+id/networkGamesBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <me.linkcube.taku.ui.main.view.SlidingMenuItem
+        android:id="@+id/settingsBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

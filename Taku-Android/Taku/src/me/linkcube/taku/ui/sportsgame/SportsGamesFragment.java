@@ -2,22 +2,19 @@ package me.linkcube.taku.ui.sportsgame;
 
 import me.linkcube.taku.R;
 import me.linkcube.taku.ui.bt.BTSettingActivity;
+import me.linkcube.taku.ui.main.BaseSlidingFragment;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 
 import com.ervinwang.bthelper.BTManager;
 
-import custom.android.app.BaseFragment;
-
-public class SportsGamesFragment extends BaseFragment implements
+public class SportsGamesFragment extends BaseSlidingFragment implements
 		OnClickListener {
 
 	private static final int BT_SETTING_REQUEST_CODE = 2;
@@ -53,14 +50,6 @@ public class SportsGamesFragment extends BaseFragment implements
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setHasOptionsMenu(true);
-	}
-
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		View rootView = inflater.inflate(R.layout.sports_games_fragment,
-				container, false);
-		return rootView;
 	}
 
 	@Override
@@ -119,5 +108,10 @@ public class SportsGamesFragment extends BaseFragment implements
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		return super.onOptionsItemSelected(item);
+	}
+
+	@Override
+	protected int getLayoutId() {
+		return R.layout.sports_games_fragment;
 	}
 }

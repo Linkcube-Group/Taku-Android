@@ -1,7 +1,7 @@
 package me.linkcube.taku.ui.profile;
 
-import custom.android.app.BaseFragment;
+import custom.android.app.CustomFragmentActivity;
 
-public class EditProfileActivity extends BaseFragment {
+public class EditProfileActivity extends CustomFragmentActivity {
 
 }

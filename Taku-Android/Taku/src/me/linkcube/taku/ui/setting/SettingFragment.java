@@ -1,16 +1,14 @@
 package me.linkcube.taku.ui.setting;
 
-import custom.android.app.BaseFragment;
 import custom.android.util.AlertUtils;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import me.linkcube.taku.R;
 import me.linkcube.taku.AppConst.ErrorFlag;
+import me.linkcube.taku.ui.main.BaseSlidingFragment;
 import me.linkcube.taku.ui.user.HttpResponseListener;
 import me.linkcube.taku.ui.user.LoginActivity;
 import me.linkcube.taku.ui.user.UserManager;
@@ -18,11 +16,9 @@ import me.linkcube.taku.ui.user.UserRequest;
 import me.linkcube.taku.view.MenuItem;
 import me.linkcube.taku.view.TitleView;
 
-public class SettingFragment extends BaseFragment {
+public class SettingFragment extends BaseSlidingFragment {
 
 	private static final String ARG_DRAWER_POSITION = "drawer_position";
-
-	private View layoutView;
 
 	private Button settingLoginBtn;
 
@@ -60,23 +56,25 @@ public class SettingFragment extends BaseFragment {
 		}
 	}
 
+	private void initTitle(TitleView titleview) {
+		titleview.setTitleText(getResources().getString(
+				R.string.setting_title_text));
+		titleview.getRightTitleBtn().setVisibility(View.GONE);
+	}
+
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		layoutView = inflater.inflate(R.layout.setting_fragment, container,
-				false);
-		TitleView titleview = (TitleView) layoutView
-				.findViewById(R.id.title_layout);
+	public void onViewCreated(View view, Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
+		TitleView titleview = (TitleView) view.findViewById(R.id.title_layout);
 		initTitle(titleview);
-		feedbackItem = (MenuItem) layoutView.findViewById(R.id.feedbackItem);
+		feedbackItem = (MenuItem) view.findViewById(R.id.feedbackItem);
 		feedbackItem.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
 				startActivity(new Intent(getActivity(), FeedbackActivity.class));
 			}
 		});
-		settingLoginBtn = (Button) layoutView
-				.findViewById(R.id.setting_login_btn);
+		settingLoginBtn = (Button) view.findViewById(R.id.setting_login_btn);
 		settingLoginBtn.setOnClickListener(new View.OnClickListener() {
 
 			@Override
@@ -111,18 +109,11 @@ public class SettingFragment extends BaseFragment {
 				}
 			}
 		});
-		return layoutView;
-	}
-
-	private void initTitle(TitleView titleview) {
-		titleview.setTitleText(getResources().getString(
-				R.string.setting_title_text));
-		titleview.getRightTitleBtn().setVisibility(View.GONE);
 	}
 
 	@Override
-	public void onViewCreated(View view, Bundle savedInstanceState) {
-		super.onViewCreated(view, savedInstanceState);
+	protected int getLayoutId() {
+		return R.layout.setting_fragment;
 	}
 
 }

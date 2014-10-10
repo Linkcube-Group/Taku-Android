@@ -1,10 +1,11 @@
 package me.linkcube.taku.ui.networkgames;
 
-import custom.android.app.BaseFragment;
+import me.linkcube.taku.R;
+import me.linkcube.taku.ui.main.BaseSlidingFragment;
 import android.app.Activity;
 import android.os.Bundle;
 
-public class NetworkGamesFragment extends BaseFragment {
+public class NetworkGamesFragment extends BaseSlidingFragment {
 
 	private static final String ARG_DRAWER_POSITION = "drawer_position";
 
@@ -23,5 +24,10 @@ public class NetworkGamesFragment extends BaseFragment {
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
 
+	}
+
+	@Override
+	protected int getLayoutId() {
+		return R.layout.sports_games_fragment;
 	}
 }
