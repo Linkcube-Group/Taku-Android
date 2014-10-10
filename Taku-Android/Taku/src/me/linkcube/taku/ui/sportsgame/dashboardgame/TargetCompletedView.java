@@ -93,6 +93,7 @@ public class TargetCompletedView extends View {
 		mDistanceTextPaint.setARGB(255, 255, 0, 255);
 		mDistanceTextPaint.setTextSize(mRadius / 3);
 
+		//得到字体高度
 		FontMetrics fm = mProgressTextPaint.getFontMetrics();
 		mProgressTxtHeight = (int) Math.ceil(fm.descent - fm.ascent);
 

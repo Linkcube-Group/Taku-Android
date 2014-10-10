@@ -14,7 +14,10 @@ import com.umeng.socialize.weixin.controller.UMWXHandler;
 import me.linkcube.taku.R;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -164,7 +167,6 @@ public class ShareActivity extends Activity {
 
 	private void sharePicClick() {
 		Log.i("CXC", "---sharePicClick");
-		System.out.println("---MainActivity.sharePicClick()");
 
 		// 设置分享内容
 		mController
