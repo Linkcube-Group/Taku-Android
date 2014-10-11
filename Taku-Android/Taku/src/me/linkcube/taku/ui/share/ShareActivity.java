@@ -1,24 +1,10 @@
 package me.linkcube.taku.ui.share;
 
-import com.umeng.socialize.bean.SHARE_MEDIA;
-import com.umeng.socialize.controller.UMServiceFactory;
-import com.umeng.socialize.controller.UMSocialService;
-import com.umeng.socialize.media.UMImage;
-import com.umeng.socialize.sso.QZoneSsoHandler;
-import com.umeng.socialize.sso.RenrenSsoHandler;
-import com.umeng.socialize.sso.TencentWBSsoHandler;
-import com.umeng.socialize.sso.UMQQSsoHandler;
-import com.umeng.socialize.sso.UMSsoHandler;
-import com.umeng.socialize.weixin.controller.UMWXHandler;
-
 import me.linkcube.taku.R;
-import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Paint;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
@@ -30,10 +16,25 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.controller.UMServiceFactory;
+import com.umeng.socialize.controller.UMSocialService;
+import com.umeng.socialize.media.UMImage;
+import com.umeng.socialize.sso.QZoneSsoHandler;
+import com.umeng.socialize.sso.RenrenSsoHandler;
+import com.umeng.socialize.sso.TencentWBSsoHandler;
+import com.umeng.socialize.sso.UMQQSsoHandler;
+import com.umeng.socialize.sso.UMSsoHandler;
+import com.umeng.socialize.weixin.controller.UMWXHandler;
+
 /**
  * 分享
  * */
-public class ShareActivity extends Activity {
+public class ShareActivity extends FragmentActivity {
+	// 首先在您的Activity中添加如下成员变量
+	UMSocialService mController = UMServiceFactory
+			.getUMSocialService("com.umeng.share");
+
 	// 返回
 	private ImageButton back_imgBtn;
 	// 运动距离
@@ -47,9 +48,6 @@ public class ShareActivity extends Activity {
 	private SpannableString calString;
 	// 分享
 	private Button share_btn;
-	// 首先在您的Activity中添加如下成员变量
-	final UMSocialService mController = UMServiceFactory
-			.getUMSocialService("com.umeng.share");
 
 	public ShareActivity() {
 		// TODO Auto-generated constructor stub
@@ -60,6 +58,8 @@ public class ShareActivity extends Activity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.share_activity);
+
+		initUMeng();
 		init();
 	}
 
@@ -78,6 +78,11 @@ public class ShareActivity extends Activity {
 		// 注册事件
 		back_imgBtn.setOnClickListener(onShareActivityButtonClickListener);
 		share_btn.setOnClickListener(onShareActivityButtonClickListener);
+
+	}
+
+	// 初始化控件并注册相应事件
+	private void initUMeng() {
 
 		/**
 		 * ISSO（免登录）分享到QQ 添加ＱＱ平台到SDK --没有它的话，会出现错误:请添加QQ平台到SDK
@@ -151,7 +156,8 @@ public class ShareActivity extends Activity {
 				// 弹出分享面板
 				mController.getConfig().removePlatform(SHARE_MEDIA.RENREN,
 						SHARE_MEDIA.DOUBAN);
-				sharePicClick();
+				sharePicPNG();
+
 				break;
 
 			default:
@@ -162,20 +168,8 @@ public class ShareActivity extends Activity {
 	};
 
 	private void exitShareActivity() {
+		Log.i("CXC","---exitShareActivity");
 		this.finish();
-	}
-
-	private void sharePicClick() {
-		Log.i("CXC", "---sharePicClick");
-
-		// 设置分享内容
-		mController
-				.setShareContent("友盟社会化组件（SDK）让移动应用快速整合社交分享功能--cxc，http://www.umeng.com/social");
-		// 设置分享图片，参数2为本地图片的资源引用
-		mController.setShareMedia(new UMImage(this, R.drawable.ic_launcher));
-		// 是否只有已登录用户才能打开分享选择页
-		mController.openShare(this, false);
-
 	}
 
 	/**
@@ -238,5 +232,19 @@ public class ShareActivity extends Activity {
 		if (ssoHandler != null) {
 			ssoHandler.authorizeCallBack(requestCode, resultCode, data);
 		}
+
+	}
+
+	private void sharePicPNG() {
+		Log.i("CXC", "---sharePicClick");
+
+		// 设置分享内容
+		mController
+				.setShareContent("友盟社会化组件（SDK）让移动应用快速整合社交分享功能--cxc，http://www.umeng.com/social");
+		// 设置分享图片，参数2为本地图片的资源引用
+		mController.setShareMedia(new UMImage(this, R.drawable.ic_launcher));
+		// 是否只有已登录用户才能打开分享选择页
+		mController.openShare(this, false);
+
 	}
 }

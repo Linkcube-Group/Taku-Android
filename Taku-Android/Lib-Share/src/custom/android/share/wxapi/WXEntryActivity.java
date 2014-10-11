@@ -1,4 +1,5 @@
-package me.linkcube.taku.wxapi;
+
+package custom.android.share.wxapi;
 
 import com.umeng.socialize.weixin.view.WXCallbackActivity;
 
