@@ -6,12 +6,15 @@ import java.util.List;
 import me.linkcube.taku.AppConst.ErrorFlag;
 import me.linkcube.taku.AppConst.KEY;
 import me.linkcube.taku.AppConst.ResponseKey;
+import me.linkcube.taku.core.entity.UserAvatarEntity;
 import me.linkcube.taku.core.entity.UserInfoEntity;
 
 import org.apache.http.Header;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 
 import com.google.gson.Gson;
@@ -26,7 +29,7 @@ public class UserManager {
 	private static UserManager userManager = null;
 
 	private boolean isLogin = false;
-	
+
 	private UserManager() {
 	}
 
@@ -46,13 +49,31 @@ public class UserManager {
 	public void setLogin(boolean isLogin) {
 		this.isLogin = isLogin;
 	}
-	
-	public UserInfoEntity getUserInfo(){
-			List<UserInfoEntity> userInfoEntities = Select.from(UserInfoEntity.class).where("username=?", new String[]{PreferenceUtils.getString(KEY.USER_NAME, "")}).list();
-			if(userInfoEntities==null||userInfoEntities.isEmpty())
-				return null;
-			Log.d("getUserInfo", "userInfoEntity:"+userInfoEntities.get(0).getNickname());
-			return userInfoEntities.get(0);
+
+	public UserInfoEntity getUserInfo() {
+		List<UserInfoEntity> userInfoEntities = Select
+				.from(UserInfoEntity.class)
+				.where("username=?",
+						new String[] { PreferenceUtils.getString(KEY.USER_NAME,
+								"") }).list();
+		if (userInfoEntities == null || userInfoEntities.isEmpty())
+			return null;
+		Log.d("getUserInfo", "userInfoEntity:"
+				+ userInfoEntities.get(0).getNickname());
+		return userInfoEntities.get(0);
+	}
+
+	public Bitmap getUserAvatar() {
+		List<UserAvatarEntity> userAvatarEntities = Select
+				.from(UserAvatarEntity.class)
+				.where("username=?",
+						new String[] { PreferenceUtils.getString(KEY.USER_NAME,
+								"") }).list();
+		if (userAvatarEntities == null || userAvatarEntities.isEmpty())
+			return null;
+		Log.d("getUserInfo", "userInfoEntity:"
+				+ userAvatarEntities.get(0).getUsername());
+		return userAvatarEntities.get(0).getAvatarBitmap();
 	}
 
 	/**

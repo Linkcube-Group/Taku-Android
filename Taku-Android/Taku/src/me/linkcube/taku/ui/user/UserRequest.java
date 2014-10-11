@@ -1,8 +1,10 @@
 package me.linkcube.taku.ui.user;
 
 import me.linkcube.taku.AppConst.ErrorFlag;
+import me.linkcube.taku.AppConst.HttpUrl;
 import me.linkcube.taku.AppConst.KEY;
 import me.linkcube.taku.AppConst.ResponseKey;
+import me.linkcube.taku.core.entity.UserAvatarEntity;
 import me.linkcube.taku.core.entity.UserInfoEntity;
 
 import org.apache.http.Header;
@@ -10,11 +12,16 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.util.Log;
+import android.view.View;
 
 import com.google.gson.Gson;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.FailReason;
+import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.orm.SugarRecord;
 
 import custom.android.util.PreferenceUtils;
@@ -104,6 +111,33 @@ public class UserRequest {
 									userInfo, UserInfoEntity.class);
 							if (UserManager.getInstance().getUserInfo() == null) {
 								SugarRecord.save(userInfoEntity);
+							}
+							String avatarUrl=UserManager.getInstance().getUserInfo().getAvatar();
+							if(avatarUrl!=null){
+								ImageLoader.getInstance().loadImage(HttpUrl.BASE_URL+avatarUrl, new ImageLoadingListener() {
+									
+									@Override
+									public void onLoadingStarted(String imageUri, View view) {
+										
+									}
+									
+									@Override
+									public void onLoadingFailed(String imageUri, View view,
+											FailReason failReason) {
+										
+									}
+									
+									@Override
+									public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+										UserAvatarEntity userAvatarEntity=new UserAvatarEntity(PreferenceUtils.getString(KEY.USER_NAME,""),loadedImage);
+										SugarRecord.save(userAvatarEntity);
+									}
+									
+									@Override
+									public void onLoadingCancelled(String imageUri, View view) {
+										
+									}
+								});
 							}
 							// TODO 获取到用户个人信息后的一些操作
 							// Log.d("getUserInfo",

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/menu_bg"
+    android:orientation="vertical" >
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="60dp"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/LayoutContentPadding"
+        android:paddingRight="@dimen/LayoutContentPadding" >
+
+    <me.linkcube.taku.view.ClearEditText
+        android:id="@+id/edit_user_info_et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edit_text_bg"
+        android:inputType="textMultiLine"
+        android:paddingBottom="20dp"
+        android:paddingLeft="18dp"
+        android:paddingRight="18dp"
+        android:textColor="@color/white" >
+
+        <requestFocus />
+    </me.linkcube.taku.view.ClearEditText>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/user_info_description_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+    </RelativeLayout>
+    
+    </LinearLayout>
+
+</LinearLayout>
