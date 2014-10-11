@@ -80,8 +80,8 @@
     <string name="user_nickname_text">昵称</string>
     <string name="user_avatar_text">头像</string>
     <string name="user_birthday_text">生日</string>
-    <string name="user_height_text">身高</string>
-    <string name="user_weight_text">体重</string>
+    <string name="user_height_text">身高(cm)</string>
+    <string name="user_weight_text">体重(kg)</string>
     <string name="user_gender_text">性别</string>
     <string name="user_age_text">年龄</string>
     <string name="user_gender_female_text">女</string>
@@ -92,7 +92,10 @@
     <string name="historical_records">运动历史记录</string>
     <string name="update_user_info_text">个人资料编辑</string>
     <string name="user_history">您已累计使用Taku:</string>
-    
+    <string name="take_photo">拍照</string>
+    <string name="pick_photo">从相册中选择 </string>
+    <string name="attachToContact">选择 </string>
+    <string name="photoPickerNotFoundText">照片文件未找到 </string>
     <!-- 设置界面 -->
     <string name="setting_title_text">设置</string>
     <string name="checkout_for_update_text">检测更新</string>

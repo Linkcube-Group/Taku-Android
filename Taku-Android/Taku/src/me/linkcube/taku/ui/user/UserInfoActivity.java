@@ -68,6 +68,7 @@ public class UserInfoActivity extends BaseTitleActivity {
 			}
 			//显示头像
 			ImageLoader.getInstance().displayImage(HttpUrl.BASE_URL+userInfoEntity.getAvatar(), userAvatarIv);
+			//userAvatarIv.setImageBitmap(UserManager.getInstance().getUserAvatar());
 		}
 	}
 
