@@ -2,8 +2,10 @@ package me.linkcube.taku.ui.share;
 
 import me.linkcube.taku.R;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.app.FragmentActivity;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -40,12 +42,15 @@ public class ShareActivity extends FragmentActivity {
 	// 运动距离
 	private TextView distance_tv;
 	private SpannableString distanceString;
+	private float distance = 0.0f;
 	// 运行时间
 	private TextView time_tv;
 	private SpannableString timeString;
+	private String time = "00:00";
 	// 卡路里
 	private TextView cal_tv;
 	private SpannableString calString;
+	private int cal = 0;
 	// 分享
 	private Button share_btn;
 
@@ -59,6 +64,19 @@ public class ShareActivity extends FragmentActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.share_activity);
 
+		/***
+		 * 
+		 * 
+		 * // 在这里接收用户真实的运动数据，用到Activity之间的传值 .从SportsGameeFragment传值到这里，
+		 * 
+		 * 
+		 * 以下只是一些假的数据，以供测试
+		 * 
+		 * ***/
+		this.distance = 12.1f;
+		this.time = "22:13";
+		this.cal = 1888;
+
 		initUMeng();
 		init();
 	}
@@ -71,9 +89,9 @@ public class ShareActivity extends FragmentActivity {
 		cal_tv = (TextView) findViewById(R.id.cal_tv);
 		share_btn = (Button) findViewById(R.id.share_btn);
 		// 设置效果
-		setDistanceText("3000");
-		setTimeText("30:12");
-		setCalText("475");
+		setDistanceText(String.valueOf(distance));
+		setTimeText(time);
+		setCalText(String.valueOf(cal));
 
 		// 注册事件
 		back_imgBtn.setOnClickListener(onShareActivityButtonClickListener);
@@ -168,7 +186,7 @@ public class ShareActivity extends FragmentActivity {
 	};
 
 	private void exitShareActivity() {
-		Log.i("CXC","---exitShareActivity");
+		Log.i("CXC", "---exitShareActivity");
 		this.finish();
 	}
 
@@ -237,12 +255,27 @@ public class ShareActivity extends FragmentActivity {
 
 	private void sharePicPNG() {
 		Log.i("CXC", "---sharePicClick");
+		// 启动Service 绘制要分享的图片*******
+		// 出现java.lang.OutOfMemoryError*******
+		Intent startIntent = new Intent();
+		startIntent.setClass(this, DrawPicService.class);
+
+		Bundle bundle = new Bundle();
+		SharePicParameters spParameters = new SharePicParameters(
+				R.drawable.dashboard_bg, R.drawable.share_head_img,
+				this.distance, this.time, this.cal);
+		startIntent.putExtra(DrawPicService.DRAWPICSERVICE_PARAMETERS, spParameters);
+		startIntent.putExtras(bundle);
+
+		startService(startIntent);
 
 		// 设置分享内容
 		mController
 				.setShareContent("友盟社会化组件（SDK）让移动应用快速整合社交分享功能--cxc，http://www.umeng.com/social");
 		// 设置分享图片，参数2为本地图片的资源引用
-		mController.setShareMedia(new UMImage(this, R.drawable.ic_launcher));
+		mController.setShareMedia(new UMImage(this, BitmapFactory
+				.decodeFile(Environment.getExternalStorageDirectory().getPath()
+						+ "/share_pic.png")));
 		// 是否只有已登录用户才能打开分享选择页
 		mController.openShare(this, false);
 
