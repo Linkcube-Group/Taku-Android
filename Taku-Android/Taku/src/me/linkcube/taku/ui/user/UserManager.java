@@ -63,7 +63,7 @@ public class UserManager {
 		return userInfoEntities.get(0);
 	}
 
-	public Bitmap getUserAvatar() {
+	public String getUserAvatarUrl() {
 		List<UserAvatarEntity> userAvatarEntities = Select
 				.from(UserAvatarEntity.class)
 				.where("username=?",
@@ -72,8 +72,8 @@ public class UserManager {
 		if (userAvatarEntities == null || userAvatarEntities.isEmpty())
 			return null;
 		Log.d("getUserInfo", "userInfoEntity:"
-				+ userAvatarEntities.get(0).getUsername());
-		return userAvatarEntities.get(0).getAvatarBitmap();
+				+ userAvatarEntities.get(0).getAvatarSdUrl());
+		return "/sdcard/taku/"+ userAvatarEntities.get(0).getAvatarSdUrl(); //BitmapUtils.convertToBitmap();
 	}
 
 	/**

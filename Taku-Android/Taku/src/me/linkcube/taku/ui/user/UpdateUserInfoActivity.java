@@ -3,6 +3,7 @@ package me.linkcube.taku.ui.user;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Calendar;
 
 import me.linkcube.taku.AppConst.ErrorFlag;
 import me.linkcube.taku.AppConst.HttpUrl;
@@ -16,7 +17,9 @@ import me.linkcube.taku.view.CircularImage;
 import me.linkcube.taku.view.MenuItem;
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.app.AlertDialog.Builder;
+import android.app.Dialog;
 import android.content.ActivityNotFoundException;
 import android.content.ContentResolver;
 import android.content.ContentValues;
@@ -36,6 +39,7 @@ import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.Toast;
@@ -81,6 +85,7 @@ public class UpdateUserInfoActivity extends BaseTitleActivity implements
 		genderItem = (MenuItem) findViewById(R.id.genderItem);
 		genderItem.setOnClickListener(this);
 		ageItem = (MenuItem) findViewById(R.id.ageItem);
+		ageItem.setOnClickListener(this);
 		heightItem = (MenuItem) findViewById(R.id.heightItem);
 		heightItem.setOnClickListener(this);
 		weightItem = (MenuItem) findViewById(R.id.weightItem);
@@ -166,6 +171,7 @@ public class UpdateUserInfoActivity extends BaseTitleActivity implements
 						AlertUtils.showToast(UpdateUserInfoActivity.this,
 								"上传头像成功！");
 						if (!isEditUserInfo()) {
+							UserRequest.getUserInfo();
 							finish();
 						}
 					}
@@ -198,12 +204,11 @@ public class UpdateUserInfoActivity extends BaseTitleActivity implements
 		params = new RequestParams();
 		UserInfoEntity userInfoEntity = UserManager.getInstance().getUserInfo();
 		if (userInfoEntity != null) {
-			 ImageLoader.getInstance()
-			 .displayImage(
-			 HttpUrl.BASE_URL + userInfoEntity.getAvatar(),
-			 userAvatarIv);
-//			userAvatarIv.setImageBitmap(UserManager.getInstance()
-//					.getUserAvatar());
+//			ImageLoader.getInstance()
+//					.displayImage(
+//							HttpUrl.BASE_URL + userInfoEntity.getAvatar(),
+//							userAvatarIv);
+			userAvatarIv.setImageBitmap(BitmapUtils.convertToBitmap(UserManager.getInstance().getUserAvatarUrl()));
 			nicknameItem.setTip(userInfoEntity.getNickname());
 			genderItem.setTip(userInfoEntity.getGender());
 			ageItem.setTip(userInfoEntity.getAge());
@@ -240,6 +245,25 @@ public class UpdateUserInfoActivity extends BaseTitleActivity implements
 								}
 
 							}).show();
+			break;
+		case R.id.ageItem:
+			
+			DatePickerDialog.OnDateSetListener dateListener = new DatePickerDialog.OnDateSetListener() {
+				@Override
+				public void onDateSet(DatePicker datePicker, int year,
+						int month, int dayOfMonth) {
+					// Calendar月份是从0开始,所以month要加1
+					ageItem.setTip(UserManager.getUserAge(year + "-" + (month + 1) + "-"
+							+ dayOfMonth));
+					getRightTitleBtn().setVisibility(View.VISIBLE);
+				}
+			};
+			Calendar calendar = Calendar.getInstance();
+			Dialog dialog = new DatePickerDialog(this, dateListener,
+					calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
+					calendar.get(Calendar.DAY_OF_MONTH));
+			dialog.show();
+			
 			break;
 		case R.id.nicknameItem:
 			Intent nickNameIntent = new Intent(UpdateUserInfoActivity.this,
@@ -346,7 +370,6 @@ public class UpdateUserInfoActivity extends BaseTitleActivity implements
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-
 		if (requestCode == CHANGE_AVATAR_GALLERY) {
 			if (data != null) {
 				Uri uri = data.getData();

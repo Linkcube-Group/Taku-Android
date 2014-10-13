@@ -1,5 +1,7 @@
 package me.linkcube.taku.ui.user;
 
+import java.io.File;
+
 import me.linkcube.taku.AppConst.ErrorFlag;
 import me.linkcube.taku.AppConst.HttpUrl;
 import me.linkcube.taku.AppConst.KEY;
@@ -112,7 +114,11 @@ public class UserRequest {
 							if (UserManager.getInstance().getUserInfo() == null) {
 								SugarRecord.save(userInfoEntity);
 							}
-							String avatarUrl=UserManager.getInstance().getUserInfo().getAvatar();
+							if(UserManager.getInstance().getUserAvatarUrl()==null){
+								
+							}
+							final String avatarUrl=UserManager.getInstance().getUserInfo().getAvatar();
+							Log.d("getUserInfo", "avatarUrl:" + avatarUrl);
 							if(avatarUrl!=null){
 								ImageLoader.getInstance().loadImage(HttpUrl.BASE_URL+avatarUrl, new ImageLoadingListener() {
 									
@@ -128,8 +134,9 @@ public class UserRequest {
 									}
 									
 									@Override
-									public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-										UserAvatarEntity userAvatarEntity=new UserAvatarEntity(PreferenceUtils.getString(KEY.USER_NAME,""),loadedImage);
+									public void onLoadingComplete(String imageUri, View view, Bitmap userAvatar) {
+										BitmapUtils.saveBitmap(avatarUrl, userAvatar);
+										UserAvatarEntity userAvatarEntity=new UserAvatarEntity(PreferenceUtils.getString(KEY.USER_NAME,""),avatarUrl);
 										SugarRecord.save(userAvatarEntity);
 									}
 									

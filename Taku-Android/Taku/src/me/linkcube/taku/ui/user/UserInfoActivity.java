@@ -67,8 +67,8 @@ public class UserInfoActivity extends BaseTitleActivity {
 				userGenderIv.setBackgroundResource(R.drawable.user_gender_male);
 			}
 			//显示头像
-			ImageLoader.getInstance().displayImage(HttpUrl.BASE_URL+userInfoEntity.getAvatar(), userAvatarIv);
-			//userAvatarIv.setImageBitmap(UserManager.getInstance().getUserAvatar());
+			//ImageLoader.getInstance().displayImage(HttpUrl.BASE_URL+userInfoEntity.getAvatar(), userAvatarIv);
+			userAvatarIv.setImageBitmap(BitmapUtils.convertToBitmap(UserManager.getInstance().getUserAvatarUrl()));
 		}
 	}
 
