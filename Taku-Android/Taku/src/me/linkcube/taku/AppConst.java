@@ -20,20 +20,6 @@ public class AppConst {
 		public static final String OLD_USER_PWD = "OldUserPwd";
 	}
 
-	/**
-	 * 用户个人信息
-	 * 
-	 */
-	public static class VCard {
-
-		public static final String GENDER = "GENDER";
-
-		public static final String BIRTHDAY = "BIRTHDAY";
-
-		public static final String PERSONSTATE = "PERSONSTATE";
-
-	}
-	
 	public static class Gender {
 
 		public static final String MALE = "男";

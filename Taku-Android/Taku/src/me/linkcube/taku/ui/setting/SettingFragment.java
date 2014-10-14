@@ -59,6 +59,7 @@ public class SettingFragment extends BaseSlidingFragment {
 	private void initTitle(TitleView titleview) {
 		titleview.setTitleText(getResources().getString(
 				R.string.setting_title_text));
+		titleview.setLeftTitleIv(R.drawable.drawer_btn);
 		titleview.getRightTitleBtn().setVisibility(View.GONE);
 	}
 
@@ -86,6 +87,7 @@ public class SettingFragment extends BaseSlidingFragment {
 						public void responseSuccess() {
 							settingLoginBtn.setText(getResources().getString(
 									R.string.login_btn_text));
+							UserManager.getInstance().setLogin(false);
 							AlertUtils.showToast(getActivity(), "当前用户已退出！");
 						}
 

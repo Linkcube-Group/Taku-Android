@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.util.Calendar;
 
 import me.linkcube.taku.AppConst.ErrorFlag;
-import me.linkcube.taku.AppConst.HttpUrl;
 import me.linkcube.taku.AppConst.KEY;
 import me.linkcube.taku.AppConst.ParamKey;
 import me.linkcube.taku.R;
@@ -17,8 +16,8 @@ import me.linkcube.taku.view.CircularImage;
 import me.linkcube.taku.view.MenuItem;
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
-import android.app.DatePickerDialog;
 import android.app.AlertDialog.Builder;
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.ActivityNotFoundException;
 import android.content.ContentResolver;
@@ -27,7 +26,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -45,7 +43,6 @@ import android.widget.ListAdapter;
 import android.widget.Toast;
 
 import com.loopj.android.http.RequestParams;
-import com.nostra13.universalimageloader.core.ImageLoader;
 import com.orm.SugarRecord;
 
 import custom.android.util.AlertUtils;
@@ -171,6 +168,14 @@ public class UpdateUserInfoActivity extends BaseTitleActivity implements
 						AlertUtils.showToast(UpdateUserInfoActivity.this,
 								"上传头像成功！");
 						if (!isEditUserInfo()) {
+							SugarRecord.deleteAll(UserInfoEntity.class,
+									"username=?",
+									new String[] { PreferenceUtils.getString(
+											KEY.USER_NAME, "") });
+							SugarRecord.deleteAll(UserAvatarEntity.class,
+									"username=?",
+									new String[] { PreferenceUtils.getString(
+											KEY.USER_NAME, "") });
 							UserRequest.getUserInfo();
 							finish();
 						}
@@ -204,11 +209,8 @@ public class UpdateUserInfoActivity extends BaseTitleActivity implements
 		params = new RequestParams();
 		UserInfoEntity userInfoEntity = UserManager.getInstance().getUserInfo();
 		if (userInfoEntity != null) {
-//			ImageLoader.getInstance()
-//					.displayImage(
-//							HttpUrl.BASE_URL + userInfoEntity.getAvatar(),
-//							userAvatarIv);
-			userAvatarIv.setImageBitmap(BitmapUtils.convertToBitmap(UserManager.getInstance().getUserAvatarUrl()));
+			userAvatarIv.setImageBitmap(BitmapUtils.convertToBitmap(UserManager
+					.getInstance().getUserAvatarUrl()));
 			nicknameItem.setTip(userInfoEntity.getNickname());
 			genderItem.setTip(userInfoEntity.getGender());
 			ageItem.setTip(userInfoEntity.getAge());
@@ -247,14 +249,14 @@ public class UpdateUserInfoActivity extends BaseTitleActivity implements
 							}).show();
 			break;
 		case R.id.ageItem:
-			
+
 			DatePickerDialog.OnDateSetListener dateListener = new DatePickerDialog.OnDateSetListener() {
 				@Override
 				public void onDateSet(DatePicker datePicker, int year,
 						int month, int dayOfMonth) {
 					// Calendar月份是从0开始,所以month要加1
-					ageItem.setTip(UserManager.getUserAge(year + "-" + (month + 1) + "-"
-							+ dayOfMonth));
+					ageItem.setTip(UserManager.getUserAge(year + "-"
+							+ (month + 1) + "-" + dayOfMonth));
 					getRightTitleBtn().setVisibility(View.VISIBLE);
 				}
 			};
@@ -263,7 +265,7 @@ public class UpdateUserInfoActivity extends BaseTitleActivity implements
 					calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
 					calendar.get(Calendar.DAY_OF_MONTH));
 			dialog.show();
-			
+
 			break;
 		case R.id.nicknameItem:
 			Intent nickNameIntent = new Intent(UpdateUserInfoActivity.this,
@@ -354,6 +356,7 @@ public class UpdateUserInfoActivity extends BaseTitleActivity implements
 		}
 	}
 
+	@TargetApi(Build.VERSION_CODES.KITKAT)
 	private void doPickPhotoFromGallery() {
 		Intent intent = new Intent();
 		intent.addCategory(Intent.CATEGORY_OPENABLE);
@@ -417,12 +420,16 @@ public class UpdateUserInfoActivity extends BaseTitleActivity implements
 		if (null != uri) {
 			ContentResolver cr = this.getContentResolver();
 			String imagePath = PhotoFileUtils.getPath(this, uri);
-			userAvatar = new File(imagePath);
+			try {
+				userAvatar = new File(imagePath);// BitmapUtils.getThumbUploadPath(imagePath));
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
 			Log.d("UpdateUserInfoActivity", "imagePath:" + imagePath);
 			try {
 				Bitmap photo = MediaStore.Images.Media.getBitmap(cr, uri);
 				if (photo != null) {
-					Bitmap smallBitmap = zoomBitmap(photo,
+					Bitmap smallBitmap = BitmapUtils.zoomBitmap(photo,
 							photo.getWidth() / 2, photo.getHeight() / 2);
 					photo.recycle();
 					userAvatarIv.setImageBitmap(smallBitmap);
@@ -433,19 +440,6 @@ public class UpdateUserInfoActivity extends BaseTitleActivity implements
 				e.printStackTrace();
 			}
 		}
-	}
-
-	/** 缩放Bitmap图片 **/
-
-	public Bitmap zoomBitmap(Bitmap bitmap, int width, int height) {
-		int w = bitmap.getWidth();
-		int h = bitmap.getHeight();
-		Matrix matrix = new Matrix();
-		float scaleWidth = ((float) width / w);
-		float scaleHeight = ((float) height / h);
-		matrix.postScale(scaleWidth, scaleHeight);// 利用矩阵进行缩放不会造成内存溢出
-		Bitmap newbmp = Bitmap.createBitmap(bitmap, 0, 0, w, h, matrix, true);
-		return newbmp;
 	}
 
 }

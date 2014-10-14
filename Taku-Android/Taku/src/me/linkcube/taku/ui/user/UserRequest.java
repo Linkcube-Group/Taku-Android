@@ -1,7 +1,5 @@
 package me.linkcube.taku.ui.user;
 
-import java.io.File;
-
 import me.linkcube.taku.AppConst.ErrorFlag;
 import me.linkcube.taku.AppConst.HttpUrl;
 import me.linkcube.taku.AppConst.KEY;

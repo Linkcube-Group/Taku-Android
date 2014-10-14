@@ -32,7 +32,8 @@ public class HistoryFragment extends BaseSlidingFragment {
 	}
 
 	private void initTitle(TitleView titleview) {
-		titleview.setTitleText("运动历史记录");
+		titleview.setTitleText(getString(R.string.historical_records));
+		titleview.setLeftTitleIv(R.drawable.drawer_btn);
 		titleview.getRightTitleBtn().setVisibility(View.GONE);
 	}
 

@@ -2,7 +2,6 @@ package me.linkcube.taku.view;
 
 import me.linkcube.taku.R;
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,6 +40,17 @@ public class TitleView extends LinearLayout {
 	public void setTitleText(String title) {
 		this.titleText.setText(title);
 	}
+	
+	/**
+	 * 设置左边按钮的图片资源
+	 * 
+	 * @param resId
+	 */
+	public void setLeftTitleIv(int resId) {
+		if (null != leftTitleBtn) {
+			leftTitleBtn.setBackgroundResource(resId);
+		}
+	}
 
 	/**
 	 * 设置右边按钮的图片资源
@@ -50,17 +60,6 @@ public class TitleView extends LinearLayout {
 	public void setRightTitleIv(int resId) {
 		if (null != rightTitleBtn) {
 			rightTitleBtn.setBackgroundResource(resId);
-		}
-	}
-
-	/**
-	 * 设置右边按钮的图片资源
-	 * 
-	 * @param drawable
-	 */
-	public void setRightTitleIv(Drawable drawable) {
-		if (null != rightTitleBtn) {
-			rightTitleBtn.setBackgroundDrawable(drawable);
 		}
 	}
 
