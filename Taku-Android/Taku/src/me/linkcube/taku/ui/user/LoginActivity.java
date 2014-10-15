@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.loopj.android.http.RequestParams;
 
@@ -63,14 +64,16 @@ public class LoginActivity extends BaseTitleActivity implements OnClickListener 
 			params.put(ParamKey.PWD, "1234567");// shisong/1234567
 			// params.put(ParamKey.EMAIL, emailEt.getText().toString());
 			// params.put(ParamKey.PWD, passWordEt.getText().toString());
+			showProgressDialog(getString(R.string.is_logining));
+			PreferenceUtils.setString(KEY.USER_NAME, "yxtest1@qq.com");
+			PreferenceUtils.setString(KEY.USER_PWD, "1234567");
 			UserRequest.userLogin(params,
 					new HttpResponseListener() {
 
 						@Override
 						public void responseSuccess() {
 							//保存当前用户
-							PreferenceUtils.setString(KEY.USER_NAME, "yxtest1@qq.com");
-							PreferenceUtils.setString(KEY.USER_PWD, "1234567");
+							hiddenProgressDialog();
 							finish();
 						}
 

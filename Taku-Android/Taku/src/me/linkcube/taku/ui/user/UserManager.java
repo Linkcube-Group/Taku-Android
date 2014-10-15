@@ -3,23 +3,11 @@ package me.linkcube.taku.ui.user;
 import java.util.Calendar;
 import java.util.List;
 
-import me.linkcube.taku.AppConst.ErrorFlag;
 import me.linkcube.taku.AppConst.KEY;
-import me.linkcube.taku.AppConst.ResponseKey;
 import me.linkcube.taku.core.entity.UserAvatarEntity;
 import me.linkcube.taku.core.entity.UserInfoEntity;
-
-import org.apache.http.Header;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.util.Log;
 
-import com.google.gson.Gson;
-import com.loopj.android.http.JsonHttpResponseHandler;
-import com.loopj.android.http.RequestParams;
 import com.orm.query.Select;
 
 import custom.android.util.PreferenceUtils;
@@ -51,6 +39,8 @@ public class UserManager {
 	}
 
 	public UserInfoEntity getUserInfo() {
+		if(!isLogin)
+			return null;
 		List<UserInfoEntity> userInfoEntities = Select
 				.from(UserInfoEntity.class)
 				.where("username=?",
@@ -63,7 +53,9 @@ public class UserManager {
 		return userInfoEntities.get(0);
 	}
 
-	public Bitmap getUserAvatar() {
+	public String getUserAvatarUrl() {
+		if(!isLogin)
+			return null;
 		List<UserAvatarEntity> userAvatarEntities = Select
 				.from(UserAvatarEntity.class)
 				.where("username=?",
@@ -72,8 +64,8 @@ public class UserManager {
 		if (userAvatarEntities == null || userAvatarEntities.isEmpty())
 			return null;
 		Log.d("getUserInfo", "userInfoEntity:"
-				+ userAvatarEntities.get(0).getUsername());
-		return userAvatarEntities.get(0).getAvatarBitmap();
+				+ userAvatarEntities.get(0).getAvatarSdUrl());
+		return "/sdcard/taku/"+ userAvatarEntities.get(0).getAvatarSdUrl(); //BitmapUtils.convertToBitmap();
 	}
 
 	/**

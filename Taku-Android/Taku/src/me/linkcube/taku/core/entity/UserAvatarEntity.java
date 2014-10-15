@@ -1,22 +1,20 @@
 package me.linkcube.taku.core.entity;
 
-import android.graphics.Bitmap;
-
 import com.orm.dsl.Table;
 
 @Table(name = "UserAvatarEntity")
 public class UserAvatarEntity {
 
 	private String username;
-	private Bitmap avatarBitmap;
+	private String avatarSdUrl;
 	
 	public UserAvatarEntity(){
 		
 	}
 	
-	public UserAvatarEntity(String username, Bitmap avatar) {
+	public UserAvatarEntity(String username, String avatarSdUrl) {
 		this.username = username;
-		this.avatarBitmap = avatar;
+		this.avatarSdUrl = avatarSdUrl;
 	}
 
 	public String getUsername() {
@@ -27,12 +25,13 @@ public class UserAvatarEntity {
 		this.username = username;
 	}
 
-	public Bitmap getAvatarBitmap() {
-		return avatarBitmap;
+	public String getAvatarSdUrl() {
+		return avatarSdUrl;
 	}
 
-	public void setAvatarBitmap(Bitmap avatarBitmap) {
-		this.avatarBitmap = avatarBitmap;
+	public void setAvatarSdUrl(String avatarSdUrl) {
+		this.avatarSdUrl = avatarSdUrl;
 	}
+
 
 }
