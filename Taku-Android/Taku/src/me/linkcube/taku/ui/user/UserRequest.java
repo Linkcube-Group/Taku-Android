@@ -47,9 +47,8 @@ public class UserRequest {
 					if (statusCode == 200) {
 						if (response.getBoolean(ResponseKey.STATUS)) {
 							TakuHttpClient.getCookie();
-							getUserInfo();
-							httpResponseListener.responseSuccess();
 							UserManager.getInstance().setLogin(true);
+							getUserInfo(httpResponseListener);
 						} else {
 							httpResponseListener
 									.responseFailed(ErrorFlag.EMAIL_PSW_WRONG);
@@ -77,8 +76,8 @@ public class UserRequest {
 				try {
 					if (statusCode == 200) {
 						if (response.getBoolean(ResponseKey.STATUS)) {
-							httpResponseListener.responseSuccess();
 							UserManager.getInstance().setLogin(false);
+							httpResponseListener.responseSuccess();
 						} else {
 							httpResponseListener
 									.responseFailed(ErrorFlag.LOGOUT_ERROR);
@@ -94,7 +93,7 @@ public class UserRequest {
 		});
 	}
 
-	public static void getUserInfo() {
+	public static void getUserInfo(final HttpResponseListener httpResponseListener) {
 		TakuHttpClient.post("getinfo", new JsonHttpResponseHandler() {
 			@Override
 			public void onSuccess(int statusCode, Header[] headers,
@@ -133,9 +132,12 @@ public class UserRequest {
 									
 									@Override
 									public void onLoadingComplete(String imageUri, View view, Bitmap userAvatar) {
-										BitmapUtils.saveBitmap(avatarUrl, userAvatar);
-										UserAvatarEntity userAvatarEntity=new UserAvatarEntity(PreferenceUtils.getString(KEY.USER_NAME,""),avatarUrl);
-										SugarRecord.save(userAvatarEntity);
+										if(UserManager.getInstance().getUserAvatarUrl()==null){
+											BitmapUtils.saveBitmap(avatarUrl, userAvatar);
+											UserAvatarEntity userAvatarEntity=new UserAvatarEntity(PreferenceUtils.getString(KEY.USER_NAME,""),avatarUrl);
+											SugarRecord.save(userAvatarEntity);
+										}
+										httpResponseListener.responseSuccess();
 									}
 									
 									@Override
@@ -143,6 +145,8 @@ public class UserRequest {
 										
 									}
 								});
+							}else{
+								httpResponseListener.responseSuccess();
 							}
 							// TODO 获取到用户个人信息后的一些操作
 							// Log.d("getUserInfo",

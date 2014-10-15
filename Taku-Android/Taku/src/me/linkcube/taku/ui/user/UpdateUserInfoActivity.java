@@ -99,6 +99,7 @@ public class UpdateUserInfoActivity extends BaseTitleActivity implements
 			@Override
 			public void onClick(View arg0) {
 				// 上传头像
+				showProgressDialog(getString(R.string.is_updating_user_info));
 				if (userAvatar != null) {
 					uploadAvatar();
 				}
@@ -127,8 +128,19 @@ public class UpdateUserInfoActivity extends BaseTitleActivity implements
 											new String[] { PreferenceUtils
 													.getString(KEY.USER_NAME,
 															"") });
-									UserRequest.getUserInfo();
-									finish();
+									UserRequest.getUserInfo(new HttpResponseListener() {
+										
+										@Override
+										public void responseSuccess() {
+											hiddenProgressDialog();
+											finish();
+										}
+										
+										@Override
+										public void responseFailed(int flag) {
+											
+										}
+									});
 								}
 
 								@Override
@@ -176,8 +188,19 @@ public class UpdateUserInfoActivity extends BaseTitleActivity implements
 									"username=?",
 									new String[] { PreferenceUtils.getString(
 											KEY.USER_NAME, "") });
-							UserRequest.getUserInfo();
-							finish();
+							UserRequest.getUserInfo(new HttpResponseListener() {
+								
+								@Override
+								public void responseSuccess() {
+									hiddenProgressDialog();
+									finish();
+								}
+								
+								@Override
+								public void responseFailed(int flag) {
+									
+								}
+							});
 						}
 					}
 

@@ -1,8 +1,7 @@
 package me.linkcube.taku.ui;
 
-import custom.android.app.CustomFragmentActivity;
-
 import me.linkcube.taku.R;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -22,6 +21,8 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 
+import custom.android.app.CustomFragmentActivity;
+
 /**
  * 用于显示title的activity基类
  * 
@@ -37,6 +38,7 @@ public class BaseTitleActivity extends CustomFragmentActivity {
 	protected Button leftTitleBtn;
 	private TextView titleText;
 	protected Button rightTitleBtn;
+	protected ProgressDialog progressDialog = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -149,5 +151,27 @@ public class BaseTitleActivity extends CustomFragmentActivity {
 
 	public RelativeLayout getTitleViewRl() {
 		return titleRelativeLayout;
+	}
+	
+	/**
+	 * 显示进度框
+	 */
+	protected void showProgressDialog(String message) {
+		if (progressDialog == null)
+			progressDialog = new ProgressDialog(this);
+		progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+		progressDialog.setIndeterminate(false);
+		progressDialog.setCancelable(true);
+		progressDialog.setMessage(message);
+		progressDialog.show();
+	}
+
+	/**
+	 * 隐藏进度框
+	 */
+	protected void hiddenProgressDialog() {
+		if (progressDialog != null) {
+			progressDialog.dismiss();
+		}
 	}
 }

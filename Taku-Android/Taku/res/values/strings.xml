@@ -96,6 +96,8 @@
     <string name="pick_photo">从相册中选择 </string>
     <string name="attachToContact">选择 </string>
     <string name="photoPickerNotFoundText">照片文件未找到 </string>
+    <string name="is_logining">正在登录中...</string>
+    <string name="is_updating_user_info">正在更新用户信息...</string>
     <!-- 设置界面 -->
     <string name="setting_title_text">设置</string>
     <string name="checkout_for_update_text">检测更新</string>
