@@ -14,6 +14,8 @@ import android.widget.ImageButton;
 
 import com.ervinwang.bthelper.BTManager;
 
+import custom.android.util.AlertUtils;
+
 public class SportsGamesFragment extends BaseSlidingFragment implements
 		OnClickListener {
 
@@ -71,7 +73,12 @@ public class SportsGamesFragment extends BaseSlidingFragment implements
 		switch (v.getId()) {
 		case R.id.panelBtn:
 			// TODO
-			startActivity(new Intent(getActivity(), DashboardActivity.class));
+			if(isToyConnected()){
+				startActivity(new Intent(getActivity(), DashboardActivity.class));
+			}else{
+				AlertUtils.showToast(getActivity(), "请连接玩具！");
+			}
+			
 			break;
 		case R.id.takuBtn:
 			// if (!isToyConnected()) {

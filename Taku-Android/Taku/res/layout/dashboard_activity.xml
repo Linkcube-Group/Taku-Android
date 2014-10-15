@@ -57,6 +57,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
             android:text="分享"
+            android:textColor="@color/white"
             android:textSize="@dimen/TextSize.Large" />
 
         <ImageButton
@@ -101,6 +102,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="心率"
+                android:textColor="@color/white"
                 android:textSize="@dimen/TextSize.Large" />
         </LinearLayout>
 
@@ -139,7 +141,7 @@
             android:orientation="vertical" >
 
             <me.linkcube.taku.ui.sportsgame.dashboardgame.InfoDashboard
-                android:id="@+id/cal"
+                android:id="@+id/calorie_view"
                 android:layout_width="100dp"
                 android:layout_height="100dp" >
             </me.linkcube.taku.ui.sportsgame.dashboardgame.InfoDashboard>
@@ -148,6 +150,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="消耗"
+                android:textColor="@color/white"
                 android:textSize="@dimen/TextSize.Large" />
         </LinearLayout>
 

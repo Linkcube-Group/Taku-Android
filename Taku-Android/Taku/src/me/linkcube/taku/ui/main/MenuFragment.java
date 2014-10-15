@@ -1,5 +1,6 @@
 package me.linkcube.taku.ui.main;
 
+import custom.android.util.AlertUtils;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -42,13 +43,13 @@ public class MenuFragment extends BaseSlidingFragment implements
 		if (UserManager.getInstance().getUserAvatarUrl() != null) {
 			avatar_iv.setImageBitmap(BitmapUtils.convertToBitmap(UserManager
 					.getInstance().getUserAvatarUrl()));
-		}else {
+		} else {
 			avatar_iv.setImageResource(R.drawable.avatar_default);
 		}
 		if (UserManager.getInstance().getUserInfo() != null) {
 			user_name_tv.setText(UserManager.getInstance().getUserInfo()
 					.getNickname());
-		}else {
+		} else {
 			user_name_tv.setText(getString(R.string.please_login_text));
 		}
 	}
@@ -106,7 +107,12 @@ public class MenuFragment extends BaseSlidingFragment implements
 			listener.onMenuItemClick(sportsGamesMenuItem, 0);
 			break;
 		case R.id.historyBtn:
-			listener.onMenuItemClick(historyMenuItem, 1);
+			if (UserManager.getInstance().isLogin()) {
+				listener.onMenuItemClick(historyMenuItem, 1);
+			} else {
+				AlertUtils.showToast(getActivity(),
+						getString(R.string.please_login_first));
+			}
 			break;
 		case R.id.networkGamesBtn:
 			listener.onMenuItemClick(networkGamesMenuItem, 2);

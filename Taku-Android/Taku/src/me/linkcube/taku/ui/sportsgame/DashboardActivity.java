@@ -1,6 +1,10 @@
 package me.linkcube.taku.ui.sportsgame;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import me.linkcube.taku.R;
+import me.linkcube.taku.AppConst.GameFrame;
 import me.linkcube.taku.ui.bt.BTSettingActivity;
 import me.linkcube.taku.ui.share.ShareActivity;
 import me.linkcube.taku.ui.sportsgame.dashboardgame.InfoDashboard;
@@ -11,7 +15,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
-import android.os.Looper;
 import android.os.Message;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -25,7 +28,6 @@ import android.widget.TextView;
 
 import com.ervinwang.bthelper.BTManager;
 import com.ervinwang.bthelper.core.IReceiveData;
-import com.ervinwang.bthelper.utils.FormatUtils;
 
 import custom.android.app.CustomFragmentActivity;
 
@@ -44,13 +46,12 @@ public class DashboardActivity extends CustomFragmentActivity {
 	// 速度
 	private SpeedDashboard speedRate;
 	// 卡路里
-	private InfoDashboard cal;
+	private InfoDashboard calorieView;
 
 	// 目标完成
 	private TargetCompletedView mTasksView;
 	// 记录用户设定的运动距离
-	private double mtargetDistance;
-	private int mTotalProgress;
+	private double mtargetDistance = 3;
 	private int mCurrentProgress;
 	// 运动距离
 	private TextView distance_tv;
@@ -63,66 +64,39 @@ public class DashboardActivity extends CustomFragmentActivity {
 
 	private static final int SETTING_TARGET_REQUEST_CODE = 1;
 
-	private boolean connectBtSuccess = false;
-
-	// Just for Test
-	private int precent = 0;
-
 	// 起始时间－－记录用户进入taku仪表盘的时间点
 	private long startTime = System.currentTimeMillis();
 
 	// 记录前一帧的时间点
 	private long preTime = startTime;
 	// 记录当前帧的时间点
-	private long currenTime = startTime;
+	private long currentTime = startTime;
 
-	// 身高，单位cm
-	private double userHeight = 175;
-	// 体重， 单位kg
-	private double userWeight = 70.0;
-	// 步长，单位m
-	private double stepLength = (userHeight - 155.911) / 26.2;
 	// 步数，记录总步数
 	private int stepCount = 0;
 
-	// 运动距离，单位km.距离 = 步长*N/1000
-	private double distance = 0.0;
-	// 消耗cal,消耗 = 距离*体重（kg）
-	private double consumeCal = 0.0;
-	private double speed = 0.0;
+	private boolean isGameStart = false;
 
-	private DashboardHander dashboardHander;
+	private Timer gameDurationTimer;
 
-	// 计算运行情况数据
-	private void calculatePrameter() {
-		stepCount++;
-
-		distance = stepLength * stepCount / 1000.0;
-		consumeCal = distance * userWeight;
-
-		preTime = currenTime;
-		currenTime = System.currentTimeMillis();
-		speed = 1000 * (stepLength * 3.6) / (currenTime - preTime);
-
-	}
+	private String[] countTime = new String[2];
+	private int countSecond = 0;
 
 	// 解析蓝牙发送过来的数据
 	String blueToothString = "";
 
 	public DashboardActivity() {
-		// TODO Auto-generated constructor stub
+
 	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.dashboard_activity);
 		init();
 
 		HandlerThread handlerThread = new HandlerThread("Dashboard_Handler");
 		handlerThread.start();
-		dashboardHander = new DashboardHander(handlerThread.getLooper());
 
 	}
 
@@ -135,22 +109,94 @@ public class DashboardActivity extends CustomFragmentActivity {
 
 			@Override
 			public void receiveData(int bytes, byte[] buffer) {
+
 				byte[] buf_data = new byte[bytes];
 				for (int i = 0; i < bytes; i++) {
 					buf_data[i] = buffer[i];
 				}
-				blueToothString = FormatUtils.bytesToHexString(buf_data);
-				Log.i("CXC", "----" + blueToothString);
-				Log.d("Receive Data Hex 1 = ", blueToothString);
-				Bundle data = new Bundle();
-				data.putInt("progress", precent++);
-				Message msg = dashboardHander.obtainMessage();
-				msg.setData(data);
-				msg.sendToTarget();
+				// 传过来的是走了一步
+				if (buf_data[2] == GameFrame.SPEED_FRAME[2]) {
+					if (!isGameStart) {
+						isGameStart = true;
+						preTime = System.currentTimeMillis();
+						gameDurationTimer = new Timer();
+						gameDurationTimer.schedule(new TimerTask() {
+							@Override
+							public void run() {
+								countSecond++;
+								countTime[0] = addZero(countSecond / 60);
+								countTime[1] = addZero(countSecond % 60);
+								Bundle timeData = new Bundle();
+								timeData.putString("counttime", countTime[0]
+										+ ":" + countTime[1]);
+								Message timeMsg = new Message();
+								timeMsg.setData(timeData);
+								timeHandler.sendMessage(timeMsg);
+							}
+						}, 0, 1000);
+					} else {
+						// 计算速度
+						currentTime = System.currentTimeMillis();
+						double speed = SportsGameManager.calculateSpeed(
+								preTime, currentTime);
+						Log.d("DashboardActivity", "speed:" + speed);
+						preTime = currentTime;
+						// 计算距离
+						stepCount++;
+						double distance = SportsGameManager
+								.calculateDistance(stepCount);
+						Log.d("DashboardActivity", "distance:" + distance);
+						// 计算热量
+						double calorie = SportsGameManager
+								.calculateCalorie(distance);
+						Log.d("DashboardActivity", "calorie:" + calorie);
+
+						Bundle data = new Bundle();
+						data.putDouble("speed", speed);
+						data.putDouble("distance", distance);
+						data.putDouble("calorie", calorie);
+						Message msg = new Message();
+						msg.setData(data);
+						dashboardHander.sendMessage(msg);
+					}
+				}
 
 			}
 		});
 	}
+
+	private float fromDegrees = -180, toDegrees = -180;
+	private Handler dashboardHander = new Handler() {
+		@Override
+		public void handleMessage(Message msg) {
+			super.handleMessage(msg);
+			Bundle bundle = msg.getData();
+			int progress = (int) (bundle.getDouble("distance") * 100 / mtargetDistance);
+			// 更新距离控件
+			mTasksView.setProgress(progress);
+			Log.i("CXC", "---progress:" + progress);
+			// 更新消耗热量控件
+			calorieView.setInfoTextView((int) bundle.getDouble("calorie") + "");
+			// 更新速度控件
+			toDegrees = (float) ((bundle.getDouble("speed") - 30) * 5);
+			Log.d("DashboardActivity", "---fromDegrees:" + fromDegrees
+					+ ";---toDegrees:" + toDegrees);
+			speedRate.showRotateAnimation(fromDegrees, toDegrees);
+			fromDegrees = toDegrees;
+			// 更新距离控件
+			java.text.DecimalFormat df = new java.text.DecimalFormat("#.##");
+			setDistanceText(df.format(((bundle.getDouble("distance")))));
+		}
+	};
+
+	private Handler timeHandler = new Handler() {
+		@Override
+		public void handleMessage(Message msg) {
+			super.handleMessage(msg);
+			Bundle bundle = msg.getData();
+			setTimeText(bundle.getString("counttime"));
+		}
+	};
 
 	private void init() {
 		// 得到控件对象
@@ -160,7 +206,7 @@ public class DashboardActivity extends CustomFragmentActivity {
 
 		heartRate = (InfoDashboard) findViewById(R.id.heartRate);
 		speedRate = (SpeedDashboard) findViewById(R.id.speedRate);
-		cal = (InfoDashboard) findViewById(R.id.cal);
+		calorieView = (InfoDashboard) findViewById(R.id.calorie_view);
 		mTasksView = (TargetCompletedView) findViewById(R.id.tasks_view);
 
 		distance_tv = (TextView) findViewById(R.id.distance_tv);
@@ -178,12 +224,12 @@ public class DashboardActivity extends CustomFragmentActivity {
 		speedRate.setPointerImageViewRes(R.drawable.dashboard_pointer);
 		heartRate.setInfoImageViewRes(R.drawable.dashboard_heartrate_bg);
 		heartRate.setInfoTextView("88");
-		cal.setInfoImageViewRes(R.drawable.dashboard_cal_bg);
-		cal.setInfoTextView("888");
+		calorieView.setInfoImageViewRes(R.drawable.dashboard_cal_bg);
+		calorieView.setInfoTextView("888");
 
-		mTotalProgress = 100;
 		mCurrentProgress = 0;
 		mTasksView.setProgress(mCurrentProgress);
+		speedRate.showRotateAnimation(-180, -180);
 		setDistanceText("00");
 		setTimeText("00:00");
 
@@ -193,7 +239,6 @@ public class DashboardActivity extends CustomFragmentActivity {
 
 		@Override
 		public void onClick(View v) {
-			// TODO Auto-generated method stub
 			switch (v.getId()) {
 			case R.id.close_imgBtn:// 关闭
 				exitDashbord();
@@ -265,7 +310,6 @@ public class DashboardActivity extends CustomFragmentActivity {
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		// TODO Auto-generated method stub
 		super.onActivityResult(requestCode, resultCode, data);
 
 		switch (requestCode) {
@@ -282,31 +326,13 @@ public class DashboardActivity extends CustomFragmentActivity {
 		default:
 			break;
 		}
-
 	}
 
-	/**
-	 * 更新UI显示
-	 * */
-	class DashboardHander extends Handler {
-		// 构造函数
-		public DashboardHander() {
-
-		}
-
-		public DashboardHander(Looper looper) {
-			super(looper);
-
-		}
-
-		@Override
-		public void handleMessage(Message msg) {
-			// TODO Auto-generated method stub
-			super.handleMessage(msg);
-			Bundle bundle = msg.getData();
-			int progress = (int) bundle.getInt("progress");
-			mTasksView.setProgress(progress);
-			Log.i("CXC", "---progress:" + progress);
+	private String addZero(int time) {
+		if (0 <= time && time <= 9)
+			return "0" + time;
+		else {
+			return time + "";
 		}
 	}
 

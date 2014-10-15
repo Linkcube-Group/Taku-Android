@@ -127,5 +127,9 @@ public class AppConst {
 		public static final String AVATAR = "avatar";
 
 	}
+	
+	public static class GameFrame{
+		public static final byte[] SPEED_FRAME = { 0x25, 0x2, 0x2, 0x0, 0x0, 0x0, 0x0, 0x29 };
+	}
 
 }

@@ -87,6 +87,7 @@
     <string name="user_gender_female_text">女</string>
     <string name="user_gender_male_text">男</string>
     <string name="please_login_text">请登录...</string>
+    <string name="please_login_first">请登录后查看历史记录</string>
     <string name="sports_accessories">运动配件</string>
     <string name="moving_target">设定每日运动目标</string>
     <string name="historical_records">运动历史记录</string>
