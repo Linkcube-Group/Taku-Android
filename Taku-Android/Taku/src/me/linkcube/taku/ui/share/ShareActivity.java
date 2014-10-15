@@ -79,6 +79,7 @@ public class ShareActivity extends FragmentActivity {
 
 		initUMeng();
 		init();
+		drawSharePic();
 	}
 
 	private void init() {
@@ -96,6 +97,28 @@ public class ShareActivity extends FragmentActivity {
 		// 注册事件
 		back_imgBtn.setOnClickListener(onShareActivityButtonClickListener);
 		share_btn.setOnClickListener(onShareActivityButtonClickListener);
+		drawSharePic();
+
+	}
+
+	/**
+	 * 绘制分享的图片
+	 * */
+	private void drawSharePic() {
+		// 启动Service 绘制要分享的图片*******
+		// 出现java.lang.OutOfMemoryError*******
+		Intent startIntent = new Intent();
+		startIntent.setClass(this, DrawPicService.class);
+
+		Bundle bundle = new Bundle();
+		SharePicParameters spParameters = new SharePicParameters(
+				R.drawable.dashboard_bg, R.drawable.share_head_img,
+				this.distance, this.time, this.cal);
+		startIntent.putExtra(DrawPicService.DRAWPICSERVICE_PARAMETERS,
+				spParameters);
+		startIntent.putExtras(bundle);
+
+		startService(startIntent);
 
 	}
 
@@ -123,7 +146,7 @@ public class ShareActivity extends FragmentActivity {
 		 **/
 		// wx967daebe835fbeac是你在微信开发平台注册应用的AppID, 这里需要替换成你注册的AppID
 		// 下一步去申请AppID＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊
-		String appID = "wx967daebe835fbeac";
+		String appID = "wx3058414210272d4b";
 		// 添加微信平台
 		UMWXHandler wxHandler = new UMWXHandler(this, appID);
 		wxHandler.addToSocialSDK();
@@ -255,19 +278,6 @@ public class ShareActivity extends FragmentActivity {
 
 	private void sharePicPNG() {
 		Log.i("CXC", "---sharePicClick");
-		// 启动Service 绘制要分享的图片*******
-		// 出现java.lang.OutOfMemoryError*******
-		Intent startIntent = new Intent();
-		startIntent.setClass(this, DrawPicService.class);
-
-		Bundle bundle = new Bundle();
-		SharePicParameters spParameters = new SharePicParameters(
-				R.drawable.dashboard_bg, R.drawable.share_head_img,
-				this.distance, this.time, this.cal);
-		startIntent.putExtra(DrawPicService.DRAWPICSERVICE_PARAMETERS, spParameters);
-		startIntent.putExtras(bundle);
-
-		startService(startIntent);
 
 		// 设置分享内容
 		mController

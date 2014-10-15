@@ -129,7 +129,6 @@ public class DrawPicService extends Service {
 	 * */
 	public void drawBitmap(int bg_resId, int head_resId, float distance,
 			String timeString, int cal) {
-		Log.i("CXC", "----drawBitmap");
 
 		Bitmap bitmap = BitmapFactory.decodeResource(getResources(), bg_resId);
 		// 得到图片的宽、高
@@ -153,6 +152,11 @@ public class DrawPicService extends Service {
 		// 绘制图片－－保证其在水平方向居中
 		mCanvas.drawBitmap(bitmap, (bg_width - head_width) / 2, 0.0f,
 				mTextPaint);
+
+		// 释放资源
+		if (bitmap != null) {
+			bitmap.recycle();
+		}
 
 		// 绘制运动距离文字
 		textString = "运动距离：";
