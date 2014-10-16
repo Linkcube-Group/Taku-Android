@@ -107,6 +107,10 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
+            android:name="me.linkcube.taku.ui.user.UserHistoryRecordActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
             android:name="me.linkcube.taku.ui.user.UpdateUserInfoActivity"
             android:screenOrientation="portrait" >
         </activity>

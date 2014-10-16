@@ -4,6 +4,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import me.linkcube.taku.AppConst.KEY;
+import me.linkcube.taku.R.string;
 import me.linkcube.taku.core.entity.UserAvatarEntity;
 import me.linkcube.taku.core.entity.UserInfoEntity;
 import android.util.Log;
@@ -38,8 +39,14 @@ public class UserManager {
 		this.isLogin = isLogin;
 	}
 
+	private UserInfoEntity userInfoEntity = null;
+
+	public void setUserInfoEntity(UserInfoEntity userInfoEntity) {
+		this.userInfoEntity = userInfoEntity;
+	}
+
 	public UserInfoEntity getUserInfo() {
-		if(!isLogin)
+		if (!isLogin)
 			return null;
 		List<UserInfoEntity> userInfoEntities = Select
 				.from(UserInfoEntity.class)
@@ -50,11 +57,20 @@ public class UserManager {
 			return null;
 		Log.d("getUserInfo", "userInfoEntity:"
 				+ userInfoEntities.get(0).getNickname());
-		return userInfoEntities.get(0);
+		userInfoEntity=userInfoEntities.get(0);
+		return userInfoEntity;
+	}
+	
+	public String getUserHeight(){
+		return userInfoEntity.getHeight();
+	}
+	
+	public String getUserWeight(){
+		return userInfoEntity.getWeight();
 	}
 
 	public String getUserAvatarUrl() {
-		if(!isLogin)
+		if (!isLogin)
 			return null;
 		List<UserAvatarEntity> userAvatarEntities = Select
 				.from(UserAvatarEntity.class)
@@ -65,7 +81,7 @@ public class UserManager {
 			return null;
 		Log.d("getUserInfo", "userInfoEntity:"
 				+ userAvatarEntities.get(0).getAvatarSdUrl());
-		return "/sdcard/taku/"+ userAvatarEntities.get(0).getAvatarSdUrl(); //BitmapUtils.convertToBitmap();
+		return "/sdcard/taku/" + userAvatarEntities.get(0).getAvatarSdUrl(); // BitmapUtils.convertToBitmap();
 	}
 
 	/**

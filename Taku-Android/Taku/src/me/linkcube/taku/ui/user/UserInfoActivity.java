@@ -4,6 +4,8 @@ import me.linkcube.taku.AppConst.Gender;
 import me.linkcube.taku.R;
 import me.linkcube.taku.core.entity.UserInfoEntity;
 import me.linkcube.taku.ui.BaseTitleActivity;
+import me.linkcube.taku.ui.bt.BTSettingActivity;
+import me.linkcube.taku.ui.sportsgame.TargetSettingActivity;
 import me.linkcube.taku.view.CircularImage;
 import me.linkcube.taku.view.MenuItem;
 import android.content.Intent;
@@ -13,12 +15,14 @@ import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class UserInfoActivity extends BaseTitleActivity {
+public class UserInfoActivity extends BaseTitleActivity implements OnClickListener{
 
 	private CircularImage userAvatarIv;
 	private TextView userNameTv;
 	private TextView userAge;
 	private ImageView userGenderIv;
+
+	private MenuItem btSettingItem, movingTargetItem, userHistoryRecordItem;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -40,15 +44,12 @@ public class UserInfoActivity extends BaseTitleActivity {
 		userNameTv = (TextView) findViewById(R.id.userNameTv);
 		userAge = (TextView) findViewById(R.id.userAge);
 		userGenderIv = (ImageView) findViewById(R.id.userGenderIv);
-		MenuItem updateUserInfoItem = (MenuItem) findViewById(R.id.movingTargetItem);
-		updateUserInfoItem.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View arg0) {
-				startActivity(new Intent(UserInfoActivity.this,
-						UpdateUserInfoActivity.class));
-			}
-		});
+		btSettingItem = (MenuItem) findViewById(R.id.btSettingItem);
+		btSettingItem.setOnClickListener(this);
+		movingTargetItem = (MenuItem) findViewById(R.id.movingTargetItem);
+		movingTargetItem.setOnClickListener(this);
+		userHistoryRecordItem = (MenuItem) findViewById(R.id.userHistoryRecordItem);
+		userHistoryRecordItem.setOnClickListener(this);
 	}
 
 	private void initData() {
@@ -81,6 +82,26 @@ public class UserInfoActivity extends BaseTitleActivity {
 						UpdateUserInfoActivity.class));
 			}
 		});
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.btSettingItem:
+			startActivity(new Intent(UserInfoActivity.this,
+					BTSettingActivity.class));
+			break;
+		case R.id.movingTargetItem:
+			startActivity(new Intent(UserInfoActivity.this,
+					TargetSettingActivity.class));
+			break;
+		case R.id.userHistoryRecordItem:
+			startActivity(new Intent(UserInfoActivity.this,
+					UserHistoryRecordActivity.class));
+			break;
+		default:
+			break;
+		}
 	}
 
 }

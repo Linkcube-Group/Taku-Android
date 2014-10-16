@@ -54,6 +54,7 @@
         android:paddingRight="@dimen/LayoutContentPadding" >
 
         <me.linkcube.taku.view.MenuItem
+            android:id="@+id/btSettingItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             menuItem:TitleText="@string/sports_accessories"
@@ -77,6 +78,7 @@
             android:background="@color/black" />
 
         <me.linkcube.taku.view.MenuItem
+            android:id="@+id/userHistoryRecordItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             menuItem:TitleText="@string/historical_records"

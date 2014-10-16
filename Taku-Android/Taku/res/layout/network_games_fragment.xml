@@ -28,7 +28,8 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="@string/sports_games"
-            android:textSize="@dimen/ActionBarTextSize" />
+            android:textSize="@dimen/ActionBarTextSize"
+            android:textColor="@color/text_green" />
 
         <ImageButton
             android:id="@+id/connectBtn"

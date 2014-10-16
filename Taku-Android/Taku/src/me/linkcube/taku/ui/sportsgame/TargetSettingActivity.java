@@ -141,9 +141,10 @@ public class TargetSettingActivity extends Activity {
 	private void submitTagetSetting() {
 		Intent intent = new Intent();
 		// 运动距离
-		intent.putExtra(TARGET_DISTANCE,
-				(distanceWheelView.getCurrentItem() + 1)
-						* DISTANCE_ARRAY_OFFSET);
+		double targetDistance=(distanceWheelView.getCurrentItem() + 1)* DISTANCE_ARRAY_OFFSET;
+		intent.putExtra(TARGET_DISTANCE,targetDistance);
+		SportsGameManager.setTargetDistance(targetDistance);
+		Log.d("submitTagetSetting", "targetDistance:"+targetDistance);
 		// 运动时间
 
 		// 消耗卡路里

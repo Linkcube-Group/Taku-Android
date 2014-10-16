@@ -88,6 +88,7 @@ public class SettingFragment extends BaseSlidingFragment {
 							settingLoginBtn.setText(getResources().getString(
 									R.string.login_btn_text));
 							UserManager.getInstance().setLogin(false);
+							UserManager.getInstance().setUserInfoEntity(null);
 							AlertUtils.showToast(getActivity(), "当前用户已退出！");
 						}
 

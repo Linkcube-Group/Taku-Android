@@ -52,7 +52,6 @@ public class BaseTitleActivity extends CustomFragmentActivity {
 		rightTitleBtn = (Button) titleLayout.findViewById(R.id.title_right_btn);
 
 		leftTitleBtn.setOnClickListener(new View.OnClickListener() {
-
 			@Override
 			public void onClick(View v) {
 				finish();

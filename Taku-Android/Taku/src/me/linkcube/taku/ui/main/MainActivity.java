@@ -15,8 +15,6 @@ import android.view.View;
 public class MainActivity extends CustomFragmentActivity implements
 		ISlidingMenu, OnMenuItemClickListener {
 	
-	private String tag="MainActivity";
-
 	private static final int SPORTS_GAMES = 0;
 
 	private static final int HISTORY = 1;

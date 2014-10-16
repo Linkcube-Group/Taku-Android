@@ -31,44 +31,23 @@
             android:layout_centerInParent="true"
             android:layout_centerVertical="true"
             android:gravity="center"
-            android:text="仪表盘"
+            android:text="@string/dashboard"
+            android:textColor="@color/text_green"
             android:textSize="@dimen/ActionBarTextSize" />
 
-        <ImageButton
-            android:id="@+id/connDevice_imgBtn"
-            android:layout_width="@dimen/ActionBarButtonSize"
-            android:layout_height="@dimen/ActionBarButtonSize"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:background="@drawable/connect"
-            android:contentDescription="@null" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical" >
-
-        <TextView
-            android:id="@+id/share_tv"
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="10dp"
-            android:text="分享"
-            android:textColor="@color/white"
-            android:textSize="@dimen/TextSize.Large" />
+            android:layout_centerVertical="true" >
 
-        <ImageButton
-            android:id="@+id/share_imgBtn"
-            android:layout_width="@dimen/ActionBarButtonSize"
-            android:layout_height="@dimen/ActionBarButtonSize"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="10dp"
-            android:layout_toLeftOf="@id/share_tv"
-            android:background="@drawable/share_img"
-            android:contentDescription="@null" />
+            <ImageButton
+                android:id="@+id/share_imgBtn"
+                android:layout_width="@dimen/ActionBarButtonSize"
+                android:layout_height="@dimen/ActionBarButtonSize"
+                android:background="@drawable/share_img"
+                android:contentDescription="@null" />
+        </RelativeLayout>
     </RelativeLayout>
 
     <!-- 添加仪表盘组 -->

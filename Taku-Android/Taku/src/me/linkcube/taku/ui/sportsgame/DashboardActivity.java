@@ -1,15 +1,18 @@
 package me.linkcube.taku.ui.sportsgame;
 
+import java.util.Calendar;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import me.linkcube.taku.R;
 import me.linkcube.taku.AppConst.GameFrame;
+import me.linkcube.taku.core.entity.SingleDayGameHistoryEntity;
 import me.linkcube.taku.ui.bt.BTSettingActivity;
 import me.linkcube.taku.ui.share.ShareActivity;
 import me.linkcube.taku.ui.sportsgame.dashboardgame.InfoDashboard;
 import me.linkcube.taku.ui.sportsgame.dashboardgame.SpeedDashboard;
 import me.linkcube.taku.ui.sportsgame.dashboardgame.TargetCompletedView;
+import me.linkcube.taku.ui.user.UserManager;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -32,13 +35,14 @@ import com.ervinwang.bthelper.core.IReceiveData;
 import custom.android.app.CustomFragmentActivity;
 
 /**
- * 仪表盘
- * */
+ * 仪表盘界面
+ * 
+ * @author Administrator
+ * 
+ */
 public class DashboardActivity extends CustomFragmentActivity {
 	// 关闭
 	private ImageButton close_imgBtn;
-	// 连接设备
-	private ImageButton connDevice_imgBtn;
 	// 分享
 	private ImageButton share_imgBtn;
 	// 心率
@@ -51,7 +55,6 @@ public class DashboardActivity extends CustomFragmentActivity {
 	// 目标完成
 	private TargetCompletedView mTasksView;
 	// 记录用户设定的运动距离
-	private double mtargetDistance = 3;
 	private int mCurrentProgress;
 	// 运动距离
 	private TextView distance_tv;
@@ -78,6 +81,7 @@ public class DashboardActivity extends CustomFragmentActivity {
 	private boolean isGameStart = false;
 
 	private Timer gameDurationTimer;
+	private Timer decayTimer;
 
 	private String[] countTime = new String[2];
 	private int countSecond = 0;
@@ -93,11 +97,43 @@ public class DashboardActivity extends CustomFragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.dashboard_activity);
-		init();
+		initView();
+
+		initData();
 
 		HandlerThread handlerThread = new HandlerThread("Dashboard_Handler");
 		handlerThread.start();
+	}
 
+	private void initData() {
+		mTasksView.setTargetDistance(SportsGameManager.getTargetDistance());
+		if (UserManager.getInstance().isLogin()) {
+			SingleDayGameHistoryEntity singleDayGameHistoryEntity = SportsGameManager
+					.getSingleDayGameHistoryEntity();
+			if (singleDayGameHistoryEntity != null) {
+				Log.d("getSingleDayGameHistoryEntity",
+						"--singleDayGameHistoryEntity.getSingleDayDuration():"
+								+ singleDayGameHistoryEntity
+										.getSingleDayDuration());
+				setDistanceText(singleDayGameHistoryEntity
+						.getSingleDayDistance());
+				setTimeText(singleDayGameHistoryEntity.getSingleDayDuration());
+				calorieView.setInfoTextView(singleDayGameHistoryEntity
+						.getSingleDayCalorie());
+			} else {
+				SportsGameManager.setSingleDayGameHistoryEntity("0", "0", "0");
+				initGameData("00", "00:00", "0");
+			}
+		} else {
+			initGameData("00", "00:00", "0");
+		}
+	}
+
+	private void initGameData(String singleDayDistance,
+			String singleDayDuration, String singleDayCalorie) {
+		setDistanceText(singleDayDistance);
+		setTimeText(singleDayDuration);
+		calorieView.setInfoTextView(singleDayCalorie);
 	}
 
 	@Override
@@ -120,6 +156,7 @@ public class DashboardActivity extends CustomFragmentActivity {
 						isGameStart = true;
 						preTime = System.currentTimeMillis();
 						gameDurationTimer = new Timer();
+						decayTimer = new Timer();
 						gameDurationTimer.schedule(new TimerTask() {
 							@Override
 							public void run() {
@@ -158,6 +195,14 @@ public class DashboardActivity extends CustomFragmentActivity {
 						Message msg = new Message();
 						msg.setData(data);
 						dashboardHander.sendMessage(msg);
+
+						// 速度的衰减
+						decayTimer.schedule(new TimerTask() {
+							@Override
+							public void run() {
+								decayHandler.sendEmptyMessage(0);
+							}
+						}, 0, 1000);
 					}
 				}
 
@@ -165,20 +210,35 @@ public class DashboardActivity extends CustomFragmentActivity {
 		});
 	}
 
-	private float fromDegrees = -180, toDegrees = -180;
+	private Handler decayHandler = new Handler() {
+		@Override
+		public void handleMessage(Message msg) {
+			super.handleMessage(msg);
+			if (fromDegrees <= -90) {
+
+			} else {
+				toDegrees = fromDegrees - 10;
+				speedRate.showRotateAnimation(fromDegrees, toDegrees);
+				fromDegrees = toDegrees;
+			}
+		}
+	};
+
+	private float fromDegrees = -90, toDegrees = -90;
 	private Handler dashboardHander = new Handler() {
 		@Override
 		public void handleMessage(Message msg) {
 			super.handleMessage(msg);
 			Bundle bundle = msg.getData();
-			int progress = (int) (bundle.getDouble("distance") * 100 / mtargetDistance);
+			int progress = (int) (bundle.getDouble("distance") * 100 / SportsGameManager
+					.getTargetDistance());
 			// 更新距离控件
 			mTasksView.setProgress(progress);
 			Log.i("CXC", "---progress:" + progress);
 			// 更新消耗热量控件
 			calorieView.setInfoTextView((int) bundle.getDouble("calorie") + "");
 			// 更新速度控件
-			toDegrees = (float) ((bundle.getDouble("speed") - 30) * 5);
+			toDegrees = (float) ((bundle.getDouble("speed") - 15) * 6);
 			Log.d("DashboardActivity", "---fromDegrees:" + fromDegrees
 					+ ";---toDegrees:" + toDegrees);
 			speedRate.showRotateAnimation(fromDegrees, toDegrees);
@@ -198,10 +258,9 @@ public class DashboardActivity extends CustomFragmentActivity {
 		}
 	};
 
-	private void init() {
+	private void initView() {
 		// 得到控件对象
 		close_imgBtn = (ImageButton) findViewById(R.id.close_imgBtn);
-		connDevice_imgBtn = (ImageButton) findViewById(R.id.connDevice_imgBtn);
 		share_imgBtn = (ImageButton) findViewById(R.id.share_imgBtn);
 
 		heartRate = (InfoDashboard) findViewById(R.id.heartRate);
@@ -215,7 +274,6 @@ public class DashboardActivity extends CustomFragmentActivity {
 
 		// 给相应控件注册事件
 		close_imgBtn.setOnClickListener(dashboardClickListener);
-		connDevice_imgBtn.setOnClickListener(dashboardClickListener);
 		share_imgBtn.setOnClickListener(dashboardClickListener);
 		setTaget_imgBtn.setOnClickListener(dashboardClickListener);
 
@@ -223,15 +281,12 @@ public class DashboardActivity extends CustomFragmentActivity {
 		speedRate.setScaleImageViewRes(R.drawable.dashboard_speed_bg);
 		speedRate.setPointerImageViewRes(R.drawable.dashboard_pointer);
 		heartRate.setInfoImageViewRes(R.drawable.dashboard_heartrate_bg);
-		heartRate.setInfoTextView("88");
+		heartRate.setInfoTextView("0");
 		calorieView.setInfoImageViewRes(R.drawable.dashboard_cal_bg);
-		calorieView.setInfoTextView("888");
 
 		mCurrentProgress = 0;
 		mTasksView.setProgress(mCurrentProgress);
-		speedRate.showRotateAnimation(-180, -180);
-		setDistanceText("00");
-		setTimeText("00:00");
+		speedRate.showRotateAnimation(-90, -90);
 
 	}
 
@@ -243,23 +298,22 @@ public class DashboardActivity extends CustomFragmentActivity {
 			case R.id.close_imgBtn:// 关闭
 				exitDashbord();
 				break;
-			case R.id.connDevice_imgBtn:// 连接设备
-				// TODO
-				startActivity(new Intent(getApplicationContext(),
-						BTSettingActivity.class));
-				break;
 			case R.id.share_imgBtn:// 分享
-				startActivity(new Intent(getApplicationContext(),
-						ShareActivity.class));
-				// TODO
+				Intent shareIntent = new Intent(getApplicationContext(),
+						ShareActivity.class);
+				Bundle shareBundle = new Bundle();
+				shareBundle.putString("distance", distance_tv.getText()
+						.toString());
+				shareBundle.putString("duration", time_tv.getText().toString());
+				shareBundle.putString("calorie", calorieView.getInfoTextView());
+				shareIntent.putExtras(shareBundle);
+				startActivity(shareIntent);
 				break;
 			case R.id.setTaget_imgBtn:// 设定运动目标
-				// TODO
 				startActivityForResult(new Intent(getApplicationContext(),
 						TargetSettingActivity.class),
 						SETTING_TARGET_REQUEST_CODE);
 				break;
-
 			default:
 				break;
 			}
@@ -315,7 +369,7 @@ public class DashboardActivity extends CustomFragmentActivity {
 		switch (requestCode) {
 		case SETTING_TARGET_REQUEST_CODE:
 			if (resultCode == RESULT_OK) {
-				mtargetDistance = data.getDoubleExtra(
+				double mtargetDistance = data.getDoubleExtra(
 						TargetSettingActivity.TARGET_DISTANCE, 0.0);
 				// 更新“目标完成”仪表盘中的目标运动距离---只有重绘的时候，显示才能改变
 				mTasksView.setTargetDistance(mtargetDistance);
@@ -333,6 +387,18 @@ public class DashboardActivity extends CustomFragmentActivity {
 			return "0" + time;
 		else {
 			return time + "";
+		}
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		if (UserManager.getInstance().isLogin()) {
+			// TODO 存数据
+			SportsGameManager.setSingleDayGameHistoryEntity(distance_tv
+					.getText().toString(), time_tv.getText().toString(),
+					calorieView.getInfoTextView());
+			SportsGameManager.saveSingleDayGameRecord();
 		}
 	}
 

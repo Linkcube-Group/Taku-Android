@@ -7,7 +7,6 @@ import com.ervinwang.bthelper.BTManager;
 import com.ervinwang.bthelper.core.DeviceBroadcastReceiver;
 import com.ervinwang.bthelper.core.DeviceConnectionManager;
 import com.ervinwang.bthelper.core.OnBTDiscoveryListener;
-import com.unity3d.player.f;
 
 import custom.android.app.CustomFragmentActivity;
 import custom.android.app.dialog.ProgressDialogFragment;
@@ -173,8 +172,8 @@ public class BTSettingActivity extends CustomFragmentActivity implements
 		case R.id.back_imgBtn:
 			if (isToyConnected()) {
 				setResult(RESULT_OK);
-				this.finish();
 			}
+			this.finish();
 			break;
 		default:
 			break;
@@ -189,7 +188,6 @@ public class BTSettingActivity extends CustomFragmentActivity implements
 	@Override
 	public void onBackPressed() {
 		super.onBackPressed();
-		// TODO
 
 	}
 

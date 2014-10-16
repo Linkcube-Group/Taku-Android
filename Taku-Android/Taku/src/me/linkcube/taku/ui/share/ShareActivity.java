@@ -73,9 +73,10 @@ public class ShareActivity extends FragmentActivity {
 		 * 以下只是一些假的数据，以供测试
 		 * 
 		 * ***/
-		this.distance = 12.1f;
-		this.time = "22:13";
-		this.cal = 1888;
+		Bundle bundle = getIntent().getExtras();
+		this.distance = Float.valueOf(bundle.getString("distance"));
+		this.time = bundle.getString("duration");
+		this.cal = Integer.valueOf(bundle.getString("calorie"));
 
 		initUMeng();
 		init();
@@ -218,7 +219,7 @@ public class ShareActivity extends FragmentActivity {
 	 * */
 	private void setDistanceText(String distanceStr) {
 		// 创建一个 SpannableString对象
-		distanceString = new SpannableString("运动距离：" + distanceStr + " 米");
+		distanceString = new SpannableString("运动距离：" + distanceStr + " 千米");
 		int length = distanceStr.length();
 		// 设置字体大小（相对值,单位：像素） 参数表示为默认字体大小的多少倍
 		distanceString.setSpan(new RelativeSizeSpan(2.0f), 5, 5 + length,

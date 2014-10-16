@@ -37,5 +37,9 @@ public class InfoDashboard extends RelativeLayout {
 	public void setInfoTextView(CharSequence text) {
 		this.infoTextView.setText(text);
 	}
+	
+	public String getInfoTextView(){
+		return this.infoTextView.getText().toString();
+	}
 
 }
