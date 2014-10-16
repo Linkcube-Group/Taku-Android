@@ -14,6 +14,8 @@ import android.view.View;
 
 public class MainActivity extends CustomFragmentActivity implements
 		ISlidingMenu, OnMenuItemClickListener {
+	
+	private String tag="MainActivity";
 
 	private static final int SPORTS_GAMES = 0;
 
@@ -42,14 +44,12 @@ public class MainActivity extends CustomFragmentActivity implements
 
 	@Override
 	public void onMenuOpened() {
-		// TODO Auto-generated method stub
-
+		menu.openMenu();
 	}
 
 	@Override
 	public void onMenuClosed() {
-		// TODO Auto-generated method stub
-
+		menu.closeMenu();
 	}
 
 	@Override
@@ -88,7 +88,5 @@ public class MainActivity extends CustomFragmentActivity implements
 		}
 		menu.replaceContentFragment(currentContentFragment);
 		menu.closeMenu();
-
 	}
-
 }

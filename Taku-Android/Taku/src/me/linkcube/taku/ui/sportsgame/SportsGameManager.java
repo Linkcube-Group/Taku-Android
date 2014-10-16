@@ -4,9 +4,9 @@ import me.linkcube.taku.ui.user.UserManager;
 
 public class SportsGameManager {
 
-	private static int userHeight = 180;
+	private static int userHeight = 175;
 
-	private static int userWeight = 70;
+	private static int userWeight = 67;
 
 	/**
 	 * 计算步长
@@ -54,7 +54,6 @@ public class SportsGameManager {
 			return Integer.parseInt(UserManager.getInstance().getUserInfo()
 					.getHeight());
 		}
-
 	}
 
 	private static double getUserWeight() {

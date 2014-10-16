@@ -9,12 +9,17 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.SlidingPaneLayout;
 import android.support.v4.widget.SlidingPaneLayout.PanelSlideListener;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 
 public class SlidingMenu {
+	
+	private String tag="SlidingMenu";
 
 	private SlidingPaneLayout mSlidingPaneLayout;
+	
+	private View slidingpaneMenu;
 
 	private FragmentActivity mActivity;
 
@@ -25,6 +30,7 @@ public class SlidingMenu {
 	private ISlidingMenu menu;
 
 	public SlidingMenu() {
+		
 	}
 
 	public void attachToActivity(FragmentActivity activity) {
@@ -44,6 +50,7 @@ public class SlidingMenu {
 		mActivity.setContentView(R.layout.slidingmenu_main_layout);
 		mSlidingPaneLayout = (SlidingPaneLayout) mActivity
 				.findViewById(R.id.slidingpanellayout);
+		slidingpaneMenu=(View)mActivity.findViewById(R.id.slidingpane_menu);
 		FragmentTransaction transaction = mActivity.getSupportFragmentManager()
 				.beginTransaction();
 		transaction.replace(R.id.slidingpane_menu, menu.getMenuFragment());
@@ -55,7 +62,6 @@ public class SlidingMenu {
 
 			@Override
 			public void onPanelSlide(View panel, float slideOffset) {
-				// TODO Auto-generated method stub
 				int contentMargin = (int) (slideOffset * maxMargin);
 				FrameLayout.LayoutParams contentParams = menu
 						.getContentFragment().getCurrentViewParams();
@@ -75,13 +81,11 @@ public class SlidingMenu {
 			@Override
 			public void onPanelOpened(View panel) {
 				menu.onMenuOpened();
-
 			}
 
 			@Override
 			public void onPanelClosed(View panel) {
 				menu.onMenuClosed();
-
 			}
 		});
 	}
@@ -92,11 +96,15 @@ public class SlidingMenu {
 	}
 
 	public void openMenu() {
+		Log.d(tag, "openMenu");
+		slidingpaneMenu.setVisibility(View.VISIBLE);
 		mSlidingPaneLayout.openPane();
 	}
 
 	public void closeMenu() {
+		Log.d(tag, "closeMenu");
 		mSlidingPaneLayout.closePane();
+		slidingpaneMenu.setVisibility(View.INVISIBLE);
 	}
 
 	public interface ISlidingMenu {
