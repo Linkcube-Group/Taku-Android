@@ -2,16 +2,16 @@ package me.linkcube.taku.ui.sportsgame;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import com.orm.SugarRecord;
+import com.orm.query.Select;
 
 import custom.android.util.PreferenceUtils;
 
 import me.linkcube.taku.AppConst.KEY;
 import me.linkcube.taku.core.entity.SingleDayGameHistoryEntity;
-import me.linkcube.taku.core.entity.UserInfoEntity;
 import me.linkcube.taku.ui.user.UserManager;
-import android.util.Log;
 
 public class SportsGameManager {
 
@@ -83,21 +83,25 @@ public class SportsGameManager {
 	}
 
 	public static void setTargetDistance(double targetDistance) {
-		Log.d("setTargetDistance", "--targetDistance:" + targetDistance);
 		SportsGameManager.targetDistance = targetDistance;
 	}
 
 	public static SingleDayGameHistoryEntity getSingleDayGameHistoryEntity() {
-		if (singleDayGameHistoryEntity == null) {
-			Log.d("getSingleDayGameHistoryEntity", "--targetDistance:" + 1);
+		List<SingleDayGameHistoryEntity> singleDayGameHistoryEntities = Select
+				.from(SingleDayGameHistoryEntity.class)
+				.where("username=? and todaydate=?",
+						new String[] {
+								PreferenceUtils.getString(KEY.USER_NAME, ""),
+								getTodayDate() }).list();
+		if (singleDayGameHistoryEntities == null
+				|| singleDayGameHistoryEntities.isEmpty()) {
 			return null;
-		}
-		if (!singleDayGameHistoryEntity.getTodayDate().equals(getTodayDate())) {
-			Log.d("getSingleDayGameHistoryEntity", "--targetDistance:" + 2);
+		} else if (!singleDayGameHistoryEntities.get(0).getTodaydate().equals(getTodayDate())) {
 			return null;
+		}else{
+			return singleDayGameHistoryEntities.get(0);
 		}
-		Log.d("getSingleDayGameHistoryEntity", "--targetDistance:" + 3);
-		return singleDayGameHistoryEntity;
+		
 	}
 
 	public static void setSingleDayGameHistoryEntity(String singleDayDistance,
@@ -106,19 +110,21 @@ public class SportsGameManager {
 		singleDayGameHistoryEntity.setSingleDayDistance(singleDayDistance);
 		singleDayGameHistoryEntity.setSingleDayDuration(singleDayDuration);
 		singleDayGameHistoryEntity.setSingleDayCalorie(singleDayCalorie);
-		singleDayGameHistoryEntity.setTodayDate(getTodayDate());
+		singleDayGameHistoryEntity.setTodaydate(getTodayDate());
 		singleDayGameHistoryEntity.setUsername(PreferenceUtils.getString(
 				KEY.USER_NAME, null));
 	}
 
 	public static void saveSingleDayGameRecord() {
-		SugarRecord.deleteAll(SingleDayGameHistoryEntity.class, "username=? and todayDate=?",
-				new String[] { PreferenceUtils.getString(KEY.USER_NAME, ""),singleDayGameHistoryEntity.getTodayDate() });
+		SugarRecord.deleteAll(SingleDayGameHistoryEntity.class,
+				"username=? and todaydate=?",
+				new String[] { PreferenceUtils.getString(KEY.USER_NAME, ""),
+						singleDayGameHistoryEntity.getTodaydate() });
 		SugarRecord.save(singleDayGameHistoryEntity);
 	}
 
 	public static String getTodayDate() {
-		SimpleDateFormat bartDateFormat = new SimpleDateFormat("yyyy-mm-dd");
+		SimpleDateFormat bartDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = new Date();
 		String todayDate = bartDateFormat.format(date);
 		return todayDate;

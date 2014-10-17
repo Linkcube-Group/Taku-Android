@@ -85,6 +85,7 @@ public class DashboardActivity extends CustomFragmentActivity {
 
 	private String[] countTime = new String[2];
 	private int countSecond = 0;
+	double distanceRecord = 0;
 
 	// 解析蓝牙发送过来的数据
 	String blueToothString = "";
@@ -104,6 +105,36 @@ public class DashboardActivity extends CustomFragmentActivity {
 		HandlerThread handlerThread = new HandlerThread("Dashboard_Handler");
 		handlerThread.start();
 	}
+	
+	private void initView() {
+		// 得到控件对象
+		close_imgBtn = (ImageButton) findViewById(R.id.close_imgBtn);
+		share_imgBtn = (ImageButton) findViewById(R.id.share_imgBtn);
+
+		heartRate = (InfoDashboard) findViewById(R.id.heartRate);
+		speedRate = (SpeedDashboard) findViewById(R.id.speedRate);
+		calorieView = (InfoDashboard) findViewById(R.id.calorie_view);
+		mTasksView = (TargetCompletedView) findViewById(R.id.tasks_view);
+
+		distance_tv = (TextView) findViewById(R.id.distance_tv);
+		time_tv = (TextView) findViewById(R.id.time_tv);
+		setTaget_imgBtn = (ImageButton) findViewById(R.id.setTaget_imgBtn);
+
+		// 给相应控件注册事件
+		close_imgBtn.setOnClickListener(dashboardClickListener);
+		share_imgBtn.setOnClickListener(dashboardClickListener);
+		setTaget_imgBtn.setOnClickListener(dashboardClickListener);
+
+		// 设置属性
+		speedRate.setScaleImageViewRes(R.drawable.dashboard_speed_bg);
+		speedRate.setPointerImageViewRes(R.drawable.dashboard_pointer);
+		heartRate.setInfoImageViewRes(R.drawable.dashboard_heartrate_bg);
+		heartRate.setInfoTextView("0");
+		calorieView.setInfoImageViewRes(R.drawable.dashboard_cal_bg);
+
+		speedRate.showRotateAnimation(-90, -90);
+
+	}
 
 	private void initData() {
 		mTasksView.setTargetDistance(SportsGameManager.getTargetDistance());
@@ -120,6 +151,14 @@ public class DashboardActivity extends CustomFragmentActivity {
 				setTimeText(singleDayGameHistoryEntity.getSingleDayDuration());
 				calorieView.setInfoTextView(singleDayGameHistoryEntity
 						.getSingleDayCalorie());
+				double distance = Double.parseDouble(singleDayGameHistoryEntity
+						.getSingleDayDistance());// 转换为double类型
+				Log.d("initGameData","singleDayDistance:"+singleDayGameHistoryEntity.getSingleDayDistance()+"---distance:"+distance);
+				distance = Double.parseDouble(dFormat
+						.format(distance));
+				int progress = (int) (distance * 100 / SportsGameManager
+						.getTargetDistance());
+				mTasksView.setProgress(progress);
 			} else {
 				SportsGameManager.setSingleDayGameHistoryEntity("0", "0", "0");
 				initGameData("00", "00:00", "0");
@@ -160,6 +199,10 @@ public class DashboardActivity extends CustomFragmentActivity {
 						gameDurationTimer.schedule(new TimerTask() {
 							@Override
 							public void run() {
+								String[] timeStrings = time_tv.getText()
+										.toString().split(":");
+								countSecond = Integer.valueOf(timeStrings[0])
+										* 60 + Integer.valueOf(timeStrings[1]);
 								countSecond++;
 								countTime[0] = addZero(countSecond / 60);
 								countTime[1] = addZero(countSecond % 60);
@@ -171,6 +214,15 @@ public class DashboardActivity extends CustomFragmentActivity {
 								timeHandler.sendMessage(timeMsg);
 							}
 						}, 0, 1000);
+						// distanceRecord =
+						// Double.parseDouble(distance_tv.getText().toString());
+						// distanceRecord=Double.parseDouble(dFormat.format(value));
+						distanceRecord = Double.parseDouble(distance_tv
+								.getText().toString());// 转换为double类型
+						distanceRecord = Double.parseDouble(dFormat
+								.format(distanceRecord));// 保留2为小数
+						Log.d("DashboardActivity", "distanceRecord:---"
+								+ distanceRecord);
 					} else {
 						// 计算速度
 						currentTime = System.currentTimeMillis();
@@ -180,8 +232,12 @@ public class DashboardActivity extends CustomFragmentActivity {
 						preTime = currentTime;
 						// 计算距离
 						stepCount++;
-						double distance = SportsGameManager
-								.calculateDistance(stepCount);
+						Log.d("DashboardActivity", "distanceRecord:"
+								+ distanceRecord);
+						double distance = distanceRecord
+								+ Double.parseDouble(dFormat
+										.format(SportsGameManager
+												.calculateDistance(stepCount)));
 						Log.d("DashboardActivity", "distance:" + distance);
 						// 计算热量
 						double calorie = SportsGameManager
@@ -225,6 +281,7 @@ public class DashboardActivity extends CustomFragmentActivity {
 	};
 
 	private float fromDegrees = -90, toDegrees = -90;
+	java.text.DecimalFormat dFormat = new java.text.DecimalFormat("#.##");
 	private Handler dashboardHander = new Handler() {
 		@Override
 		public void handleMessage(Message msg) {
@@ -244,8 +301,7 @@ public class DashboardActivity extends CustomFragmentActivity {
 			speedRate.showRotateAnimation(fromDegrees, toDegrees);
 			fromDegrees = toDegrees;
 			// 更新距离控件
-			java.text.DecimalFormat df = new java.text.DecimalFormat("#.##");
-			setDistanceText(df.format(((bundle.getDouble("distance")))));
+			setDistanceText(dFormat.format(((bundle.getDouble("distance")))));
 		}
 	};
 
@@ -257,38 +313,6 @@ public class DashboardActivity extends CustomFragmentActivity {
 			setTimeText(bundle.getString("counttime"));
 		}
 	};
-
-	private void initView() {
-		// 得到控件对象
-		close_imgBtn = (ImageButton) findViewById(R.id.close_imgBtn);
-		share_imgBtn = (ImageButton) findViewById(R.id.share_imgBtn);
-
-		heartRate = (InfoDashboard) findViewById(R.id.heartRate);
-		speedRate = (SpeedDashboard) findViewById(R.id.speedRate);
-		calorieView = (InfoDashboard) findViewById(R.id.calorie_view);
-		mTasksView = (TargetCompletedView) findViewById(R.id.tasks_view);
-
-		distance_tv = (TextView) findViewById(R.id.distance_tv);
-		time_tv = (TextView) findViewById(R.id.time_tv);
-		setTaget_imgBtn = (ImageButton) findViewById(R.id.setTaget_imgBtn);
-
-		// 给相应控件注册事件
-		close_imgBtn.setOnClickListener(dashboardClickListener);
-		share_imgBtn.setOnClickListener(dashboardClickListener);
-		setTaget_imgBtn.setOnClickListener(dashboardClickListener);
-
-		// 设置属性
-		speedRate.setScaleImageViewRes(R.drawable.dashboard_speed_bg);
-		speedRate.setPointerImageViewRes(R.drawable.dashboard_pointer);
-		heartRate.setInfoImageViewRes(R.drawable.dashboard_heartrate_bg);
-		heartRate.setInfoTextView("0");
-		calorieView.setInfoImageViewRes(R.drawable.dashboard_cal_bg);
-
-		mCurrentProgress = 0;
-		mTasksView.setProgress(mCurrentProgress);
-		speedRate.showRotateAnimation(-90, -90);
-
-	}
 
 	OnClickListener dashboardClickListener = new OnClickListener() {
 

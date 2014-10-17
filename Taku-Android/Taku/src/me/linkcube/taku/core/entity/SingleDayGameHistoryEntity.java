@@ -7,7 +7,7 @@ public class SingleDayGameHistoryEntity {
 
 	private String username;
 
-	private String todayDate;
+	private String todaydate;
 
 	private String singleDayDistance;
 
@@ -23,12 +23,12 @@ public class SingleDayGameHistoryEntity {
 		this.username = username;
 	}
 
-	public String getTodayDate() {
-		return todayDate;
+	public String getTodaydate() {
+		return todaydate;
 	}
 
-	public void setTodayDate(String todayDate) {
-		this.todayDate = todayDate;
+	public void setTodaydate(String todaydate) {
+		this.todaydate = todaydate;
 	}
 
 	public String getSingleDayDistance() {
