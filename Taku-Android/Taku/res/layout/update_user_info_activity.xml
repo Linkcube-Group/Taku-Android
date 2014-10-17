@@ -36,13 +36,12 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/MenuTextSize" />
 
-            <me.linkcube.taku.view.CircularImage
+            <me.linkcube.taku.view.CircleImageView
                 android:id="@+id/userAvatarIv"
                 android:layout_width="90dp"
                 android:layout_height="90dp"
                 android:layout_gravity="center_vertical"
                 android:layout_margin="10dp"
-                android:scaleType="fitCenter"
                 android:src="@drawable/defalut_user_avatar"
                 android:gravity="right" />
 

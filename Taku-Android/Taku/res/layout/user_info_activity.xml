@@ -9,11 +9,10 @@
     android:orientation="vertical"
     android:paddingTop="30dp" >
 
-    <me.linkcube.taku.view.CircularImage
+    <me.linkcube.taku.view.CircleImageView
         android:id="@+id/userAvatarIv"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:scaleType="fitCenter"
         android:background="@drawable/defalut_user_avatar" />
 
     <TextView

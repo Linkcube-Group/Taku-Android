@@ -6,7 +6,7 @@ import me.linkcube.taku.core.entity.UserInfoEntity;
 import me.linkcube.taku.ui.BaseTitleActivity;
 import me.linkcube.taku.ui.bt.BTSettingActivity;
 import me.linkcube.taku.ui.sportsgame.TargetSettingActivity;
-import me.linkcube.taku.view.CircularImage;
+import me.linkcube.taku.view.CircleImageView;
 import me.linkcube.taku.view.MenuItem;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,7 +17,7 @@ import android.widget.TextView;
 
 public class UserInfoActivity extends BaseTitleActivity implements OnClickListener{
 
-	private CircularImage userAvatarIv;
+	private CircleImageView userAvatarIv;
 	private TextView userNameTv;
 	private TextView userAge;
 	private ImageView userGenderIv;
@@ -40,7 +40,7 @@ public class UserInfoActivity extends BaseTitleActivity implements OnClickListen
 
 	private void initView() {
 		initTitle();
-		userAvatarIv = (CircularImage) findViewById(R.id.userAvatarIv);
+		userAvatarIv = (CircleImageView) findViewById(R.id.userAvatarIv);
 		userNameTv = (TextView) findViewById(R.id.userNameTv);
 		userAge = (TextView) findViewById(R.id.userAge);
 		userGenderIv = (ImageView) findViewById(R.id.userGenderIv);

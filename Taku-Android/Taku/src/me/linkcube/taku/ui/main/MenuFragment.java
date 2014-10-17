@@ -1,19 +1,19 @@
 package me.linkcube.taku.ui.main;
 
-import custom.android.util.AlertUtils;
-import android.app.Activity;
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.TextView;
 import me.linkcube.taku.R;
 import me.linkcube.taku.ui.main.view.SlidingMenuItem;
 import me.linkcube.taku.ui.user.BitmapUtils;
 import me.linkcube.taku.ui.user.LoginActivity;
 import me.linkcube.taku.ui.user.UserInfoActivity;
 import me.linkcube.taku.ui.user.UserManager;
-import me.linkcube.taku.view.CircularImage;
+import me.linkcube.taku.view.CircleImageView;
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.TextView;
+import custom.android.util.AlertUtils;
 
 public class MenuFragment extends BaseSlidingFragment implements
 		OnClickListener {
@@ -23,7 +23,7 @@ public class MenuFragment extends BaseSlidingFragment implements
 
 	private OnMenuItemClickListener listener;
 
-	private CircularImage avatar_iv;
+	private CircleImageView avatar_iv;
 	private TextView user_name_tv;
 
 	@Override
@@ -57,7 +57,7 @@ public class MenuFragment extends BaseSlidingFragment implements
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
-		avatar_iv = (CircularImage) view.findViewById(R.id.avatar_iv);
+		avatar_iv = (CircleImageView) view.findViewById(R.id.avatar_iv);
 		user_name_tv = (TextView) view.findViewById(R.id.user_name_tv);
 		avatar_iv.setOnClickListener(new OnClickListener() {
 

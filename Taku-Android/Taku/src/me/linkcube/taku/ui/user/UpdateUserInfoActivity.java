@@ -12,7 +12,7 @@ import me.linkcube.taku.R;
 import me.linkcube.taku.core.entity.UserAvatarEntity;
 import me.linkcube.taku.core.entity.UserInfoEntity;
 import me.linkcube.taku.ui.BaseTitleActivity;
-import me.linkcube.taku.view.CircularImage;
+import me.linkcube.taku.view.CircleImageView;
 import me.linkcube.taku.view.MenuItem;
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
@@ -56,7 +56,7 @@ public class UpdateUserInfoActivity extends BaseTitleActivity implements
 	private int CHANGE_NICKNAME = 1022;
 	private int CHANGE_HEIGHT = 1023;
 	private int CHANGE_WEIGHT = 1024;
-	private CircularImage userAvatarIv;
+	private CircleImageView userAvatarIv;
 	private RequestParams params;
 	private File userAvatar;
 	private MenuItem nicknameItem, genderItem, ageItem, heightItem, weightItem;
@@ -76,7 +76,7 @@ public class UpdateUserInfoActivity extends BaseTitleActivity implements
 		initTitle();
 		LinearLayout userAvatarLayout = (LinearLayout) findViewById(R.id.userAvatarLayout);
 		userAvatarLayout.setOnClickListener(this);
-		userAvatarIv = (CircularImage) findViewById(R.id.userAvatarIv);
+		userAvatarIv = (CircleImageView) findViewById(R.id.userAvatarIv);
 		nicknameItem = (MenuItem) findViewById(R.id.nicknameItem);
 		nicknameItem.setOnClickListener(this);
 		genderItem = (MenuItem) findViewById(R.id.genderItem);
