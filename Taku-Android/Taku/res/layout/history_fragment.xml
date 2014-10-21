@@ -69,12 +69,13 @@
             <ImageView
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:background="@drawable/ic_history_calorie" />
+                android:background="@drawable/ic_history_distance" />
 
             <TextView
+                android:id="@+id/singleDayDistanceTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="300Ka"
+                android:text="300km"
                 android:textColor="@drawable/write" />
         </LinearLayout>
 
@@ -88,9 +89,10 @@
             <ImageView
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:background="@drawable/ic_history_distance" />
+                android:background="@drawable/ic_history_calorie" />
 
             <TextView
+                android:id="@+id/singleDayCalorieTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="300Ka"
@@ -110,9 +112,10 @@
                 android:background="@drawable/ic_history_duration" />
 
             <TextView
+                android:id="@+id/singleDayDurationTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="300Ka"
+                android:text="300s"
                 android:textColor="@drawable/write" />
         </LinearLayout>
     </LinearLayout>
@@ -140,6 +143,7 @@
             android:orientation="horizontal" >
 
             <TextView
+                android:id="@+id/totalDistanceTv"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -148,6 +152,7 @@
                 android:textColor="@drawable/write" />
 
             <TextView
+                android:id="@+id/totalDurationTv"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -156,6 +161,7 @@
                 android:textColor="@drawable/write" />
 
             <TextView
+                android:id="@+id/totalCalorieTv"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

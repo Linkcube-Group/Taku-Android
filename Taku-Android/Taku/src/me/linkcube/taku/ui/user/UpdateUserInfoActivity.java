@@ -12,6 +12,7 @@ import me.linkcube.taku.R;
 import me.linkcube.taku.core.entity.UserAvatarEntity;
 import me.linkcube.taku.core.entity.UserInfoEntity;
 import me.linkcube.taku.ui.BaseTitleActivity;
+import me.linkcube.taku.ui.request.UserRequest;
 import me.linkcube.taku.view.CircleImageView;
 import me.linkcube.taku.view.MenuItem;
 import android.annotation.TargetApi;

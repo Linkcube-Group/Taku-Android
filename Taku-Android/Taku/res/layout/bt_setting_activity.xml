@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ripple="http://schemas.android.com/apk/res/me.linkcube.taku"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/dashboard_bg"
@@ -99,16 +100,27 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp" >
 
-        <Button
+        <me.linkcube.taku.view.RippleView
             android:id="@id/discover_devices_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+            android:background="@drawable/card_bk"
             android:drawableLeft="@drawable/ic_search"
             android:drawablePadding="10dp"
-            android:text="@string/search_toy" />
+            android:gravity="center"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="25dp"
+            android:text="@string/search_toy"
+            android:textColor="@color/black"
+            ripple:alphaFactor="0.3"
+            ripple:hover="true"
+            ripple:rippleColor="#66FA9C" />
 
         <Button
             android:id="@id/bluetooth_help_btn"

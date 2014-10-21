@@ -4,6 +4,7 @@ import me.linkcube.taku.R;
 import me.linkcube.taku.AppConst.ErrorFlag;
 import me.linkcube.taku.AppConst.ParamKey;
 import me.linkcube.taku.ui.BaseTitleActivity;
+import me.linkcube.taku.ui.request.UserRequest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;

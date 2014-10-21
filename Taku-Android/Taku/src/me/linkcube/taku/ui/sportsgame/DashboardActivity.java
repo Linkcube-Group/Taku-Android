@@ -1,17 +1,23 @@
 package me.linkcube.taku.ui.sportsgame;
 
+import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import me.linkcube.taku.R;
+import me.linkcube.taku.AppConst.ErrorFlag;
 import me.linkcube.taku.AppConst.GameFrame;
+import me.linkcube.taku.AppConst.ParamKey;
 import me.linkcube.taku.core.entity.SingleDayGameHistoryEntity;
 import me.linkcube.taku.ui.bt.BTSettingActivity;
+import me.linkcube.taku.ui.request.GameRequest;
 import me.linkcube.taku.ui.share.ShareActivity;
 import me.linkcube.taku.ui.sportsgame.dashboardgame.InfoDashboard;
 import me.linkcube.taku.ui.sportsgame.dashboardgame.SpeedDashboard;
 import me.linkcube.taku.ui.sportsgame.dashboardgame.TargetCompletedView;
+import me.linkcube.taku.ui.user.HttpResponseListener;
+import me.linkcube.taku.ui.user.UpdateUserInfoActivity;
 import me.linkcube.taku.ui.user.UserManager;
 import android.content.Intent;
 import android.graphics.Color;
@@ -31,8 +37,10 @@ import android.widget.TextView;
 
 import com.ervinwang.bthelper.BTManager;
 import com.ervinwang.bthelper.core.IReceiveData;
+import com.loopj.android.http.RequestParams;
 
 import custom.android.app.CustomFragmentActivity;
+import custom.android.util.AlertUtils;
 
 /**
  * 仪表盘界面
@@ -89,6 +97,7 @@ public class DashboardActivity extends CustomFragmentActivity {
 
 	// 解析蓝牙发送过来的数据
 	String blueToothString = "";
+	DecimalFormat dFormat = new java.text.DecimalFormat("#.##");
 
 	public DashboardActivity() {
 
@@ -105,7 +114,7 @@ public class DashboardActivity extends CustomFragmentActivity {
 		HandlerThread handlerThread = new HandlerThread("Dashboard_Handler");
 		handlerThread.start();
 	}
-	
+
 	private void initView() {
 		// 得到控件对象
 		close_imgBtn = (ImageButton) findViewById(R.id.close_imgBtn);
@@ -148,14 +157,13 @@ public class DashboardActivity extends CustomFragmentActivity {
 										.getSingleDayDuration());
 				setDistanceText(singleDayGameHistoryEntity
 						.getSingleDayDistance());
-				setTimeText(singleDayGameHistoryEntity.getSingleDayDuration());
+				setTimeText(SportsGameManager.durationToTime(Integer
+						.parseInt(singleDayGameHistoryEntity
+								.getSingleDayDuration())));
 				calorieView.setInfoTextView(singleDayGameHistoryEntity
 						.getSingleDayCalorie());
-				double distance = Double.parseDouble(singleDayGameHistoryEntity
+				double distance = SportsGameManager.fromStringToDouble(singleDayGameHistoryEntity
 						.getSingleDayDistance());// 转换为double类型
-				Log.d("initGameData","singleDayDistance:"+singleDayGameHistoryEntity.getSingleDayDistance()+"---distance:"+distance);
-				distance = Double.parseDouble(dFormat
-						.format(distance));
 				int progress = (int) (distance * 100 / SportsGameManager
 						.getTargetDistance());
 				mTasksView.setProgress(progress);
@@ -199,28 +207,21 @@ public class DashboardActivity extends CustomFragmentActivity {
 						gameDurationTimer.schedule(new TimerTask() {
 							@Override
 							public void run() {
-								String[] timeStrings = time_tv.getText()
-										.toString().split(":");
-								countSecond = Integer.valueOf(timeStrings[0])
-										* 60 + Integer.valueOf(timeStrings[1]);
+								countSecond = SportsGameManager
+										.calculateDuration(time_tv.getText()
+												.toString());
 								countSecond++;
-								countTime[0] = addZero(countSecond / 60);
-								countTime[1] = addZero(countSecond % 60);
 								Bundle timeData = new Bundle();
-								timeData.putString("counttime", countTime[0]
-										+ ":" + countTime[1]);
+								timeData.putString("counttime",
+										SportsGameManager
+												.durationToTime(countSecond));
 								Message timeMsg = new Message();
 								timeMsg.setData(timeData);
 								timeHandler.sendMessage(timeMsg);
 							}
 						}, 0, 1000);
-						// distanceRecord =
-						// Double.parseDouble(distance_tv.getText().toString());
-						// distanceRecord=Double.parseDouble(dFormat.format(value));
-						distanceRecord = Double.parseDouble(distance_tv
+						distanceRecord = SportsGameManager.fromStringToDouble(distance_tv
 								.getText().toString());// 转换为double类型
-						distanceRecord = Double.parseDouble(dFormat
-								.format(distanceRecord));// 保留2为小数
 						Log.d("DashboardActivity", "distanceRecord:---"
 								+ distanceRecord);
 					} else {
@@ -281,7 +282,6 @@ public class DashboardActivity extends CustomFragmentActivity {
 	};
 
 	private float fromDegrees = -90, toDegrees = -90;
-	java.text.DecimalFormat dFormat = new java.text.DecimalFormat("#.##");
 	private Handler dashboardHander = new Handler() {
 		@Override
 		public void handleMessage(Message msg) {
@@ -406,22 +406,45 @@ public class DashboardActivity extends CustomFragmentActivity {
 		}
 	}
 
-	private String addZero(int time) {
-		if (0 <= time && time <= 9)
-			return "0" + time;
-		else {
-			return time + "";
-		}
-	}
-
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
 		if (UserManager.getInstance().isLogin()) {
-			// TODO 存数据
-			SportsGameManager.setSingleDayGameHistoryEntity(distance_tv
-					.getText().toString(), time_tv.getText().toString(),
-					calorieView.getInfoTextView());
+			// 上传数据
+			RequestParams params = new RequestParams();
+			params.put(ParamKey.RECORD_DATE, SportsGameManager.getTodayDate());
+			params.put(ParamKey.CALORIE, calorieView.getInfoTextView());
+			params.put(ParamKey.DURATION, time_tv.getText().toString());
+			params.put(ParamKey.DISTANCE, SportsGameManager.calculateDuration(distance_tv.getText().toString()));
+			
+			Log.d("DashboardActivity", "params:"+params.toString());
+			
+			GameRequest.uploadGameRecord(params, new HttpResponseListener() {
+
+				@Override
+				public void responseSuccess() {
+
+				}
+
+				@Override
+				public void responseFailed(int flag) {
+					switch (flag) {
+					case ErrorFlag.UPLOAD_GAME_RECORD_WRONG:
+						AlertUtils.showToast(DashboardActivity.this, "上传数据失败！");
+						break;
+					case ErrorFlag.NETWORK_ERROR:
+						AlertUtils.showToast(DashboardActivity.this,
+								"网络错误，请检查！");
+						break;
+					default:
+						break;
+					}
+				}
+			});
+			SportsGameManager.setSingleDayGameHistoryEntity(
+					distance_tv.getText().toString(),
+					SportsGameManager.calculateDuration(time_tv.getText()
+							.toString()) + "", calorieView.getInfoTextView());
 			SportsGameManager.saveSingleDayGameRecord();
 		}
 	}

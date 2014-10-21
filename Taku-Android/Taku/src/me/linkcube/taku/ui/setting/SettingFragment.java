@@ -9,10 +9,10 @@ import android.widget.Button;
 import me.linkcube.taku.R;
 import me.linkcube.taku.AppConst.ErrorFlag;
 import me.linkcube.taku.ui.main.BaseSlidingFragment;
+import me.linkcube.taku.ui.request.UserRequest;
 import me.linkcube.taku.ui.user.HttpResponseListener;
 import me.linkcube.taku.ui.user.LoginActivity;
 import me.linkcube.taku.ui.user.UserManager;
-import me.linkcube.taku.ui.user.UserRequest;
 import me.linkcube.taku.view.MenuItem;
 import me.linkcube.taku.view.TitleView;
 

@@ -1,6 +1,9 @@
 package me.linkcube.taku.ui.sportsgame;
 
+import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -62,6 +65,33 @@ public class SportsGameManager {
 		return getStepLength() * stepCount / 1000.0;
 	}
 
+	/**
+	 * 计算时长
+	 * 
+	 * @param time
+	 * @return
+	 */
+	public static int calculateDuration(String time) {
+		String[] timeStrings = time.split(":");
+		return Integer.valueOf(timeStrings[0]) * 60
+				+ Integer.valueOf(timeStrings[1]);
+	}
+
+	public static String durationToTime(int duration) {
+		String[] countTime = new String[2];
+		countTime[0] = addZero(duration / 60);
+		countTime[1] = addZero(duration % 60);
+		return countTime[0] + ":" + countTime[1];
+	}
+
+	private static String addZero(int time) {
+		if (0 <= time && time <= 9)
+			return "0" + time;
+		else {
+			return time + "";
+		}
+	}
+
 	private static int getUserHeight() {
 		if (UserManager.getInstance().getUserInfo() == null) {
 			return userHeight;
@@ -96,12 +126,13 @@ public class SportsGameManager {
 		if (singleDayGameHistoryEntities == null
 				|| singleDayGameHistoryEntities.isEmpty()) {
 			return null;
-		} else if (!singleDayGameHistoryEntities.get(0).getTodaydate().equals(getTodayDate())) {
+		} else if (!singleDayGameHistoryEntities.get(0).getTodaydate()
+				.equals(getTodayDate())) {
 			return null;
-		}else{
+		} else {
 			return singleDayGameHistoryEntities.get(0);
 		}
-		
+
 	}
 
 	public static void setSingleDayGameHistoryEntity(String singleDayDistance,
@@ -123,11 +154,35 @@ public class SportsGameManager {
 		SugarRecord.save(singleDayGameHistoryEntity);
 	}
 
+	private static SimpleDateFormat bartDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	
 	public static String getTodayDate() {
-		SimpleDateFormat bartDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		
 		Date date = new Date();
 		String todayDate = bartDateFormat.format(date);
 		return todayDate;
 	}
 
+	public static String getDate(String preDate,int flag) {
+		Calendar calendar = Calendar.getInstance();
+		try {
+			calendar.setTime(bartDateFormat.parse(preDate));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		calendar.add(Calendar.DAY_OF_MONTH, flag);
+		Date d2 = calendar.getTime();
+		return bartDateFormat.format(d2);
+	}
+	static DecimalFormat dFormat = new java.text.DecimalFormat("#.##");
+	
+	public static double fromStringToDouble(String str){
+		double num=Double.parseDouble(str);
+		Double.parseDouble(dFormat.format(num));
+		return num;
+	}
+	
+	public static double saveTwoPointDouble(double num){
+		return Double.parseDouble(dFormat.format(num));
+	}
 }

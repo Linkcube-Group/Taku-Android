@@ -1,4 +1,4 @@
-package me.linkcube.taku.ui.user;
+package me.linkcube.taku.ui.request;
 
 import me.linkcube.taku.AppConst.ErrorFlag;
 import me.linkcube.taku.AppConst.HttpUrl;
@@ -6,6 +6,10 @@ import me.linkcube.taku.AppConst.KEY;
 import me.linkcube.taku.AppConst.ResponseKey;
 import me.linkcube.taku.core.entity.UserAvatarEntity;
 import me.linkcube.taku.core.entity.UserInfoEntity;
+import me.linkcube.taku.ui.user.BitmapUtils;
+import me.linkcube.taku.ui.user.HttpResponseListener;
+import me.linkcube.taku.ui.user.TakuHttpClient;
+import me.linkcube.taku.ui.user.UserManager;
 
 import org.apache.http.Header;
 import org.json.JSONException;

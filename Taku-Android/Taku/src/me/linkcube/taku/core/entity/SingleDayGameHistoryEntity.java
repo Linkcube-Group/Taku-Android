@@ -8,6 +8,8 @@ public class SingleDayGameHistoryEntity {
 	private String username;
 
 	private String todaydate;
+	
+	private String singleDayTarget;
 
 	private String singleDayDistance;
 
@@ -29,6 +31,14 @@ public class SingleDayGameHistoryEntity {
 
 	public void setTodaydate(String todaydate) {
 		this.todaydate = todaydate;
+	}
+	
+	public String getSingleDayTarget() {
+		return singleDayTarget;
+	}
+
+	public void setSingleDayTarget(String singleDayTarget) {
+		this.singleDayTarget = singleDayTarget;
 	}
 
 	public String getSingleDayDistance() {

@@ -2,38 +2,44 @@ package me.linkcube.taku.core.entity;
 
 public class TotalGameHistoryEntity {
 	
-	private String userName;
+	private String username;
 	
-	private String totleDistance;
+	private String TotalDistance;
 	
-	private String totleCalorie;
+	private String TotalCalorie;
 	
-	private String totleDuration;
-	
-	public String getUserName() {
-		return userName;
+	private String TotalDuration;
+
+	public String getUsername() {
+		return username;
 	}
-	public void setUserName(String userName) {
-		this.userName = userName;
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
-	public String getTotleDistance() {
-		return totleDistance;
+
+	public String getTotalDistance() {
+		return TotalDistance;
 	}
-	public void setTotleDistance(String totleDistance) {
-		this.totleDistance = totleDistance;
+
+	public void setTotalDistance(String totalDistance) {
+		TotalDistance = totalDistance;
 	}
-	public String getTotleCalorie() {
-		return totleCalorie;
+
+	public String getTotalCalorie() {
+		return TotalCalorie;
 	}
-	public void setTotleCalorie(String totleCalorie) {
-		this.totleCalorie = totleCalorie;
+
+	public void setTotalCalorie(String totalCalorie) {
+		TotalCalorie = totalCalorie;
 	}
-	public String getTotleDuration() {
-		return totleDuration;
+
+	public String getTotalDuration() {
+		return TotalDuration;
 	}
-	public void setTotleDuration(String totleDuration) {
-		this.totleDuration = totleDuration;
+
+	public void setTotalDuration(String totalDuration) {
+		TotalDuration = totalDuration;
 	}
-	
-	
+
 }
