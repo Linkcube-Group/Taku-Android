@@ -2,6 +2,7 @@ package me.linkcube.taku.ui.main;
 
 import me.linkcube.taku.R;
 import me.linkcube.taku.ui.main.view.SlidingMenuItem;
+import me.linkcube.taku.ui.setting.SettingFragment.UpdateUIListener;
 import me.linkcube.taku.ui.user.BitmapUtils;
 import me.linkcube.taku.ui.user.LoginActivity;
 import me.linkcube.taku.ui.user.UserInfoActivity;
@@ -16,7 +17,7 @@ import android.widget.TextView;
 import custom.android.util.AlertUtils;
 
 public class MenuFragment extends BaseSlidingFragment implements
-		OnClickListener {
+		OnClickListener{
 
 	private SlidingMenuItem sportsGamesMenuItem, historyMenuItem,
 			networkGamesMenuItem, settingsMenuItem;
@@ -125,6 +126,11 @@ public class MenuFragment extends BaseSlidingFragment implements
 		default:
 			break;
 		}
+	}
+
+	public void logoutUpdateUI() {
+		avatar_iv.setImageResource(R.drawable.avatar_default);
+		user_name_tv.setText(getString(R.string.please_login_text));
 	}
 
 }

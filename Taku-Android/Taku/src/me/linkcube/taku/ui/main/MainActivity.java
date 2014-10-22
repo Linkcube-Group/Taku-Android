@@ -7,13 +7,14 @@ import me.linkcube.taku.ui.main.view.SlidingMenu;
 import me.linkcube.taku.ui.main.view.SlidingMenu.ISlidingMenu;
 import me.linkcube.taku.ui.networkgames.NetworkGamesFragment;
 import me.linkcube.taku.ui.setting.SettingFragment;
+import me.linkcube.taku.ui.setting.SettingFragment.UpdateUIListener;
 import me.linkcube.taku.ui.sportsgame.SportsGamesFragment;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
 public class MainActivity extends CustomFragmentActivity implements
-		ISlidingMenu, OnMenuItemClickListener {
+		ISlidingMenu, OnMenuItemClickListener,UpdateUIListener  {
 	
 	private static final int SPORTS_GAMES = 0;
 
@@ -80,11 +81,17 @@ public class MainActivity extends CustomFragmentActivity implements
 			break;
 		case SETTINGS:// 设置
 			currentContentFragment = SettingFragment.newInstance(position);
+			((SettingFragment)currentContentFragment).setUpdateUIListener(this);
 			break;
 		default:
 			break;
 		}
 		menu.replaceContentFragment(currentContentFragment);
 		menu.closeMenu();
+	}
+
+	@Override
+	public void onLogoutUpdateUI() {
+		((MenuFragment)menuFragment).logoutUpdateUI();
 	}
 }

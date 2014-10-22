@@ -23,6 +23,8 @@ public class SettingFragment extends BaseSlidingFragment {
 	private Button settingLoginBtn;
 
 	private MenuItem feedbackItem;
+	
+	private UpdateUIListener updateUIListener;
 
 	public static SettingFragment newInstance(int position) {
 		SettingFragment fragment = new SettingFragment();
@@ -89,6 +91,7 @@ public class SettingFragment extends BaseSlidingFragment {
 									R.string.login_btn_text));
 							UserManager.getInstance().setLogin(false);
 							UserManager.getInstance().setUserInfoEntity(null);
+							updateUIListener.onLogoutUpdateUI();
 							AlertUtils.showToast(getActivity(), "当前用户已退出！");
 						}
 
@@ -117,6 +120,14 @@ public class SettingFragment extends BaseSlidingFragment {
 	@Override
 	protected int getLayoutId() {
 		return R.layout.setting_fragment;
+	}
+	
+	public void setUpdateUIListener(UpdateUIListener updateUIListener) {
+		this.updateUIListener = updateUIListener;
+	}
+
+	public interface UpdateUIListener{
+		public void onLogoutUpdateUI();
 	}
 
 }

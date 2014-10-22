@@ -59,6 +59,13 @@ public class BitmapUtils {
 	public static Bitmap convertToBitmap(String path) {
 		return BitmapFactory.decodeFile(path);
 	}
+	
+	public static boolean isFileExist(String path){
+		File avatarFile = new File("/sdcard/taku/"+path);
+		if (!avatarFile.exists()) 
+			return false;
+		return true;
+	}
 
 	public static String getThumbUploadPath(String oldPath) throws Exception {
 		BitmapFactory.Options options = new BitmapFactory.Options();

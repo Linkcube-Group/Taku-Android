@@ -114,7 +114,8 @@ public class UserRequest {
 									userInfo, UserInfoEntity.class);
 							if (UserManager.getInstance().getUserInfo() == null) {
 								SugarRecord.save(userInfoEntity);
-							}else if(UserManager.getInstance().getUserInfo().getNickname()==null){
+							}
+							else if(UserManager.getInstance().getUserInfo().getNickname()==null){
 								SugarRecord.deleteAll(UserInfoEntity.class,
 										"username=?",
 										new String[] { PreferenceUtils
@@ -129,7 +130,7 @@ public class UserRequest {
 								Log.d("getAvatar", "getAvatar:" + UserManager.getInstance().getUserInfo().getAvatar());
 							}
 							final String avatarUrl=userInfoEntity.getAvatar();
-							if(avatarUrl!=null){
+							if(avatarUrl!=null && !BitmapUtils.isFileExist(avatarUrl)){
 								ImageLoader.getInstance().loadImage(HttpUrl.BASE_URL+avatarUrl, new ImageLoadingListener() {
 									
 									@Override
@@ -158,6 +159,13 @@ public class UserRequest {
 										
 									}
 								});
+							}else if(BitmapUtils.isFileExist(avatarUrl)){
+								if(UserManager.getInstance().getUserAvatarUrl()==null){
+									BitmapUtils.saveBitmap(avatarUrl, BitmapUtils.convertToBitmap("/sdcard/taku/"+avatarUrl));
+									UserAvatarEntity userAvatarEntity=new UserAvatarEntity(PreferenceUtils.getString(KEY.USER_NAME,""),avatarUrl);
+									SugarRecord.save(userAvatarEntity);
+								}
+								httpResponseListener.responseSuccess();
 							}else{
 								httpResponseListener.responseSuccess();
 							}

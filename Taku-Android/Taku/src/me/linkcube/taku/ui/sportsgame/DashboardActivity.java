@@ -154,16 +154,16 @@ public class DashboardActivity extends CustomFragmentActivity {
 				Log.d("getSingleDayGameHistoryEntity",
 						"--singleDayGameHistoryEntity.getSingleDayDuration():"
 								+ singleDayGameHistoryEntity
-										.getSingleDayDuration());
+										.getDuration());
 				setDistanceText(singleDayGameHistoryEntity
-						.getSingleDayDistance());
+						.getDistance());
 				setTimeText(SportsGameManager.durationToTime(Integer
 						.parseInt(singleDayGameHistoryEntity
-								.getSingleDayDuration())));
+								.getDuration())));
 				calorieView.setInfoTextView(singleDayGameHistoryEntity
-						.getSingleDayCalorie());
+						.getCalorie());
 				double distance = SportsGameManager.fromStringToDouble(singleDayGameHistoryEntity
-						.getSingleDayDistance());// 转换为double类型
+						.getDistance());// 转换为double类型
 				int progress = (int) (distance * 100 / SportsGameManager
 						.getTargetDistance());
 				mTasksView.setProgress(progress);
@@ -414,8 +414,8 @@ public class DashboardActivity extends CustomFragmentActivity {
 			RequestParams params = new RequestParams();
 			params.put(ParamKey.RECORD_DATE, SportsGameManager.getTodayDate());
 			params.put(ParamKey.CALORIE, calorieView.getInfoTextView());
-			params.put(ParamKey.DURATION, time_tv.getText().toString());
-			params.put(ParamKey.DISTANCE, SportsGameManager.calculateDuration(distance_tv.getText().toString()));
+			params.put(ParamKey.DURATION, SportsGameManager.calculateDuration(time_tv.getText().toString()));
+			params.put(ParamKey.DISTANCE, SportsGameManager.fromStringToDouble(distance_tv.getText().toString()));
 			params.put(ParamKey.TARGET, SportsGameManager.getTargetDistance());
 			
 			Log.d("DashboardActivity", "params:"+params.toString());

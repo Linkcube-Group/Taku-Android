@@ -9,13 +9,13 @@ public class SingleDayGameHistoryEntity {
 
 	private String todaydate;
 	
-	private String singleDayTarget;
+	private String target;
 
-	private String singleDayDistance;
+	private String distance;
 
-	private String singleDayCalorie;
+	private String calorie;
 
-	private String singleDayDuration;
+	private String duration;
 
 	public String getUsername() {
 		return username;
@@ -32,36 +32,36 @@ public class SingleDayGameHistoryEntity {
 	public void setTodaydate(String todaydate) {
 		this.todaydate = todaydate;
 	}
-	
-	public String getSingleDayTarget() {
-		return singleDayTarget;
+
+	public String getTarget() {
+		return target;
 	}
 
-	public void setSingleDayTarget(String singleDayTarget) {
-		this.singleDayTarget = singleDayTarget;
+	public void setTarget(String target) {
+		this.target = target;
 	}
 
-	public String getSingleDayDistance() {
-		return singleDayDistance;
+	public String getDistance() {
+		return distance;
 	}
 
-	public void setSingleDayDistance(String singleDayDistance) {
-		this.singleDayDistance = singleDayDistance;
+	public void setDistance(String distance) {
+		this.distance = distance;
 	}
 
-	public String getSingleDayCalorie() {
-		return singleDayCalorie;
+	public String getCalorie() {
+		return calorie;
 	}
 
-	public void setSingleDayCalorie(String singleDayCalorie) {
-		this.singleDayCalorie = singleDayCalorie;
+	public void setCalorie(String calorie) {
+		this.calorie = calorie;
 	}
 
-	public String getSingleDayDuration() {
-		return singleDayDuration;
+	public String getDuration() {
+		return duration;
 	}
 
-	public void setSingleDayDuration(String singleDayDuration) {
-		this.singleDayDuration = singleDayDuration;
+	public void setDuration(String duration) {
+		this.duration = duration;
 	}
 }

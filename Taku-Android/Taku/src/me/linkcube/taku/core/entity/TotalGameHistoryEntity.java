@@ -4,11 +4,11 @@ public class TotalGameHistoryEntity {
 	
 	private String username;
 	
-	private String TotalDistance;
+	private String totalDistance;
 	
-	private String TotalCalorie;
+	private String totalCalorie;
 	
-	private String TotalDuration;
+	private String totalDuration;
 
 	public String getUsername() {
 		return username;
@@ -19,27 +19,27 @@ public class TotalGameHistoryEntity {
 	}
 
 	public String getTotalDistance() {
-		return TotalDistance;
+		return totalDistance;
 	}
 
 	public void setTotalDistance(String totalDistance) {
-		TotalDistance = totalDistance;
+		this.totalDistance = totalDistance;
 	}
 
 	public String getTotalCalorie() {
-		return TotalCalorie;
+		return totalCalorie;
 	}
 
 	public void setTotalCalorie(String totalCalorie) {
-		TotalCalorie = totalCalorie;
+		this.totalCalorie = totalCalorie;
 	}
 
 	public String getTotalDuration() {
-		return TotalDuration;
+		return totalDuration;
 	}
 
 	public void setTotalDuration(String totalDuration) {
-		TotalDuration = totalDuration;
+		this.totalDuration = totalDuration;
 	}
 
 }

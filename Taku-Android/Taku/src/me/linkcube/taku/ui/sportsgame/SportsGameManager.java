@@ -138,9 +138,9 @@ public class SportsGameManager {
 	public static void setSingleDayGameHistoryEntity(String singleDayDistance,
 			String singleDayDuration, String singleDayCalorie) {
 		singleDayGameHistoryEntity = new SingleDayGameHistoryEntity();
-		singleDayGameHistoryEntity.setSingleDayDistance(singleDayDistance);
-		singleDayGameHistoryEntity.setSingleDayDuration(singleDayDuration);
-		singleDayGameHistoryEntity.setSingleDayCalorie(singleDayCalorie);
+		singleDayGameHistoryEntity.setDistance(singleDayDistance);
+		singleDayGameHistoryEntity.setDuration(singleDayDuration);
+		singleDayGameHistoryEntity.setCalorie(singleDayCalorie);
 		singleDayGameHistoryEntity.setTodaydate(getTodayDate());
 		singleDayGameHistoryEntity.setUsername(PreferenceUtils.getString(
 				KEY.USER_NAME, null));

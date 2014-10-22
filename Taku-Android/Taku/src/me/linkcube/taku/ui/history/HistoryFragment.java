@@ -2,6 +2,7 @@ package me.linkcube.taku.ui.history;
 
 import com.loopj.android.http.RequestParams;
 
+import me.linkcube.taku.AppConst.ErrorFlag;
 import me.linkcube.taku.R;
 import me.linkcube.taku.AppConst.ParamKey;
 import me.linkcube.taku.core.entity.SingleDayGameHistoryEntity;
@@ -71,6 +72,7 @@ public class HistoryFragment extends BaseSlidingFragment implements
 		preDateIv.setOnClickListener(this);
 		nextDateIv = (ImageView) view.findViewById(R.id.nextDateIv);
 		nextDateIv.setOnClickListener(this);
+		nextDateIv.setVisibility(View.INVISIBLE);
 		historyDateTv = (TextView) view.findViewById(R.id.historyDateTv);
 		historyCircleChartView = (HistoryCircleChartView) view
 				.findViewById(R.id.historyCircleChartView);
@@ -126,14 +128,21 @@ public class HistoryFragment extends BaseSlidingFragment implements
 
 	@Override
 	public void onClick(View v) {
+		
 		switch (v.getId()) {
 		case R.id.preDateIv:
 			String preDateStr = historyDateTv.getText().toString();
 			getSingleDayHistoryRecord(SportsGameManager.getDate(preDateStr, -1));
+			nextDateIv.setVisibility(View.VISIBLE);
 			break;
 		case R.id.nextDateIv:
 			String nextDateStr = historyDateTv.getText().toString();
 			getSingleDayHistoryRecord(SportsGameManager.getDate(nextDateStr, 1));
+			if(historyDateTv.getText().toString().equals(SportsGameManager.getTodayDate())){
+				nextDateIv.setVisibility(View.INVISIBLE);
+			}else{
+				nextDateIv.setVisibility(View.VISIBLE);
+			}
 			break;
 		default:
 			break;
@@ -149,18 +158,31 @@ public class HistoryFragment extends BaseSlidingFragment implements
 			@Override
 			public void responseSuccess(Object object) {
 				SingleDayGameHistoryEntity singleDayGameHistoryEntity = (SingleDayGameHistoryEntity) object;
-				singleDayDistanceTv.setText(singleDayGameHistoryEntity.getSingleDayDistance()+ "千米");
-				singleDayDurationTv.setText(singleDayGameHistoryEntity.getSingleDayDuration()+ "秒");
-				singleDayCalorieTv.setText(singleDayGameHistoryEntity.getSingleDayCalorie()+ "卡");
-				percent=SportsGameManager.fromStringToDouble(singleDayGameHistoryEntity.getSingleDayDistance())/SportsGameManager.getTargetDistance();
+				singleDayDistanceTv.setText(singleDayGameHistoryEntity.getDistance()+ "千米");
+				singleDayDurationTv.setText(singleDayGameHistoryEntity.getDuration()+ "秒");
+				singleDayCalorieTv.setText(singleDayGameHistoryEntity.getCalorie()+ "卡");
+				percent=SportsGameManager.fromStringToDouble(singleDayGameHistoryEntity.getDistance())/SportsGameManager.getTargetDistance();
 				historyCircleChartView.setPercent(SportsGameManager.saveTwoPointDouble(percent*100));
-				historyCircleChartView.setTarget(singleDayGameHistoryEntity.getSingleDayTarget());
+				historyCircleChartView.setTarget(singleDayGameHistoryEntity.getTarget());
 				historyCircleChartView.invalidate();
 			}
 
 			@Override
 			public void responseFailed(int flag) {
+				switch (flag) {
+				case ErrorFlag.GET_SINGLEDAY_HISTORY_WRONG:
+					singleDayDistanceTv.setText(0+ "千米");
+					singleDayDurationTv.setText(0+ "秒");
+					singleDayCalorieTv.setText(0+ "卡");
+					percent=0;
+					historyCircleChartView.setPercent(0);
+					historyCircleChartView.setTarget("0");
+					historyCircleChartView.invalidate();
+					break;
 
+				default:
+					break;
+				}
 			}
 		});
 	}
