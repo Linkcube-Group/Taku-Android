@@ -2,6 +2,7 @@ package me.linkcube.taku.ui.user;
 
 import me.linkcube.taku.R;
 import me.linkcube.taku.AppConst.ErrorFlag;
+import me.linkcube.taku.AppConst.KEY;
 import me.linkcube.taku.AppConst.ParamKey;
 import me.linkcube.taku.ui.BaseTitleActivity;
 import me.linkcube.taku.ui.request.UserRequest;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 import com.loopj.android.http.RequestParams;
 
 import custom.android.util.AlertUtils;
+import custom.android.util.PreferenceUtils;
 import custom.android.util.StringUtils;
 
 public class RegisterActivity extends BaseTitleActivity implements
@@ -77,6 +79,8 @@ public class RegisterActivity extends BaseTitleActivity implements
 				final RequestParams params = new RequestParams();
 				params.put(ParamKey.EMAIL, emailEt.getText().toString());
 				params.put(ParamKey.PWD, passWordEt.getText().toString());
+				PreferenceUtils.setString(KEY.USER_NAME, emailEt.getText().toString());
+				PreferenceUtils.setString(KEY.USER_PWD, passWordEt.getText().toString());
 				UserRequest.userRegister(params,
 						new HttpResponseListener() {
 
@@ -91,6 +95,7 @@ public class RegisterActivity extends BaseTitleActivity implements
 												startActivity(new Intent(
 														RegisterActivity.this,
 														InitUserInfoActivity.class));
+												finish();
 											}
 
 											@Override
@@ -112,7 +117,6 @@ public class RegisterActivity extends BaseTitleActivity implements
 												default:
 													break;
 												}
-
 											}
 										});
 							}

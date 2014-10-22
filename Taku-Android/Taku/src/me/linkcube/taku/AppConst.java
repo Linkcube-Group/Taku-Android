@@ -141,6 +141,8 @@ public class AppConst {
 		public static final String DURATION = "duration";
 
 		public static final String DISTANCE = "distance";
+		
+		public static final String TARGET = "target";
 
 		public static final String HISTORY_DATE = "historyDate";
 

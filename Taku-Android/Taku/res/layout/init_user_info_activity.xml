@@ -28,7 +28,7 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:scaleType="fitXY"
-                android:src="@drawable/icon_user_nickname" />
+                android:src="@drawable/ic_user_nickname" />
 
             <EditText
                 android:id="@+id/user_nickname_et"
@@ -65,7 +65,7 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:scaleType="fitXY"
-                android:src="@drawable/icon_user_birthday" />
+                android:src="@drawable/ic_user_birthday" />
             
             <EditText
                 android:id="@+id/user_birthday_et"
@@ -157,7 +157,7 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:scaleType="fitXY"
-                android:src="@drawable/icon_user_height" />
+                android:src="@drawable/ic_user_height" />
             
             <EditText
                 android:id="@+id/user_height_et"
@@ -186,7 +186,7 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:scaleType="fitXY"
-                android:src="@drawable/icon_user_weight" />
+                android:src="@drawable/ic_user_weight" />
             
             <EditText
                 android:id="@+id/user_weight_et"

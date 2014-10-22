@@ -114,12 +114,21 @@ public class UserRequest {
 									userInfo, UserInfoEntity.class);
 							if (UserManager.getInstance().getUserInfo() == null) {
 								SugarRecord.save(userInfoEntity);
+							}else if(UserManager.getInstance().getUserInfo().getNickname()==null){
+								SugarRecord.deleteAll(UserInfoEntity.class,
+										"username=?",
+										new String[] { PreferenceUtils
+												.getString(KEY.USER_NAME,
+														"") });
+								SugarRecord.save(userInfoEntity);
 							}
-							if(UserManager.getInstance().getUserAvatarUrl()==null){
-								
+//							if(UserManager.getInstance().getUserAvatarUrl()==null){
+//								
+//							}
+							if (UserManager.getInstance().getUserInfo() != null) {
+								Log.d("getAvatar", "getAvatar:" + UserManager.getInstance().getUserInfo().getAvatar());
 							}
-							final String avatarUrl=UserManager.getInstance().getUserInfo().getAvatar();
-							Log.d("getUserInfo", "avatarUrl:" + avatarUrl);
+							final String avatarUrl=userInfoEntity.getAvatar();
 							if(avatarUrl!=null){
 								ImageLoader.getInstance().loadImage(HttpUrl.BASE_URL+avatarUrl, new ImageLoadingListener() {
 									
@@ -208,6 +217,11 @@ public class UserRequest {
 				try {
 					if (statusCode == 200) {
 						if (response.getBoolean(ResponseKey.STATUS)) {
+							SugarRecord.deleteAll(UserInfoEntity.class,
+									"username=?",
+									new String[] { PreferenceUtils
+											.getString(KEY.USER_NAME,
+													"") });
 							httpResponseListener.responseSuccess();
 						} else {
 							httpResponseListener

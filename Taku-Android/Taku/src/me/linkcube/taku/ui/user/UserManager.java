@@ -79,7 +79,7 @@ public class UserManager {
 								"") }).list();
 		if (userAvatarEntities == null || userAvatarEntities.isEmpty())
 			return null;
-		Log.d("getUserInfo", "userInfoEntity:"
+		Log.d("getUserAvatarUrl", "userInfoEntity:"
 				+ userAvatarEntities.get(0).getAvatarSdUrl());
 		return "/sdcard/taku/" + userAvatarEntities.get(0).getAvatarSdUrl(); // BitmapUtils.convertToBitmap();
 	}

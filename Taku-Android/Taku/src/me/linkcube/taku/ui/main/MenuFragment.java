@@ -43,7 +43,9 @@ public class MenuFragment extends BaseSlidingFragment implements
 		if (UserManager.getInstance().getUserAvatarUrl() != null) {
 			avatar_iv.setImageBitmap(BitmapUtils.convertToBitmap(UserManager
 					.getInstance().getUserAvatarUrl()));
-		} else {
+		} else if(UserManager.getInstance().isLogin()){
+			avatar_iv.setImageResource(R.drawable.defalut_user_avatar);
+		}else{
 			avatar_iv.setImageResource(R.drawable.avatar_default);
 		}
 		if (UserManager.getInstance().getUserInfo() != null) {

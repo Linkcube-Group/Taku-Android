@@ -416,6 +416,7 @@ public class DashboardActivity extends CustomFragmentActivity {
 			params.put(ParamKey.CALORIE, calorieView.getInfoTextView());
 			params.put(ParamKey.DURATION, time_tv.getText().toString());
 			params.put(ParamKey.DISTANCE, SportsGameManager.calculateDuration(distance_tv.getText().toString()));
+			params.put(ParamKey.TARGET, SportsGameManager.getTargetDistance());
 			
 			Log.d("DashboardActivity", "params:"+params.toString());
 			

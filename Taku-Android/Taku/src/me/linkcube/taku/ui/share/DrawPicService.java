@@ -5,7 +5,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import android.animation.FloatEvaluator;
+import me.linkcube.taku.R;
+
 import android.app.Service;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -20,7 +21,6 @@ import android.util.Log;
 
 public class DrawPicService extends Service {
 	public static final String DRAWPICSERVICE_PARAMETERS = "me.linkcube.taku.ui.share.parameters";
-
 	// 绘制参数
 	private SharePicParameters spParameters;
 
@@ -43,14 +43,11 @@ public class DrawPicService extends Service {
 	private float x;
 
 	public DrawPicService() {
-		// TODO Auto-generated constructor stub
-		System.out.println("MyService.MyService()");
 
 	}
 
 	@Override
 	public IBinder onBind(Intent intent) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -75,17 +72,12 @@ public class DrawPicService extends Service {
 		mDataPaint.setColor(Color.RED);// 红色画笔
 		mDataPaint.setTextSize(120.0f);// 设置字体大小
 
-		Thread backgroundThread = new Thread(doBackgroundThreadProcessing,
-				"backgroundThread");
-		backgroundThread.start();
-
 	}
 
 	private Runnable doBackgroundThreadProcessing = new Runnable() {
 
 		@Override
 		public void run() {
-			// TODO Auto-generated method stub
 			drawBitmap(spParameters.getBg_resId(),
 					spParameters.getHead_resId(), spParameters.getDistance(),
 					spParameters.getTimeString(), spParameters.getCal());
@@ -94,11 +86,13 @@ public class DrawPicService extends Service {
 
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
-		// TODO Auto-generated method stub
-
 		// 接收参数
 		spParameters = (SharePicParameters) intent
 				.getSerializableExtra(DRAWPICSERVICE_PARAMETERS);
+		
+		Thread backgroundThread = new Thread(doBackgroundThreadProcessing,
+				"backgroundThread");
+		backgroundThread.start();
 
 		return super.onStartCommand(intent, flags, startId);
 
@@ -109,8 +103,6 @@ public class DrawPicService extends Service {
 	 * */
 	@Override
 	public void onDestroy() {
-		// TODO Auto-generated method stub
-		System.out.println("MyService.onDestroy()");
 		super.onDestroy();
 	}
 
@@ -130,7 +122,7 @@ public class DrawPicService extends Service {
 	public void drawBitmap(int bg_resId, int head_resId, float distance,
 			String timeString, int cal) {
 
-		Bitmap bitmap = BitmapFactory.decodeResource(getResources(), bg_resId);
+		Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.dashboard_bg);
 		// 得到图片的宽、高
 		int bg_width = bitmap.getWidth();
 		int height_bg = bitmap.getHeight();
@@ -233,21 +225,29 @@ public class DrawPicService extends Service {
 	 * */
 	private void savePicPNG() {
 		File file = new File(Environment.getExternalStorageDirectory()
-				.getPath() + "/share_pic.png");// 保存到sdcard根目录下，文件名为share_pic.png
+				.getPath() + "/taku/share/share_pic.png");// 保存到sdcard/taku/share目录下，文件名为share_pic.png
 		Log.i("CXC", Environment.getExternalStorageDirectory().getPath());
+		File temp = new File(Environment.getExternalStorageDirectory()
+				.getPath() + "/taku");// 自已项目 文件夹
+		if (!temp.exists()) {
+			temp.mkdir();
+		}
+		File temp2 = new File(Environment.getExternalStorageDirectory()
+				.getPath() + "/taku/share");// 自已项目 文件夹
+		if (!temp2.exists()) {
+			temp2.mkdir();
+		}
 		FileOutputStream fos = null;
 		try {
 			fos = new FileOutputStream(file);
 			mBitmap.compress(Bitmap.CompressFormat.PNG, 50, fos);
 
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try {
 			fos.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

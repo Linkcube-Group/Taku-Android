@@ -15,6 +15,8 @@ public class HistoryCircleChartView extends View {
 
 	private double percent = 0;
 	
+	private String target = "0";
+	
 	private Paint innerPaint = new Paint();
 	
 	private Paint textPaint = new Paint();
@@ -39,7 +41,7 @@ public class HistoryCircleChartView extends View {
 		textPaint.setColor(Color.WHITE);
 		textPaint.setStrokeWidth(5);
 		textPaint.setTextSize(76);
-		canvas.drawText(SportsGameManager.getTargetDistance() + "km", 130, 220,
+		canvas.drawText(target + "km", 130, 220,
 				textPaint);
 		textPaint.setTextSize(44);
 		canvas.drawText(percent + "%", 160, 280, textPaint);
@@ -54,6 +56,10 @@ public class HistoryCircleChartView extends View {
 
 	public void setPercent(double percent) {
 		this.percent = percent;
+	}
+
+	public void setTarget(String target) {
+		this.target = target;
 	}
 
 }

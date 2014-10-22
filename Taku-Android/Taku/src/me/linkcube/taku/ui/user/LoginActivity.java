@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.loopj.android.http.RequestParams;
 
@@ -51,6 +50,7 @@ public class LoginActivity extends BaseTitleActivity implements OnClickListener 
 			public void onClick(View arg0) {
 				startActivity(new Intent(LoginActivity.this,
 						RegisterActivity.class));
+				finish();
 			}
 		});
 	}
@@ -61,13 +61,13 @@ public class LoginActivity extends BaseTitleActivity implements OnClickListener 
 		case R.id.login_btn:
 			TakuHttpClient.initCookie(this);
 			RequestParams params = new RequestParams();
-			params.put(ParamKey.EMAIL, "yxtest1@qq.com");// yangxintest@qq.com/313832830@qq.com
-			params.put(ParamKey.PWD, "1234567");// shisong/1234567
-			// params.put(ParamKey.EMAIL, emailEt.getText().toString());
-			// params.put(ParamKey.PWD, passWordEt.getText().toString());
+//			params.put(ParamKey.EMAIL, "yxtest1@qq.com");// yangxintest@qq.com/313832830@qq.com
+//			params.put(ParamKey.PWD, "1234567");// shisong/1234567
+			params.put(ParamKey.EMAIL, emailEt.getText().toString());
+			params.put(ParamKey.PWD, passWordEt.getText().toString());
 			showProgressDialog(getString(R.string.is_logining));
-			PreferenceUtils.setString(KEY.USER_NAME, "yxtest1@qq.com");
-			PreferenceUtils.setString(KEY.USER_PWD, "1234567");
+			PreferenceUtils.setString(KEY.USER_NAME, emailEt.getText().toString());
+			PreferenceUtils.setString(KEY.USER_PWD, passWordEt.getText().toString());
 			UserRequest.userLogin(params,
 					new HttpResponseListener() {
 
@@ -84,10 +84,12 @@ public class LoginActivity extends BaseTitleActivity implements OnClickListener 
 							case ErrorFlag.NETWORK_ERROR:
 								AlertUtils.showToast(LoginActivity.this,
 										"网络错误，请检查！");
+								hiddenProgressDialog();
 								break;
 							case ErrorFlag.EMAIL_PSW_WRONG:
 								AlertUtils.showToast(LoginActivity.this,
 										"账号或密码错误！");
+								hiddenProgressDialog();
 								break;
 
 							default:

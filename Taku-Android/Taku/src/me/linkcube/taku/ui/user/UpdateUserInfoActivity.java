@@ -118,17 +118,6 @@ public class UpdateUserInfoActivity extends BaseTitleActivity implements
 									AlertUtils.showToast(
 											UpdateUserInfoActivity.this,
 											"更新用户信息成功！");
-									SugarRecord.deleteAll(UserInfoEntity.class,
-											"username=?",
-											new String[] { PreferenceUtils
-													.getString(KEY.USER_NAME,
-															"") });
-									SugarRecord.deleteAll(
-											UserAvatarEntity.class,
-											"username=?",
-											new String[] { PreferenceUtils
-													.getString(KEY.USER_NAME,
-															"") });
 									UserRequest.getUserInfo(new HttpResponseListener() {
 										
 										@Override
@@ -233,8 +222,10 @@ public class UpdateUserInfoActivity extends BaseTitleActivity implements
 		params = new RequestParams();
 		UserInfoEntity userInfoEntity = UserManager.getInstance().getUserInfo();
 		if (userInfoEntity != null) {
-			userAvatarIv.setImageBitmap(BitmapUtils.convertToBitmap(UserManager
-					.getInstance().getUserAvatarUrl()));
+			if(UserManager.getInstance().getUserAvatarUrl()!=null){
+				userAvatarIv.setImageBitmap(BitmapUtils.convertToBitmap(UserManager
+						.getInstance().getUserAvatarUrl()));
+			}
 			nicknameItem.setTip(userInfoEntity.getNickname());
 			genderItem.setTip(userInfoEntity.getGender());
 			ageItem.setTip(userInfoEntity.getAge());

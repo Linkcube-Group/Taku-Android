@@ -23,7 +23,6 @@ public class SharePicParameters implements Serializable {
 
 	public SharePicParameters(int bg_resId, int head_resId, float distance,
 			String timeString, int cal) {
-		// TODO Auto-generated constructor stub
 		this.bg_resId = bg_resId;
 		this.head_resId = head_resId;
 		this.distance = distance;

@@ -110,14 +110,12 @@ public class ShareActivity extends FragmentActivity {
 		// 出现java.lang.OutOfMemoryError*******
 		Intent startIntent = new Intent();
 		startIntent.setClass(this, DrawPicService.class);
-
-		Bundle bundle = new Bundle();
+		
 		SharePicParameters spParameters = new SharePicParameters(
 				R.drawable.dashboard_bg, R.drawable.share_head_img,
 				this.distance, this.time, this.cal);
 		startIntent.putExtra(DrawPicService.DRAWPICSERVICE_PARAMETERS,
 				spParameters);
-		startIntent.putExtras(bundle);
 
 		startService(startIntent);
 

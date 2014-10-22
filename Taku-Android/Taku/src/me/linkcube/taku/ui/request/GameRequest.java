@@ -4,7 +4,6 @@ import me.linkcube.taku.AppConst.ErrorFlag;
 import me.linkcube.taku.AppConst.ResponseKey;
 import me.linkcube.taku.core.entity.SingleDayGameHistoryEntity;
 import me.linkcube.taku.core.entity.TotalGameHistoryEntity;
-import me.linkcube.taku.core.entity.UserInfoEntity;
 import me.linkcube.taku.ui.user.HttpGameResponseListener;
 import me.linkcube.taku.ui.user.HttpResponseListener;
 import me.linkcube.taku.ui.user.TakuHttpClient;
@@ -18,8 +17,11 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
-import com.orm.SugarRecord;
-
+/**
+ * 游戏相关的网络请求
+ * @author xinyang
+ *
+ */
 public class GameRequest {
 	public static void uploadGameRecord(RequestParams params,
 			final HttpResponseListener httpResponseListener) {

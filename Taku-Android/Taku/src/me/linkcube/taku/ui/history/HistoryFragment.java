@@ -154,6 +154,7 @@ public class HistoryFragment extends BaseSlidingFragment implements
 				singleDayCalorieTv.setText(singleDayGameHistoryEntity.getSingleDayCalorie()+ "卡");
 				percent=SportsGameManager.fromStringToDouble(singleDayGameHistoryEntity.getSingleDayDistance())/SportsGameManager.getTargetDistance();
 				historyCircleChartView.setPercent(SportsGameManager.saveTwoPointDouble(percent*100));
+				historyCircleChartView.setTarget(singleDayGameHistoryEntity.getSingleDayTarget());
 				historyCircleChartView.invalidate();
 			}
 

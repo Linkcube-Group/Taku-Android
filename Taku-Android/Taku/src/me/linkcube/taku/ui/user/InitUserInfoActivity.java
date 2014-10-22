@@ -121,7 +121,21 @@ public class InitUserInfoActivity extends BaseTitleActivity implements
 
 								@Override
 								public void responseSuccess() {
-									finish();
+									AlertUtils.showToast(
+											InitUserInfoActivity.this,
+											"初始化用户信息成功！");
+									UserRequest.getUserInfo(new HttpResponseListener() {
+										
+										@Override
+										public void responseSuccess() {
+											finish();
+										}
+										
+										@Override
+										public void responseFailed(int flag) {
+											
+										}
+									});
 								}
 
 								@Override
