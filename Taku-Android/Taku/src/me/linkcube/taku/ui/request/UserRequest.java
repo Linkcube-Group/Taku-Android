@@ -3,6 +3,7 @@ package me.linkcube.taku.ui.request;
 import me.linkcube.taku.AppConst.ErrorFlag;
 import me.linkcube.taku.AppConst.HttpUrl;
 import me.linkcube.taku.AppConst.KEY;
+import me.linkcube.taku.AppConst.PATH;
 import me.linkcube.taku.AppConst.ResponseKey;
 import me.linkcube.taku.core.entity.UserAvatarEntity;
 import me.linkcube.taku.core.entity.UserInfoEntity;
@@ -161,7 +162,7 @@ public class UserRequest {
 								});
 							}else if(BitmapUtils.isFileExist(avatarUrl)){
 								if(UserManager.getInstance().getUserAvatarUrl()==null){
-									BitmapUtils.saveBitmap(avatarUrl, BitmapUtils.convertToBitmap("/sdcard/taku/"+avatarUrl));
+									BitmapUtils.saveBitmap(avatarUrl, BitmapUtils.convertToBitmap(PATH.SDCARD_PATH+avatarUrl));
 									UserAvatarEntity userAvatarEntity=new UserAvatarEntity(PreferenceUtils.getString(KEY.USER_NAME,""),avatarUrl);
 									SugarRecord.save(userAvatarEntity);
 								}

@@ -135,6 +135,10 @@
             android:name="me.linkcube.taku.ui.setting.FeedbackActivity"
             android:screenOrientation="portrait" >
         </activity>
+        <activity
+            android:name="me.linkcube.taku.ui.setting.GraphTestActivity"
+            android:screenOrientation="landscape" >
+        </activity>
         <!-- ###################注册SDK使用的Activity###################### -->
 
 

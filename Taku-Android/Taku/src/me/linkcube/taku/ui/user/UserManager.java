@@ -4,6 +4,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import me.linkcube.taku.AppConst.KEY;
+import me.linkcube.taku.AppConst.PATH;
 import me.linkcube.taku.R.string;
 import me.linkcube.taku.core.entity.UserAvatarEntity;
 import me.linkcube.taku.core.entity.UserInfoEntity;
@@ -81,7 +82,7 @@ public class UserManager {
 			return null;
 		Log.d("getUserAvatarUrl", "userInfoEntity:"
 				+ userAvatarEntities.get(0).getAvatarSdUrl());
-		return "/sdcard/taku/" + userAvatarEntities.get(0).getAvatarSdUrl(); // BitmapUtils.convertToBitmap();
+		return PATH.SDCARD_PATH + userAvatarEntities.get(0).getAvatarSdUrl(); // BitmapUtils.convertToBitmap();
 	}
 
 	/**

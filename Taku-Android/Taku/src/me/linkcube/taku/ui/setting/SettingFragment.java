@@ -22,7 +22,7 @@ public class SettingFragment extends BaseSlidingFragment {
 
 	private Button settingLoginBtn;
 
-	private MenuItem feedbackItem;
+	private MenuItem feedbackItem,aboutUsItem;
 	
 	private UpdateUIListener updateUIListener;
 
@@ -77,6 +77,15 @@ public class SettingFragment extends BaseSlidingFragment {
 				startActivity(new Intent(getActivity(), FeedbackActivity.class));
 			}
 		});
+		aboutUsItem=(MenuItem)view.findViewById(R.id.aboutUsItem);
+		aboutUsItem.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				startActivity(new Intent(getActivity(), GraphTestActivity.class));
+			}
+		});
+		
 		settingLoginBtn = (Button) view.findViewById(R.id.setting_login_btn);
 		settingLoginBtn.setOnClickListener(new View.OnClickListener() {
 

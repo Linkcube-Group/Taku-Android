@@ -48,6 +48,7 @@
             android:background="@color/light_white" />
 
         <me.linkcube.taku.view.MenuItem
+            android:id="@+id/aboutUsItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             menuItem:TitleText="@string/about_us_text"

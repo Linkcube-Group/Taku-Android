@@ -92,6 +92,10 @@ public class RegisterActivity extends BaseTitleActivity implements
 
 											@Override
 											public void responseSuccess() {
+												AlertUtils
+												.showToast(
+														RegisterActivity.this,
+														"注册成功！");
 												startActivity(new Intent(
 														RegisterActivity.this,
 														InitUserInfoActivity.class));

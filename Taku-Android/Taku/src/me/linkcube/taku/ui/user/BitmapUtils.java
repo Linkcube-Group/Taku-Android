@@ -7,6 +7,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import me.linkcube.taku.AppConst.PATH;
+
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
@@ -61,7 +63,7 @@ public class BitmapUtils {
 	}
 	
 	public static boolean isFileExist(String path){
-		File avatarFile = new File("/sdcard/taku/"+path);
+		File avatarFile = new File(PATH.SDCARD_PATH+path);
 		if (!avatarFile.exists()) 
 			return false;
 		return true;

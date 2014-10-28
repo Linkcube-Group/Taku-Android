@@ -21,7 +21,7 @@ public abstract class BaseSlidingFragment extends CustomFragment {
 	}
 
 	public FrameLayout.LayoutParams getCurrentViewParams() {
-		return (LayoutParams) currentView.getLayoutParams();
+		return (LayoutParams) currentView.getLayoutParams(); 
 	}
 
 	@Override

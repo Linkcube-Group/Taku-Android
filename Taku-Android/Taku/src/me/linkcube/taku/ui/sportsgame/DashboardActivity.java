@@ -1,23 +1,21 @@
 package me.linkcube.taku.ui.sportsgame;
 
 import java.text.DecimalFormat;
-import java.util.Calendar;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import me.linkcube.taku.R;
 import me.linkcube.taku.AppConst.ErrorFlag;
 import me.linkcube.taku.AppConst.GameFrame;
 import me.linkcube.taku.AppConst.ParamKey;
+import me.linkcube.taku.R;
 import me.linkcube.taku.core.entity.SingleDayGameHistoryEntity;
-import me.linkcube.taku.ui.bt.BTSettingActivity;
 import me.linkcube.taku.ui.request.GameRequest;
 import me.linkcube.taku.ui.share.ShareActivity;
+import me.linkcube.taku.ui.sportsgame.HeartRateManager.HeartRateListener;
 import me.linkcube.taku.ui.sportsgame.dashboardgame.InfoDashboard;
 import me.linkcube.taku.ui.sportsgame.dashboardgame.SpeedDashboard;
 import me.linkcube.taku.ui.sportsgame.dashboardgame.TargetCompletedView;
 import me.linkcube.taku.ui.user.HttpResponseListener;
-import me.linkcube.taku.ui.user.UpdateUserInfoActivity;
 import me.linkcube.taku.ui.user.UserManager;
 import android.content.Intent;
 import android.graphics.Color;
@@ -49,52 +47,35 @@ import custom.android.util.AlertUtils;
  * 
  */
 public class DashboardActivity extends CustomFragmentActivity {
-	// 关闭
-	private ImageButton close_imgBtn;
-	// 分享
-	private ImageButton share_imgBtn;
+
+	private ImageButton close_imgBtn, share_imgBtn;
 	// 心率
-	private InfoDashboard heartRate;
+	private InfoDashboard heartRateView, calorieView;
 	// 速度
 	private SpeedDashboard speedRate;
-	// 卡路里
-	private InfoDashboard calorieView;
-
 	// 目标完成
 	private TargetCompletedView mTasksView;
-	// 记录用户设定的运动距离
-	private int mCurrentProgress;
-	// 运动距离
-	private TextView distance_tv;
-	private SpannableString distanceString;
-	// 运动时间
-	private TextView time_tv;
-	private SpannableString timeString;
+	// 运动距离和时间
+	private TextView distance_tv, time_tv;
+	private SpannableString distanceString, timeString;
 	// 设定运行目标
 	private ImageButton setTaget_imgBtn;
-
 	private static final int SETTING_TARGET_REQUEST_CODE = 1;
-
 	// 起始时间－－记录用户进入taku仪表盘的时间点
 	private long startTime = System.currentTimeMillis();
-
 	// 记录前一帧的时间点
 	private long preTime = startTime;
 	// 记录当前帧的时间点
 	private long currentTime = startTime;
-
 	// 步数，记录总步数
 	private int stepCount = 0;
-
 	private boolean isGameStart = false;
 
-	private Timer gameDurationTimer;
-	private Timer decayTimer;
+	private Timer gameDurationTimer, decayTimer;
 
 	private String[] countTime = new String[2];
 	private int countSecond = 0;
 	double distanceRecord = 0;
-
 	// 解析蓝牙发送过来的数据
 	String blueToothString = "";
 	DecimalFormat dFormat = new java.text.DecimalFormat("#.##");
@@ -120,7 +101,7 @@ public class DashboardActivity extends CustomFragmentActivity {
 		close_imgBtn = (ImageButton) findViewById(R.id.close_imgBtn);
 		share_imgBtn = (ImageButton) findViewById(R.id.share_imgBtn);
 
-		heartRate = (InfoDashboard) findViewById(R.id.heartRate);
+		heartRateView = (InfoDashboard) findViewById(R.id.heartRate);
 		speedRate = (SpeedDashboard) findViewById(R.id.speedRate);
 		calorieView = (InfoDashboard) findViewById(R.id.calorie_view);
 		mTasksView = (TargetCompletedView) findViewById(R.id.tasks_view);
@@ -137,8 +118,8 @@ public class DashboardActivity extends CustomFragmentActivity {
 		// 设置属性
 		speedRate.setScaleImageViewRes(R.drawable.dashboard_speed_bg);
 		speedRate.setPointerImageViewRes(R.drawable.dashboard_pointer);
-		heartRate.setInfoImageViewRes(R.drawable.dashboard_heartrate_bg);
-		heartRate.setInfoTextView("0");
+		heartRateView.setInfoImageViewRes(R.drawable.dashboard_heartrate_bg);
+		heartRateView.setInfoTextView("0");
 		calorieView.setInfoImageViewRes(R.drawable.dashboard_cal_bg);
 
 		speedRate.showRotateAnimation(-90, -90);
@@ -153,17 +134,15 @@ public class DashboardActivity extends CustomFragmentActivity {
 			if (singleDayGameHistoryEntity != null) {
 				Log.d("getSingleDayGameHistoryEntity",
 						"--singleDayGameHistoryEntity.getSingleDayDuration():"
-								+ singleDayGameHistoryEntity
-										.getDuration());
-				setDistanceText(singleDayGameHistoryEntity
-						.getDistance());
+								+ singleDayGameHistoryEntity.getDuration());
+				setDistanceText(singleDayGameHistoryEntity.getDistance());
 				setTimeText(SportsGameManager.durationToTime(Integer
-						.parseInt(singleDayGameHistoryEntity
-								.getDuration())));
+						.parseInt(singleDayGameHistoryEntity.getDuration())));
 				calorieView.setInfoTextView(singleDayGameHistoryEntity
 						.getCalorie());
-				double distance = SportsGameManager.fromStringToDouble(singleDayGameHistoryEntity
-						.getDistance());// 转换为double类型
+				double distance = SportsGameManager
+						.fromStringToDouble(singleDayGameHistoryEntity
+								.getDistance());// 转换为double类型
 				int progress = (int) (distance * 100 / SportsGameManager
 						.getTargetDistance());
 				mTasksView.setProgress(progress);
@@ -220,8 +199,9 @@ public class DashboardActivity extends CustomFragmentActivity {
 								timeHandler.sendMessage(timeMsg);
 							}
 						}, 0, 1000);
-						distanceRecord = SportsGameManager.fromStringToDouble(distance_tv
-								.getText().toString());// 转换为double类型
+						distanceRecord = SportsGameManager
+								.fromStringToDouble(distance_tv.getText()
+										.toString());// 转换为double类型
 						Log.d("DashboardActivity", "distanceRecord:---"
 								+ distanceRecord);
 					} else {
@@ -261,11 +241,32 @@ public class DashboardActivity extends CustomFragmentActivity {
 							}
 						}, 0, 1000);
 					}
-				}
+				} else if (buf_data[2] == GameFrame.HEART_RATE_FRAME[2]) {
+					// 处理心跳
+					HeartRateManager
+							.receiveHeartRateData(new HeartRateListener() {
 
+								@Override
+								public void onHeartRateListener(int heartRate) {
+									Message msg = new Message();
+									msg.what = heartRate;
+									heartRateHandler.sendMessage(msg);
+								}
+							});
+				}
 			}
 		});
 	}
+
+	private Handler heartRateHandler = new Handler() {
+
+		@Override
+		public void handleMessage(Message msg) {
+			super.handleMessage(msg);
+			// 显示心率
+			heartRateView.setInfoTextView(msg.what + "");
+		}
+	};
 
 	private Handler decayHandler = new Handler() {
 		@Override
@@ -320,7 +321,7 @@ public class DashboardActivity extends CustomFragmentActivity {
 		public void onClick(View v) {
 			switch (v.getId()) {
 			case R.id.close_imgBtn:// 关闭
-				exitDashbord();
+				finish();
 				break;
 			case R.id.share_imgBtn:// 分享
 				Intent shareIntent = new Intent(getApplicationContext(),
@@ -346,15 +347,10 @@ public class DashboardActivity extends CustomFragmentActivity {
 	};
 
 	/**
-	 * 退出
-	 * */
-	private void exitDashbord() {
-		this.finish();
-	}
-
-	/**
 	 * 设置TextView 文字效果
-	 * */
+	 * 
+	 * @param distanceStr
+	 */
 	private void setDistanceText(String distanceStr) {
 		int length = distanceStr.length();
 		// 创建一个 SpannableString对象
@@ -414,14 +410,13 @@ public class DashboardActivity extends CustomFragmentActivity {
 			RequestParams params = new RequestParams();
 			params.put(ParamKey.RECORD_DATE, SportsGameManager.getTodayDate());
 			params.put(ParamKey.CALORIE, calorieView.getInfoTextView());
-			params.put(ParamKey.DURATION, SportsGameManager.calculateDuration(time_tv.getText().toString()));
-			params.put(ParamKey.DISTANCE, SportsGameManager.fromStringToDouble(distance_tv.getText().toString()));
+			params.put(ParamKey.DURATION, SportsGameManager
+					.calculateDuration(time_tv.getText().toString()));
+			params.put(ParamKey.DISTANCE, SportsGameManager
+					.fromStringToDouble(distance_tv.getText().toString()));
 			params.put(ParamKey.TARGET, SportsGameManager.getTargetDistance());
-			
-			Log.d("DashboardActivity", "params:"+params.toString());
-			
+			Log.d("DashboardActivity", "params:" + params.toString());
 			GameRequest.uploadGameRecord(params, new HttpResponseListener() {
-
 				@Override
 				public void responseSuccess() {
 
@@ -449,5 +444,6 @@ public class DashboardActivity extends CustomFragmentActivity {
 			SportsGameManager.saveSingleDayGameRecord();
 		}
 	}
+
 
 }

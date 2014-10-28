@@ -1,6 +1,5 @@
 package me.linkcube.taku.view;
 
-import me.linkcube.taku.ui.sportsgame.SportsGameManager;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
